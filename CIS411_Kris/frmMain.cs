@@ -152,7 +152,7 @@ namespace CIS411
 
         private void signIn()
         {
-            ;
+            MessageBox.Show("You have been signed in");
             resetForm();
         }
 
