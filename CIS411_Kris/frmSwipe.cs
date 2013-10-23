@@ -25,7 +25,7 @@ namespace CIS411
         {
             if ((e.KeyCode >= Keys.D0) && (e.KeyCode <= Keys.D9))
                 cardNumber += e.KeyValue-48;
-            if (cardNumber.Length >= 9)
+            if (cardNumber.Length >= 8)
             {
                 int cardInt;
                 if (int.TryParse(cardNumber, out cardInt))

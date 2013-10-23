@@ -51,7 +51,7 @@ namespace CIS411
             }
             
             //Import classes information into the classes dropdown menu
-            updateClassComboBox(studentID);
+            initClassCombo();
             disableChangeID();
             groupRadioButtons.Enabled = true;
 
@@ -88,37 +88,44 @@ namespace CIS411
                 if (MessageBox.Show("Are you being tutored?", "Tutoring", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
                 {
                     btnSubmit.Enabled = true;
+                    comboClassList.SelectedIndex = 0;
+                    comboClassList.Enabled = false;
                     return;
                 }
             }
-            this.comboClassList.Enabled = true;
-            updateClassComboBox(studentID);
-            this.comboTutors.Items.Add("Select a tutor...");
-            this.comboTutors.Items.AddRange(getTutors());
-            this.comboTutors.SelectedIndex = 0;
+            // Initialize the comboTutors box if it hasn't been yet
+            if (comboTutors.Items.Count==0)
+            {
+                this.comboTutors.Items.Add("Select a tutor...");
+                this.comboTutors.Items.AddRange(getTutors());
+                this.comboTutors.SelectedIndex = 0;
+            }
             this.comboTutors.Visible = true;
+            comboClassList.Enabled = true;
         }
 
+        // Checks if student is registered as a tutor
         private bool isTutor(int ID)
         {
-            return (ID==999999999);
+            return (ID==99999999);
         }
 
         private void rdoOther_Click(object sender, EventArgs e)
         {
-            updateClassComboBox(studentID);
-            this.comboClassList.Enabled = true;
+            if (comboTutors.Visible)
+                comboTutors.Visible = false;
+            comboClassList.Enabled = true;
         }
 
         private void comboClassList_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            if (!(comboTutors.Visible))
+            if ((!(comboTutors.Visible)) && (comboClassList.SelectedIndex != 0))
                 this.btnSubmit.Enabled = true;
         }
 
         private void comboTutors_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            if (comboTutors.SelectedIndex != 0)
+            if ((comboTutors.SelectedIndex != 0) && (comboClassList.SelectedIndex != 0))
                 this.btnSubmit.Enabled = true;
         }
 
@@ -129,9 +136,9 @@ namespace CIS411
 
         private string getName()
         {
-            if (studentID == 999999999)
+            if (studentID == 99999999)
                 return "William Warren";
-            if (studentID == 111111111)
+            if (studentID == 11111111)
                 return "Matthew Miller";
             else
                 return "ERROR";
@@ -139,7 +146,7 @@ namespace CIS411
 
         private int StripID(int old)
         {
-            return old % 1000000000;
+            return old % 100000000;
         }
 
         //  Queries database for classes taken by student with ID cardNumber
@@ -149,6 +156,15 @@ namespace CIS411
             comboClassList.Items.Add("CIS 411");
             comboClassList.Items.Add("CIS 402");
             comboClassList.SelectedIndex = 0;
+        }
+
+        // Initializes classComboBox if it hasn't been yet
+        private void initClassCombo()
+        {
+            if (comboClassList.Items.Count==0)
+            {
+                updateClassComboBox(studentID);
+            }
         }
 
         private void signIn()
@@ -195,7 +211,7 @@ namespace CIS411
         public bool studentIDExists(int searchID)
         {
             //CHANGE THIS
-            return ((searchID == 999999999) || (searchID == 111111111));
+            return ((searchID == 99999999) || (searchID == 11111111));
         }
 
         public void updatetxtStudentID (int numIn)
@@ -205,7 +221,7 @@ namespace CIS411
             txtStudentID.Visible = true;
             txtStudentID.Text = studentID.ToString();
             txtStudentID.ReadOnly = true;
-
+            initClassCombo();
             groupRadioButtons.Enabled = true;
         }
 
@@ -224,7 +240,7 @@ namespace CIS411
         public void manualStudentIDEntry()
         {
             txtStudentID.Visible = true;
-            txtStudentID.MaxLength = 9;
+            txtStudentID.MaxLength = 8;
             btnSwipe.Visible = false;
             btnIdSearch.Visible = true;
             btnForgotId.Visible = true;
