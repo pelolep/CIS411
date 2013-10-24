@@ -143,13 +143,14 @@ namespace CIS411
 
         private string getName()
         {
-<<<<<<< HEAD
+            /*            
             if (studentID == 99999999)
                 return "William Warren";
             if (studentID == 11111111)
                 return "Matthew Miller";
             else
-=======
+                return "ERROR";
+             */
             string name = "";
             int column = 0, f=0, l=0;
             string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\matt\Documents\GitHub\CIS411\VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";
@@ -183,9 +184,6 @@ namespace CIS411
                     return name;
                 }
             }
-
->>>>>>> origin/Matt
-                return "ERROR";
         }
 
         private int StripID(int old)
@@ -217,7 +215,7 @@ namespace CIS411
                     c = i;
 
             }
-comboClassList.Items.Add("Select a class...");
+            comboClassList.Items.Add("Select a class...");
             while (excelReader.Read())
             {
 
@@ -299,9 +297,7 @@ comboClassList.Items.Add("Select a class...");
             System.Data.OleDb.OleDbDataReader excelReader;
             excelReader = excelCommand.ExecuteReader();
             //CHANGE THIS
-<<<<<<< HEAD
-            return ((searchID == 99999999) || (searchID == 11111111));
-=======
+            //return ((searchID == 99999999) || (searchID == 11111111));
             for (int i = 0; i < excelReader.FieldCount; i++)
             {
                 if (excelReader.GetName(i) == "EMPLID")
@@ -317,8 +313,6 @@ comboClassList.Items.Add("Select a class...");
                     }
             }
                 return false;
-
->>>>>>> origin/Matt
         }
 
         public void updatetxtStudentID (int numIn)
