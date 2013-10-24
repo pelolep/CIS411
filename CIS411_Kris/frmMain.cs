@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Data.OleDb;
 namespace CIS411
 {
     public partial class frmMain : Form
@@ -143,11 +143,48 @@ namespace CIS411
 
         private string getName()
         {
+<<<<<<< HEAD
             if (studentID == 99999999)
                 return "William Warren";
             if (studentID == 11111111)
                 return "Matthew Miller";
             else
+=======
+            string name = "";
+            int column = 0, f=0, l=0;
+            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\matt\Documents\GitHub\CIS411\VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";
+            //Create the connection
+            System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
+            string excelQuery = @"Select * from [Export Worksheet$]";
+            System.Data.OleDb.OleDbCommand excelCommand = new System.Data.OleDb.OleDbCommand(excelQuery, excelConnection);
+            excelConnection.Open();
+            System.Data.OleDb.OleDbDataReader excelReader;
+            excelReader = excelCommand.ExecuteReader();
+            //CHANGE THIS
+            for (int i = 0; i < excelReader.FieldCount; i++)
+            {
+                if (excelReader.GetName(i) == "EMPLID")
+                    column = i;
+                if (excelReader.GetName(i) == "FIRST_NAME")
+                    f = i;
+                if (excelReader.GetName(i) == "LAST_NAME")
+                    l = i;
+
+            }
+
+            while (excelReader.Read())
+            {
+
+                if (excelReader[column].ToString() == studentID.ToString())
+                {
+                    name += excelReader[f].ToString();
+                    name += " ";
+                    name += excelReader[l].ToString();
+                    return name;
+                }
+            }
+
+>>>>>>> origin/Matt
                 return "ERROR";
         }
 
@@ -159,9 +196,43 @@ namespace CIS411
         //  Queries database for classes taken by student with ID cardNumber
         private void updateClassComboBox(int studentID)
         {
-            comboClassList.Items.Add("Select a class...");
-            comboClassList.Items.Add("CIS 411");
-            comboClassList.Items.Add("CIS 402");
+            string name = "";
+            int column = 0, s=0, c = 0;
+            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\matt\Documents\GitHub\CIS411\VEN_LSC_SR_Project_Courses_sample.xls;Extended Properties=Excel 12.0 Xml";
+            //Create the connection
+            System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
+            string excelQuery = @"Select * from [sheet1$]";
+            System.Data.OleDb.OleDbCommand excelCommand = new System.Data.OleDb.OleDbCommand(excelQuery, excelConnection);
+            excelConnection.Open();
+            System.Data.OleDb.OleDbDataReader excelReader;
+            excelReader = excelCommand.ExecuteReader();
+            //CHANGE THIS
+            for (int i = 0; i < excelReader.FieldCount; i++)
+            {
+                if (excelReader.GetName(i) == "ID")
+                    column = i;
+                if (excelReader.GetName(i) == "Subject")
+                    s = i;
+                if (excelReader.GetName(i) == "Catalog")
+                    c = i;
+
+            }
+comboClassList.Items.Add("Select a class...");
+            while (excelReader.Read())
+            {
+
+                if (excelReader[column].ToString() == studentID.ToString())
+                {
+                    name += excelReader[s].ToString();
+                    name += " ";
+                    name += excelReader[c].ToString();
+                    comboClassList.Items.Add(name);
+                    name = "";
+                }
+            }
+
+
+           
             comboClassList.SelectedIndex = 0;
         }
 
@@ -216,10 +287,38 @@ namespace CIS411
         }
 
         // Searches through database for searchID and returns true if ID is found
-        public bool studentIDExists(int searchID)
+        public bool studentIDExists(int numIn)
         {
+            int column=0, searchID = StripID(numIn);
+            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\matt\Documents\GitHub\CIS411\VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";
+            //Create the connection
+            System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
+            string excelQuery = @"Select * from [Export Worksheet$]";
+            System.Data.OleDb.OleDbCommand excelCommand = new System.Data.OleDb.OleDbCommand(excelQuery, excelConnection);
+            excelConnection.Open();
+            System.Data.OleDb.OleDbDataReader excelReader;
+            excelReader = excelCommand.ExecuteReader();
             //CHANGE THIS
+<<<<<<< HEAD
             return ((searchID == 99999999) || (searchID == 11111111));
+=======
+            for (int i = 0; i < excelReader.FieldCount; i++)
+            {
+                if (excelReader.GetName(i) == "EMPLID")
+                        column = i;             
+            }
+
+            while (excelReader.Read())//ready
+            {
+
+                    if (excelReader[column].ToString() == searchID.ToString())
+                    {
+                        return true;
+                    }
+            }
+                return false;
+
+>>>>>>> origin/Matt
         }
 
         public void updatetxtStudentID (int numIn)
