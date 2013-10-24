@@ -47,11 +47,13 @@ namespace CIS411
                 }
             }
         }
+        /*
         private void btnDontHave_Click(object sender, EventArgs e)
         {
             Program.mainForm.manualStudentIDEntry();
             this.Close();
         }
+        */
         string cardNumber = "";
     }
 }

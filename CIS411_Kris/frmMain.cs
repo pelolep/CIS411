@@ -90,6 +90,8 @@ namespace CIS411
                     btnSubmit.Enabled = true;
                     comboClassList.SelectedIndex = 0;
                     comboClassList.Enabled = false;
+                    comboTutors.SelectedIndex = 0;
+                    comboTutors.Visible = false;
                     return;
                 }
             }
@@ -134,6 +136,11 @@ namespace CIS411
             resetForm();
         }
 
+        private void btnNoCard_Click(object sender, System.EventArgs e)
+        {
+            manualStudentIDEntry();
+        }
+
         private string getName()
         {
             if (studentID == 99999999)
@@ -176,6 +183,7 @@ namespace CIS411
         private void resetForm()
         {
             this.btnSwipe.Visible = true;
+            this.btnNoCard.Visible = true;
             this.txtStudentID.Text = "";
             this.txtStudentID.Visible = false;
             this.txtStudentID.ReadOnly = false;
@@ -218,6 +226,7 @@ namespace CIS411
         {
             studentID = StripID(numIn);
             btnSwipe.Visible = false;
+            btnNoCard.Visible = false;
             txtStudentID.Visible = true;
             txtStudentID.Text = studentID.ToString();
             txtStudentID.ReadOnly = true;
@@ -237,11 +246,12 @@ namespace CIS411
             resetForm();
         }
 
-        public void manualStudentIDEntry()
+        private void manualStudentIDEntry()
         {
             txtStudentID.Visible = true;
             txtStudentID.MaxLength = 8;
             btnSwipe.Visible = false;
+            btnNoCard.Visible = false;
             btnIdSearch.Visible = true;
             btnForgotId.Visible = true;
         }

@@ -42,6 +42,7 @@ namespace CIS411
             this.btnSubmit = new System.Windows.Forms.Button();
             this.btnAdmin = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
+            this.btnNoCard = new System.Windows.Forms.Button();
             this.groupRadioButtons.SuspendLayout();
             this.SuspendLayout();
             #region btnSwipe
@@ -208,10 +209,22 @@ namespace CIS411
             this.btnReset.Location = new System.Drawing.Point(12, 12);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(46, 25);
-            this.btnReset.TabIndex = 8;
+            this.btnReset.TabIndex = 9;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            #endregion
+            #region btnNoCard
+            //
+            // btnNoCard
+            //
+            this.btnNoCard.Location = new System.Drawing.Point(250, 84);
+            this.btnNoCard.Name = "btnReset";
+            this.btnNoCard.Size = new System.Drawing.Size(90, 25);
+            this.btnNoCard.TabIndex = 10;
+            this.btnNoCard.Text = "Forgot Card";
+            this.btnNoCard.UseVisualStyleBackColor = true;
+            this.btnNoCard.Click += new System.EventHandler(this.btnNoCard_Click);
             #endregion
             #region frmMain
             // 
@@ -232,6 +245,7 @@ namespace CIS411
             this.Controls.Add(this.txtStudentID);
             this.Controls.Add(this.btnSwipe);
             this.Controls.Add(this.btnReset);
+            this.Controls.Add(this.btnNoCard);
             this.Name = "frmMain";
             this.Text = "Login";
             this.ResumeLayout(false);
@@ -252,6 +266,7 @@ namespace CIS411
         private System.Windows.Forms.Button btnAdmin;
         private System.Windows.Forms.Button btnSwipe;
         private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.Button btnNoCard;
     }
 }
 

@@ -30,7 +30,7 @@
         {
             this.lblPleaseSwipe = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnDontHave = new System.Windows.Forms.Button();
+//            this.btnDontHave = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblPleaseSwipe
@@ -53,6 +53,7 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            /*
             // 
             // btnDontHave
             // 
@@ -65,6 +66,7 @@
             this.btnDontHave.Text = "I don\'t have it";
             this.btnDontHave.UseVisualStyleBackColor = true;
             this.btnDontHave.Click += new System.EventHandler(this.btnDontHave_Click);
+            */
             // 
             // frmSwipe
             // 
@@ -74,7 +76,7 @@
             this.ClientSize = new System.Drawing.Size(234, 88);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblPleaseSwipe);
-            this.Controls.Add(this.btnDontHave);
+//            this.Controls.Add(this.btnDontHave);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
             this.Name = "frmSwipe";
@@ -90,7 +92,7 @@
 
         private System.Windows.Forms.Label lblPleaseSwipe;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnDontHave;
+//        private System.Windows.Forms.Button btnDontHave;
 
     }
 }
