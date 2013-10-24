@@ -121,13 +121,17 @@ namespace CIS411
 
         private void comboClassList_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            if ((!(comboTutors.Visible)) && (comboClassList.SelectedIndex != 0))
+            if ((comboClassList.SelectedIndex == 0) || ((comboTutors.Visible) && (comboTutors.SelectedIndex == 0)))
+                this.btnSubmit.Enabled = false;
+            else if (comboClassList.SelectedIndex != 0)
                 this.btnSubmit.Enabled = true;
         }
 
         private void comboTutors_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            if ((comboTutors.SelectedIndex != 0) && (comboClassList.SelectedIndex != 0))
+            if ((comboTutors.SelectedIndex == 0) || (comboClassList.SelectedIndex == 0))
+                this.btnSubmit.Enabled = false;
+            else if ((comboTutors.SelectedIndex != 0) && (comboClassList.SelectedIndex != 0))
                 this.btnSubmit.Enabled = true;
         }
 
@@ -153,7 +157,7 @@ namespace CIS411
              */
             string name = "";
             int column = 0, f=0, l=0;
-            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\matt\Documents\GitHub\CIS411\VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";
+            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=..\..\..\VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";
             //Create the connection
             System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
             string excelQuery = @"Select * from [Export Worksheet$]";
@@ -170,7 +174,6 @@ namespace CIS411
                     f = i;
                 if (excelReader.GetName(i) == "LAST_NAME")
                     l = i;
-
             }
 
             while (excelReader.Read())
@@ -184,6 +187,7 @@ namespace CIS411
                     return name;
                 }
             }
+            return "ERROR";
         }
 
         private int StripID(int old)
@@ -196,7 +200,7 @@ namespace CIS411
         {
             string name = "";
             int column = 0, s=0, c = 0;
-            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\matt\Documents\GitHub\CIS411\VEN_LSC_SR_Project_Courses_sample.xls;Extended Properties=Excel 12.0 Xml";
+            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=..\..\..\VEN_LSC_SR_Project_Courses_sample.xls;Extended Properties=Excel 12.0 Xml";
             //Create the connection
             System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
             string excelQuery = @"Select * from [sheet1$]";
@@ -288,7 +292,7 @@ namespace CIS411
         public bool studentIDExists(int numIn)
         {
             int column=0, searchID = StripID(numIn);
-            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\matt\Documents\GitHub\CIS411\VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";
+            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=..\..\..\VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";
             //Create the connection
             System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
             string excelQuery = @"Select * from [Export Worksheet$]";

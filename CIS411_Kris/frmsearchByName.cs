@@ -49,5 +49,10 @@ namespace CIS411
                 return false;
             }
         }
+
+        private void frmSearchByName_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

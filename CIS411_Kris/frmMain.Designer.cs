@@ -126,9 +126,9 @@ namespace CIS411
             this.btnForgotId.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.btnForgotId.Location = new System.Drawing.Point(123, 61);
             this.btnForgotId.Name = "btnForgotId";
-            this.btnForgotId.Size = new System.Drawing.Size(173, 23);
+            this.btnForgotId.Size = new System.Drawing.Size(190, 23);
             this.btnForgotId.TabIndex = 4;
-            this.btnForgotId.Text = "Forgot your Student Id?";
+            this.btnForgotId.Text = "Don't know your ID number?";
             this.btnForgotId.Click += new System.EventHandler(this.btnForgotId_Click);
             this.btnForgotId.UseVisualStyleBackColor = true;
             this.btnForgotId.Visible = false;

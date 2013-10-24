@@ -54,7 +54,7 @@ namespace CIS411
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(51, 32);
+            this.lblUsername.Location = new System.Drawing.Point(43, 32);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(58, 13);
             this.lblUsername.TabIndex = 3;
@@ -81,6 +81,7 @@ namespace CIS411
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmSearchByName";
             this.Text = "Forgot your Student Id?";
+            this.Load += new System.EventHandler(this.frmSearchByName_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
