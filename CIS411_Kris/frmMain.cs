@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Data.OleDb;
 namespace CIS411
 {
     public partial class frmMain : Form
@@ -139,7 +139,7 @@ namespace CIS411
 
         private int StripID(int old)
         {
-            return old % 1000000000;
+            return old % 100000000;
         }
 
         //  Queries database for classes taken by student with ID cardNumber
@@ -192,10 +192,34 @@ namespace CIS411
         }
 
         // Searches through database for searchID and returns true if ID is found
-        public bool studentIDExists(int searchID)
+        public bool studentIDExists(int numIn)
         {
+            int column=0, searchID = StripID(numIn);
+            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\matt\Documents\GitHub\CIS411\VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";
+            //Create the connection
+            System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
+            string excelQuery = @"Select * from [Export Worksheet$]";
+            System.Data.OleDb.OleDbCommand excelCommand = new System.Data.OleDb.OleDbCommand(excelQuery, excelConnection);
+            excelConnection.Open();
+            System.Data.OleDb.OleDbDataReader excelReader;
+            excelReader = excelCommand.ExecuteReader();
             //CHANGE THIS
-            return ((searchID == 999999999) || (searchID == 111111111));
+            for (int i = 0; i < excelReader.FieldCount; i++)
+            {
+                if (excelReader.GetName(i) == "EMPLID")
+                        column = i;             
+            }
+
+            while (excelReader.Read())
+            {
+
+                    if (excelReader[column].ToString() == searchID.ToString())
+                    {
+                        return true;
+                    }
+            }
+                return false;
+
         }
 
         public void updatetxtStudentID (int numIn)
