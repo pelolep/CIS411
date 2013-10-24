@@ -10,8 +10,10 @@ using System.Windows.Forms;
 
 namespace CIS411
 {
+
     public partial class frmAdmin : Form
     {
+
         public frmAdmin()
         {
             InitializeComponent();
@@ -59,6 +61,30 @@ namespace CIS411
             btnAddVisit.Show();
             btnEditVisit.Show();
             btnSave.Hide();
+
+        }
+
+        private void btnChangePassword_Click(object sender, EventArgs e)
+        {
+            string currentPassword = txtCurrentPassword.Text;
+            string newPassword = txtNewPassword.Text;
+            string confirmPassword = txtConfirmPassword.Text;
+            string password = Globals.password;
+
+            //Check that the Password matches the current Password entered by the user
+            if (currentPassword != password)
+            {
+                MessageBox.Show( "Error: The password you used is incorrect");
+            }
+            else if (newPassword != confirmPassword)
+            {
+                MessageBox.Show("Error: The new password doesn't match");
+            }
+            else
+            {
+                MessageBox.Show("The password was changed");
+                Globals.password = newPassword;
+            }
 
         }
     }
