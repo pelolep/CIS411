@@ -273,7 +273,7 @@ comboClassList.Items.Add("Select a class...");
                         column = i;             
             }
 
-            while (excelReader.Read())
+            while (excelReader.Read())//ready
             {
 
                     if (excelReader[column].ToString() == searchID.ToString())
