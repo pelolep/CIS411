@@ -11,6 +11,13 @@ using System.Windows.Forms;
 using System.Data.OleDb;
 namespace CIS411
 {
+    public static class Globals
+    {
+       //Here is the Password!!!!!
+        public static String password= "CIS411"; 
+        
+    }
+
     public partial class frmMain : Form
     {
         public frmMain()

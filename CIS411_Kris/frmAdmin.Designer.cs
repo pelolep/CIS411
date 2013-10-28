@@ -56,12 +56,18 @@ namespace CIS411
             this.listBoxLoggedIn = new System.Windows.Forms.ListBox();
             this.tabPermission = new System.Windows.Forms.TabPage();
             this.grpBoxPassword = new System.Windows.Forms.GroupBox();
+            this.btnChangePassword = new System.Windows.Forms.Button();
+            this.txtConfirmPassword = new System.Windows.Forms.TextBox();
+            this.txtNewPassword = new System.Windows.Forms.TextBox();
+            this.txtCurrentPassword = new System.Windows.Forms.TextBox();
+            this.lblConfirmPassword = new System.Windows.Forms.Label();
+            this.lblNewPassword = new System.Windows.Forms.Label();
+            this.lblCurrentPassword = new System.Windows.Forms.Label();
             this.listBoxAdminUsers = new System.Windows.Forms.ListBox();
             this.lblAdminUsers = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtAdminStudentID = new System.Windows.Forms.TextBox();
             this.btnClose = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.tabControlAdmin.SuspendLayout();
             this.tabTutors.SuspendLayout();
             this.tabVisits.SuspendLayout();
@@ -340,13 +346,77 @@ namespace CIS411
             // 
             // grpBoxPassword
             // 
-            this.grpBoxPassword.Controls.Add(this.label3);
-            this.grpBoxPassword.Location = new System.Drawing.Point(399, 34);
+            this.grpBoxPassword.Controls.Add(this.btnChangePassword);
+            this.grpBoxPassword.Controls.Add(this.txtConfirmPassword);
+            this.grpBoxPassword.Controls.Add(this.txtNewPassword);
+            this.grpBoxPassword.Controls.Add(this.txtCurrentPassword);
+            this.grpBoxPassword.Controls.Add(this.lblConfirmPassword);
+            this.grpBoxPassword.Controls.Add(this.lblNewPassword);
+            this.grpBoxPassword.Controls.Add(this.lblCurrentPassword);
+            this.grpBoxPassword.Location = new System.Drawing.Point(328, 34);
             this.grpBoxPassword.Name = "grpBoxPassword";
-            this.grpBoxPassword.Size = new System.Drawing.Size(200, 249);
+            this.grpBoxPassword.Size = new System.Drawing.Size(271, 164);
             this.grpBoxPassword.TabIndex = 4;
             this.grpBoxPassword.TabStop = false;
             this.grpBoxPassword.Text = "Password";
+            // 
+            // btnChangePassword
+            // 
+            this.btnChangePassword.Location = new System.Drawing.Point(147, 111);
+            this.btnChangePassword.Name = "btnChangePassword";
+            this.btnChangePassword.Size = new System.Drawing.Size(104, 23);
+            this.btnChangePassword.TabIndex = 9;
+            this.btnChangePassword.Text = "Change Password";
+            this.btnChangePassword.UseVisualStyleBackColor = true;
+            this.btnChangePassword.Click += new System.EventHandler(this.btnChangePassword_Click);
+            // 
+            // txtConfirmPassword
+            // 
+            this.txtConfirmPassword.Location = new System.Drawing.Point(107, 73);
+            this.txtConfirmPassword.Name = "txtConfirmPassword";
+            this.txtConfirmPassword.Size = new System.Drawing.Size(144, 20);
+            this.txtConfirmPassword.TabIndex = 8;
+            // 
+            // txtNewPassword
+            // 
+            this.txtNewPassword.Location = new System.Drawing.Point(107, 46);
+            this.txtNewPassword.Name = "txtNewPassword";
+            this.txtNewPassword.Size = new System.Drawing.Size(144, 20);
+            this.txtNewPassword.TabIndex = 7;
+            // 
+            // txtCurrentPassword
+            // 
+            this.txtCurrentPassword.Location = new System.Drawing.Point(107, 20);
+            this.txtCurrentPassword.Name = "txtCurrentPassword";
+            this.txtCurrentPassword.Size = new System.Drawing.Size(144, 20);
+            this.txtCurrentPassword.TabIndex = 6;
+            // 
+            // lblConfirmPassword
+            // 
+            this.lblConfirmPassword.AutoSize = true;
+            this.lblConfirmPassword.Location = new System.Drawing.Point(10, 76);
+            this.lblConfirmPassword.Name = "lblConfirmPassword";
+            this.lblConfirmPassword.Size = new System.Drawing.Size(91, 13);
+            this.lblConfirmPassword.TabIndex = 5;
+            this.lblConfirmPassword.Text = "Confirm Password";
+            // 
+            // lblNewPassword
+            // 
+            this.lblNewPassword.AutoSize = true;
+            this.lblNewPassword.Location = new System.Drawing.Point(23, 49);
+            this.lblNewPassword.Name = "lblNewPassword";
+            this.lblNewPassword.Size = new System.Drawing.Size(78, 13);
+            this.lblNewPassword.TabIndex = 1;
+            this.lblNewPassword.Text = "New Password";
+            // 
+            // lblCurrentPassword
+            // 
+            this.lblCurrentPassword.AutoSize = true;
+            this.lblCurrentPassword.Location = new System.Drawing.Point(11, 23);
+            this.lblCurrentPassword.Name = "lblCurrentPassword";
+            this.lblCurrentPassword.Size = new System.Drawing.Size(90, 13);
+            this.lblCurrentPassword.TabIndex = 0;
+            this.lblCurrentPassword.Text = "Current Password";
             // 
             // listBoxAdminUsers
             // 
@@ -389,15 +459,6 @@ namespace CIS411
             this.btnClose.TabIndex = 2;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 20);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "label3";
             // 
             // frmAdmin
             // 
@@ -456,6 +517,12 @@ namespace CIS411
         private System.Windows.Forms.Label lblAdminUsers;
         private System.Windows.Forms.ListBox listBoxAdminUsers;
         private System.Windows.Forms.GroupBox grpBoxPassword;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblCurrentPassword;
+        private System.Windows.Forms.Button btnChangePassword;
+        private System.Windows.Forms.TextBox txtConfirmPassword;
+        private System.Windows.Forms.TextBox txtNewPassword;
+        private System.Windows.Forms.TextBox txtCurrentPassword;
+        private System.Windows.Forms.Label lblConfirmPassword;
+        private System.Windows.Forms.Label lblNewPassword;
     }
 }
