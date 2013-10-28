@@ -83,20 +83,16 @@ namespace CIS411
         private void rdoTutor_Click(object sender, EventArgs e)
         {
             // If student is registered as a tutor, asks if they are being tutored. Skips this if student is not a tutor
-            if (isTutor(studentID))
+            if ((isTutor(studentID))&&(MessageBox.Show("Are you being tutored?", "Tutoring", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No))
             {
-                if (MessageBox.Show("Are you being tutored?", "Tutoring", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
-                {
                     btnSubmit.Enabled = true;
                     comboClassList.SelectedIndex = 0;
                     comboClassList.Enabled = false;
                     comboTutors.SelectedIndex = 0;
                     comboTutors.Visible = false;
-                    return;
-                }
             }
-            // Initialize the comboTutors box if it hasn't been yet
-            if (comboTutors.Items.Count==0)
+            // Otherwise, initialize the comboTutors box if it hasn't been yet
+            else if (comboTutors.Items.Count==0)
             {
                 this.comboTutors.Items.Add("Select a tutor...");
                 this.comboTutors.Items.AddRange(getTutors());
@@ -121,13 +117,17 @@ namespace CIS411
 
         private void comboClassList_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            if ((!(comboTutors.Visible)) && (comboClassList.SelectedIndex != 0))
+            if ((comboClassList.SelectedIndex == 0) || ((comboTutors.Visible) && (comboTutors.SelectedIndex == 0)))
+                this.btnSubmit.Enabled = false;
+            else if (comboClassList.SelectedIndex != 0)
                 this.btnSubmit.Enabled = true;
         }
 
         private void comboTutors_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            if ((comboTutors.SelectedIndex != 0) && (comboClassList.SelectedIndex != 0))
+            if ((comboTutors.SelectedIndex == 0) || (comboClassList.SelectedIndex == 0))
+                this.btnSubmit.Enabled = false;
+            else if ((comboTutors.SelectedIndex != 0) && (comboClassList.SelectedIndex != 0))
                 this.btnSubmit.Enabled = true;
         }
 
@@ -153,7 +153,7 @@ namespace CIS411
              */
             string name = "";
             int column = 0, f=0, l=0;
-            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\matt\Documents\GitHub\CIS411\VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";
+            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=..\..\..\VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";
             //Create the connection
             System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
             string excelQuery = @"Select * from [Export Worksheet$]";
@@ -170,7 +170,6 @@ namespace CIS411
                     f = i;
                 if (excelReader.GetName(i) == "LAST_NAME")
                     l = i;
-
             }
 
             while (excelReader.Read())
@@ -184,6 +183,7 @@ namespace CIS411
                     return name;
                 }
             }
+            return "ERROR";
         }
 
         private int StripID(int old)
@@ -196,15 +196,15 @@ namespace CIS411
         {
             string name = "";
             int column = 0, s=0, c = 0;
-            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\matt\Documents\GitHub\CIS411\VEN_LSC_SR_Project_Courses_sample.xls;Extended Properties=Excel 12.0 Xml";
-            //Create the connection
+            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=..\..\..\VEN_LSC_SR_Project_Courses_sample.xls;Extended Properties=Excel 12.0 Xml";
+            // Create the connection
             System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
             string excelQuery = @"Select * from [sheet1$]";
             System.Data.OleDb.OleDbCommand excelCommand = new System.Data.OleDb.OleDbCommand(excelQuery, excelConnection);
             excelConnection.Open();
             System.Data.OleDb.OleDbDataReader excelReader;
             excelReader = excelCommand.ExecuteReader();
-            //CHANGE THIS
+            // Get classes from Excel sheet
             for (int i = 0; i < excelReader.FieldCount; i++)
             {
                 if (excelReader.GetName(i) == "ID")
@@ -216,6 +216,7 @@ namespace CIS411
 
             }
             comboClassList.Items.Add("Select a class...");
+            // Add class names to comboClassList
             while (excelReader.Read())
             {
 
@@ -228,12 +229,8 @@ namespace CIS411
                     name = "";
                 }
             }
-
-
-           
             comboClassList.SelectedIndex = 0;
         }
-
         // Initializes classComboBox if it hasn't been yet
         private void initClassCombo()
         {
@@ -243,6 +240,7 @@ namespace CIS411
             }
         }
 
+        // Adds an entry to the visits table with the information currently selected and resets the form
         private void signIn()
         {
             MessageBox.Show("You have been signed in");
@@ -287,23 +285,23 @@ namespace CIS411
         // Searches through database for searchID and returns true if ID is found
         public bool studentIDExists(int numIn)
         {
+            //return ((searchID == 99999999) || (searchID == 11111111));
             int column=0, searchID = StripID(numIn);
-            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\matt\Documents\GitHub\CIS411\VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";
-            //Create the connection
+            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=..\..\..\VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";
+            // Create the connection
             System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
             string excelQuery = @"Select * from [Export Worksheet$]";
             System.Data.OleDb.OleDbCommand excelCommand = new System.Data.OleDb.OleDbCommand(excelQuery, excelConnection);
             excelConnection.Open();
             System.Data.OleDb.OleDbDataReader excelReader;
             excelReader = excelCommand.ExecuteReader();
-            //CHANGE THIS
-            //return ((searchID == 99999999) || (searchID == 11111111));
+            // Get student IDs
             for (int i = 0; i < excelReader.FieldCount; i++)
             {
                 if (excelReader.GetName(i) == "EMPLID")
                         column = i;             
             }
-
+            // Check to see if student ID exists in spreadsheet
             while (excelReader.Read())//ready
             {
 
