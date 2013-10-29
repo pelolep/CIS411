@@ -17,24 +17,26 @@ namespace CIS411
             InitializeComponent();
             this.Focus();
         }
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-        private void frmSwipe_KeyDown(object sender, KeyEventArgs e)
+
+        private void frmSwipe_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if ((e.KeyCode >= Keys.D0) && (e.KeyCode <= Keys.D9))
-                cardNumber += e.KeyValue-48;
-            if (cardNumber.Length >= 8)
+            if ((e.KeyChar >= '0') && (e.KeyChar <= '9'))
+                cardNumber += (e.KeyChar-'0').ToString();
+            else if ((e.KeyChar == '\r'))
             {
                 int cardInt;
                 if (int.TryParse(cardNumber, out cardInt))
                 {
-                    if (Program.mainForm.studentIDExists(cardInt))
-                        if (Program.mainForm.studentSignedIn(cardInt))
+                    if (Program.mainForm.studentIDExists(Program.mainForm.StripID(cardInt)))
+                        if (Program.mainForm.studentSignedIn(Program.mainForm.StripID(cardInt)))
                             Program.mainForm.signOut(cardInt);
                         else
-                            Program.mainForm.updatetxtStudentID(cardInt);
+                            Program.mainForm.updatetxtStudentID(Program.mainForm.StripID(cardInt));
                     else
                         MessageBox.Show("Invalid ID, please try again");
                     Program.mainForm.Focus();
@@ -45,6 +47,10 @@ namespace CIS411
                     MessageBox.Show("Invalid ID, please try again");
                     cardNumber = "";
                 }
+            }
+            else
+            {
+                MessageBox.Show(e.KeyChar.ToString());
             }
         }
         /*

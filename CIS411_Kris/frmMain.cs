@@ -112,7 +112,7 @@ namespace CIS411
         // Checks if student is registered as a tutor
         private bool isTutor(int ID)
         {
-            return (ID==99999999);
+            return (ID == 10569779);
         }
 
         private void rdoOther_Click(object sender, EventArgs e)
@@ -184,18 +184,15 @@ namespace CIS411
 
                 if (excelReader[column].ToString() == studentID.ToString())
                 {
-                    name += excelReader[f].ToString();
-                    name += " ";
                     name += excelReader[l].ToString();
+                    name += " ";
+                    name += excelReader[f].ToString();
+                    excelConnection.Close();
                     return name;
                 }
             }
+            excelConnection.Close();
             return "ERROR";
-        }
-
-        private int StripID(int old)
-        {
-            return old % 100000000;
         }
 
         //  Queries database for classes taken by student with ID cardNumber
@@ -237,6 +234,7 @@ namespace CIS411
                 }
             }
             comboClassList.SelectedIndex = 0;
+            excelConnection.Close();
         }
         // Initializes classComboBox if it hasn't been yet
         private void initClassCombo()
@@ -314,15 +312,17 @@ namespace CIS411
 
                     if (excelReader[column].ToString() == searchID.ToString())
                     {
+                        excelConnection.Close();
                         return true;
                     }
             }
-                return false;
+            excelConnection.Close();
+            return false;
         }
 
         public void updatetxtStudentID (int numIn)
         {
-            studentID = StripID(numIn);
+            studentID = numIn;
             btnSwipe.Visible = false;
             btnNoCard.Visible = false;
             txtStudentID.Visible = true;
@@ -359,6 +359,11 @@ namespace CIS411
             txtStudentID.ReadOnly = true;
             btnForgotId.Visible = false;
             btnIdSearch.Visible = false;
+        }
+
+        public int StripID(int old)
+        {
+            return old % 100000000;
         }
 
         private int studentID = 0;

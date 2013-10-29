@@ -67,7 +67,7 @@ namespace CIS411
             this.lblEx.Name = "lblEx";
             this.lblEx.Size = new System.Drawing.Size(216, 13);
             this.lblEx.TabIndex = 4;
-            this.lblEx.Text = "Your Clarion username without @clarion.edu";
+            this.lblEx.Text = "Your Clarion username with @clarion.edu";
             // 
             // frmSearchByName
             // 
@@ -81,7 +81,6 @@ namespace CIS411
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmSearchByName";
             this.Text = "Forgot your Student Id?";
-            this.Load += new System.EventHandler(this.frmSearchByName_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

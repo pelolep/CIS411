@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Security.Cryptography;
 
 namespace CIS411
 {
@@ -70,22 +71,31 @@ namespace CIS411
             string newPassword = txtNewPassword.Text;
             string confirmPassword = txtConfirmPassword.Text;
             string password = Globals.password;
-
+            MD5CryptoServiceProvider x = new MD5CryptoServiceProvider();
+            byte[] currentPassMD5 = Encoding.ASCII.GetBytes(txtCurrentPassword.Text);
+            currentPassMD5 = x.ComputeHash(currentPassMD5);
+            String currentPassMD5String = Encoding.ASCII.GetString(currentPassMD5);
             //Check that the Password matches the current Password entered by the user
-            if (currentPassword != password)
+            if (currentPassMD5String != Properties.Settings.Default.PasswordMD5)
             {
                 MessageBox.Show( "Error: The password you used is incorrect");
             }
-            else if (newPassword != confirmPassword)
+            else if (txtNewPassword.Text != txtConfirmPassword.Text)
             {
                 MessageBox.Show("Error: The new password doesn't match");
             }
             else
             {
                 MessageBox.Show("The password was changed");
-                Globals.password = newPassword;
+                byte[] newPassMD5 = Encoding.ASCII.GetBytes(txtNewPassword.Text);
+                newPassMD5 = x.ComputeHash(newPassMD5);
+                String newPassMD5String = Encoding.ASCII.GetString(newPassMD5);
+                Properties.Settings.Default.PasswordMD5 = newPassMD5String;
             }
-
+        }
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
