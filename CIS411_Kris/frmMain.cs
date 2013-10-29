@@ -174,11 +174,7 @@ namespace CIS411
              */
             string name = "";
             int column = 0, f=0, l=0;
-<<<<<<< HEAD
-            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=..\..\..\VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";
-=======
             string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=../../../VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";
->>>>>>> origin/Matt2
             //Create the connection
             System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
             string excelQuery = @"Select * from [Export Worksheet$]";
@@ -203,39 +199,22 @@ namespace CIS411
                 if (excelReader[column].ToString() == studentID.ToString())
                 {
                     name += excelReader[l].ToString();
-<<<<<<< HEAD
                     name += " ";
                     name += excelReader[f].ToString();
-=======
->>>>>>> origin/Matt2
                     excelConnection.Close();
                     return name;
                 }
             }
             excelConnection.Close();
             return "ERROR";
-<<<<<<< HEAD
-=======
         }
-
-        private int StripID(int old)
-        {
-            return old % 100000000;
->>>>>>> origin/Matt2
-        }
-
         //  Queries database for classes taken by student with ID cardNumber
         private void updateClassComboBox(int studentID)
         {
             string name = "";
             int column = 0, s=0, c = 0;
-<<<<<<< HEAD
-            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=..\..\..\VEN_LSC_SR_Project_Courses_sample.xls;Extended Properties=Excel 12.0 Xml";
-            // Create the connection
-=======
             string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=../../../VEN_LSC_SR_Project_Courses_sample.xls;Extended Properties=Excel 12.0 Xml";
             //Create the connection
->>>>>>> origin/Matt2
             System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
             string excelQuery = @"Select * from [sheet1$]";
             System.Data.OleDb.OleDbCommand excelCommand = new System.Data.OleDb.OleDbCommand(excelQuery, excelConnection);
@@ -247,11 +226,10 @@ namespace CIS411
             {
                 if (excelReader.GetName(i) == "ID")
                     column = i;
-                if (excelReader.GetName(i) == "Subject")
+                else if (excelReader.GetName(i) == "Subject")
                     s = i;
-                if (excelReader.GetName(i) == "Catalog")
+                else if (excelReader.GetName(i) == "Catalog")
                     c = i;
-
             }
             comboClassList.Items.Add("Select a class...");
             // Add class names to comboClassList
@@ -351,11 +329,7 @@ namespace CIS411
                     }
             }
             excelConnection.Close();
-<<<<<<< HEAD
             return false;
-=======
-                return false;
->>>>>>> origin/Matt2
         }
 
         public void updatetxtStudentID (int numIn)

@@ -34,7 +34,6 @@ namespace CIS411
 
         private bool SearchForUser(string username, out int userID)
         {
-<<<<<<< HEAD
             /*
             if (username == "s_wwwarren")
 =======
@@ -96,18 +95,6 @@ namespace CIS411
             userID = -1;
             excelConnection.Close();
             return false;
-=======
-
-                if (excelReader[column].ToString() == username.ToString())
-                {
-                    userID = int.Parse( excelReader[id].ToString());
-                    return true;
-                }
-            }
-            userID = 000000000;
-            return false;
-
->>>>>>> origin/Matt2
         }
     }
 }
