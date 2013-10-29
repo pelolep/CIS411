@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
+using System.Data.SqlClient;
 namespace CIS411
 {
     public static class Globals
@@ -66,6 +67,19 @@ namespace CIS411
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
+            SqlConnection cn = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\db.mdf;Integrated Security=True");
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cn;
+            cn.Open();
+            cmd.CommandText = "insert into visits ( CLARION_ID, Lastname) values ('" + 123 + "','" + "123" + "')";
+            cmd.ExecuteNonQuery();
+            cmd.Clone();
+            cn.Close();
+
+            cn.Open();
+            cmd.CommandText = "delete from visits where CLARION_ID='" + 123 + "' and LASTNAME= '" + "123" + "'";
+            cmd.ExecuteNonQuery();
+            cn.Close();
             signIn();
         }
 
@@ -160,7 +174,11 @@ namespace CIS411
              */
             string name = "";
             int column = 0, f=0, l=0;
+<<<<<<< HEAD
             string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=..\..\..\VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";
+=======
+            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=../../../VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";
+>>>>>>> origin/Matt2
             //Create the connection
             System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
             string excelQuery = @"Select * from [Export Worksheet$]";
@@ -185,14 +203,25 @@ namespace CIS411
                 if (excelReader[column].ToString() == studentID.ToString())
                 {
                     name += excelReader[l].ToString();
+<<<<<<< HEAD
                     name += " ";
                     name += excelReader[f].ToString();
+=======
+>>>>>>> origin/Matt2
                     excelConnection.Close();
                     return name;
                 }
             }
             excelConnection.Close();
             return "ERROR";
+<<<<<<< HEAD
+=======
+        }
+
+        private int StripID(int old)
+        {
+            return old % 100000000;
+>>>>>>> origin/Matt2
         }
 
         //  Queries database for classes taken by student with ID cardNumber
@@ -200,8 +229,13 @@ namespace CIS411
         {
             string name = "";
             int column = 0, s=0, c = 0;
+<<<<<<< HEAD
             string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=..\..\..\VEN_LSC_SR_Project_Courses_sample.xls;Extended Properties=Excel 12.0 Xml";
             // Create the connection
+=======
+            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=../../../VEN_LSC_SR_Project_Courses_sample.xls;Extended Properties=Excel 12.0 Xml";
+            //Create the connection
+>>>>>>> origin/Matt2
             System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
             string excelQuery = @"Select * from [sheet1$]";
             System.Data.OleDb.OleDbCommand excelCommand = new System.Data.OleDb.OleDbCommand(excelQuery, excelConnection);
@@ -317,7 +351,11 @@ namespace CIS411
                     }
             }
             excelConnection.Close();
+<<<<<<< HEAD
             return false;
+=======
+                return false;
+>>>>>>> origin/Matt2
         }
 
         public void updatetxtStudentID (int numIn)
