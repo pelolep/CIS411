@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace CIS411
 {
@@ -33,21 +34,38 @@ namespace CIS411
 
         private bool SearchForUser(string username, out int userID)
         {
-            if (username == "s_wwwarren")
+            username += "@clarion.not";
+            int column = 0, id = 0;
+            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=../../../VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";
+            //Create the connection
+            System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
+            string excelQuery = @"Select * from [Export Worksheet$]";
+            System.Data.OleDb.OleDbCommand excelCommand = new System.Data.OleDb.OleDbCommand(excelQuery, excelConnection);
+            excelConnection.Open();
+            System.Data.OleDb.OleDbDataReader excelReader;
+            excelReader = excelCommand.ExecuteReader();
+            
+            for (int i = 0; i < excelReader.FieldCount; i++)
             {
-                userID = 999999999;
-                return true;
+                if (excelReader.GetName(i) == "CZ_CNET_ID")
+                    column = i;
+                if (excelReader.GetName(i) == "EMPLID")
+                    id = i;
+
             }
-            else if (username == "s_mjmiller")
+
+            while (excelReader.Read())
             {
-                userID = 111111111;
-                return true;
+
+                if (excelReader[column].ToString() == username.ToString())
+                {
+                    userID = int.Parse( excelReader[id].ToString());
+                    return true;
+                }
             }
-            else
-            {
-                userID = 000000000;
-                return false;
-            }
+            userID = 000000000;
+            return false;
+
         }
     }
 }

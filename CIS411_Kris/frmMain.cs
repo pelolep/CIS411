@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
+using System.Data.SqlClient;
 namespace CIS411
 {
     public partial class frmMain : Form
@@ -59,6 +60,19 @@ namespace CIS411
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
+            SqlConnection cn = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\db.mdf;Integrated Security=True");
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cn;
+            cn.Open();
+            cmd.CommandText = "insert into visits ( CLARION_ID, Lastname) values ('" + 123 + "','" + "123" + "')";
+            cmd.ExecuteNonQuery();
+            cmd.Clone();
+            cn.Close();
+
+            cn.Open();
+            cmd.CommandText = "delete from visits where CLARION_ID='" + 123 + "' and LASTNAME= '" + "123" + "'";
+            cmd.ExecuteNonQuery();
+            cn.Close();
             signIn();
         }
 
@@ -153,7 +167,7 @@ namespace CIS411
              */
             string name = "";
             int column = 0, f=0, l=0;
-            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\matt\Documents\GitHub\CIS411\VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";
+            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=../../../VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";
             //Create the connection
             System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
             string excelQuery = @"Select * from [Export Worksheet$]";
@@ -181,9 +195,12 @@ namespace CIS411
                     name += excelReader[f].ToString();
                     name += " ";
                     name += excelReader[l].ToString();
+                    excelConnection.Close();
                     return name;
                 }
             }
+            excelConnection.Close();
+            return "ERROR";
         }
 
         private int StripID(int old)
@@ -196,7 +213,7 @@ namespace CIS411
         {
             string name = "";
             int column = 0, s=0, c = 0;
-            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\matt\Documents\GitHub\CIS411\VEN_LSC_SR_Project_Courses_sample.xls;Extended Properties=Excel 12.0 Xml";
+            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=../../../VEN_LSC_SR_Project_Courses_sample.xls;Extended Properties=Excel 12.0 Xml";
             //Create the connection
             System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
             string excelQuery = @"Select * from [sheet1$]";
@@ -232,6 +249,7 @@ namespace CIS411
 
            
             comboClassList.SelectedIndex = 0;
+            excelConnection.Close();
         }
 
         // Initializes classComboBox if it hasn't been yet
@@ -309,9 +327,11 @@ namespace CIS411
 
                     if (excelReader[column].ToString() == searchID.ToString())
                     {
+                        excelConnection.Close();
                         return true;
                     }
             }
+            excelConnection.Close();
                 return false;
         }
 
