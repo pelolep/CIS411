@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Security.Cryptography;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace CIS411
 {
@@ -96,6 +97,26 @@ namespace CIS411
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        private void btnReport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Data.OleDb.OleDbConnection MyConnection;
+                System.Data.OleDb.OleDbCommand myCommand = new System.Data.OleDb.OleDbCommand();
+                string sql = null;
+                MyConnection = new System.Data.OleDb.OleDbConnection("Provider= Microsoft.ACE.OLEDB.12.0;Data Source='../../ReportBook.xls';Extended Properties=Excel 12.0 Xml;");
+                MyConnection.Open();
+                myCommand.Connection = MyConnection;
+                sql = "Insert into [Sheet1$] (Student,NumOfHours) values('Bill Warren','30')";
+                myCommand.CommandText = sql;
+                myCommand.ExecuteNonQuery();
+                MyConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }

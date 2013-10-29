@@ -68,7 +68,9 @@ namespace CIS411
             this.label2 = new System.Windows.Forms.Label();
             this.txtAdminStudentID = new System.Windows.Forms.TextBox();
             this.btnClose = new System.Windows.Forms.Button();
+            this.btnReport = new System.Windows.Forms.Button();
             this.tabControlAdmin.SuspendLayout();
+            this.tabGeneral.SuspendLayout();
             this.tabTutors.SuspendLayout();
             this.tabVisits.SuspendLayout();
             this.tabPermission.SuspendLayout();
@@ -89,6 +91,7 @@ namespace CIS411
             // 
             // tabGeneral
             // 
+            this.tabGeneral.Controls.Add(this.btnReport);
             this.tabGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabGeneral.Name = "tabGeneral";
             this.tabGeneral.Padding = new System.Windows.Forms.Padding(3);
@@ -461,6 +464,16 @@ namespace CIS411
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // btnReport
+            // 
+            this.btnReport.Location = new System.Drawing.Point(161, 76);
+            this.btnReport.Name = "button1";
+            this.btnReport.Size = new System.Drawing.Size(75, 23);
+            this.btnReport.TabIndex = 0;
+            this.btnReport.Text = "Report";
+            this.btnReport.UseVisualStyleBackColor = true;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
+            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -471,6 +484,7 @@ namespace CIS411
             this.Name = "frmAdmin";
             this.Text = "frmAdmin";
             this.tabControlAdmin.ResumeLayout(false);
+            this.tabGeneral.ResumeLayout(false);
             this.tabTutors.ResumeLayout(false);
             this.tabTutors.PerformLayout();
             this.tabVisits.ResumeLayout(false);
@@ -525,5 +539,6 @@ namespace CIS411
         private System.Windows.Forms.TextBox txtCurrentPassword;
         private System.Windows.Forms.Label lblConfirmPassword;
         private System.Windows.Forms.Label lblNewPassword;
+        private System.Windows.Forms.Button btnReport;
     }
 }
