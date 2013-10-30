@@ -18,7 +18,7 @@
     <Setting Name="TutoringMethod" Type="System.String" Scope="User">
       <Value Profile="(Default)">Tutoring</Value>
     </Setting>
-    <Setting Name="PasswordMD5" Type="System.String" Scope="User">
+    <Setting Name="EncryptedPassword" Type="System.String" Scope="User">
       <Value Profile="(Default)">30775aca586f3f9eb6be5e8b6f06cd37</Value>
     </Setting>
   </Settings>

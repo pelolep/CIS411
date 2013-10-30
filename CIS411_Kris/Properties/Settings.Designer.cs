@@ -60,12 +60,12 @@ namespace CIS411.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("30775aca586f3f9eb6be5e8b6f06cd37")]
-        public string PasswordMD5 {
+        public string EncryptedPassword {
             get {
-                return ((string)(this["PasswordMD5"]));
+                return ((string)(this["EncryptedPassword"]));
             }
             set {
-                this["PasswordMD5"] = value;
+                this["EncryptedPassword"] = value;
             }
         }
     }

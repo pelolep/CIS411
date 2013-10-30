@@ -71,13 +71,13 @@ namespace CIS411
             string currentPassword = txtCurrentPassword.Text;
             string newPassword = txtNewPassword.Text;
             string confirmPassword = txtConfirmPassword.Text;
-            string password = Globals.password;
-            MD5CryptoServiceProvider x = new MD5CryptoServiceProvider();
-            byte[] currentPassMD5 = Encoding.ASCII.GetBytes(txtCurrentPassword.Text);
-            currentPassMD5 = x.ComputeHash(currentPassMD5);
-            String currentPassMD5String = Encoding.ASCII.GetString(currentPassMD5);
+            SHA1CryptoServiceProvider x = new SHA1CryptoServiceProvider();
+            byte[] currentPassSHA = Encoding.ASCII.GetBytes(txtCurrentPassword.Text);
+            currentPassSHA = x.ComputeHash(currentPassSHA);
+            string currentPassSHAString = Encoding.ASCII.GetString(currentPassSHA);
+
             //Check that the Password matches the current Password entered by the user
-            if (currentPassMD5String != Properties.Settings.Default.PasswordMD5)
+            if (currentPassSHAString != Properties.Settings.Default.EncryptedPassword.ToString())
             {
                 MessageBox.Show( "Error: The password you used is incorrect");
             }
@@ -87,11 +87,12 @@ namespace CIS411
             }
             else
             {
+                byte[] newPassSHA = Encoding.ASCII.GetBytes(txtNewPassword.Text);
+                newPassSHA = x.ComputeHash(newPassSHA);
+                string newPassSHAString = Encoding.ASCII.GetString(newPassSHA);
+                Properties.Settings.Default.EncryptedPassword = newPassSHAString;
+                Properties.Settings.Default.Save();
                 MessageBox.Show("The password was changed");
-                byte[] newPassMD5 = Encoding.ASCII.GetBytes(txtNewPassword.Text);
-                newPassMD5 = x.ComputeHash(newPassMD5);
-                String newPassMD5String = Encoding.ASCII.GetString(newPassMD5);
-                Properties.Settings.Default.PasswordMD5 = newPassMD5String;
             }
         }
         private void btnClose_Click(object sender, EventArgs e)

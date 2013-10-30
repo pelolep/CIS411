@@ -30,6 +30,7 @@ namespace CIS411
         {
             this.tabControlAdmin = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
+            this.btnReport = new System.Windows.Forms.Button();
             this.tabTutors = new System.Windows.Forms.TabPage();
             this.btnAddTutor = new System.Windows.Forms.Button();
             this.btnDisableSelected = new System.Windows.Forms.Button();
@@ -68,7 +69,6 @@ namespace CIS411
             this.label2 = new System.Windows.Forms.Label();
             this.txtAdminStudentID = new System.Windows.Forms.TextBox();
             this.btnClose = new System.Windows.Forms.Button();
-            this.btnReport = new System.Windows.Forms.Button();
             this.tabControlAdmin.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.tabTutors.SuspendLayout();
@@ -99,6 +99,16 @@ namespace CIS411
             this.tabGeneral.TabIndex = 0;
             this.tabGeneral.Text = "General";
             this.tabGeneral.UseVisualStyleBackColor = true;
+            // 
+            // btnReport
+            // 
+            this.btnReport.Location = new System.Drawing.Point(161, 76);
+            this.btnReport.Name = "btnReport";
+            this.btnReport.Size = new System.Drawing.Size(75, 23);
+            this.btnReport.TabIndex = 0;
+            this.btnReport.Text = "Report";
+            this.btnReport.UseVisualStyleBackColor = true;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 
             // tabTutors
             // 
@@ -379,6 +389,7 @@ namespace CIS411
             this.txtConfirmPassword.Name = "txtConfirmPassword";
             this.txtConfirmPassword.Size = new System.Drawing.Size(144, 20);
             this.txtConfirmPassword.TabIndex = 8;
+            this.txtConfirmPassword.UseSystemPasswordChar = true;
             // 
             // txtNewPassword
             // 
@@ -386,6 +397,7 @@ namespace CIS411
             this.txtNewPassword.Name = "txtNewPassword";
             this.txtNewPassword.Size = new System.Drawing.Size(144, 20);
             this.txtNewPassword.TabIndex = 7;
+            this.txtNewPassword.UseSystemPasswordChar = true;
             // 
             // txtCurrentPassword
             // 
@@ -393,6 +405,7 @@ namespace CIS411
             this.txtCurrentPassword.Name = "txtCurrentPassword";
             this.txtCurrentPassword.Size = new System.Drawing.Size(144, 20);
             this.txtCurrentPassword.TabIndex = 6;
+            this.txtCurrentPassword.UseSystemPasswordChar = true;
             // 
             // lblConfirmPassword
             // 
@@ -463,16 +476,6 @@ namespace CIS411
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // btnReport
-            // 
-            this.btnReport.Location = new System.Drawing.Point(161, 76);
-            this.btnReport.Name = "button1";
-            this.btnReport.Size = new System.Drawing.Size(75, 23);
-            this.btnReport.TabIndex = 0;
-            this.btnReport.Text = "Report";
-            this.btnReport.UseVisualStyleBackColor = true;
-            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 
             // frmAdmin
             // 

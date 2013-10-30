@@ -28,8 +28,26 @@ namespace CIS411
 
         private void txtStudentID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
+            if (txtStudentID.Text == "")
+            {
+                // Starts a timer to see if user is swiping a card.
+                usingCard = true;
+                keyTimer.Start();
+            }
             if (e.KeyCode == Keys.Enter)
                 btnIdSearch.PerformClick();
+            else if ((txtStudentID.TextLength == 8)&&(usingCard))
+            {
+                // If student is swiping card, first character must be stripped from ID textbox because it is an extraneous 9.
+                txtStudentID.Text = txtStudentID.Text.Remove(0, 1);
+                txtStudentID.Select(7, 0);
+            }
+        }
+
+        private void keyTimer_Tick(object sender, EventArgs e)
+        {
+            usingCard = false;
+            keyTimer.Stop();
         }
 
         private void btnIdSearch_Click(object sender, EventArgs e)
@@ -379,5 +397,6 @@ namespace CIS411
         }
 
         private int studentID = 0;
+        private bool usingCard = false;
     }
 }

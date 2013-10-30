@@ -43,6 +43,7 @@ namespace CIS411
             this.btnAdmin = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnNoCard = new System.Windows.Forms.Button();
+            this.keyTimer = new System.Windows.Forms.Timer();
             this.groupRadioButtons.SuspendLayout();
             this.SuspendLayout();
             #region btnSwipe
@@ -51,6 +52,7 @@ namespace CIS411
             //
             this.btnSwipe.AutoSize = true;
             this.btnSwipe.Location = new System.Drawing.Point(200, 10);
+            this.btnSwipe.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnSwipe.Name = "btnSwipe";
             this.btnSwipe.Size = new System.Drawing.Size(190, 64);
             this.btnSwipe.TabIndex = 1;
@@ -226,6 +228,13 @@ namespace CIS411
             this.btnNoCard.UseVisualStyleBackColor = true;
             this.btnNoCard.Click += new System.EventHandler(this.btnNoCard_Click);
             #endregion
+            #region keyTimer
+            //
+            // keyTimer
+            //
+            this.keyTimer.Interval = 200;
+            this.keyTimer.Tick += new System.EventHandler(this.keyTimer_Tick);
+            #endregion
             #region frmMain
             // 
             // frmMain
@@ -233,7 +242,7 @@ namespace CIS411
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 537);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.Controls.Add(this.btnAdmin);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.comboClassList);
@@ -267,6 +276,7 @@ namespace CIS411
         private System.Windows.Forms.Button btnSwipe;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Button btnNoCard;
+        private System.Windows.Forms.Timer keyTimer;
     }
 }
 
