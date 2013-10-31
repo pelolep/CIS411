@@ -184,9 +184,12 @@ namespace CIS411
 
         private void btn_student_import_Click(object sender, EventArgs e)
         {
-
-           // int term, id, last, first, middle, username, eaglemail, standing, degree, major, major2, minor, minor2, credits_att, sex, his, am_in, asian, black, pac_is, white, age, campus, housing, trans, trans_cr, visits;
-            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=..\..\..\VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";
+            OpenFileDialog o = new OpenFileDialog();
+            o.ShowDialog();
+            if (o.FileName == "")
+                return;
+            // int term, id, last, first, middle, username, eaglemail, standing, degree, major, major2, minor, minor2, credits_att, sex, his, am_in, asian, black, pac_is, white, age, campus, housing, trans, trans_cr, visits;
+            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source="+o.FileName+/*..\..\..\VEN_LSC_SR_Project_Students_sample.xls*/";Extended Properties=Excel 12.0 Xml";
             // Create the connection
             string last, first;
             System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
@@ -218,7 +221,11 @@ namespace CIS411
         private void btn_courses_import_Click(object sender, EventArgs e)
         {
             string last, first;
-            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=..\..\..\VEN_LSC_SR_Project_Courses_sample.xls;Extended Properties=Excel 12.0 Xml";
+            OpenFileDialog o = new OpenFileDialog();
+            o.ShowDialog();
+            if (o.FileName == "")
+                return;
+            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source="+o.FileName+/*..\..\..\VEN_LSC_SR_Project_Courses_sample.xls*/";Extended Properties=Excel 12.0 Xml";
             // Create the connection
 
             System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
@@ -244,8 +251,6 @@ namespace CIS411
             }
             cn.Close();
             excelConnection.Close();
-
-            
         }
 
         private void frmAdmin_Load(object sender, EventArgs e)
@@ -273,7 +278,6 @@ namespace CIS411
                         listBoxDisableTutors.Items.Add(rd[2].ToString() + " " + rd[3].ToString());
                 }
             }
-
             cn.Close();
         }
 

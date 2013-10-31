@@ -71,6 +71,8 @@ namespace CIS411
             this.label2 = new System.Windows.Forms.Label();
             this.txtAdminStudentID = new System.Windows.Forms.TextBox();
             this.btnClose = new System.Windows.Forms.Button();
+            this.comboLeastOrGreater = new System.Windows.Forms.ComboBox();
+            this.comboCategory = new System.Windows.Forms.ComboBox();
             this.tabControlAdmin.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.tabTutors.SuspendLayout();
@@ -93,6 +95,8 @@ namespace CIS411
             // 
             // tabGeneral
             // 
+            this.tabGeneral.Controls.Add(this.comboCategory);
+            this.tabGeneral.Controls.Add(this.comboLeastOrGreater);
             this.tabGeneral.Controls.Add(this.btn_courses_import);
             this.tabGeneral.Controls.Add(this.btn_student_import);
             this.tabGeneral.Controls.Add(this.btnReport);
@@ -106,29 +110,29 @@ namespace CIS411
             // 
             // btn_courses_import
             // 
-            this.btn_courses_import.Location = new System.Drawing.Point(286, 108);
+            this.btn_courses_import.Location = new System.Drawing.Point(6, 35);
             this.btn_courses_import.Name = "btn_courses_import";
-            this.btn_courses_import.Size = new System.Drawing.Size(107, 53);
+            this.btn_courses_import.Size = new System.Drawing.Size(93, 23);
             this.btn_courses_import.TabIndex = 2;
-            this.btn_courses_import.Text = "course import";
+            this.btn_courses_import.Text = "Import Courses";
             this.btn_courses_import.UseVisualStyleBackColor = true;
             this.btn_courses_import.Click += new System.EventHandler(this.btn_courses_import_Click);
             // 
             // btn_student_import
             // 
-            this.btn_student_import.Location = new System.Drawing.Point(273, 30);
+            this.btn_student_import.Location = new System.Drawing.Point(6, 64);
             this.btn_student_import.Name = "btn_student_import";
-            this.btn_student_import.Size = new System.Drawing.Size(93, 46);
+            this.btn_student_import.Size = new System.Drawing.Size(93, 23);
             this.btn_student_import.TabIndex = 1;
-            this.btn_student_import.Text = "students import";
+            this.btn_student_import.Text = "Import Students";
             this.btn_student_import.UseVisualStyleBackColor = true;
             this.btn_student_import.Click += new System.EventHandler(this.btn_student_import_Click);
             // 
             // btnReport
             // 
-            this.btnReport.Location = new System.Drawing.Point(161, 76);
+            this.btnReport.Location = new System.Drawing.Point(408, 8);
             this.btnReport.Name = "btnReport";
-            this.btnReport.Size = new System.Drawing.Size(75, 23);
+            this.btnReport.Size = new System.Drawing.Size(93, 23);
             this.btnReport.TabIndex = 0;
             this.btnReport.Text = "Report";
             this.btnReport.UseVisualStyleBackColor = true;
@@ -502,6 +506,25 @@ namespace CIS411
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // comboLeastOrGreater
+            // 
+            this.comboLeastOrGreater.FormattingEnabled = true;
+            this.comboLeastOrGreater.Items.AddRange(new object[] {
+            "Least to greatest",
+            "Greatest to least"});
+            this.comboLeastOrGreater.Location = new System.Drawing.Point(523, 37);
+            this.comboLeastOrGreater.Name = "comboLeastOrGreater";
+            this.comboLeastOrGreater.Size = new System.Drawing.Size(121, 21);
+            this.comboLeastOrGreater.TabIndex = 3;
+            // 
+            // comboCategory
+            // 
+            this.comboCategory.FormattingEnabled = true;
+            this.comboCategory.Location = new System.Drawing.Point(523, 8);
+            this.comboCategory.Name = "comboCategory";
+            this.comboCategory.Size = new System.Drawing.Size(121, 21);
+            this.comboCategory.TabIndex = 4;
+            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -571,5 +594,7 @@ namespace CIS411
         private System.Windows.Forms.Button btnReport;
         private System.Windows.Forms.Button btn_courses_import;
         private System.Windows.Forms.Button btn_student_import;
+        private System.Windows.Forms.ComboBox comboLeastOrGreater;
+        private System.Windows.Forms.ComboBox comboCategory;
     }
 }
