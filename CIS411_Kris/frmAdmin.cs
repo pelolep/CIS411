@@ -68,6 +68,7 @@ namespace CIS411
 
         private void btnChangePassword_Click(object sender, EventArgs e)
         {
+            /*
             string currentPassword = txtCurrentPassword.Text;
             string newPassword = txtNewPassword.Text;
             string confirmPassword = txtConfirmPassword.Text;
@@ -75,9 +76,10 @@ namespace CIS411
             byte[] currentPassSHA = Encoding.ASCII.GetBytes(txtCurrentPassword.Text);
             currentPassSHA = x.ComputeHash(currentPassSHA);
             string currentPassSHAString = Encoding.ASCII.GetString(currentPassSHA);
+            */
 
             //Check that the Password matches the current Password entered by the user
-            if (currentPassSHAString != Properties.Settings.Default.EncryptedPassword.ToString())
+            if (hash(txtCurrentPassword.Text) != Properties.Settings.Default.EncryptedPassword)
             {
                 MessageBox.Show( "Error: The password you used is incorrect");
             }
@@ -87,18 +89,29 @@ namespace CIS411
             }
             else
             {
+                /*
                 byte[] newPassSHA = Encoding.ASCII.GetBytes(txtNewPassword.Text);
                 newPassSHA = x.ComputeHash(newPassSHA);
                 string newPassSHAString = Encoding.ASCII.GetString(newPassSHA);
-                Properties.Settings.Default.EncryptedPassword = newPassSHAString;
+                */
+                Properties.Settings.Default.EncryptedPassword = hash(txtNewPassword.Text);
                 Properties.Settings.Default.Save();
                 MessageBox.Show("The password was changed");
             }
         }
+
+        private string hash(string input)
+        {
+            SHA1CryptoServiceProvider x = new SHA1CryptoServiceProvider();
+            //RSACryptoServiceProvider y = new RSACryptoServiceProvider();
+            return Encoding.ASCII.GetString/*(y.Encrypt*/(x.ComputeHash(Encoding.ASCII.GetBytes(input))/*,true)*/);
+        }
+
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
         private void btnReport_Click(object sender, EventArgs e)
         {
             try
@@ -106,7 +119,7 @@ namespace CIS411
                 System.Data.OleDb.OleDbConnection MyConnection;
                 System.Data.OleDb.OleDbCommand myCommand = new System.Data.OleDb.OleDbCommand();
                 string sql = null;
-                MyConnection = new System.Data.OleDb.OleDbConnection("Provider= Microsoft.ACE.OLEDB.12.0;Data Source='../../ReportBook.xls';Extended Properties=Excel 12.0 Xml;");
+                MyConnection = new System.Data.OleDb.OleDbConnection("Provider= Microsoft.ACE.OLEDB.12.0;Data Source='../../../ReportBook.xls';Extended Properties=Excel 12.0 Xml;");
                 MyConnection.Open();
                 myCommand.Connection = MyConnection;
                 sql = "Insert into [Sheet1$] (Student,NumOfHours) values('Bill Warren','30')";

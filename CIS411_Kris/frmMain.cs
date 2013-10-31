@@ -266,6 +266,7 @@ namespace CIS411
             comboClassList.SelectedIndex = 0;
             excelConnection.Close();
         }
+
         // Initializes classComboBox if it hasn't been yet
         private void initClassCombo()
         {
@@ -284,14 +285,14 @@ namespace CIS411
 
         private void resetForm()
         {
-            this.btnSwipe.Visible = true;
-            this.btnNoCard.Visible = true;
+            //this.btnSwipe.Visible = true;
+            //this.btnNoCard.Visible = true;
             this.txtStudentID.Text = "";
-            this.txtStudentID.Visible = false;
+            this.txtStudentID.Visible = true;
             this.txtStudentID.ReadOnly = false;
-            this.btnIdSearch.Visible = false;
-            this.lblStudentID.Visible = false;
-            this.btnForgotId.Visible = false;
+            this.btnIdSearch.Visible = true;
+            this.lblStudentID.Visible = true;
+            this.btnForgotId.Visible = true;
             for (int i = 0; i < rdoMethods.Length; i++)
                 this.rdoMethods[i].Checked = false;
             this.groupRadioButtons.Visible = true;
@@ -353,8 +354,8 @@ namespace CIS411
         public void updatetxtStudentID (int numIn)
         {
             studentID = numIn;
-            btnSwipe.Visible = false;
-            btnNoCard.Visible = false;
+            //btnSwipe.Visible = false;
+            //btnNoCard.Visible = false;
             txtStudentID.Visible = true;
             txtStudentID.Text = studentID.ToString();
             txtStudentID.ReadOnly = true;
@@ -378,8 +379,8 @@ namespace CIS411
         {
             txtStudentID.Visible = true;
             txtStudentID.MaxLength = 8;
-            btnSwipe.Visible = false;
-            btnNoCard.Visible = false;
+            //btnSwipe.Visible = false;
+            //btnNoCard.Visible = false;
             btnIdSearch.Visible = true;
             btnForgotId.Visible = true;
         }
@@ -387,8 +388,8 @@ namespace CIS411
         public void disableChangeID()
         {
             txtStudentID.ReadOnly = true;
-            btnForgotId.Visible = false;
-            btnIdSearch.Visible = false;
+            btnForgotId.Enabled = false;
+            btnIdSearch.Enabled = false;
         }
 
         public int StripID(int old)

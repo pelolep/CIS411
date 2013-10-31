@@ -33,7 +33,7 @@ namespace CIS411
             this.lblStudentID = new System.Windows.Forms.Label();
             this.btnForgotId = new System.Windows.Forms.Button();
             this.groupRadioButtons = new System.Windows.Forms.GroupBox();
-            this.btnSwipe = new System.Windows.Forms.Button();
+            //this.btnSwipe = new System.Windows.Forms.Button();
             this.rdoMethods = new System.Windows.Forms.RadioButton[Properties.Settings.Default.MethodNames.Count];
             for (int i = 0; i < Properties.Settings.Default.MethodNames.Count; i++)
                 this.rdoMethods[i] = new System.Windows.Forms.RadioButton();
@@ -42,12 +42,12 @@ namespace CIS411
             this.btnSubmit = new System.Windows.Forms.Button();
             this.btnAdmin = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
-            this.btnNoCard = new System.Windows.Forms.Button();
+            //this.btnNoCard = new System.Windows.Forms.Button();
             this.keyTimer = new System.Windows.Forms.Timer();
             this.groupRadioButtons.SuspendLayout();
             this.SuspendLayout();
             #region btnSwipe
-            //
+            /*
             // btnSwipe
             //
             this.btnSwipe.AutoSize = true;
@@ -59,6 +59,7 @@ namespace CIS411
             this.btnSwipe.Text = "Swipe Card";
             this.btnSwipe.Click += new System.EventHandler(this.btnSwipe_Click);
             this.btnSwipe.Visible = true;
+            */
             #endregion
             #region rdoMethods
             //
@@ -89,9 +90,10 @@ namespace CIS411
             this.txtStudentID.Name = "txtStudentID";
             this.txtStudentID.Size = new System.Drawing.Size(100, 20);
             this.txtStudentID.TabIndex = 0;
+            this.txtStudentID.MaxLength = 8;
             this.txtStudentID.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtStudentID_PreviewKeyDown);
             this.txtStudentID.AcceptsReturn = false;
-            this.txtStudentID.Visible = false;
+            this.txtStudentID.Visible = true;
             #endregion
             #region btnIdSearch
             // 
@@ -104,7 +106,7 @@ namespace CIS411
             this.btnIdSearch.Text = "Search by ID";
             this.btnIdSearch.UseVisualStyleBackColor = true;
             this.btnIdSearch.Click += new System.EventHandler(this.btnIdSearch_Click);
-            this.btnIdSearch.Visible = false;
+            this.btnIdSearch.Visible = true;
             #endregion
             #region lblStudentID
             // 
@@ -116,10 +118,10 @@ namespace CIS411
             this.lblStudentID.Size = new System.Drawing.Size(58, 13);
             this.lblStudentID.TabIndex = 3;
             this.lblStudentID.Text = "Student ID";
-            this.lblStudentID.Visible = false;
+            this.lblStudentID.Visible = true;
             #endregion
             #region btnForgotID
-            // 
+            //
             // btnForgotId
             // 
             this.btnForgotId.FlatAppearance.BorderSize = 0;
@@ -133,7 +135,7 @@ namespace CIS411
             this.btnForgotId.Text = "Don't know your ID number?";
             this.btnForgotId.Click += new System.EventHandler(this.btnForgotId_Click);
             this.btnForgotId.UseVisualStyleBackColor = true;
-            this.btnForgotId.Visible = false;
+            this.btnForgotId.Visible = true;
             #endregion
             #region groupRadioButtons
             // 
@@ -217,7 +219,7 @@ namespace CIS411
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             #endregion
             #region btnNoCard
-            //
+            /*
             // btnNoCard
             //
             this.btnNoCard.Location = new System.Drawing.Point(250, 84);
@@ -227,6 +229,7 @@ namespace CIS411
             this.btnNoCard.Text = "Forgot Card";
             this.btnNoCard.UseVisualStyleBackColor = true;
             this.btnNoCard.Click += new System.EventHandler(this.btnNoCard_Click);
+            */
             #endregion
             #region keyTimer
             //
@@ -252,9 +255,9 @@ namespace CIS411
             this.Controls.Add(this.lblStudentID);
             this.Controls.Add(this.btnIdSearch);
             this.Controls.Add(this.txtStudentID);
-            this.Controls.Add(this.btnSwipe);
+            //this.Controls.Add(this.btnSwipe);
             this.Controls.Add(this.btnReset);
-            this.Controls.Add(this.btnNoCard);
+            //this.Controls.Add(this.btnNoCard);
             this.Name = "frmMain";
             this.Text = "Login";
             this.ResumeLayout(false);
@@ -273,9 +276,9 @@ namespace CIS411
         private System.Windows.Forms.ComboBox comboTutors;
         private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.Button btnAdmin;
-        private System.Windows.Forms.Button btnSwipe;
+        //private System.Windows.Forms.Button btnSwipe;
         private System.Windows.Forms.Button btnReset;
-        private System.Windows.Forms.Button btnNoCard;
+        //private System.Windows.Forms.Button btnNoCard;
         private System.Windows.Forms.Timer keyTimer;
     }
 }
