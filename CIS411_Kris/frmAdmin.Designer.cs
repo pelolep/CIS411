@@ -30,6 +30,8 @@ namespace CIS411
         {
             this.tabControlAdmin = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
+            this.btn_courses_import = new System.Windows.Forms.Button();
+            this.btn_student_import = new System.Windows.Forms.Button();
             this.btnReport = new System.Windows.Forms.Button();
             this.tabTutors = new System.Windows.Forms.TabPage();
             this.btnAddTutor = new System.Windows.Forms.Button();
@@ -91,6 +93,8 @@ namespace CIS411
             // 
             // tabGeneral
             // 
+            this.tabGeneral.Controls.Add(this.btn_courses_import);
+            this.tabGeneral.Controls.Add(this.btn_student_import);
             this.tabGeneral.Controls.Add(this.btnReport);
             this.tabGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabGeneral.Name = "tabGeneral";
@@ -99,6 +103,26 @@ namespace CIS411
             this.tabGeneral.TabIndex = 0;
             this.tabGeneral.Text = "General";
             this.tabGeneral.UseVisualStyleBackColor = true;
+            // 
+            // btn_courses_import
+            // 
+            this.btn_courses_import.Location = new System.Drawing.Point(286, 108);
+            this.btn_courses_import.Name = "btn_courses_import";
+            this.btn_courses_import.Size = new System.Drawing.Size(107, 53);
+            this.btn_courses_import.TabIndex = 2;
+            this.btn_courses_import.Text = "course import";
+            this.btn_courses_import.UseVisualStyleBackColor = true;
+            this.btn_courses_import.Click += new System.EventHandler(this.btn_courses_import_Click);
+            // 
+            // btn_student_import
+            // 
+            this.btn_student_import.Location = new System.Drawing.Point(273, 30);
+            this.btn_student_import.Name = "btn_student_import";
+            this.btn_student_import.Size = new System.Drawing.Size(93, 46);
+            this.btn_student_import.TabIndex = 1;
+            this.btn_student_import.Text = "students import";
+            this.btn_student_import.UseVisualStyleBackColor = true;
+            this.btn_student_import.Click += new System.EventHandler(this.btn_student_import_Click);
             // 
             // btnReport
             // 
@@ -147,6 +171,7 @@ namespace CIS411
             this.btnDisableSelected.TabIndex = 8;
             this.btnDisableSelected.Text = ">";
             this.btnDisableSelected.UseVisualStyleBackColor = true;
+            this.btnDisableSelected.Click += new System.EventHandler(this.btnDisableSelected_Click);
             // 
             // btnDisableAll
             // 
@@ -486,6 +511,7 @@ namespace CIS411
             this.Controls.Add(this.tabControlAdmin);
             this.Name = "frmAdmin";
             this.Text = "frmAdmin";
+            this.Load += new System.EventHandler(this.frmAdmin_Load);
             this.tabControlAdmin.ResumeLayout(false);
             this.tabGeneral.ResumeLayout(false);
             this.tabTutors.ResumeLayout(false);
@@ -543,5 +569,7 @@ namespace CIS411
         private System.Windows.Forms.Label lblConfirmPassword;
         private System.Windows.Forms.Label lblNewPassword;
         private System.Windows.Forms.Button btnReport;
+        private System.Windows.Forms.Button btn_courses_import;
+        private System.Windows.Forms.Button btn_student_import;
     }
 }
