@@ -78,7 +78,6 @@ namespace CIS411
             
             //Import classes information into the classes dropdown menu
             initClassCombo();
-            disableChangeID();
             groupRadioButtons.Enabled = true;
 
         }
@@ -263,8 +262,9 @@ namespace CIS411
                     name = "";
                 }
             }
-            comboClassList.SelectedIndex = 0;
             excelConnection.Close();
+            comboClassList.SelectedIndex = 0;
+            comboClassList.Items.Add("Other");
         }
 
         // Initializes classComboBox if it hasn't been yet
@@ -293,6 +293,8 @@ namespace CIS411
             this.btnIdSearch.Visible = true;
             this.lblStudentID.Visible = true;
             this.btnForgotId.Visible = true;
+            this.btnIdSearch.Enabled = true;
+            this.btnForgotId.Enabled = true;
             for (int i = 0; i < rdoMethods.Length; i++)
                 this.rdoMethods[i].Checked = false;
             this.groupRadioButtons.Visible = true;
@@ -358,9 +360,9 @@ namespace CIS411
             //btnNoCard.Visible = false;
             txtStudentID.Visible = true;
             txtStudentID.Text = studentID.ToString();
-            txtStudentID.ReadOnly = true;
+            //txtStudentID.ReadOnly = true;
             initClassCombo();
-            groupRadioButtons.Enabled = true;
+            //groupRadioButtons.Enabled = true;
         }
 
         // Queries database to see if student with searchID is already signed in
@@ -384,14 +386,14 @@ namespace CIS411
             btnIdSearch.Visible = true;
             btnForgotId.Visible = true;
         }
-
+        /*
         public void disableChangeID()
         {
             txtStudentID.ReadOnly = true;
             btnForgotId.Enabled = false;
             btnIdSearch.Enabled = false;
         }
-
+        */
         public int StripID(int old)
         {
             return old % 100000000;

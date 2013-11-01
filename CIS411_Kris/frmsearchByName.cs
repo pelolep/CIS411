@@ -24,7 +24,7 @@ namespace CIS411
             if (SearchForUser(txtUsername.Text, out userID))
             {
                 Program.mainForm.updatetxtStudentID(userID);
-                Program.mainForm.disableChangeID();
+                //Program.mainForm.disableChangeID();
                 Program.mainForm.Focus();
                 this.Close();
             }
