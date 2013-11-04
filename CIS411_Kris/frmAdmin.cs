@@ -27,18 +27,17 @@ namespace CIS411
         //Adds Tutor ot the list of tutors via Student ID and adds their information to the Tutors table
         private void btnAddTutor_Click(object sender, EventArgs e)
         {/////////////// edit table so only clarion id, status and cnet_username are used
-            string term="", id="",last="", first="", middle="", user="", eagle="", status="";
-            MessageBox.Show("click");
+            bool real = false;
             //Gets the student id
             string studentID = txtTutorStudentID.Text;
 
             listBoxEnableTutors.Items.Clear();
             listBoxDisableTutors.Items.Clear();
-            loadlist();
+
 
             cmd.Connection = cn;
             cn.Open();
-            cmd.CommandText = "select * from students";
+            cmd.CommandText = "select * from student";
             
             rd = cmd.ExecuteReader();
             
@@ -48,26 +47,23 @@ namespace CIS411
                 {
                     if (rd[1].ToString() == studentID.ToString())
                     {
-                        term = rd[0].ToString();
-                        id = rd[1].ToString();
-                        last = rd[2].ToString();
-                        first = rd[3].ToString();
-                        middle = rd[4].ToString();
-                        user = rd[5].ToString();
-                        eagle = rd[6].ToString();
-                        status = "active";
+                        real = true;
                     }
                 }
             }
-
+            rd.Close();
+            MessageBox.Show("d");
             cn.Close();
-            cmd.Connection = cn;
-            cn.Open();
-            cmd.CommandText = "update tutors set status =";
-            cmd.ExecuteNonQuery();
-            cmd.Clone();
-            cn.Close();
-            loadlist();
+            if (real)
+            {
+                cmd.Connection = cn;
+                cn.Open();
+                // cmd.CommandText = "insert into tutors(clarion_id,status) values ('"+ studentID +"', '"+ "active" +"')";
+                cmd.ExecuteNonQuery();
+                cmd.Clone();
+                cn.Close();
+                //loadlist();
+            }
         }
 
         private void btnDisableSelected_Click(object sender, EventArgs e)
@@ -79,6 +75,25 @@ namespace CIS411
             cmd.Clone();
             cn.Close();
             loadlist();
+        }
+
+        private void btnDisableAll_Click(object sender, EventArgs e)
+        {
+
+            //loadlist();
+            cmd.Connection = cn;
+            cn.Open();
+            cmd.CommandText = "select * from tutor";
+            rd = cmd.ExecuteReader();
+            if (rd.HasRows)
+            {
+                while (rd.Read())
+                {
+                    cmd.CommandText = "update tutor set status = '"+ "inactive" +"' where status= '"+ "active"+"'";
+                }
+            }
+            cn.Close();
+            rd.Close();
         }
 
 
@@ -184,6 +199,7 @@ namespace CIS411
 
         private void btn_student_import_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             OpenFileDialog o = new OpenFileDialog();
             o.ShowDialog();
             if (o.FileName == "")
@@ -203,29 +219,60 @@ namespace CIS411
 
             // Add class names to comboClassList
             while (excelReader.Read())
+=======
+            try
             {
-                last = excelReader[2].ToString();
-                last = last.Replace("'", " ");
-                first = excelReader[3].ToString();
-                first = first.Replace("'", " ");
-                cmd.CommandText = "insert into students ( term,clarion_id,lastname,firstname,middle_name,cnet_username,eaglemail,class_standing,degree_seeking,major_1,major_2,minor_1,minor_2,credit_attempted,sex,hispanic,amer_indian,asian,black,pacific_islander,White,age,campus,housing,transfer,transfer_credit,number_of_visits) values ('" + excelReader[0] + "','" + excelReader[1] + "','" + last + "','" + first + "','" + excelReader[4] + "','" + excelReader[5] + "','" + excelReader[6] + "','" + excelReader[7] + "','" + excelReader[8] + "','" + excelReader[9] + "','" + excelReader[10] + "','" + excelReader[11] + "','" + excelReader[12] + "','" + excelReader[13] + "','" + excelReader[14] + "','" + excelReader[15] + "','" + excelReader[16] + "','" + excelReader[17] + "','" + excelReader[18] + "','" + excelReader[19] + "','" + excelReader[20] + "','" + excelReader[21] + "','" + excelReader[22] + "','" + excelReader[23] + "','" + excelReader[24] + "','" + excelReader[25] + "','" + 0 + "')";
-            cmd.ExecuteNonQuery();
-            cmd.Clone();
-            }
+                // int term, id, last, first, middle, username, eaglemail, standing, degree, major, major2, minor, minor2, credits_att, sex, his, am_in, asian, black, pac_is, white, age, campus, housing, trans, trans_cr, visits;
+                string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=..\..\..\VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";
+                // Create the connection
+                string last, first, middle;
 
-            excelConnection.Close();
+                System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
+                string excelQuery = @"Select * from [Export Worksheet$]";
+                System.Data.OleDb.OleDbCommand excelCommand = new System.Data.OleDb.OleDbCommand(excelQuery, excelConnection);
+                excelConnection.Open();
+                System.Data.OleDb.OleDbDataReader excelReader;
+                excelReader = excelCommand.ExecuteReader();
+                cmd.Connection = cn;
+                cn.Open();
+
+                // Add class names to comboClassList
+                while (excelReader.Read())
+                {
+                    last = excelReader[2].ToString();
+                    last = last.Replace("'", " ");
+                    first = excelReader[3].ToString();
+                    first = first.Replace("'", " ");
+                    middle = excelReader[4].ToString();
+                    middle = first.Replace("'", " ");
+                    cmd.CommandText = "insert into STUDENT ( term,clarion_id,lastname,firstname,middle_name,cnet_username,eaglemail,class_standing,degree_seeking,major_1,major_2,minor_1,minor_2,credit_attempted,sex,hispanic,amer_indian,asian,black,pacific_islander,White,age,campus,housing,transfer,transfer_credit,number_of_visit) values ('" + excelReader[0] + "','" + excelReader[1] + "','" + last + "','" + first + "','" + middle + "','" + excelReader[5] + "','" + excelReader[6] + "','" + excelReader[7] + "','" + excelReader[8] + "','" + excelReader[9] + "','" + excelReader[10] + "','" + excelReader[11] + "','" + excelReader[12] + "','" + excelReader[13] + "','" + excelReader[14] + "','" + excelReader[15] + "','" + excelReader[16] + "','" + excelReader[17] + "','" + excelReader[18] + "','" + excelReader[19] + "','" + excelReader[20] + "','" + excelReader[21] + "','" + excelReader[22] + "','" + excelReader[23] + "','" + excelReader[24] + "','" + excelReader[25] + "','" + 0 + "')";
+                    cmd.ExecuteNonQuery();
+                    cmd.Clone();
+                }
+                excelReader.Close();
+                excelConnection.Close();
+                cn.Close();
+            }
+            catch
+>>>>>>> origin/Matt4
+            {
+            }
             cn.Close();
-            
         }
 
         private void btn_courses_import_Click(object sender, EventArgs e)
         {
             string last, first;
+<<<<<<< HEAD
             OpenFileDialog o = new OpenFileDialog();
             o.ShowDialog();
             if (o.FileName == "")
                 return;
             string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source="+o.FileName+/*..\..\..\VEN_LSC_SR_Project_Courses_sample.xls*/";Extended Properties=Excel 12.0 Xml";
+=======
+            SqlCommand cmd2 = new SqlCommand();
+            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=..\..\..\VEN_LSC_SR_Project_Courses_sample.xls;Extended Properties=Excel 12.0 Xml";
+>>>>>>> origin/Matt4
             // Create the connection
 
             System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
@@ -234,7 +281,8 @@ namespace CIS411
             excelConnection.Open();
             System.Data.OleDb.OleDbDataReader excelReader;
             excelReader = excelCommand.ExecuteReader();
-
+            cmd.Connection = cn;
+            cmd2.Connection = cn;
             cn.Open();
            
             // Add class names to comboClassList
@@ -245,17 +293,35 @@ namespace CIS411
                 last = last.Replace("'"," ");
                 first = excelReader[6].ToString();
                 first= first.Replace("'"," ");
-                cmd.CommandText = "insert into Courses (term,id,subject,catalog,section,last_name, first_name,emp_email) values ('" + excelReader[0] + "','" + excelReader[1] + "','" + excelReader[2] + "','" + excelReader[3] + "','" + excelReader[4] + "','" + last + "','" + first + "','" + excelReader[7] + "')";
-                cmd.ExecuteNonQuery();
-                cmd.Clone();
+                try
+                {
+                    cmd.CommandText = "insert into Course (term,subject,catalog,section) values ('" + excelReader[0] + "','" + excelReader[2] + "','" + excelReader[3] + "','" + excelReader[4] + "')";
+                    cmd.ExecuteNonQuery();
+                    cmd.Clone();
+                }
+                catch
+                {
+                }
+                try
+                {
+                    cmd2.CommandText = "insert into PROFESSOR (PROF_EMAIL, LASTNAME, FIRSTNAME) values ('" + excelReader[7] + "', '" + last + "', '" + first + "')";
+                    cmd2.ExecuteNonQuery();
+                    cmd2.Clone();
+                }
+                catch{
+                }
             }
+            excelReader.Close();
             cn.Close();
+            cn.Close();
+
+            
             excelConnection.Close();
         }
 
         private void frmAdmin_Load(object sender, EventArgs e)
         {
-            loadlist();
+            //loadlist();
         }
 
         public void loadlist()
@@ -265,7 +331,7 @@ namespace CIS411
 
             cmd.Connection = cn;
             cn.Open();
-            cmd.CommandText = "select * from tutors";
+            cmd.CommandText = "select * from tutor";
             rd = cmd.ExecuteReader();
 
             if (rd.HasRows)
