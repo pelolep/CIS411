@@ -199,31 +199,14 @@ namespace CIS411
 
         private void btn_student_import_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
-            OpenFileDialog o = new OpenFileDialog();
-            o.ShowDialog();
-            if (o.FileName == "")
-                return;
-            // int term, id, last, first, middle, username, eaglemail, standing, degree, major, major2, minor, minor2, credits_att, sex, his, am_in, asian, black, pac_is, white, age, campus, housing, trans, trans_cr, visits;
-            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source="+o.FileName+/*..\..\..\VEN_LSC_SR_Project_Students_sample.xls*/";Extended Properties=Excel 12.0 Xml";
-            // Create the connection
-            string last, first;
-            System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
-            string excelQuery = @"Select * from [Export Worksheet$]";
-            System.Data.OleDb.OleDbCommand excelCommand = new System.Data.OleDb.OleDbCommand(excelQuery, excelConnection);
-            excelConnection.Open();
-            System.Data.OleDb.OleDbDataReader excelReader;
-            excelReader = excelCommand.ExecuteReader();
-
-            cn.Open();
-
-            // Add class names to comboClassList
-            while (excelReader.Read())
-=======
             try
             {
+                OpenFileDialog o = new OpenFileDialog();
+                o.ShowDialog();
+                if (o.FileName == "")
+                    return;
                 // int term, id, last, first, middle, username, eaglemail, standing, degree, major, major2, minor, minor2, credits_att, sex, his, am_in, asian, black, pac_is, white, age, campus, housing, trans, trans_cr, visits;
-                string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=..\..\..\VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";
+                string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source="+o.FileName+";Extended Properties=Excel 12.0 Xml";
                 // Create the connection
                 string last, first, middle;
 
@@ -254,25 +237,19 @@ namespace CIS411
                 cn.Close();
             }
             catch
->>>>>>> origin/Matt4
             {
             }
-            cn.Close();
         }
 
         private void btn_courses_import_Click(object sender, EventArgs e)
         {
             string last, first;
-<<<<<<< HEAD
             OpenFileDialog o = new OpenFileDialog();
             o.ShowDialog();
             if (o.FileName == "")
                 return;
-            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source="+o.FileName+/*..\..\..\VEN_LSC_SR_Project_Courses_sample.xls*/";Extended Properties=Excel 12.0 Xml";
-=======
             SqlCommand cmd2 = new SqlCommand();
-            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=..\..\..\VEN_LSC_SR_Project_Courses_sample.xls;Extended Properties=Excel 12.0 Xml";
->>>>>>> origin/Matt4
+            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source="+o.FileName+";Extended Properties=Excel 12.0 Xml";
             // Create the connection
 
             System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
