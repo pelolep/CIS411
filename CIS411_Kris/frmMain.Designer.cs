@@ -258,6 +258,7 @@ namespace CIS411
             //this.Controls.Add(this.btnSwipe);
             this.Controls.Add(this.btnReset);
             //this.Controls.Add(this.btnNoCard);
+            this.AcceptButton = btnIdSearch;
             this.Name = "frmMain";
             this.Text = "Login";
             this.ResumeLayout(false);

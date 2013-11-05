@@ -31,11 +31,14 @@ namespace CIS411
             if (txtStudentID.Text == "")
             {
                 // Starts a timer to see if user is swiping a card.
+                // keyTimer sets usingCard to false in 200 ms
                 usingCard = true;
                 keyTimer.Start();
             }
-            if (e.KeyCode == Keys.Enter)
+            /*
+             * if (e.KeyCode == Keys.Enter)
                 btnIdSearch.PerformClick();
+             */
             else if ((txtStudentID.TextLength == 8)&&(usingCard))
             {
                 // If student is swiping card, first character must be stripped from ID textbox because it is an extraneous 9.
@@ -114,8 +117,15 @@ namespace CIS411
 
         private void btnAdmin_Click(object sender, EventArgs e)
         {
-            frmAdmin adminForm = new frmAdmin();
-            adminForm.Show();
+            FormCollection fc = Application.OpenForms;
+            foreach (Form frm in fc)
+                if (frm is frmAdminPass)
+                {
+                    frm.Focus();
+                    return;
+                }
+            frmAdminPass adminPassForm = new frmAdminPass();
+            adminPassForm.Show();
         }
 
         private void rdoTutor_Click(object sender, EventArgs e)

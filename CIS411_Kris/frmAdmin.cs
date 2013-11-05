@@ -146,10 +146,15 @@ namespace CIS411
             if (hash(txtCurrentPassword.Text) != Properties.Settings.Default.EncryptedPassword)
             {
                 MessageBox.Show( "Error: The password you used is incorrect");
+                txtCurrentPassword.Clear();
+                txtCurrentPassword.Focus();
             }
             else if (txtNewPassword.Text != txtConfirmPassword.Text)
             {
                 MessageBox.Show("Error: The new password doesn't match");
+                txtNewPassword.Clear();
+                txtConfirmPassword.Clear();
+                txtNewPassword.Focus();
             }
             else
             {
@@ -161,10 +166,13 @@ namespace CIS411
                 Properties.Settings.Default.EncryptedPassword = hash(txtNewPassword.Text);
                 Properties.Settings.Default.Save();
                 MessageBox.Show("The password was changed");
+                txtCurrentPassword.Clear();
+                txtNewPassword.Clear();
+                txtConfirmPassword.Clear();
             }
         }
 
-        private string hash(string input)
+        static public string hash(string input)
         {
             SHA1CryptoServiceProvider x = new SHA1CryptoServiceProvider();
             //RSACryptoServiceProvider y = new RSACryptoServiceProvider();
