@@ -181,6 +181,7 @@ namespace CIS411
             this.btnDisableAll.TabIndex = 7;
             this.btnDisableAll.Text = ">>";
             this.btnDisableAll.UseVisualStyleBackColor = true;
+            this.btnDisableAll.Click += new System.EventHandler(this.btnDisableAll_Click);
             // 
             // btnEnableAll
             // 
