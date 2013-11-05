@@ -81,6 +81,7 @@ namespace CIS411
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmSearchByName";
             this.Text = "Forgot your Student Id?";
+            this.AcceptButton = btnSearch;
             this.ResumeLayout(false);
             this.PerformLayout();
 

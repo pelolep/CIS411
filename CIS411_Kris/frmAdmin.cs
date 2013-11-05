@@ -332,6 +332,12 @@ namespace CIS411
             cn.Close();
         }
 
-
+        private void tabControlAdmin_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControlAdmin.SelectedIndex == 3)
+                this.AcceptButton = btnChangePassword;
+            else
+                this.AcceptButton = null;
+        }
     }
 }

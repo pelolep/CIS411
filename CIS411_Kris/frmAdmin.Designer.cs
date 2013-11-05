@@ -92,6 +92,7 @@ namespace CIS411
             this.tabControlAdmin.SelectedIndex = 0;
             this.tabControlAdmin.Size = new System.Drawing.Size(658, 385);
             this.tabControlAdmin.TabIndex = 0;
+            this.tabControlAdmin.SelectedIndexChanged += new System.EventHandler(this.tabControlAdmin_SelectedIndexChanged);
             // 
             // tabGeneral
             // 
