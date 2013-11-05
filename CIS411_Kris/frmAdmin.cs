@@ -143,7 +143,22 @@ namespace CIS411
             */
 
             //Check that the Password matches the current Password entered by the user
-            if (hash(txtCurrentPassword.Text) != Properties.Settings.Default.EncryptedPassword)
+            if (txtCurrentPassword.Text == "")
+            {
+                MessageBox.Show("Error: Please enter your current password");
+                txtCurrentPassword.Focus();
+            }
+            else if (txtNewPassword.Text == "")
+            {
+                MessageBox.Show("Error: Please enter a new password");
+                txtNewPassword.Focus();
+            }
+            else if (txtConfirmPassword.Text == "")
+            {
+                MessageBox.Show("Error: Please confirm password");
+                txtConfirmPassword.Focus();
+            }
+            else if (hash(txtCurrentPassword.Text) != Properties.Settings.Default.EncryptedPassword)
             {
                 MessageBox.Show( "Error: The password you used is incorrect");
                 txtCurrentPassword.Clear();
@@ -158,11 +173,6 @@ namespace CIS411
             }
             else
             {
-                /*
-                byte[] newPassSHA = Encoding.ASCII.GetBytes(txtNewPassword.Text);
-                newPassSHA = x.ComputeHash(newPassSHA);
-                string newPassSHAString = Encoding.ASCII.GetString(newPassSHA);
-                */
                 Properties.Settings.Default.EncryptedPassword = hash(txtNewPassword.Text);
                 Properties.Settings.Default.Save();
                 MessageBox.Show("The password was changed");
@@ -334,7 +344,7 @@ namespace CIS411
 
         private void tabControlAdmin_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tabControlAdmin.SelectedIndex == 3)
+            if (tabControlAdmin.SelectedTab == this.tabPermission)
                 this.AcceptButton = btnChangePassword;
             else
                 this.AcceptButton = null;
