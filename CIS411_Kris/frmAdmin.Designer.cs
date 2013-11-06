@@ -215,6 +215,7 @@ namespace CIS411
             this.btnEnableAll.TabIndex = 6;
             this.btnEnableAll.Text = "<<";
             this.btnEnableAll.UseVisualStyleBackColor = true;
+            this.btnEnableAll.Click += new System.EventHandler(this.btnEnableAll_Click);
             // 
             // btnEnableSelected
             // 
@@ -383,6 +384,7 @@ namespace CIS411
             this.btnLogOut.TabIndex = 1;
             this.btnLogOut.Text = "Log Out";
             this.btnLogOut.UseVisualStyleBackColor = true;
+            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
             // listBoxLoggedIn
             // 
