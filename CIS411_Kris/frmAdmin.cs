@@ -146,10 +146,15 @@ namespace CIS411
             if (hash(txtCurrentPassword.Text) != Properties.Settings.Default.EncryptedPassword)
             {
                 MessageBox.Show( "Error: The password you used is incorrect");
+                txtCurrentPassword.Clear();
+                txtCurrentPassword.Focus();
             }
             else if (txtNewPassword.Text != txtConfirmPassword.Text)
             {
                 MessageBox.Show("Error: The new password doesn't match");
+                txtNewPassword.Clear();
+                txtConfirmPassword.Clear();
+                txtNewPassword.Focus();
             }
             else
             {
@@ -161,6 +166,9 @@ namespace CIS411
                 Properties.Settings.Default.EncryptedPassword = hash(txtNewPassword.Text);
                 Properties.Settings.Default.Save();
                 MessageBox.Show("The password was changed");
+                txtCurrentPassword.Clear();
+                txtNewPassword.Clear();
+                txtConfirmPassword.Clear();
             }
         }
 
@@ -178,41 +186,6 @@ namespace CIS411
 
         private void btnReport_Click(object sender, EventArgs e)
         {
-            SaveFileDialog reportFile = new SaveFileDialog();
-            reportFile.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
-            reportFile.RestoreDirectory = true;
-            reportFile.DefaultExt = "xlsx";
-            reportFile.OverwritePrompt = false;
-
-            if (reportFile.ShowDialog() == DialogResult.OK)
-            {
-                object misValue = System.Reflection.Missing.Value;
-                Excel.Application xlApp = new Excel.Application(misValue);
-                Excel.Workbook xlWorkBook = xlApp.Workbooks.Add();
-                Excel.Worksheet xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
-
-                xlWorkSheet.Cells[1, 1] = "Student";
-                xlWorkSheet.Cells[1, 2] = "Hours";
-                xlWorkSheet.Cells[2, 1] = "Bill Warren";
-                xlWorkSheet.Cells[2, 2] = "30";
-                xlWorkSheet.Cells[3, 1] = "Kris Demor";
-                xlWorkSheet.Cells[3, 2] = "40";
-
-                try
-                {
-                    xlWorkBook.SaveAs(reportFile.FileName, Excel.XlFileFormat.xlOpenXMLWorkbook);
-                    xlWorkBook.Close();
-                }
-                catch (Exception ex)
-                {
-                    if (ex.Source == "Microsoft Excel")
-                        MessageBox.Show("File may be open in another window", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    else
-                        MessageBox.Show(ex.ToString());
-                }
-            }
-            reportFile.Dispose();
-            /*
             try
             {
                 System.Data.OleDb.OleDbConnection MyConnection;
@@ -230,7 +203,6 @@ namespace CIS411
             {
                 MessageBox.Show(ex.ToString());
             }
-            */
         }
 
         private void btn_student_import_Click(object sender, EventArgs e)
@@ -332,12 +304,6 @@ namespace CIS411
             excelConnection.Close();
         }
 
-        private void tabControlAdmin_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tabControlAdmin.SelectedTab.Name == "")
-                ;
-        }
-
         private void frmAdmin_Load(object sender, EventArgs e)
         {
             //loadlist();
@@ -366,6 +332,12 @@ namespace CIS411
             cn.Close();
         }
 
-
+        private void tabControlAdmin_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControlAdmin.SelectedIndex == 3)
+                this.AcceptButton = btnChangePassword;
+            else
+                this.AcceptButton = null;
+        }
     }
 }
