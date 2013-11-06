@@ -165,6 +165,7 @@ namespace CIS411
             this.comboClassList.TabIndex = 6;
             this.comboClassList.Visible = true;
             this.comboClassList.Enabled = false;
+            this.comboClassList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboClassList.SelectedIndexChanged += new System.EventHandler(this.comboClassList_SelectedIndexChanged);
             #endregion
             #region comboTutors
@@ -178,6 +179,7 @@ namespace CIS411
             this.comboTutors.TabIndex = 6;
             this.comboTutors.Visible = false;
             this.comboTutors.Enabled = true;
+            this.comboTutors.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboTutors.SelectedIndexChanged += new System.EventHandler(this.comboTutors_SelectedIndexChanged);
             #endregion
             #region btnSubmit

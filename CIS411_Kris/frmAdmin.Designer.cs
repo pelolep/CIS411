@@ -72,6 +72,8 @@ namespace CIS411
             this.lblAdminUsers = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtAdminStudentID = new System.Windows.Forms.TextBox();
+            this.tabMethods = new System.Windows.Forms.TabPage();
+            this.btnSaveMethods = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.tabControlAdmin.SuspendLayout();
             this.tabGeneral.SuspendLayout();
@@ -79,6 +81,7 @@ namespace CIS411
             this.tabVisits.SuspendLayout();
             this.tabPermission.SuspendLayout();
             this.grpBoxPassword.SuspendLayout();
+            this.tabMethods.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlAdmin
@@ -87,6 +90,7 @@ namespace CIS411
             this.tabControlAdmin.Controls.Add(this.tabTutors);
             this.tabControlAdmin.Controls.Add(this.tabVisits);
             this.tabControlAdmin.Controls.Add(this.tabPermission);
+            this.tabControlAdmin.Controls.Add(this.tabMethods);
             this.tabControlAdmin.Location = new System.Drawing.Point(12, 12);
             this.tabControlAdmin.Name = "tabControlAdmin";
             this.tabControlAdmin.SelectedIndex = 0;
@@ -519,6 +523,27 @@ namespace CIS411
             this.txtAdminStudentID.Size = new System.Drawing.Size(100, 20);
             this.txtAdminStudentID.TabIndex = 0;
             // 
+            // tabMethods
+            // 
+            this.tabMethods.Controls.Add(this.btnSaveMethods);
+            this.tabMethods.Location = new System.Drawing.Point(4, 22);
+            this.tabMethods.Name = "tabMethods";
+            this.tabMethods.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMethods.Size = new System.Drawing.Size(650, 359);
+            this.tabMethods.TabIndex = 4;
+            this.tabMethods.Text = "Methods";
+            this.tabMethods.UseVisualStyleBackColor = true;
+            // 
+            // btnSaveMethods
+            // 
+            this.btnSaveMethods.Location = new System.Drawing.Point(569, 330);
+            this.btnSaveMethods.Name = "btnSaveMethods";
+            this.btnSaveMethods.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveMethods.TabIndex = 0;
+            this.btnSaveMethods.Text = "Save Changes";
+            this.btnSaveMethods.UseVisualStyleBackColor = true;
+            this.btnSaveMethods.Click += new System.EventHandler(this.btnSaveMethods_Click);
+            // 
             // btnClose
             // 
             this.btnClose.Location = new System.Drawing.Point(595, 421);
@@ -549,6 +574,7 @@ namespace CIS411
             this.tabPermission.PerformLayout();
             this.grpBoxPassword.ResumeLayout(false);
             this.grpBoxPassword.PerformLayout();
+            this.tabMethods.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -600,5 +626,7 @@ namespace CIS411
         private System.Windows.Forms.Button btn_student_import;
         private System.Windows.Forms.ComboBox comboLeastOrGreater;
         private System.Windows.Forms.ComboBox comboCategory;
+        private System.Windows.Forms.TabPage tabMethods;
+        private System.Windows.Forms.Button btnSaveMethods;
     }
 }

@@ -244,6 +244,41 @@ namespace CIS411
 
         private void btnReport_Click(object sender, EventArgs e)
         {
+            SaveFileDialog reportFile = new SaveFileDialog();
+            reportFile.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+            reportFile.RestoreDirectory = true;
+            reportFile.DefaultExt = "xlsx";
+            reportFile.OverwritePrompt = false;
+
+            if (reportFile.ShowDialog() == DialogResult.OK)
+            {
+                Excel.Application xlApp = new Excel.Application();
+                Excel.Workbook xlWorkBook = xlApp.Workbooks.Add();
+                Excel.Worksheet xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+                xlWorkSheet.Cells[1, 1] = "Student";
+                xlWorkSheet.Cells[1, 2] = "Hours";
+                xlWorkSheet.Cells[2, 1] = "Bill Warren";
+                xlWorkSheet.Cells[2, 2] = "30";
+                xlWorkSheet.Cells[3, 1] = "Kris Demor";
+                xlWorkSheet.Cells[3, 2] = "40";
+
+                try
+                {
+                    xlWorkBook.SaveAs(reportFile.FileName, Excel.XlFileFormat.xlOpenXMLWorkbook);
+                    xlWorkBook.Close();
+                }
+                catch (Exception ex)
+                {
+                    if (ex.Source == "Microsoft Excel")
+                        MessageBox.Show("File may be open in another window", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else
+                        MessageBox.Show(ex.ToString());
+                }
+            }
+            reportFile.Dispose();
+            this.Focus();
+            /*
             try
             {
                 System.Data.OleDb.OleDbConnection MyConnection;
@@ -261,6 +296,7 @@ namespace CIS411
             {
                 MessageBox.Show(ex.ToString());
             }
+            */
         }
 
         private void btn_student_import_Click(object sender, EventArgs e)
@@ -420,15 +456,99 @@ namespace CIS411
 
         private void tabControlAdmin_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tabControlAdmin.SelectedIndex == 3)
+            if (tabControlAdmin.SelectedTab.Name == "tabAdmin")
                 this.AcceptButton = btnChangePassword;
             else
                 this.AcceptButton = null;
+            if (tabControlAdmin.SelectedTab.Name == "tabMethods")
+            {
+                initializeMethodTextBoxes();
+            }
+            else
+            {
+                txtMethods.Clear();
+                methodIndex = 0;
+            }
         }
 
+        void initializeMethodTextBoxes()
+        {
+            for (; methodIndex < Properties.Settings.Default.MethodNames.Count; methodIndex++)
+            {
+                addMethodTextbox();
+                addRemoveButton();
+            }
+            btnAddMethod.Text = "Add new method";
+            btnAddMethod.Location = new System.Drawing.Point(((methodIndex / 10) * 150) + 50, ((methodIndex % 10) * 26) + 47);
+            btnAddMethod.Name = "btnAddMethod";
+            btnAddMethod.Size = new System.Drawing.Size(100, 20);
+            btnAddMethod.TabIndex = txtMethods.Count;
+            btnAddMethod.Click += btnAddMethod_Click;
+            tabMethods.Controls.Add(btnAddMethod);
+        }
+
+        void btnAddMethod_Click(object sender, EventArgs e)
+        {
+            addMethodTextbox();
+            addRemoveButton();
+            methodIndex++;
+            btnAddMethod.Location = new System.Drawing.Point(((methodIndex / 10) * 200) + 50, ((methodIndex % 10) * 26) + 47);
+        }
+
+        void addMethodTextbox()
+        {
+            txtMethods.Add(new TextBox());
+            if (methodIndex < Properties.Settings.Default.MethodNames.Count)
+                txtMethods[methodIndex].Text = Properties.Settings.Default.MethodNames[methodIndex];
+            else
+                txtMethods[methodIndex].Text = "";
+            txtMethods[methodIndex].Location = new System.Drawing.Point(((methodIndex / 10) * 200) + 50, ((methodIndex % 10) * 26) + 47);
+            txtMethods[methodIndex].Name = "txtMethods" + methodIndex.ToString();
+            txtMethods[methodIndex].Size = new System.Drawing.Size(100, 20);
+            txtMethods[methodIndex].TabIndex = methodIndex;
+            tabMethods.Controls.Add(txtMethods[methodIndex]);
+        }
+
+        void addRemoveButton()
+        {
+            btnRemoveMethods.Add(new Button());
+            btnRemoveMethods[methodIndex].Text = "Remove";
+            btnRemoveMethods[methodIndex].Location = new System.Drawing.Point(((methodIndex / 10) * 200) + 155, ((methodIndex % 10) * 26) + 47);
+            btnRemoveMethods[methodIndex].Name = "btnRemoveMethods" + methodIndex.ToString();
+            btnRemoveMethods[methodIndex].TabIndex = (methodIndex + 1) * 2;
+            btnRemoveMethods[methodIndex].Click += btnRemoveMethods_Click;
+            tabMethods.Controls.Add(btnRemoveMethods[methodIndex]);
+        }
         private void btnLogOut_Click(object sender, EventArgs e)
         {
 
+        }
+
+        List<TextBox> txtMethods = new List<TextBox>();
+        Button btnAddMethod = new Button();
+        List<Button> btnRemoveMethods = new List<Button>();
+        int methodIndex = 0;
+
+        private void btnSaveMethods_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.MethodNames.Clear();
+            for (int i = 0; i < txtMethods.Count; i++)
+            {
+                Properties.Settings.Default.MethodNames.Add(txtMethods[i].Text);
+            }
+            Properties.Settings.Default.Save();
+        }
+
+        void btnRemoveMethods_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < btnRemoveMethods.Count; i++)
+                if (sender.Equals(btnRemoveMethods[i]))
+                {
+                    Properties.Settings.Default.MethodNames.RemoveAt(i);
+                    txtMethods.Clear();
+                    methodIndex = 0;
+                    initializeMethodTextBoxes();
+                }
         }
     }
 }
