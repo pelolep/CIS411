@@ -190,16 +190,6 @@ namespace CIS411
 
         private void btnChangePassword_Click(object sender, EventArgs e)
         {
-            /*
-            string currentPassword = txtCurrentPassword.Text;
-            string newPassword = txtNewPassword.Text;
-            string confirmPassword = txtConfirmPassword.Text;
-            SHA1CryptoServiceProvider x = new SHA1CryptoServiceProvider();
-            byte[] currentPassSHA = Encoding.ASCII.GetBytes(txtCurrentPassword.Text);
-            currentPassSHA = x.ComputeHash(currentPassSHA);
-            string currentPassSHAString = Encoding.ASCII.GetString(currentPassSHA);
-            */
-
             //Check that the Password matches the current Password entered by the user
             if (hash(txtCurrentPassword.Text) != Properties.Settings.Default.EncryptedPassword)
             {
@@ -216,11 +206,6 @@ namespace CIS411
             }
             else
             {
-                /*
-                byte[] newPassSHA = Encoding.ASCII.GetBytes(txtNewPassword.Text);
-                newPassSHA = x.ComputeHash(newPassSHA);
-                string newPassSHAString = Encoding.ASCII.GetString(newPassSHA);
-                */
                 Properties.Settings.Default.EncryptedPassword = hash(txtNewPassword.Text);
                 Properties.Settings.Default.Save();
                 MessageBox.Show("The password was changed");

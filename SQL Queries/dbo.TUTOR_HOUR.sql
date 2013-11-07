@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[TUTOR_HOUR] (
+    [DATE]            DATE     NOT NULL,
+    [TIME_IN]         TIME (7) NOT NULL,
+    [TIME_OUT]        TIME (7) NULL,
+    [TIME_DIFFERENCE] TIME (7) NULL,
+    [TUTOR_ID]        INT      NOT NULL,
+    PRIMARY KEY CLUSTERED ([DATE] ASC),
+    FOREIGN KEY ([TUTOR_ID]) REFERENCES [dbo].[TUTOR] ([TUTOR_ID])
+);
+
