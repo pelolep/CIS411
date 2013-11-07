@@ -28,6 +28,11 @@ namespace CIS411
         public frmAdmin()
         {
             InitializeComponent();
+            for (int i = 0; i < Properties.Settings.Default.MethodNames.Count; i++)
+            {
+               comboAddMethod.Items.Add(Properties.Settings.Default.MethodNames[i]);
+                
+            }
         }
         
         //Adds Tutor ot the list of tutors via Student ID and adds their information to the Tutors table
@@ -155,39 +160,7 @@ namespace CIS411
             loadlist();
         }
 
-        //Retrieves the Student Visit Records to edit
-        private void btnEditVisit_Click(object sender, EventArgs e)
-        {
-            //gets the student id
-            string studentID = txtStudentID.Text;
-
-            //Gets the student visit record from that day
-
-            //Displays the sign and sign out from the record
-
-            //Hide Edit Button, Add Button, and show Save Button
-            btnAddVisit.Hide();
-            btnEditVisit.Hide();
-            btnSave.Show();
-
-        }
-
-        //Saves the edited Visit record
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            //Gets new sign In and Sign Out times
-
-            //Updates Visits Record
-
-            //Includes date of update
-
-            //Show Edit Button, Add Button, and hide Save Button
-            btnAddVisit.Show();
-            btnEditVisit.Show();
-            btnSave.Hide();
-
-        }
-
+        
         private void btnChangePassword_Click(object sender, EventArgs e)
         {
             /*
@@ -429,6 +402,37 @@ namespace CIS411
         private void btnLogOut_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void comboTutoring_SelectedIndex(object sender, EventArgs e)
+        {
+            txtAddTutor.Enabled = true;
+            txtAddClass.Enabled = true;
+        }
+
+        private void btnAddVisit_Click(object sender, EventArgs e)
+        {
+
+        }
+        
+        //Retrieves the Student Visit Records to edit
+        private void btnEditVisit_Click(object sender, EventArgs e)
+        {
+            
+           //Change button text to save and return to Edit Visit
+            if (btnEditVisit.Text == "EditVisit")
+                btnEditVisit.Text = "Save Edit";
+            else
+                btnEditVisit.Text = "Edit Visit";
+            
+
+        }
+
+        
+        //null
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

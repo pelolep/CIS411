@@ -91,13 +91,13 @@ namespace CIS411
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cn;
             cn.Open();
-            cmd.CommandText = "insert into visits ( CLARION_ID, Lastname) values ('" + 123 + "','" + "123" + "')";
+            cmd.CommandText = "insert into visit ( tutor_ID) values ('" + 123 + "')";
             cmd.ExecuteNonQuery();
             cmd.Clone();
             cn.Close();
 
             cn.Open();
-            cmd.CommandText = "delete from visits where CLARION_ID='" + 123 + "' and LASTNAME= '" + "123" + "'";
+            cmd.CommandText = "delete from visit where tutor_ID='" + 123 + "'";
             cmd.ExecuteNonQuery();
             cn.Close();
             signIn();
