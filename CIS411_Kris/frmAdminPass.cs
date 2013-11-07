@@ -22,12 +22,16 @@ namespace CIS411
         private void btnSubmit_Click(object sender, EventArgs e)
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Matt6
             /*
             if (frmAdmin.hash(txtPass.Text) == Properties.Settings.Default.EncryptedPassword)
             {*/
                 frmAdmin adminForm = new frmAdmin();
                 adminForm.Show();
                 this.Close();
+<<<<<<< HEAD
             /*
             }
 =======
@@ -38,16 +42,23 @@ namespace CIS411
                 this.Close();
          /*   }
 >>>>>>> origin/Kris5
+=======
+            /*}
+>>>>>>> Matt6
             else
             {
                 MessageBox.Show("Incorrect Password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtPass.Clear();
+<<<<<<< HEAD
 <<<<<<< HEAD
             }
             */
 =======
             }*/
 >>>>>>> origin/Kris5
+=======
+            }*/
+>>>>>>> Matt6
         }
     }
 }
