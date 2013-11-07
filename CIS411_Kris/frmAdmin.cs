@@ -10,12 +10,18 @@ using System.Windows.Forms;
 using System.Security.Cryptography;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Data.SqlClient;
+using System.Reflection;
 
 namespace CIS411
 {
-
     public partial class frmAdmin : Form
-    {
+    {//        AppDomain currentDomain = AppDomain.CurrentDomain.SetData("DataDirectory", "App1.config");
+
+//        AppDomain currentDomain = AppDomain.CurrentDomain;
+        
+
+
+     
         SqlConnection cn = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\db.mdf;Integrated Security=True");
         SqlCommand cmd = new SqlCommand();
         SqlDataReader rd;
@@ -23,17 +29,15 @@ namespace CIS411
         {
             InitializeComponent();
         }
-
+        
         //Adds Tutor ot the list of tutors via Student ID and adds their information to the Tutors table
         private void btnAddTutor_Click(object sender, EventArgs e)
         {/////////////// edit table so only clarion id, status and cnet_username are used
             bool real = false;
             //Gets the student id
             string studentID = txtTutorStudentID.Text;
-
-            listBoxEnableTutors.Items.Clear();
-            listBoxDisableTutors.Items.Clear();
-
+           
+            
 
             cmd.Connection = cn;
             cn.Open();
@@ -45,42 +49,74 @@ namespace CIS411
             {
                 while (rd.Read())
                 {
-                    if (rd[1].ToString() == studentID.ToString())
+                    
+                    if (rd[0].ToString() == studentID.ToString())
                     {
+                        
                         real = true;
                     }
                 }
             }
             rd.Close();
-            MessageBox.Show("d");
+
             cn.Close();
             if (real)
             {
+
                 cmd.Connection = cn;
                 cn.Open();
-                // cmd.CommandText = "insert into tutors(clarion_id,status) values ('"+ studentID +"', '"+ "active" +"')";
+                 cmd.CommandText = "insert into tutor(clarion_id,status) values ('"+ studentID +"', '"+ "active" +"')";
+
                 cmd.ExecuteNonQuery();
-                cmd.Clone();
+               // cmd.Clone();
                 cn.Close();
-                //loadlist();
+                MessageBox.Show("dd");
+                
             }
+            cn.Close();
+           loadlist();
         }
 
         private void btnDisableSelected_Click(object sender, EventArgs e)
         {
+            SqlConnection cn2 = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\db.mdf;Integrated Security=True");
 
+            SqlCommand cmd2 = new SqlCommand();
+            cmd2.Connection = cn2;
+            cmd.Connection = cn;
             cn.Open();
-           // cmd.CommandText = "insert into tutors(term,clarion_id,lastname,firstname,middle_initial,cnet_username,eaglemail,status) values ('" + term + "','" + id + "','" + last + "','" + first + "','" + middle + "','" + user + "','" + eagle + "','" + status + "')";
-            cmd.ExecuteNonQuery();
-            cmd.Clone();
+            cn2.Open();
+           // try
+            {
+                string[] words = listBoxEnableTutors.SelectedItem.ToString().Split();
+                MessageBox.Show("1st");
+                
+                cmd.CommandText = "select * from tutor join student on tutor.clarion_id=student.clarion_id ";
+
+                rd = cmd.ExecuteReader();
+                if (rd.HasRows)
+                {
+                    while (rd.Read())
+                    {
+                        cmd2.CommandText = "update tutor set status = '" + "inactive" + "'from tutor join student on tutor.clarion_id=student.clarion_id where firstname = '" + "cxllpn" + "'";
+         cmd2.ExecuteNonQuery();
+            cmd2.Clone();
+                    }
+                }
+
+            MessageBox.Show(words[0]);
+            }
+           // catch
+            { }
+
+   
             cn.Close();
+            cn2.Close();
             loadlist();
         }
 
         private void btnDisableAll_Click(object sender, EventArgs e)
         {
-
-            //loadlist();
             cmd.Connection = cn;
             cn.Open();
             cmd.CommandText = "select * from tutor";
@@ -92,10 +128,32 @@ namespace CIS411
                     cmd.CommandText = "update tutor set status = '"+ "inactive" +"' where status= '"+ "active"+"'";
                 }
             }
-            cn.Close();
             rd.Close();
+            cmd.ExecuteNonQuery();
+            //cmd.Clone();
+            cn.Close();
+            loadlist();
         }
 
+        private void btnEnableAll_Click(object sender, EventArgs e)
+        {
+            cmd.Connection = cn;
+            cn.Open();
+            cmd.CommandText = "select * from tutor";
+            rd = cmd.ExecuteReader();
+            if (rd.HasRows)
+            {
+                while (rd.Read())
+                {
+                    cmd.CommandText = "update tutor set status = '" + "active" + "' where status= '" + "inactive" + "'";
+                }
+            }
+            rd.Close();
+            cmd.ExecuteNonQuery();
+           // cmd.Clone();
+            cn.Close();
+            loadlist();
+        }
 
         //Retrieves the Student Visit Records to edit
         private void btnEditVisit_Click(object sender, EventArgs e)
@@ -199,8 +257,7 @@ namespace CIS411
 
         private void btn_student_import_Click(object sender, EventArgs e)
         {
-            try
-            {
+           
                 OpenFileDialog o = new OpenFileDialog();
                 o.ShowDialog();
                 if (o.FileName == "")
@@ -218,27 +275,47 @@ namespace CIS411
                 excelReader = excelCommand.ExecuteReader();
                 cmd.Connection = cn;
                 cn.Open();
-
+                
                 // Add class names to comboClassList
                 while (excelReader.Read())
                 {
+                    int up = 1;
+                    
                     last = excelReader[2].ToString();
                     last = last.Replace("'", " ");
                     first = excelReader[3].ToString();
                     first = first.Replace("'", " ");
                     middle = excelReader[4].ToString();
                     middle = first.Replace("'", " ");
-                    cmd.CommandText = "insert into STUDENT ( term,clarion_id,lastname,firstname,middle_name,cnet_username,eaglemail,class_standing,degree_seeking,major_1,major_2,minor_1,minor_2,credit_attempted,sex,hispanic,amer_indian,asian,black,pacific_islander,White,age,campus,housing,transfer,transfer_credit,number_of_visit) values ('" + excelReader[0] + "','" + excelReader[1] + "','" + last + "','" + first + "','" + middle + "','" + excelReader[5] + "','" + excelReader[6] + "','" + excelReader[7] + "','" + excelReader[8] + "','" + excelReader[9] + "','" + excelReader[10] + "','" + excelReader[11] + "','" + excelReader[12] + "','" + excelReader[13] + "','" + excelReader[14] + "','" + excelReader[15] + "','" + excelReader[16] + "','" + excelReader[17] + "','" + excelReader[18] + "','" + excelReader[19] + "','" + excelReader[20] + "','" + excelReader[21] + "','" + excelReader[22] + "','" + excelReader[23] + "','" + excelReader[24] + "','" + excelReader[25] + "','" + 0 + "')";
-                    cmd.ExecuteNonQuery();
-                    cmd.Clone();
+                    try
+                    {
+                        
+                        cmd.CommandText = "insert into STUDENT ( term,clarion_id,lastname,firstname,middle_name,cnet_username,eaglemail,class_standing,degree_seeking,major_1,major_2,minor_1,minor_2,credit_attempted,sex,hispanic,amer_indian,asian,black,pacific_islander,White,age,campus,housing,transfer,transfer_credit,number_of_visit) values ('" + excelReader[0] + "','" + excelReader[1] + "','" + last + "','" + first + "','" + middle + "','" + excelReader[5] + "','" + excelReader[6] + "','" + excelReader[7] + "','" + excelReader[8] + "','" + excelReader[9] + "','" + excelReader[10] + "','" + excelReader[11] + "','" + excelReader[12] + "','" + excelReader[13] + "','" + excelReader[14] + "','" + excelReader[15] + "','" + excelReader[16] + "','" + excelReader[17] + "','" + excelReader[18] + "','" + excelReader[19] + "','" + excelReader[20] + "','" + excelReader[21] + "','" + excelReader[22] + "','" + excelReader[23] + "','" + excelReader[24] + "','" + excelReader[25] + "','" + 0 + "')";
+                        cmd.ExecuteNonQuery();
+                      //  cmd.Clone();     
+                        up = 2;
+                    }
+                    catch
+                    {
+                    }
+                    if (up == 1)
+                    {
+                        MessageBox.Show(excelReader[1].ToString() + "update");
+                        cmd.CommandText = "update STUDENT set term = '" + excelReader[0] + "', lastname = '" + last + "', firstname = '" + first + "',middle_name = '" + middle + "',cnet_username = '" + excelReader[5] + "',eaglemail = '" + excelReader[6] + "',class_standing = '" + excelReader[7] + "',degree_seeking = '" + excelReader[8] + "',major_1 = '" + excelReader[9] + "',major_2 = '" + excelReader[10] + "',minor_1 = '" + excelReader[11] + "',minor_2 = '" + excelReader[12] + "',credit_attempted = '" + excelReader[13] + "',sex = '" + excelReader[14] + "',hispanic = '" + excelReader[15] + "',amer_indian = '" + excelReader[16] + "',asian = '" + excelReader[17] + "',black = '" + excelReader[18] + "',pacific_islander = '" + excelReader[19] + "',White = '" + excelReader[20] + "',age = '" + excelReader[21] + "',campus = '" + excelReader[22] + "',housing = '" + excelReader[23] + "',transfer = '" + excelReader[24] + "',transfer_credit = '" + excelReader[25] + "' where clarion_id = '" + excelReader[1] + "'";
+                        cmd.ExecuteNonQuery();
+                      //  cmd.Clone();
+                    }
+  
                 }
+                
                 excelReader.Close();
                 excelConnection.Close();
                 cn.Close();
-            }
-            catch
-            {
-            }
+                
+
+ 
+
+            cn.Close();
         }
 
         private void btn_courses_import_Click(object sender, EventArgs e)
@@ -274,7 +351,7 @@ namespace CIS411
                 {
                     cmd.CommandText = "insert into Course (term,subject,catalog,section) values ('" + excelReader[0] + "','" + excelReader[2] + "','" + excelReader[3] + "','" + excelReader[4] + "')";
                     cmd.ExecuteNonQuery();
-                    cmd.Clone();
+                   // cmd.Clone();
                 }
                 catch
                 {
@@ -283,7 +360,7 @@ namespace CIS411
                 {
                     cmd2.CommandText = "insert into PROFESSOR (PROF_EMAIL, LASTNAME, FIRSTNAME) values ('" + excelReader[7] + "', '" + last + "', '" + first + "')";
                     cmd2.ExecuteNonQuery();
-                    cmd2.Clone();
+                    //cmd2.Clone();
                 }
                 catch{
                 }
@@ -298,31 +375,47 @@ namespace CIS411
 
         private void frmAdmin_Load(object sender, EventArgs e)
         {
-            //loadlist();
+          //  MessageBox.Show("");
+            loadlist();
+           // AppDomain.CurrentDomain.SetData("DataDirectory", "~/cis411/cis411_Kris/db.mdf");
+            //currentDomain.SetData("DataDirectory", "~/cis411/cis411_Kris/db.mdf");
+           // MessageBox.Show(currentDomain.GetData("DataDirectory").ToString());
+            
         }
 
         public void loadlist()
         {
+
+            
+
             listBoxEnableTutors.Items.Clear();
             listBoxDisableTutors.Items.Clear();
-
+           
             cmd.Connection = cn;
             cn.Open();
-            cmd.CommandText = "select * from tutor";
+            cmd.CommandText = "select * from tutor inner join student on tutor.clarion_id=student.clarion_id";
             rd = cmd.ExecuteReader();
-
+          
             if (rd.HasRows)
-            {
+            {  
+                
                 while (rd.Read())
                 {
-                    if(rd[7].ToString() == "active")
-                    listBoxEnableTutors.Items.Add(rd[2].ToString() + " " + rd[3].ToString());
+                    if(rd[2].ToString() == "active")
+                    listBoxEnableTutors.Items.Add(rd[5].ToString() + " " +rd[6].ToString());
                     else
-                        listBoxDisableTutors.Items.Add(rd[2].ToString() + " " + rd[3].ToString());
+                        listBoxDisableTutors.Items.Add(rd[5].ToString() + " " + rd[6].ToString());
                 }
             }
             cn.Close();
         }
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
 
 
     }

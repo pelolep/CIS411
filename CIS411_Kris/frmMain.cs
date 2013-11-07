@@ -114,6 +114,7 @@ namespace CIS411
 
         private void btnAdmin_Click(object sender, EventArgs e)
         {
+           // AppDomain.CurrentDomain.SetData("DataDirectory", "C:/Users/matt/Documents/GitHub/CIS411");
             frmAdmin adminForm = new frmAdmin();
             adminForm.Show();
         }

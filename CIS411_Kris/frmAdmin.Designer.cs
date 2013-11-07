@@ -30,6 +30,8 @@ namespace CIS411
         {
             this.tabControlAdmin = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
+            this.comboCategory = new System.Windows.Forms.ComboBox();
+            this.comboLeastOrGreater = new System.Windows.Forms.ComboBox();
             this.btn_courses_import = new System.Windows.Forms.Button();
             this.btn_student_import = new System.Windows.Forms.Button();
             this.btnReport = new System.Windows.Forms.Button();
@@ -71,8 +73,6 @@ namespace CIS411
             this.label2 = new System.Windows.Forms.Label();
             this.txtAdminStudentID = new System.Windows.Forms.TextBox();
             this.btnClose = new System.Windows.Forms.Button();
-            this.comboLeastOrGreater = new System.Windows.Forms.ComboBox();
-            this.comboCategory = new System.Windows.Forms.ComboBox();
             this.tabControlAdmin.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.tabTutors.SuspendLayout();
@@ -107,6 +107,25 @@ namespace CIS411
             this.tabGeneral.TabIndex = 0;
             this.tabGeneral.Text = "General";
             this.tabGeneral.UseVisualStyleBackColor = true;
+            // 
+            // comboCategory
+            // 
+            this.comboCategory.FormattingEnabled = true;
+            this.comboCategory.Location = new System.Drawing.Point(523, 8);
+            this.comboCategory.Name = "comboCategory";
+            this.comboCategory.Size = new System.Drawing.Size(121, 21);
+            this.comboCategory.TabIndex = 4;
+            // 
+            // comboLeastOrGreater
+            // 
+            this.comboLeastOrGreater.FormattingEnabled = true;
+            this.comboLeastOrGreater.Items.AddRange(new object[] {
+            "Least to greatest",
+            "Greatest to least"});
+            this.comboLeastOrGreater.Location = new System.Drawing.Point(523, 37);
+            this.comboLeastOrGreater.Name = "comboLeastOrGreater";
+            this.comboLeastOrGreater.Size = new System.Drawing.Size(121, 21);
+            this.comboLeastOrGreater.TabIndex = 3;
             // 
             // btn_courses_import
             // 
@@ -195,6 +214,7 @@ namespace CIS411
             this.btnEnableAll.TabIndex = 6;
             this.btnEnableAll.Text = "<<";
             this.btnEnableAll.UseVisualStyleBackColor = true;
+            this.btnEnableAll.Click += new System.EventHandler(this.btnEnableAll_Click);
             // 
             // btnEnableSelected
             // 
@@ -363,6 +383,7 @@ namespace CIS411
             this.btnLogOut.TabIndex = 1;
             this.btnLogOut.Text = "Log Out";
             this.btnLogOut.UseVisualStyleBackColor = true;
+            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
             // listBoxLoggedIn
             // 
@@ -506,25 +527,6 @@ namespace CIS411
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // comboLeastOrGreater
-            // 
-            this.comboLeastOrGreater.FormattingEnabled = true;
-            this.comboLeastOrGreater.Items.AddRange(new object[] {
-            "Least to greatest",
-            "Greatest to least"});
-            this.comboLeastOrGreater.Location = new System.Drawing.Point(523, 37);
-            this.comboLeastOrGreater.Name = "comboLeastOrGreater";
-            this.comboLeastOrGreater.Size = new System.Drawing.Size(121, 21);
-            this.comboLeastOrGreater.TabIndex = 3;
-            // 
-            // comboCategory
-            // 
-            this.comboCategory.FormattingEnabled = true;
-            this.comboCategory.Location = new System.Drawing.Point(523, 8);
-            this.comboCategory.Name = "comboCategory";
-            this.comboCategory.Size = new System.Drawing.Size(121, 21);
-            this.comboCategory.TabIndex = 4;
             // 
             // frmAdmin
             // 
