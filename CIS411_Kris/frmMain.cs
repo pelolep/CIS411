@@ -91,13 +91,21 @@ namespace CIS411
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cn;
             cn.Open();
+<<<<<<< HEAD
             cmd.CommandText = "insert into VISIT (DATE, TIME_IN, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION) values ('" + System.DateTime.Today.ToString() + "','" + System.DateTime.UtcNow.TimeOfDay.ToString() + "','" + txtStudentID.Text + "','" + );
+=======
+            cmd.CommandText = "insert into visit ( tutor_ID) values ('" + 123 + "')";
+>>>>>>> origin/Kris5
             cmd.ExecuteNonQuery();
             cmd.Clone();
             cn.Close();
             /*
             cn.Open();
+<<<<<<< HEAD
             cmd.CommandText = "delete from VISIT where CLARION_ID='" + 123 + "' and LASTNAME= '" + "123" + "'";
+=======
+            cmd.CommandText = "delete from visit where tutor_ID='" + 123 + "'";
+>>>>>>> origin/Kris5
             cmd.ExecuteNonQuery();
             cn.Close();
             */
