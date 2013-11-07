@@ -35,7 +35,7 @@ namespace CIS411
             }
         }
         
-        //Adds Tutor ot the list of tutors via Student ID and adds their information to the Tutors table
+        //Adds Tutor to the list of tutors via Student ID and adds their information to the Tutors table
         private void btnAddTutor_Click(object sender, EventArgs e)
         {/////////////// edit table so only clarion id, status and cnet_username are used
             bool real = false;
@@ -153,15 +153,11 @@ namespace CIS411
             cn.Close();
             loadlist();
         }
-
-<<<<<<< HEAD
-        
-=======
+		
         //Retrieves the Student Visit Records to edit
+        /*
         private void btnEditVisit_Click(object sender, EventArgs e)
         {
-            //gets the student id
-            string studentID = txtStudentID.Text;
 
             //Gets the student visit record from that day
 
@@ -170,27 +166,9 @@ namespace CIS411
             //Hide Edit Button, Add Button, and show Save Button
             btnAddVisit.Enabled=false;
             btnEditVisit.Enabled=false;
-            btnSave.Enabled=true;
 
-        }
+        }*/
 
-        //Saves the edited Visit record
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            //Gets new sign In and Sign Out times
-
-            //Updates Visits Record
-
-            //Includes date of update
-
-            //Show Edit Button, Add Button, and hide Save Button
-            btnAddVisit.Enabled=true;
-            btnEditVisit.Enabled=true;
-            btnSave.Enabled=false;
-
-        }
-
->>>>>>> Matt6
         private void btnChangePassword_Click(object sender, EventArgs e)
         {
             //Check that the Password matches the current Password entered by the user
@@ -553,8 +531,6 @@ namespace CIS411
             loadlist();
         }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
         List<TextBox> txtMethods = new List<TextBox>();
         Button btnAddMethod = new Button();
         List<Button> btnRemoveMethods = new List<Button>();
@@ -584,7 +560,8 @@ namespace CIS411
                     updateAddMethodButtonLocation();
                     btnSaveMethods.Enabled = true;
                 }
-=======
+        }
+
         private void comboTutoring_SelectedIndex(object sender, EventArgs e)
         {
             txtAddTutor.Enabled = true;
@@ -614,10 +591,6 @@ namespace CIS411
         private void btnSave_Click(object sender, EventArgs e)
         {
             
->>>>>>> origin/Kris5
         }
-=======
-
->>>>>>> Matt6
     }
 }

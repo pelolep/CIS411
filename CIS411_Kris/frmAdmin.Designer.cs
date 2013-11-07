@@ -73,12 +73,9 @@ namespace CIS411
             this.lblAdminUsers = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtAdminStudentID = new System.Windows.Forms.TextBox();
-<<<<<<< HEAD
             this.tabMethods = new System.Windows.Forms.TabPage();
             this.btnSaveMethods = new System.Windows.Forms.Button();
-=======
             this.btnEditVisit = new System.Windows.Forms.Button();
->>>>>>> origin/Kris5
             this.btnClose = new System.Windows.Forms.Button();
             this.dateTimePickerEditMin = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
@@ -573,7 +570,6 @@ namespace CIS411
             this.txtAdminStudentID.Size = new System.Drawing.Size(100, 20);
             this.txtAdminStudentID.TabIndex = 0;
             // 
-<<<<<<< HEAD
             // tabMethods
             // 
             this.tabMethods.Controls.Add(this.btnSaveMethods);
@@ -594,7 +590,7 @@ namespace CIS411
             this.btnSaveMethods.Text = "Save Changes";
             this.btnSaveMethods.UseVisualStyleBackColor = true;
             this.btnSaveMethods.Click += new System.EventHandler(this.btnSaveMethods_Click);
-=======
+			//
             // btnEditVisit
             // 
             this.btnEditVisit.Location = new System.Drawing.Point(559, 312);
@@ -604,7 +600,6 @@ namespace CIS411
             this.btnEditVisit.Text = "Edit Visit";
             this.btnEditVisit.UseVisualStyleBackColor = true;
             this.btnEditVisit.Click += new System.EventHandler(this.btnEditVisit_Click);
->>>>>>> origin/Kris5
             // 
             // btnClose
             // 
@@ -830,10 +825,8 @@ namespace CIS411
         private System.Windows.Forms.Button btn_student_import;
         private System.Windows.Forms.ComboBox comboLeastOrGreater;
         private System.Windows.Forms.ComboBox comboCategory;
-<<<<<<< HEAD
         private System.Windows.Forms.TabPage tabMethods;
         private System.Windows.Forms.Button btnSaveMethods;
-=======
         private System.Windows.Forms.DateTimePicker dateTimePickerAdd;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Label lblEditVisit;
@@ -854,6 +847,5 @@ namespace CIS411
         private System.Windows.Forms.ComboBox comboAddMethod;
         private System.Windows.Forms.TextBox txtAddTutor;
         private System.Windows.Forms.Label lblAddTutor;
->>>>>>> origin/Kris5
     }
 }

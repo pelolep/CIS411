@@ -92,32 +92,10 @@ namespace CIS411
         {
             
             cn.Open();
-<<<<<<< HEAD
-<<<<<<< HEAD
-            cmd.CommandText = "insert into VISIT (DATE, TIME_IN, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION) values ('" + System.DateTime.Today.ToString() + "','" + System.DateTime.UtcNow.TimeOfDay.ToString() + "','" + txtStudentID.Text + "','" + );
-=======
-            cmd.CommandText = "insert into visit ( tutor_ID) values ('" + 123 + "')";
->>>>>>> origin/Kris5
-=======
-            cmd.CommandText = "insert into tutor ( Clarion_ID) values ('" + 123 + "')";
->>>>>>> Matt6
+            cmd.CommandText = "insert into VISIT (DATE, TIME_IN, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION) values ('" + System.DateTime.Today.ToString() + "','" + System.DateTime.UtcNow.TimeOfDay.ToString() + "','" + txtStudentID.Text + "','";
             cmd.ExecuteNonQuery();
             cmd.Clone();
             cn.Close();
-            /*
-            cn.Open();
-<<<<<<< HEAD
-<<<<<<< HEAD
-            cmd.CommandText = "delete from VISIT where CLARION_ID='" + 123 + "' and LASTNAME= '" + "123" + "'";
-=======
-            cmd.CommandText = "delete from visit where tutor_ID='" + 123 + "'";
->>>>>>> origin/Kris5
-=======
-            cmd.CommandText = "delete from tutor where CLARION_ID='" + 123 + "'";
->>>>>>> Matt6
-            cmd.ExecuteNonQuery();
-            cn.Close();
-            */
             signIn();
         }
 
