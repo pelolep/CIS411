@@ -479,12 +479,13 @@ namespace CIS411
                 addRemoveButton();
             }
             btnAddMethod.Text = "Add new method";
-            btnAddMethod.Location = new System.Drawing.Point(((methodIndex / 10) * 150) + 50, ((methodIndex % 10) * 26) + 47);
+            updateAddMethodButtonLocation();
             btnAddMethod.Name = "btnAddMethod";
             btnAddMethod.Size = new System.Drawing.Size(100, 20);
             btnAddMethod.TabIndex = txtMethods.Count;
             btnAddMethod.Click += btnAddMethod_Click;
             tabMethods.Controls.Add(btnAddMethod);
+            btnSaveMethods.Enabled = false;
         }
 
         void btnAddMethod_Click(object sender, EventArgs e)
@@ -492,7 +493,8 @@ namespace CIS411
             addMethodTextbox();
             addRemoveButton();
             methodIndex++;
-            btnAddMethod.Location = new System.Drawing.Point(((methodIndex / 10) * 200) + 50, ((methodIndex % 10) * 26) + 47);
+            updateAddMethodButtonLocation();
+            btnSaveMethods.Enabled = true;
         }
 
         void addMethodTextbox()
@@ -506,6 +508,7 @@ namespace CIS411
             txtMethods[methodIndex].Name = "txtMethods" + methodIndex.ToString();
             txtMethods[methodIndex].Size = new System.Drawing.Size(100, 20);
             txtMethods[methodIndex].TabIndex = methodIndex;
+            txtMethods[methodIndex].TextChanged+=txtMethods_TextChanged;
             tabMethods.Controls.Add(txtMethods[methodIndex]);
         }
 
@@ -518,6 +521,16 @@ namespace CIS411
             btnRemoveMethods[methodIndex].TabIndex = (methodIndex + 1) * 2;
             btnRemoveMethods[methodIndex].Click += btnRemoveMethods_Click;
             tabMethods.Controls.Add(btnRemoveMethods[methodIndex]);
+        }
+
+        void updateAddMethodButtonLocation()
+        {
+            btnAddMethod.Location = new System.Drawing.Point(((methodIndex / 10) * 200) + 50, ((methodIndex % 10) * 26) + 47);
+        }
+
+        private void txtMethods_TextChanged(object sender, EventArgs e)
+        {
+            btnSaveMethods.Enabled = true;
         }
         private void btnLogOut_Click(object sender, EventArgs e)
         {
@@ -537,6 +550,7 @@ namespace CIS411
                 Properties.Settings.Default.MethodNames.Add(txtMethods[i].Text);
             }
             Properties.Settings.Default.Save();
+            btnSaveMethods.Enabled = false;
         }
 
         void btnRemoveMethods_Click(object sender, EventArgs e)
@@ -544,10 +558,13 @@ namespace CIS411
             for (int i = 0; i < btnRemoveMethods.Count; i++)
                 if (sender.Equals(btnRemoveMethods[i]))
                 {
-                    Properties.Settings.Default.MethodNames.RemoveAt(i);
-                    txtMethods.Clear();
-                    methodIndex = 0;
-                    initializeMethodTextBoxes();
+                    txtMethods[i].Visible = false;
+                    btnRemoveMethods[i].Visible = false;
+                    txtMethods.RemoveAt(i);
+                    btnRemoveMethods.RemoveAt(i);
+                    methodIndex--;
+                    updateAddMethodButtonLocation();
+                    btnSaveMethods.Enabled = true;
                 }
         }
     }

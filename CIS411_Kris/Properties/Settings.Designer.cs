@@ -59,7 +59,7 @@ namespace CIS411.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("30775aca586f3f9eb6be5e8b6f06cd37")]
+        [global::System.Configuration.DefaultSettingValueAttribute("?{?;oqTz???E/?.??^?v")]
         public string EncryptedPassword {
             get {
                 return ((string)(this["EncryptedPassword"]));

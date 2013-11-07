@@ -19,7 +19,7 @@
       <Value Profile="(Default)">Tutoring</Value>
     </Setting>
     <Setting Name="EncryptedPassword" Type="System.String" Scope="User">
-      <Value Profile="(Default)">30775aca586f3f9eb6be5e8b6f06cd37</Value>
+      <Value Profile="(Default)">?{?;oqTz???E/?.??^?v</Value>
     </Setting>
     <Setting Name="Database1ConnectionString" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
