@@ -225,6 +225,7 @@ namespace CIS411
             this.btnEnableSelected.TabIndex = 4;
             this.btnEnableSelected.Text = "<";
             this.btnEnableSelected.UseVisualStyleBackColor = true;
+            this.btnEnableSelected.Click += new System.EventHandler(this.btnEnableSelected_Click);
             // 
             // listBoxDisableTutors
             // 

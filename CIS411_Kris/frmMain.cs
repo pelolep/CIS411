@@ -21,6 +21,9 @@ namespace CIS411
 
     public partial class frmMain : Form
     {
+        SqlConnection cn = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\db.mdf;Integrated Security=True");
+        SqlCommand cmd = new SqlCommand();
+        SqlDataReader rd;
         public frmMain()
         {
             InitializeComponent();
@@ -87,17 +90,15 @@ namespace CIS411
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            SqlConnection cn = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\db.mdf;Integrated Security=True");
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = cn;
+            
             cn.Open();
-            cmd.CommandText = "insert into visits ( CLARION_ID, Lastname) values ('" + 123 + "','" + "123" + "')";
+            cmd.CommandText = "insert into tutor ( Clarion_ID) values ('" + 123 + "')";
             cmd.ExecuteNonQuery();
             cmd.Clone();
             cn.Close();
 
             cn.Open();
-            cmd.CommandText = "delete from visits where CLARION_ID='" + 123 + "' and LASTNAME= '" + "123" + "'";
+            cmd.CommandText = "delete from tutor where CLARION_ID='" + 123 + "'";
             cmd.ExecuteNonQuery();
             cn.Close();
             signIn();
@@ -191,54 +192,70 @@ namespace CIS411
 
         private string getName()
         {
-            /*            
-            if (studentID == 99999999)
-                return "William Warren";
-            if (studentID == 11111111)
-                return "Matthew Miller";
-            else
-                return "ERROR";
-             */
             string name = "";
-            int column = 0, f=0, l=0;
-            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=../../../VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";
-            //Create the connection
-            System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
-            string excelQuery = @"Select * from [Export Worksheet$]";
-            System.Data.OleDb.OleDbCommand excelCommand = new System.Data.OleDb.OleDbCommand(excelQuery, excelConnection);
-            excelConnection.Open();
-            System.Data.OleDb.OleDbDataReader excelReader;
-            excelReader = excelCommand.ExecuteReader();
-            //CHANGE THIS
-            for (int i = 0; i < excelReader.FieldCount; i++)
-            {
-                if (excelReader.GetName(i) == "EMPLID")
-                    column = i;
-                if (excelReader.GetName(i) == "FIRST_NAME")
-                    f = i;
-                if (excelReader.GetName(i) == "LAST_NAME")
-                    l = i;
-            }
 
-            while (excelReader.Read())
-            {
 
-                if (excelReader[column].ToString() == studentID.ToString())
+            cmd.Connection = cn;
+            cn.Open();
+            cmd.CommandText = "select * from student";
+            
+            rd = cmd.ExecuteReader();
+            
+            if (rd.HasRows)
+            {
+                while (rd.Read())
                 {
-                    name += excelReader[l].ToString();
-                    name += " ";
-                    name += excelReader[f].ToString();
-                    excelConnection.Close();
-                    return name;
+                    
+                    if (rd[0].ToString() == studentID.ToString())
+                    {
+                        
+                       name += rd[3] + " " + rd[2];
+                        cn.Close();
+                        rd.Close();
+                        return name;
+                    }
                 }
             }
-            excelConnection.Close();
+            rd.Close();
+            cn.Close();
+           
             return "ERROR";
         }
         //  Queries database for classes taken by student with ID cardNumber
         private void updateClassComboBox(int studentID)
         {
             string name = "";
+            MessageBox.Show("");
+            cmd.Connection = cn;
+            cn.Open();
+            cmd.CommandText = "select * from course inner join student_course on course.term=student_course.term";
+
+            rd = cmd.ExecuteReader();
+
+            if (rd.HasRows)
+            {
+                while (rd.Read())
+                {
+
+                   // if (rd[0].ToString() == studentID.ToString())
+                  //  {
+
+                        MessageBox.Show(rd[0].ToString());
+                    
+                 //   }
+                }
+            }
+            rd.Close();
+            cn.Close();
+
+
+
+
+
+
+
+
+
             int column = 0, s=0, c = 0;
             string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=../../../VEN_LSC_SR_Project_Courses_sample.xls;Extended Properties=Excel 12.0 Xml";
             //Create the connection
@@ -324,42 +341,70 @@ namespace CIS411
         // Returns array of all tutors
         public string[] getTutors()
         {
-            string[] tutors = new string[2];
+            int i = 0;
+
+            string name = "";
+            string[] tutors = new string[1000000];
             tutors[0] = "Kris Demor";
             tutors[1] = "Sean Fagan";
+            string[] tutor = new string[tutors.Length];
+            MessageBox.Show(tutors.Count().ToString());
             return tutors;
+            
+
+            /*
+            cmd.Connection = cn;
+            cn.Open();
+            cmd.CommandText = "select * from tutor inner join student on tutor.clarion_id=student.clarion_id";
+
+            rd = cmd.ExecuteReader();
+
+            if (rd.HasRows)
+            {
+                while (rd.Read())
+                {
+
+                    if (rd[0].ToString() == studentID.ToString())
+                    {
+
+                        name += rd[5] + " " + rd[6];
+                        tutors[i] = name;
+                        i++;
+                    }
+                }
+            }
+            rd.Close();
+            cn.Close();
+
+            return tutors;
+             */
         }
 
         // Searches through database for searchID and returns true if ID is found
         public bool studentIDExists(int numIn)
         {
-            //return ((searchID == 99999999) || (searchID == 11111111));
-            int column=0, searchID = StripID(numIn);
-            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=..\..\..\VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";
-            // Create the connection
-            System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
-            string excelQuery = @"Select * from [Export Worksheet$]";
-            System.Data.OleDb.OleDbCommand excelCommand = new System.Data.OleDb.OleDbCommand(excelQuery, excelConnection);
-            excelConnection.Open();
-            System.Data.OleDb.OleDbDataReader excelReader;
-            excelReader = excelCommand.ExecuteReader();
-            // Get student IDs
-            for (int i = 0; i < excelReader.FieldCount; i++)
-            {
-                if (excelReader.GetName(i) == "EMPLID")
-                        column = i;             
-            }
-            // Check to see if student ID exists in spreadsheet
-            while (excelReader.Read())//ready
-            {
+            cmd.Connection = cn;
+            cn.Open();
+            cmd.CommandText = "select * from student";
 
-                    if (excelReader[column].ToString() == searchID.ToString())
+            rd = cmd.ExecuteReader();
+
+            if (rd.HasRows)
+            {
+                while (rd.Read())
+                {
+
+                    if (rd[0].ToString() == numIn.ToString())
                     {
-                        excelConnection.Close();
+                        rd.Close();
+                        cn.Close();
                         return true;
                     }
+                }
             }
-            excelConnection.Close();
+            rd.Close();
+            cn.Close();
+
             return false;
         }
 
