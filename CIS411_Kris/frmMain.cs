@@ -29,6 +29,9 @@ namespace CIS411
             InitializeComponent();
             cn = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\db.mdf;Integrated Security=True");
             cmd = new SqlCommand();
+            cn.Open(); //TESTING DATABASE
+            cn.Close();
+            cmd.Connection = cn;
         }
 
         private void txtStudentID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)

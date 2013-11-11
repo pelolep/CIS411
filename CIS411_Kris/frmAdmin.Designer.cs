@@ -929,7 +929,7 @@ namespace CIS411
         }
 
         #endregion
-
+        #region Declarations
         private System.Windows.Forms.TabControl tabControlAdmin;
         private System.Windows.Forms.TabPage tabGeneral;
         private System.Windows.Forms.TabPage tabTutors;
@@ -997,5 +997,6 @@ namespace CIS411
         private System.Windows.Forms.TextBox txtAddTutor;
         private System.Windows.Forms.Label lblAddTutor;
         private System.Windows.Forms.Button btnAddMethod;
+        #endregion
     }
 }

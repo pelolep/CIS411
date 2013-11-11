@@ -34,7 +34,20 @@ namespace CIS411
 
         private bool SearchForUser(string username, out int userID)
         {
-
+            DataConnection.cmd.CommandText = "select * from STUDENT where CNET_USERNAME='" + username + "'";
+            DataConnection.cn.Open();
+            DataConnection.rd = DataConnection.cmd.ExecuteReader();
+            if (DataConnection.rd.HasRows)
+            {
+                DataConnection.rd.Read();
+                userID = int.Parse(DataConnection.rd[0].ToString());
+                DataConnection.cn.Close();
+                return true;
+            }
+            userID = -1;
+            DataConnection.cn.Close();
+            return false;
+            /*
             int column = 0, idCol = 0;
             string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=..\..\..\VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";
             //Create the connection
@@ -66,6 +79,7 @@ namespace CIS411
             userID = -1;
             excelConnection.Close();
             return false;
+            */
         }
     }
 }
