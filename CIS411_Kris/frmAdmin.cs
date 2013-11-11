@@ -18,12 +18,12 @@ namespace CIS411
     {//        AppDomain currentDomain = AppDomain.CurrentDomain.SetData("DataDirectory", "App1.config");
 
 //        AppDomain currentDomain = AppDomain.CurrentDomain;
-        
 
 
-     
-        SqlConnection cn = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\db.mdf;Integrated Security=True");
-        SqlCommand cmd = new SqlCommand();
+
+
+        SqlConnection cn;
+        SqlCommand cmd;
         SqlDataReader rd;
         public frmAdmin()
         {
@@ -31,8 +31,11 @@ namespace CIS411
             for (int i = 0; i < Properties.Settings.Default.MethodNames.Count; i++)
             {
                comboAddMethod.Items.Add(Properties.Settings.Default.MethodNames[i]);
-                
+
             }
+            cn = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\db.mdf;Integrated Security=True");
+            cmd = new SqlCommand();
+            cmd.Connection = cn;
         }
         
         //Adds Tutor to the list of tutors via Student ID and adds their information to the Tutors table
@@ -41,10 +44,6 @@ namespace CIS411
             bool valid = false;
             //Gets the student id
             string studentID = txtTutorStudentID.Text;
-           
-            
-
-            cmd.Connection = cn;
             cn.Open();
             cmd.CommandText = "select * from student where CLARION_ID=" + studentID;
             
@@ -70,7 +69,6 @@ namespace CIS411
             cn.Close();
             if (valid)
             {
-                cmd.Connection = cn;
                 cn.Open();
                 cmd.CommandText = "insert into tutor(clarion_id,status) values ('"+ studentID +"', '"+ "active" +"')";
 
@@ -84,8 +82,6 @@ namespace CIS411
 
         private void btnDisableSelected_Click(object sender, EventArgs e)
         {
-
-            cmd.Connection = cn;
             cn.Open();
             try
             {
@@ -100,7 +96,6 @@ namespace CIS411
         }
         private void btnEnableSelected_Click(object sender, EventArgs e)
         {
-            cmd.Connection = cn;
             cn.Open();
             try
             {
@@ -116,7 +111,6 @@ namespace CIS411
 
         private void btnDisableAll_Click(object sender, EventArgs e)
         {
-            cmd.Connection = cn;
             cn.Open();
             cmd.CommandText = "select * from tutor";
             rd = cmd.ExecuteReader();
@@ -136,7 +130,6 @@ namespace CIS411
 
         private void btnEnableAll_Click(object sender, EventArgs e)
         {
-            cmd.Connection = cn;
             cn.Open();
             cmd.CommandText = "select * from tutor";
             rd = cmd.ExecuteReader();
@@ -386,8 +379,7 @@ namespace CIS411
             listBoxEnableTutors.Items.Clear();
             listBoxDisableTutors.Items.Clear();
             listBoxLoggedIn.Items.Clear();
-           
-            cmd.Connection = cn;
+
             cn.Open();
             cmd.CommandText = "select * from tutor inner join student on tutor.clarion_id=student.clarion_id";
             rd = cmd.ExecuteReader();
@@ -406,11 +398,9 @@ namespace CIS411
            
             rd.Close();
             cn.Close();
-            SqlCommand cmd2 = new SqlCommand();
-            cmd2.Connection = cn;
             cn.Open();
-            cmd2.CommandText = "select * from visit";
-            rd = cmd2.ExecuteReader();
+            cmd.CommandText = "select * from visit";
+            rd = cmd.ExecuteReader();
             listBoxLoggedIn.Items.Add("Date               time in       id      term     method");
             if (rd.HasRows)
             {
@@ -500,7 +490,6 @@ namespace CIS411
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            cmd.Connection = cn;
             cn.Open();
             cmd.CommandText = "insert into visit(Date, time_in, clarion_id, method) values ('" + DateTime.Today + "', '" + "10:52:02" + "', '" + "11111111" + "', '" + "testing" + "')";
 

@@ -21,12 +21,14 @@ namespace CIS411
 
     public partial class frmMain : Form
     {
-        SqlConnection cn = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\db.mdf;Integrated Security=True");
-        SqlCommand cmd = new SqlCommand();
+        SqlConnection cn;
+        SqlCommand cmd;
         SqlDataReader rd;
         public frmMain()
         {
             InitializeComponent();
+            cn = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\db.mdf;Integrated Security=True");
+            cmd = new SqlCommand();
         }
 
         private void txtStudentID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
