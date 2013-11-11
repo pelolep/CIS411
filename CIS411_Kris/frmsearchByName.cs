@@ -34,7 +34,7 @@ namespace CIS411
 
         private bool SearchForUser(string username, out int userID)
         {
-            DataConnection.cmd.CommandText = "select * from STUDENT where CNET_USERNAME='" + username + "'";
+            DataConnection.cmd.CommandText = "select CLARION_ID from STUDENT where CNET_USERNAME='" + username + "'";
             DataConnection.cn.Open();
             DataConnection.rd = DataConnection.cmd.ExecuteReader();
             if (DataConnection.rd.HasRows)

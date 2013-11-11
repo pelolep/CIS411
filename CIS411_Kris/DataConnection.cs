@@ -18,4 +18,20 @@ static class DataConnection
         cn.Close();
         cmd.Connection = cn;
     }
+
+    static public SqlConnection getConn()
+    {
+        cn.Open();
+        return cn;
+    }
+
+    static public void closeConn()
+    {
+        cn.Close();
+    }
+
+    static public SqlDataReader getReader(string s)
+    {
+        return rd;
+    }
 }
