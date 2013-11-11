@@ -38,7 +38,7 @@ namespace CIS411
         //Adds Tutor to the list of tutors via Student ID and adds their information to the Tutors table
         private void btnAddTutor_Click(object sender, EventArgs e)
         {/////////////// edit table so only clarion id, status and cnet_username are used
-            bool real = false;
+            bool valid = false;
             //Gets the student id
             string studentID = txtTutorStudentID.Text;
            
@@ -46,12 +46,13 @@ namespace CIS411
 
             cmd.Connection = cn;
             cn.Open();
-            cmd.CommandText = "select * from student";
+            cmd.CommandText = "select * from student where CLARION_ID=" + studentID;
             
             rd = cmd.ExecuteReader();
             
             if (rd.HasRows)
             {
+                /*
                 while (rd.Read())
                 {
                     
@@ -61,25 +62,24 @@ namespace CIS411
                         real = true;
                     }
                 }
+                */
+                valid = true;
             }
             rd.Close();
 
             cn.Close();
-            if (real)
+            if (valid)
             {
-
                 cmd.Connection = cn;
                 cn.Open();
-                 cmd.CommandText = "insert into tutor(clarion_id,status) values ('"+ studentID +"', '"+ "active" +"')";
+                cmd.CommandText = "insert into tutor(clarion_id,status) values ('"+ studentID +"', '"+ "active" +"')";
 
                 cmd.ExecuteNonQuery();
                 cmd.Clone();
                 cn.Close();
-                
-                
             }
             cn.Close();
-           loadlist();
+            loadlist();
         }
 
         private void btnDisableSelected_Click(object sender, EventArgs e)
@@ -289,8 +289,6 @@ namespace CIS411
                 // Add class names to comboClassList
                 while (excelReader.Read())
                 {
-                    int up = 1;
-                    
                     last = excelReader[2].ToString();
                     last = last.Replace("'", " ");
                     first = excelReader[3].ToString();
@@ -299,34 +297,22 @@ namespace CIS411
                     middle = first.Replace("'", " ");
                     try
                     {
-                        
                         cmd.CommandText = "insert into STUDENT ( term,clarion_id,lastname,firstname,middle_name,cnet_username,eaglemail,class_standing,degree_seeking,major_1,major_2,minor_1,minor_2,credit_attempted,sex,hispanic,amer_indian,asian,black,pacific_islander,White,age,campus,housing,transfer,transfer_credit,number_of_visit) values ('" + excelReader[0] + "','" + excelReader[1] + "','" + last + "','" + first + "','" + middle + "','" + excelReader[5] + "','" + excelReader[6] + "','" + excelReader[7] + "','" + excelReader[8] + "','" + excelReader[9] + "','" + excelReader[10] + "','" + excelReader[11] + "','" + excelReader[12] + "','" + excelReader[13] + "','" + excelReader[14] + "','" + excelReader[15] + "','" + excelReader[16] + "','" + excelReader[17] + "','" + excelReader[18] + "','" + excelReader[19] + "','" + excelReader[20] + "','" + excelReader[21] + "','" + excelReader[22] + "','" + excelReader[23] + "','" + excelReader[24] + "','" + excelReader[25] + "','" + 0 + "')";
                         cmd.ExecuteNonQuery();
-                        cmd.Clone();     
-                        up = 2;
+                        cmd.Clone();
                     }
                     catch
-                    {
-                    }
-                    if (up == 1)
                     {
                         MessageBox.Show(excelReader[1].ToString() + "update");
                         cmd.CommandText = "update STUDENT set term = '" + excelReader[0] + "', lastname = '" + last + "', firstname = '" + first + "',middle_name = '" + middle + "',cnet_username = '" + excelReader[5] + "',eaglemail = '" + excelReader[6] + "',class_standing = '" + excelReader[7] + "',degree_seeking = '" + excelReader[8] + "',major_1 = '" + excelReader[9] + "',major_2 = '" + excelReader[10] + "',minor_1 = '" + excelReader[11] + "',minor_2 = '" + excelReader[12] + "',credit_attempted = '" + excelReader[13] + "',sex = '" + excelReader[14] + "',hispanic = '" + excelReader[15] + "',amer_indian = '" + excelReader[16] + "',asian = '" + excelReader[17] + "',black = '" + excelReader[18] + "',pacific_islander = '" + excelReader[19] + "',White = '" + excelReader[20] + "',age = '" + excelReader[21] + "',campus = '" + excelReader[22] + "',housing = '" + excelReader[23] + "',transfer = '" + excelReader[24] + "',transfer_credit = '" + excelReader[25] + "' where clarion_id = '" + excelReader[1] + "'";
                         cmd.ExecuteNonQuery();
                         cmd.Clone();
-                        
                     }
-  
                 }
                 
                 excelReader.Close();
                 excelConnection.Close();
                 cn.Close();
-                
-
- 
-
-            cn.Close();
         }
 
         private void btn_courses_import_Click(object sender, EventArgs e)
@@ -373,14 +359,12 @@ namespace CIS411
                     cmd2.ExecuteNonQuery();
                     cmd2.Clone();
                 }
-                catch{
+                catch
+                {
                 }
             }
             excelReader.Close();
             cn.Close();
-            cn.Close();
-
-            
             excelConnection.Close();
         }
 
@@ -445,11 +429,10 @@ namespace CIS411
         {
             if (tabControlAdmin.SelectedTab.Name == "tabAdmin")
                 this.AcceptButton = btnChangePassword;
-            else
-                this.AcceptButton = null;
             if (tabControlAdmin.SelectedTab.Name == "tabMethods")
             {
                 initializeMethodTextBoxes();
+                this.AcceptButton = btnSaveMethods;
             }
             else
             {
@@ -463,22 +446,16 @@ namespace CIS411
             for (; methodIndex < Properties.Settings.Default.MethodNames.Count; methodIndex++)
             {
                 addMethodTextbox();
-                addRemoveButton();
+                createRemoveButton();
             }
-            btnAddMethod.Text = "Add new method";
             updateAddMethodButtonLocation();
-            btnAddMethod.Name = "btnAddMethod";
-            btnAddMethod.Size = new System.Drawing.Size(100, 20);
-            btnAddMethod.TabIndex = txtMethods.Count;
-            btnAddMethod.Click += btnAddMethod_Click;
-            tabMethods.Controls.Add(btnAddMethod);
             btnSaveMethods.Enabled = false;
         }
 
         void btnAddMethod_Click(object sender, EventArgs e)
         {
             addMethodTextbox();
-            addRemoveButton();
+            createRemoveButton();
             methodIndex++;
             updateAddMethodButtonLocation();
             btnSaveMethods.Enabled = true;
@@ -494,18 +471,18 @@ namespace CIS411
             txtMethods[methodIndex].Location = new System.Drawing.Point(((methodIndex / 10) * 200) + 50, ((methodIndex % 10) * 26) + 47);
             txtMethods[methodIndex].Name = "txtMethods" + methodIndex.ToString();
             txtMethods[methodIndex].Size = new System.Drawing.Size(100, 20);
-            txtMethods[methodIndex].TabIndex = methodIndex;
-            txtMethods[methodIndex].TextChanged+=txtMethods_TextChanged;
+            txtMethods[methodIndex].TabIndex = (methodIndex + 1) * 2;
+            txtMethods[methodIndex].TextChanged += txtMethods_TextChanged;
             tabMethods.Controls.Add(txtMethods[methodIndex]);
         }
 
-        void addRemoveButton()
+        void createRemoveButton()
         {
             btnRemoveMethods.Add(new Button());
             btnRemoveMethods[methodIndex].Text = "Remove";
             btnRemoveMethods[methodIndex].Location = new System.Drawing.Point(((methodIndex / 10) * 200) + 155, ((methodIndex % 10) * 26) + 47);
             btnRemoveMethods[methodIndex].Name = "btnRemoveMethods" + methodIndex.ToString();
-            btnRemoveMethods[methodIndex].TabIndex = (methodIndex + 1) * 2;
+            btnRemoveMethods[methodIndex].TabIndex = (methodIndex + 1) * 2 + 1;
             btnRemoveMethods[methodIndex].Click += btnRemoveMethods_Click;
             tabMethods.Controls.Add(btnRemoveMethods[methodIndex]);
         }
@@ -513,12 +490,14 @@ namespace CIS411
         void updateAddMethodButtonLocation()
         {
             btnAddMethod.Location = new System.Drawing.Point(((methodIndex / 10) * 200) + 50, ((methodIndex % 10) * 26) + 47);
+            btnAddMethod.TabIndex = (methodIndex + 1) * 2 + 2;
         }
 
         private void txtMethods_TextChanged(object sender, EventArgs e)
         {
             btnSaveMethods.Enabled = true;
         }
+
         private void btnLogOut_Click(object sender, EventArgs e)
         {
             cmd.Connection = cn;
@@ -532,7 +511,6 @@ namespace CIS411
         }
 
         List<TextBox> txtMethods = new List<TextBox>();
-        Button btnAddMethod = new Button();
         List<Button> btnRemoveMethods = new List<Button>();
         int methodIndex = 0;
 
@@ -547,7 +525,7 @@ namespace CIS411
             btnSaveMethods.Enabled = false;
         }
 
-        void btnRemoveMethods_Click(object sender, EventArgs e)
+        private void btnRemoveMethods_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < btnRemoveMethods.Count; i++)
                 if (sender.Equals(btnRemoveMethods[i]))
@@ -557,9 +535,21 @@ namespace CIS411
                     txtMethods.RemoveAt(i);
                     btnRemoveMethods.RemoveAt(i);
                     methodIndex--;
+                    resetMethodButtonPositions();
                     updateAddMethodButtonLocation();
                     btnSaveMethods.Enabled = true;
                 }
+        }
+
+        private void resetMethodButtonPositions()
+        {
+            for (int i = 0; i < methodIndex; i++)
+            {
+                txtMethods[i].Location = new System.Drawing.Point(((i / 10) * 200) + 50, ((i % 10) * 26) + 47);
+                txtMethods[i].TabIndex = (i + 1) * 2;
+                btnRemoveMethods[i].Location = new System.Drawing.Point(((i / 10) * 200) + 155, ((i % 10) * 26) + 47);
+                btnRemoveMethods[i].TabIndex = (i + 1) * 2 + 1;
+            }
         }
 
         private void comboTutoring_SelectedIndex(object sender, EventArgs e)
