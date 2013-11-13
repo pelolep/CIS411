@@ -336,18 +336,9 @@ namespace CIS411
         // Returns array of all tutors
         public string[] getTutors()
         {
-            int i = 0;
-
+            List<string> tutorslist = new List<string>();
             string name = "";
-            string[] tutors = new string[1000000];
-            tutors[0] = "Kris Demor";
-            tutors[1] = "Sean Fagan";
-            string[] tutor = new string[tutors.Length];
-            MessageBox.Show(tutors.Count().ToString());
-            return tutors;
-            
 
-            /*
             cmd.Connection = cn;
             cn.Open();
             cmd.CommandText = "select * from tutor inner join student on tutor.clarion_id=student.clarion_id";
@@ -359,20 +350,18 @@ namespace CIS411
                 while (rd.Read())
                 {
 
-                    if (rd[0].ToString() == studentID.ToString())
-                    {
-
-                        name += rd[5] + " " + rd[6];
-                        tutors[i] = name;
-                        i++;
-                    }
+                    name += rd[5].ToString() + " " + rd[6].ToString() + " " + rd[0].ToString();
+                    tutorslist.Add(name);
                 }
             }
             rd.Close();
             cn.Close();
 
+            string[] tutors = new string[tutorslist.Count()];
+            for (int i = 0; i < tutorslist.Count(); i++)
+                tutors[i] = tutorslist.ElementAt(i);
+
             return tutors;
-             */
         }
 
         // Searches through database for searchID and returns true if ID is found

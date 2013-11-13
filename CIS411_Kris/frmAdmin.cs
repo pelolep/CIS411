@@ -33,6 +33,8 @@ namespace CIS411
                comboAddMethod.Items.Add(Properties.Settings.Default.MethodNames[i]);
                 
             }
+            
+
         }
         
         //Adds Tutor to the list of tutors via Student ID and adds their information to the Tutors table
@@ -564,13 +566,49 @@ namespace CIS411
 
         private void comboTutoring_SelectedIndex(object sender, EventArgs e)
         {
-            txtAddTutor.Enabled = true;
+            comboAddTutoring.Enabled = true;
             txtAddClass.Enabled = true;
         }
 
         private void btnAddVisit_Click(object sender, EventArgs e)
         {
+            /*Won't run because of tutor ID issue.
+             * The Tutor ID being uploaded to the visits
+             * table does not line up with the Tutor table
+             * 
+             * 
+             */
+            
+            string studentID = txtAddStudentID.Text;
+            string date = dateTimePickerAdd.Text;
+            string timeIn = dateTimePickerAddTimeIn.Text;
+            string timeOut = dateTimePickerAddTimeOut.Text;
+            string method = comboAddMethod.SelectedIndex.ToString();
+            string course = txtAddClass.Text;
+            int tutor = 2;
+            
+            string nothing = " ";
 
+            /*if (method == "Tutoring")
+            {
+                if (course == null || tutor == null)
+                {
+                    MessageBox.Show("Please Enter a course and a tutor.");
+                }
+            }
+            else
+            {
+            */
+            //cmd.Connection = cn;
+                cn.Open();
+                cmd.CommandText = "insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + nothing + "', '" + nothing + "', '" + nothing + "', '" + tutor + "', '" + method + "', '" + nothing + "')";
+                cmd.ExecuteNonQuery();
+                cmd.Clone();
+                cn.Close();
+
+
+          //  }
+            lblTest.Text = date + "','" + timeIn + "', '" + timeOut + "', '" + studentID +  "', '" + method;
         }
         
         //Retrieves the Student Visit Records to edit
@@ -586,11 +624,60 @@ namespace CIS411
 
         }
 
+
         
         //null
         private void btnSave_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void comboAddMethod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (comboAddMethod.SelectedIndex == 0)
+            {
+                comboAddTutoring.Enabled = true;
+                comboAddTutoring.Items.Add("Select a tutor...");
+                comboAddTutoring.Items.AddRange(getTutors());
+                comboAddTutoring.SelectedIndex = 0;
+            }
+            else
+                comboAddTutoring.Enabled = false;
+
+
+        
+        }
+
+        // Returns array of all tutors
+        public string[] getTutors()
+        {
+            List<string> tutorslist = new List<string>();
+            string name = "";
+
+            cmd.Connection = cn;
+            cn.Open();
+            cmd.CommandText = "select * from tutor inner join student on tutor.clarion_id=student.clarion_id";
+
+            rd = cmd.ExecuteReader();
+
+            if (rd.HasRows)
+            {
+                while (rd.Read())
+                {
+
+                    name += rd[5].ToString() + " " + rd[6].ToString() + " " + rd[0].ToString();
+                    tutorslist.Add(name);
+                }
+            }
+            rd.Close();
+            cn.Close();
+
+            string[] tutors = new string[tutorslist.Count()];
+            for (int i = 0; i < tutorslist.Count(); i++)
+                tutors[i] = tutorslist.ElementAt(i);
+
+            return tutors;
         }
     }
 }
