@@ -46,6 +46,8 @@ namespace CIS411
             this.label1 = new System.Windows.Forms.Label();
             this.txtTutorStudentID = new System.Windows.Forms.TextBox();
             this.tabVisits = new System.Windows.Forms.TabPage();
+            this.comboAddTutoring = new System.Windows.Forms.ComboBox();
+            this.lblTest = new System.Windows.Forms.Label();
             this.dateTimePickerEditTimeOut = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerEditTimeIn = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerAddTimeOut = new System.Windows.Forms.DateTimePicker();
@@ -93,8 +95,8 @@ namespace CIS411
             this.tabMethods = new System.Windows.Forms.TabPage();
             this.btnSaveMethods = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
-            this.lblTest = new System.Windows.Forms.Label();
-            this.comboAddTutoring = new System.Windows.Forms.ComboBox();
+            this.lblActiveTutors = new System.Windows.Forms.Label();
+            this.lblInactiveTutors = new System.Windows.Forms.Label();
             this.tabControlAdmin.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.tabTutors.SuspendLayout();
@@ -184,6 +186,8 @@ namespace CIS411
             // 
             // tabTutors
             // 
+            this.tabTutors.Controls.Add(this.lblInactiveTutors);
+            this.tabTutors.Controls.Add(this.lblActiveTutors);
             this.tabTutors.Controls.Add(this.btnAddTutor);
             this.tabTutors.Controls.Add(this.btnDisableSelected);
             this.tabTutors.Controls.Add(this.btnDisableAll);
@@ -325,6 +329,24 @@ namespace CIS411
             this.tabVisits.TabIndex = 2;
             this.tabVisits.Text = "Visits";
             this.tabVisits.UseVisualStyleBackColor = true;
+            // 
+            // comboAddTutoring
+            // 
+            this.comboAddTutoring.Enabled = false;
+            this.comboAddTutoring.FormattingEnabled = true;
+            this.comboAddTutoring.Location = new System.Drawing.Point(256, 243);
+            this.comboAddTutoring.Name = "comboAddTutoring";
+            this.comboAddTutoring.Size = new System.Drawing.Size(121, 21);
+            this.comboAddTutoring.TabIndex = 43;
+            // 
+            // lblTest
+            // 
+            this.lblTest.AutoSize = true;
+            this.lblTest.Location = new System.Drawing.Point(449, 275);
+            this.lblTest.Name = "lblTest";
+            this.lblTest.Size = new System.Drawing.Size(35, 13);
+            this.lblTest.TabIndex = 42;
+            this.lblTest.Text = "label3";
             // 
             // dateTimePickerEditTimeOut
             // 
@@ -766,23 +788,23 @@ namespace CIS411
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // lblTest
+            // lblActiveTutors
             // 
-            this.lblTest.AutoSize = true;
-            this.lblTest.Location = new System.Drawing.Point(449, 275);
-            this.lblTest.Name = "lblTest";
-            this.lblTest.Size = new System.Drawing.Size(35, 13);
-            this.lblTest.TabIndex = 42;
-            this.lblTest.Text = "label3";
+            this.lblActiveTutors.AutoSize = true;
+            this.lblActiveTutors.Location = new System.Drawing.Point(222, 20);
+            this.lblActiveTutors.Name = "lblActiveTutors";
+            this.lblActiveTutors.Size = new System.Drawing.Size(73, 13);
+            this.lblActiveTutors.TabIndex = 10;
+            this.lblActiveTutors.Text = "Active Tutors:";
             // 
-            // comboAddTutoring
+            // lblInactiveTutors
             // 
-            this.comboAddTutoring.Enabled = false;
-            this.comboAddTutoring.FormattingEnabled = true;
-            this.comboAddTutoring.Location = new System.Drawing.Point(256, 243);
-            this.comboAddTutoring.Name = "comboAddTutoring";
-            this.comboAddTutoring.Size = new System.Drawing.Size(121, 21);
-            this.comboAddTutoring.TabIndex = 43;
+            this.lblInactiveTutors.AutoSize = true;
+            this.lblInactiveTutors.Location = new System.Drawing.Point(472, 20);
+            this.lblInactiveTutors.Name = "lblInactiveTutors";
+            this.lblInactiveTutors.Size = new System.Drawing.Size(81, 13);
+            this.lblInactiveTutors.TabIndex = 11;
+            this.lblInactiveTutors.Text = "Inactive Tutors:";
             // 
             // frmAdmin
             // 
@@ -878,5 +900,7 @@ namespace CIS411
         private System.Windows.Forms.DateTimePicker dateTimePickerAddTimeIn;
         private System.Windows.Forms.Label lblTest;
         private System.Windows.Forms.ComboBox comboAddTutoring;
+        private System.Windows.Forms.Label lblInactiveTutors;
+        private System.Windows.Forms.Label lblActiveTutors;
     }
 }
