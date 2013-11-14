@@ -306,6 +306,7 @@ namespace CIS411
             if (o.FileName == "")
                 return;
             SqlCommand cmd2 = new SqlCommand();
+            SqlCommand cmd3 = new SqlCommand();
             string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source="+o.FileName+";Extended Properties=Excel 12.0 Xml";
             // Create the connection
 
@@ -344,6 +345,13 @@ namespace CIS411
                 catch
                 {
                 }
+                try
+                {
+                    cmd.CommandText = "insert into student_Course (clarion_id,term,subject,catalog,section) values ('"+excelReader[1]+"' ,'" + excelReader[0] + "','" + excelReader[2] + "','" + excelReader[3] + "','" + excelReader[4] + "')";
+                    cmd.ExecuteNonQuery();
+                    cmd.Clone();
+                }
+                catch { }
             }
             excelReader.Close();
             cn.Close();
@@ -352,6 +360,13 @@ namespace CIS411
 
         private void frmAdmin_Load(object sender, EventArgs e)
         {
+            
+
+
+
+
+
+
           //  MessageBox.Show("");
             loadlist();
            // AppDomain.CurrentDomain.SetData("DataDirectory", "~/cis411/cis411_Kris/db.mdf");

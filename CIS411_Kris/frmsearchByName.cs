@@ -13,6 +13,9 @@ namespace CIS411
 {
     public partial class frmSearchByName : Form
     {
+        SqlConnection cn = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\db.mdf;Integrated Security=True");
+        SqlCommand cmd = new SqlCommand();
+        SqlDataReader rd;
         public frmSearchByName()
         {
             InitializeComponent();
@@ -79,19 +82,26 @@ namespace CIS411
                 if (excelReader.GetName(i) == "CZ_CNET_ID")
                     column = i;
             }
+=======
 
-            while (excelReader.Read())
+            cmd.Connection = cn;
+            cn.Open();
+            cmd.CommandText = "select clarion_id from student where cnet_username='" + username + "'";
+
+            rd = cmd.ExecuteReader();
+>>>>>>> origin/Matt7
+
+            if (rd.HasRows)
             {
-                if (excelReader[column].ToString().ToLower() == username.ToLower())
-                {
-                    userID = 0;
-                    int.TryParse(excelReader[idCol].ToString(), out userID);
-                    excelConnection.Close();
-                    return true;
-                }
+                rd.Read();
+                userID = int.Parse(rd[0].ToString());
+                rd.Close();
+                cn.Close();
+                return true;
             }
+            rd.Close();
+            cn.Close();
             userID = -1;
-            excelConnection.Close();
             return false;
             */
         }

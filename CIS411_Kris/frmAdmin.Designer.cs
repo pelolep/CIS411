@@ -97,7 +97,6 @@ namespace CIS411
             this.tabMethods = new System.Windows.Forms.TabPage();
             this.btnSaveMethods = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
-<<<<<<< HEAD
             this.dateTimePickerEditMin = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.txtEditSignOut = new System.Windows.Forms.TextBox();
@@ -116,10 +115,10 @@ namespace CIS411
             this.txtAddTutor = new System.Windows.Forms.TextBox();
             this.lblAddTutor = new System.Windows.Forms.Label(); 
             this.btnAddMethod = new System.Windows.Forms.Button();
-=======
             this.lblActiveTutors = new System.Windows.Forms.Label();
             this.lblInactiveTutors = new System.Windows.Forms.Label();
->>>>>>> origin/Kris6
+            this.txtAddSignOut = new System.Windows.Forms.TextBox();
+            this.txtAddSignIn = new System.Windows.Forms.TextBox();
             this.tabControlAdmin.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.tabTutors.SuspendLayout();
@@ -630,7 +629,6 @@ namespace CIS411
             #endregion
             #region txtAddSignOut
             // 
-<<<<<<< HEAD
             // txtAddSignOut
             // 
             this.txtAddSignOut.Location = new System.Drawing.Point(440, 212);
@@ -649,8 +647,6 @@ namespace CIS411
             #endregion
             #region txtAddStudentID
             // 
-=======
->>>>>>> origin/Kris6
             // txtAddStudentID
             // 
             this.txtAddStudentID.Location = new System.Drawing.Point(22, 206);
@@ -670,47 +666,29 @@ namespace CIS411
             this.btnAddVisit.UseVisualStyleBackColor = true;
             this.btnAddVisit.Click += new System.EventHandler(this.btnAddVisit_Click);
             #endregion
-            #region lblSignOut
+            #region lblTimeOut
             // 
             // lblTimeOut
             // 
-<<<<<<< HEAD
-            this.lblSignOut.AutoSize = true;
-            this.lblSignOut.Location = new System.Drawing.Point(437, 194);
-            this.lblSignOut.Name = "lblSignOut";
-            this.lblSignOut.Size = new System.Drawing.Size(48, 13);
-            this.lblSignOut.TabIndex = 9;
-            this.lblSignOut.Text = "Sign Out";
-            #endregion
-            #region lblSignIn
-=======
             this.lblTimeOut.AutoSize = true;
             this.lblTimeOut.Location = new System.Drawing.Point(340, 188);
             this.lblTimeOut.Name = "lblTimeOut";
             this.lblTimeOut.Size = new System.Drawing.Size(50, 13);
             this.lblTimeOut.TabIndex = 9;
             this.lblTimeOut.Text = "Time Out";
->>>>>>> origin/Kris6
+            #endregion
+            #region lblTimeIn
             // 
             // lblTimeIn
             // 
-<<<<<<< HEAD
-            this.lblSignIn.AutoSize = true;
-            this.lblSignIn.Location = new System.Drawing.Point(331, 194);
-            this.lblSignIn.Name = "lblSignIn";
-            this.lblSignIn.Size = new System.Drawing.Size(40, 13);
-            this.lblSignIn.TabIndex = 8;
-            this.lblSignIn.Text = "Sign In";
-            #endregion
-            #region lblStudentID
-=======
             this.lblTimeIn.AutoSize = true;
             this.lblTimeIn.Location = new System.Drawing.Point(234, 188);
             this.lblTimeIn.Name = "lblTimeIn";
             this.lblTimeIn.Size = new System.Drawing.Size(42, 13);
             this.lblTimeIn.TabIndex = 8;
             this.lblTimeIn.Text = "Time In";
->>>>>>> origin/Kris6
+            #endregion
+            #region lblStudentID
             // 
             // lblStudentID
             // 
@@ -941,7 +919,6 @@ namespace CIS411
             this.btnSaveMethods.Text = "Save Changes";
             this.btnSaveMethods.UseVisualStyleBackColor = true;
             this.btnSaveMethods.Click += new System.EventHandler(this.btnSaveMethods_Click);
-<<<<<<< HEAD
             #endregion
             #region btnEditVisit
 			//
@@ -956,8 +933,6 @@ namespace CIS411
             this.btnEditVisit.Click += new System.EventHandler(this.btnEditVisit_Click);
             #endregion
             #region btnClose
-=======
->>>>>>> origin/Kris6
             // 
             // btnClose
             // 
@@ -980,7 +955,6 @@ namespace CIS411
             #endregion
             #region dateTimePickerEditMin
             // 
-<<<<<<< HEAD
             // dateTimePickerEditMin
             // 
             this.dateTimePickerEditMin.Location = new System.Drawing.Point(128, 315);
@@ -1073,17 +1047,11 @@ namespace CIS411
             this.dateTimePickerEditMax.Value = new System.DateTime(2013, 11, 7, 0, 0, 0, 0);
             #endregion
             #region txtEditDate
-            // 
-            // txtEditDate
-            // 
             this.txtEditDate.Enabled = false;
             this.txtEditDate.Location = new System.Drawing.Point(22, 360);
             this.txtEditDate.Name = "txtEditDate";
             this.txtEditDate.Size = new System.Drawing.Size(100, 20);
             this.txtEditDate.TabIndex = 30;
-            #endregion
-            #region lblEditDate
-=======
             // lblActiveTutors
             // 
             this.lblActiveTutors.AutoSize = true;
@@ -1092,11 +1060,11 @@ namespace CIS411
             this.lblActiveTutors.Size = new System.Drawing.Size(73, 13);
             this.lblActiveTutors.TabIndex = 10;
             this.lblActiveTutors.Text = "Active Tutors:";
->>>>>>> origin/Kris6
+            #endregion
+            #region lblEditDate
             // 
-            // lblInactiveTutors
+            // lblEditDate
             // 
-<<<<<<< HEAD
             this.lblEditDate.AutoSize = true;
             this.lblEditDate.Location = new System.Drawing.Point(19, 342);
             this.lblEditDate.Name = "lblEditDate";
@@ -1166,16 +1134,17 @@ namespace CIS411
             this.lblAddTutor.Size = new System.Drawing.Size(32, 13);
             this.lblAddTutor.TabIndex = 36;
             this.lblAddTutor.Text = "Tutor";
-            #endregion
-            #region frmAdmin
-=======
+            // 
+            // lblInactiveTutors
+            // 
             this.lblInactiveTutors.AutoSize = true;
             this.lblInactiveTutors.Location = new System.Drawing.Point(472, 20);
             this.lblInactiveTutors.Name = "lblInactiveTutors";
             this.lblInactiveTutors.Size = new System.Drawing.Size(81, 13);
             this.lblInactiveTutors.TabIndex = 11;
             this.lblInactiveTutors.Text = "Inactive Tutors:";
->>>>>>> origin/Kris6
+            #endregion
+            #region frmAdmin
             // 
             // frmAdmin
             // 
@@ -1266,10 +1235,7 @@ namespace CIS411
         private System.Windows.Forms.Label lblAddClass;
         private System.Windows.Forms.ComboBox comboAddMethod;
         private System.Windows.Forms.Label lblAddTutor;
-<<<<<<< HEAD
         private System.Windows.Forms.Button btnAddMethod;
-        #endregion
-=======
         private System.Windows.Forms.DateTimePicker dateTimePickerEditTimeOut;
         private System.Windows.Forms.DateTimePicker dateTimePickerEditTimeIn;
         private System.Windows.Forms.DateTimePicker dateTimePickerAddTimeOut;
@@ -1278,6 +1244,14 @@ namespace CIS411
         private System.Windows.Forms.ComboBox comboAddTutoring;
         private System.Windows.Forms.Label lblInactiveTutors;
         private System.Windows.Forms.Label lblActiveTutors;
->>>>>>> origin/Kris6
+        private System.Windows.Forms.TextBox txtAddTutor;
+        private System.Windows.Forms.Label lblEditSignIn;
+        private System.Windows.Forms.Label lblEditSignOut;
+        private System.Windows.Forms.TextBox txtEditSignIn;
+        private System.Windows.Forms.TextBox txtEditSignOut;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtAddSignIn;
+        private System.Windows.Forms.TextBox txtAddSignOut;
+        #endregion
     }
 }

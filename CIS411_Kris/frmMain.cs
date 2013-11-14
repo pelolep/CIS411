@@ -10,12 +10,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
 using System.Data.SqlClient;
+
 namespace CIS411
 {
     public static class Globals
     {
        //Here is the Password!!!!!
-        public static String password= "CIS411"; 
+        public static String password= "CIS411";
         
     }
 
@@ -23,10 +24,12 @@ namespace CIS411
     {
         SqlConnection cn;
         SqlCommand cmd;
+        bool tutoring;
         SqlDataReader rd;
         public frmMain()
         {
             InitializeComponent();
+            tutoring = false;
             cn = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\db.mdf;Integrated Security=True");
             cmd = new SqlCommand();
             cn.Open(); //TESTING DATABASE
@@ -35,7 +38,7 @@ namespace CIS411
         }
 
         private void txtStudentID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
+        { 
             if (txtStudentID.Text == "")
             {
                 // Starts a timer to see if user is swiping a card.
@@ -95,10 +98,20 @@ namespace CIS411
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            
+            if (tutoring)
+            {
+                cn.Open();
+                cmd.CommandText = "select";
+                cmd.ExecuteNonQuery();                                                                                                                                                                                                                                              
+                cmd.Clone();
+                cn.Close();
+            }
+            string[] words = comboClassList.SelectedItem.ToString().Split();
+            string[] tutors = comboTutors.SelectedItem.ToString().Split();
             cn.Open();
-            cmd.CommandText = "insert into VISIT (DATE, TIME_IN, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION) values ('" + System.DateTime.Today.ToString() + "','" + System.DateTime.UtcNow.TimeOfDay.ToString() + "','" + txtStudentID.Text + "','";
-            cmd.ExecuteNonQuery();
+            //cmd.CommandText = "insert into VISIT (DATE, TIME_IN, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION) values ('" + System.DateTime.Today.ToString() + "','" + System.DateTime.UtcNow.TimeOfDay.ToString() + "','" + txtStudentID.Text + "', '" + "term" + "', '" + words[0] + "', '" + words[1] + "', '"+ tutors[0] +"' , '" + "method" + "', '" + words[2] + "')";
+           // cmd.CommandText = "insert into VISIT (DATE, TIME_IN, CLARION_ID, TERM, SUBJECT, CATALOG, METHOD, SECTION) values ('" + System.DateTime.Today.ToString() + "','" + System.DateTime.UtcNow.TimeOfDay.ToString() + "','" + txtStudentID.Text + "', '" + "term" + "', '" + words[0] + "', '" + words[1] + "', '" + "method" + "', '" + words[2] + "')";
+            //cmd.ExecuteNonQuery();                                                                                                                                                                                                                                              
             cmd.Clone();
             cn.Close();
             signIn();
@@ -135,10 +148,12 @@ namespace CIS411
             if ((isTutor(studentID))&&(MessageBox.Show("Are you being tutored?", "Tutoring", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No))
             {
                     btnSubmit.Enabled = true;
-                    comboClassList.SelectedIndex = 0;
+                  
+                  //  comboClassList.SelectedIndex = 0;
                     comboClassList.Enabled = false;
-                    comboTutors.SelectedIndex = 0;
+                 //   comboTutors.SelectedIndex = 0;
                     comboTutors.Visible = false;
+                    tutoring = true;
             }
             // Otherwise, initialize the comboTutors box if it hasn't been yet
             else if (comboTutors.Items.Count==0)
@@ -146,6 +161,7 @@ namespace CIS411
                 this.comboTutors.Items.Add("Select a tutor...");
                 this.comboTutors.Items.AddRange(getTutors());
                 this.comboTutors.SelectedIndex = 0;
+
             }
             this.comboTutors.Visible = true;
             comboClassList.Enabled = true;
@@ -154,7 +170,29 @@ namespace CIS411
         // Checks if student is registered as a tutor
         private bool isTutor(int ID)
         {
-            return (ID == 10569779);
+
+            cmd.Connection = cn;
+            cn.Open();
+            cmd.CommandText = "select clarion_id from tutor";
+
+            rd = cmd.ExecuteReader();
+
+            if (rd.HasRows)
+            {
+                while (rd.Read())
+                {
+
+                    if (int.Parse(rd[0].ToString()) == ID)
+                    {
+                        rd.Close();
+                        cn.Close();
+                        return true;
+                    }
+                }
+            }
+            rd.Close();
+            cn.Close();
+            return false;
         }
 
         private void rdoOther_Click(object sender, EventArgs e)
@@ -223,24 +261,19 @@ namespace CIS411
             cmd.CommandText = "select subject, catalog from student_course, student where student_course.clarion_id=" + studentID.ToString();
 
             rd = cmd.ExecuteReader();
-
+            
             if (rd.HasRows)
             {
                 while (rd.Read())
                 {
                     comboClassList.Items.Add(rd[0].ToString() + rd[1].ToString());
-                   // if (rd[0].ToString() == studentID.ToString())
-                  //  {
-
-                        //MessageBox.Show(rd[0].ToString());
-                    
-                 //   }
                 }
             }
             rd.Close();
             cn.Close();
             /*
 
+<<<<<<< HEAD
 
 
 
@@ -284,7 +317,6 @@ namespace CIS411
             */
             comboClassList.Items.Add("Other");
             comboClassList.SelectedIndex = 0;
-            
         }
 
         // Initializes classComboBox if it hasn't been yet
@@ -334,28 +366,11 @@ namespace CIS411
         // Returns array of all tutors
         public string[] getTutors()
         {
-<<<<<<< HEAD
-            //int i = 0;
-
-            string name = "";
-            
-            //string[] tutors = new string[1000000];
-
             List<string> tutorList = new List<string>();
-            //tutors[0] = "Kris Demor";
-            //tutors[1] = "Sean Fagan";
-            //string[] tutor = new string[tutors.Length];
-            //MessageBox.Show(tutors.Count().ToString());
-            //return tutors;
-            
-=======
-            List<string> tutorslist = new List<string>();
             string name = "";
-
->>>>>>> origin/Kris6
             cmd.Connection = cn;
             cn.Open();
-            cmd.CommandText = "select * from tutor inner join student on tutor.clarion_id=student.clarion_id";
+            cmd.CommandText = "select * from tutor inner join student on tutor.clarion_id=student.clarion_id where status = '"+"active"+"'";
 
             rd = cmd.ExecuteReader();
 
@@ -363,8 +378,6 @@ namespace CIS411
             {
                 while (rd.Read())
                 {
-
-<<<<<<< HEAD
                     if (rd[0].ToString() == studentID.ToString())
                     {
 
@@ -373,25 +386,12 @@ namespace CIS411
                         //tutors[i] = name;
                         //i++;
                     }
-=======
-                    name += rd[5].ToString() + " " + rd[6].ToString() + " " + rd[0].ToString();
-                    tutorslist.Add(name);
->>>>>>> origin/Kris6
+                    name = "";
                 }
             }
             rd.Close();
             cn.Close();
-<<<<<<< HEAD
             return tutorList.ToArray();
-            //return tutors;
-=======
-
-            string[] tutors = new string[tutorslist.Count()];
-            for (int i = 0; i < tutorslist.Count(); i++)
-                tutors[i] = tutorslist.ElementAt(i);
-
-            return tutors;
->>>>>>> origin/Kris6
         }
 
         // Searches through database for searchID and returns true if ID is found
@@ -400,7 +400,6 @@ namespace CIS411
             cmd.Connection = cn;
             cn.Open();
             cmd.CommandText = "SELECT CLARION_ID FROM STUDENT WHERE CLARION_ID=" + numIn.ToString();
-
             rd = cmd.ExecuteReader();
             if (rd.HasRows)
             {
@@ -428,11 +427,57 @@ namespace CIS411
         // Queries database to see if student with searchID is already signed in
         public bool studentSignedIn(int searchID)
         {
-            return false; //CHANGE THIS
+            cmd.Connection = cn;
+            cn.Open();
+            cmd.CommandText = "select clarion_id from visit where clarion_id='"+searchID+"' and time_out=NULL";
+
+            rd = cmd.ExecuteReader();
+
+            if (rd.HasRows)
+            {
+
+                rd.Close();
+                cn.Close();
+                return true;
+    
+            }
+            rd.Close();
+            cn.Close();
+
+            return false;
+
         }
 
         public void signOut(int searchID)
         {
+            System.DateTime timeout = DateTime.Parse("12:11:11"), timenow = DateTime.Parse("12:11:11"), timedifference = DateTime.Parse("12:11:11");
+            cmd.Connection = cn;
+            cn.Open();
+            cmd.CommandText = "select time_in from visits where student_id= '" + studentID + "' and time_out=DBNull";
+
+            if (rd.HasRows)
+            {
+
+                rd.Close();
+                cn.Close();
+                timeout = DateTime.Parse(rd[0].ToString());
+
+            }
+            rd.Close();
+            cn.Close();
+
+            timenow = DateTime.Parse(DateTime.Now.ToString("HH:mm:ss tt"));
+
+            timedifference = DateTime.Parse(timenow.Subtract(timeout).TotalMinutes.ToString());
+
+            cmd.Connection = cn;
+            cn.Open();
+            cmd.CommandText = "update visits set time_out = '" + timenow + "' , time_difference = '" + timedifference + "' where clarion_id= '" + studentID + "' and time_out=DBNULL";
+
+            rd.Close();
+            cn.Close();
+
+
             MessageBox.Show("You have been signed out."); //ADD TO THIS
             resetForm();
         }
