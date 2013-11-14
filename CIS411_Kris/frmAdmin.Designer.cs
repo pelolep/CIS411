@@ -28,13 +28,12 @@ namespace CIS411
         /// </summary>
         private void InitializeComponent()
         {
-            if (true)
-                ; // Preventing Form Designer from deleting the #region directives
+            if (true); // Preventing Form Designer from deleting the #region directives
             #region Initialization
             this.tabControlAdmin = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
             this.comboCategory = new System.Windows.Forms.ComboBox();
-            this.comboLeastOrGreater = new System.Windows.Forms.ComboBox();
+            this.comboSortBy = new System.Windows.Forms.ComboBox();
             this.btn_courses_import = new System.Windows.Forms.Button();
             this.btn_student_import = new System.Windows.Forms.Button();
             this.btnReport = new System.Windows.Forms.Button();
@@ -128,7 +127,7 @@ namespace CIS411
             // tabGeneral
             // 
             this.tabGeneral.Controls.Add(this.comboCategory);
-            this.tabGeneral.Controls.Add(this.comboLeastOrGreater);
+            this.tabGeneral.Controls.Add(this.comboSortBy);
             this.tabGeneral.Controls.Add(this.btn_courses_import);
             this.tabGeneral.Controls.Add(this.btn_student_import);
             this.tabGeneral.Controls.Add(this.btnReport);
@@ -149,19 +148,30 @@ namespace CIS411
             this.comboCategory.Name = "comboCategory";
             this.comboCategory.Size = new System.Drawing.Size(121, 21);
             this.comboCategory.TabIndex = 4;
+            this.comboCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCategory.Items.AddRange(new object[] {
+            "All"});
+            this.comboCategory.SelectedIndex = 0;
             #endregion
-            #region comboLeastOrGreater
+            #region comboSortBy
             // 
-            // comboLeastOrGreater
+            // comboSortBy
             // 
-            this.comboLeastOrGreater.FormattingEnabled = true;
-            this.comboLeastOrGreater.Items.AddRange(new object[] {
-            "Least to greatest",
-            "Greatest to least"});
-            this.comboLeastOrGreater.Location = new System.Drawing.Point(523, 37);
-            this.comboLeastOrGreater.Name = "comboLeastOrGreater";
-            this.comboLeastOrGreater.Size = new System.Drawing.Size(121, 21);
-            this.comboLeastOrGreater.TabIndex = 3;
+            this.comboSortBy.FormattingEnabled = true;
+            this.comboSortBy.Items.AddRange(new object[] {
+            "Default",
+            "Hours",
+            "Credits",
+            "Class_Standing",
+            "Major",
+            "Transfer",
+            "Number of Visits"});
+            this.comboSortBy.Location = new System.Drawing.Point(523, 37);
+            this.comboSortBy.Name = "comboSortBy";
+            this.comboSortBy.Size = new System.Drawing.Size(121, 21);
+            this.comboSortBy.TabIndex = 3;
+            this.comboSortBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboSortBy.SelectedIndex = 0;
             #endregion
             #region btn_courses_import
             // 
@@ -972,7 +982,7 @@ namespace CIS411
         private System.Windows.Forms.Button btnReport;
         private System.Windows.Forms.Button btn_courses_import;
         private System.Windows.Forms.Button btn_student_import;
-        private System.Windows.Forms.ComboBox comboLeastOrGreater;
+        private System.Windows.Forms.ComboBox comboSortBy;
         private System.Windows.Forms.ComboBox comboCategory;
         private System.Windows.Forms.TabPage tabMethods;
         private System.Windows.Forms.Button btnSaveMethods;

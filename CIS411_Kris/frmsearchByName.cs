@@ -34,7 +34,20 @@ namespace CIS411
 
         private bool SearchForUser(string username, out int userID)
         {
-            DataConnection.cmd.CommandText = "select CLARION_ID from STUDENT where CNET_USERNAME='" + username + "'";
+            DataConnection conn = new DataConnection();
+            conn.open();
+            SqlDataReader rd = conn.getReader("CLARION_ID", "STUDENT", "CNET_USERNAME", username);
+            if (rd.HasRows)
+            {
+                rd.Read();
+                userID = int.Parse(rd[0].ToString());
+                conn.close();
+                return true;
+            }
+            userID = -1;
+            conn.close();
+            return false;
+            /*DataConnection.cmd.CommandText = "select CLARION_ID from STUDENT where CNET_USERNAME='" + username + "'";
             DataConnection.cn.Open();
             DataConnection.rd = DataConnection.cmd.ExecuteReader();
             if (DataConnection.rd.HasRows)
@@ -47,6 +60,7 @@ namespace CIS411
             userID = -1;
             DataConnection.cn.Close();
             return false;
+            */
             /*
             int column = 0, idCol = 0;
             string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=..\..\..\VEN_LSC_SR_Project_Students_sample.xls;Extended Properties=Excel 12.0 Xml";

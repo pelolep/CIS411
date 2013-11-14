@@ -197,38 +197,30 @@ namespace CIS411
 
             cmd.Connection = cn;
             cn.Open();
-            cmd.CommandText = "select * from student";
-            
+            cmd.CommandText = "SELECT FIRSTNAME, MIDDLE_NAME, LASTNAME FROM STUDENT WHERE CLARION_ID=" + studentID.ToString();
             rd = cmd.ExecuteReader();
             
             if (rd.HasRows)
             {
-                while (rd.Read())
-                {
-                    
-                    if (rd[0].ToString() == studentID.ToString())
-                    {
-                        
-                       name += rd[3] + " " + rd[2];
-                        cn.Close();
-                        rd.Close();
-                        return name;
-                    }
-                }
+                rd.Read();
+                name += rd[0] + " " + rd[1] + " " + rd[2];
+                cn.Close();
+                rd.Close();
+                return name;
             }
             rd.Close();
             cn.Close();
-           
             return "ERROR";
         }
         //  Queries database for classes taken by student with ID cardNumber
         private void updateClassComboBox(int studentID)
         {
-            string name = "";
-            MessageBox.Show("");
+            //string name = "";
+            //MessageBox.Show("");
+            comboClassList.Items.Add("Select a class...");
             cmd.Connection = cn;
             cn.Open();
-            cmd.CommandText = "select * from course inner join student_course on course.term=student_course.term";
+            cmd.CommandText = "select subject, catalog from student_course, student where student_course.clarion_id=" + studentID.ToString();
 
             rd = cmd.ExecuteReader();
 
@@ -236,18 +228,18 @@ namespace CIS411
             {
                 while (rd.Read())
                 {
-
+                    comboClassList.Items.Add(rd[0].ToString() + rd[1].ToString());
                    // if (rd[0].ToString() == studentID.ToString())
                   //  {
 
-                        MessageBox.Show(rd[0].ToString());
+                        //MessageBox.Show(rd[0].ToString());
                     
                  //   }
                 }
             }
             rd.Close();
             cn.Close();
-
+            /*
 
 
 
@@ -275,7 +267,6 @@ namespace CIS411
                 else if (excelReader.GetName(i) == "Catalog")
                     c = i;
             }
-            comboClassList.Items.Add("Select a class...");
             // Add class names to comboClassList
             while (excelReader.Read())
             {
@@ -290,8 +281,10 @@ namespace CIS411
                 }
             }
             excelConnection.Close();
-            comboClassList.SelectedIndex = 0;
+            */
             comboClassList.Items.Add("Other");
+            comboClassList.SelectedIndex = 0;
+            
         }
 
         // Initializes classComboBox if it hasn't been yet
@@ -386,26 +379,17 @@ namespace CIS411
         {
             cmd.Connection = cn;
             cn.Open();
-            cmd.CommandText = "select * from student";
+            cmd.CommandText = "SELECT CLARION_ID FROM STUDENT WHERE CLARION_ID=" + numIn.ToString();
 
             rd = cmd.ExecuteReader();
-
             if (rd.HasRows)
             {
-                while (rd.Read())
-                {
-
-                    if (rd[0].ToString() == numIn.ToString())
-                    {
-                        rd.Close();
-                        cn.Close();
-                        return true;
-                    }
-                }
+                rd.Close();
+                cn.Close();
+                return true;
             }
             rd.Close();
             cn.Close();
-
             return false;
         }
 

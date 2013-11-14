@@ -41,14 +41,17 @@ namespace CIS411
         //Adds Tutor to the list of tutors via Student ID and adds their information to the Tutors table
         private void btnAddTutor_Click(object sender, EventArgs e)
         {/////////////// edit table so only clarion id, status and cnet_username are used
-            bool valid = false;
+            //bool valid = false;
             //Gets the student id
             string studentID = txtTutorStudentID.Text;
-            cn.Open();
+            /*cn.Open();
             cmd.CommandText = "select * from student where CLARION_ID=" + studentID;
             
             rd = cmd.ExecuteReader();
-            
+            */
+            DataConnection conn = new DataConnection();
+            conn.open();
+            SqlDataReader rd = conn.getReader("*","STUDENT","CLARION_ID",studentID);
             if (rd.HasRows)
             {
                 /*
@@ -61,23 +64,27 @@ namespace CIS411
                         real = true;
                     }
                 }
-                */
                 valid = true;
+                */
+                conn.close();
+                conn.open();
+                conn.query("insert into tutor(clarion_id,status) values ('"+ studentID +"', '"+ "active" +"')");
             }
-            rd.Close();
-
-            cn.Close();
+            conn.close();
+            loadlist();
+            /*
             if (valid)
             {
                 cn.Open();
                 cmd.CommandText = "insert into tutor(clarion_id,status) values ('"+ studentID +"', '"+ "active" +"')";
 
                 cmd.ExecuteNonQuery();
-                cmd.Clone();
+                //cmd.Clone();
                 cn.Close();
             }
             cn.Close();
             loadlist();
+            */
         }
 
         private void btnDisableSelected_Click(object sender, EventArgs e)
@@ -214,13 +221,15 @@ namespace CIS411
                 Excel.Application xlApp = new Excel.Application();
                 Excel.Workbook xlWorkBook = xlApp.Workbooks.Add();
                 Excel.Worksheet xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
-
+                
                 xlWorkSheet.Cells[1, 1] = "Student";
                 xlWorkSheet.Cells[1, 2] = "Hours";
                 xlWorkSheet.Cells[2, 1] = "Bill Warren";
                 xlWorkSheet.Cells[2, 2] = "30";
                 xlWorkSheet.Cells[3, 1] = "Kris Demor";
                 xlWorkSheet.Cells[3, 2] = "40";
+
+                DataConnection conn = new DataConnection();
 
                 try
                 {
@@ -237,25 +246,6 @@ namespace CIS411
             }
             reportFile.Dispose();
             this.Focus();
-            /*
-            try
-            {
-                System.Data.OleDb.OleDbConnection MyConnection;
-                System.Data.OleDb.OleDbCommand myCommand = new System.Data.OleDb.OleDbCommand();
-                string sql = null;
-                MyConnection = new System.Data.OleDb.OleDbConnection("Provider= Microsoft.ACE.OLEDB.12.0;Data Source='../../../ReportBook.xls';Extended Properties=Excel 12.0 Xml;");
-                MyConnection.Open();
-                myCommand.Connection = MyConnection;
-                sql = "Insert into [Sheet1$] (Student,NumOfHours) values('Bill Warren','30')";
-                myCommand.CommandText = sql;
-                myCommand.ExecuteNonQuery();
-                MyConnection.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            */
         }
 
         private void btn_student_import_Click(object sender, EventArgs e)
@@ -287,7 +277,7 @@ namespace CIS411
                     first = excelReader[3].ToString();
                     first = first.Replace("'", " ");
                     middle = excelReader[4].ToString();
-                    middle = first.Replace("'", " ");
+                    middle = middle.Replace("'", " ");
                     try
                     {
                         cmd.CommandText = "insert into STUDENT ( term,clarion_id,lastname,firstname,middle_name,cnet_username,eaglemail,class_standing,degree_seeking,major_1,major_2,minor_1,minor_2,credit_attempted,sex,hispanic,amer_indian,asian,black,pacific_islander,White,age,campus,housing,transfer,transfer_credit,number_of_visit) values ('" + excelReader[0] + "','" + excelReader[1] + "','" + last + "','" + first + "','" + middle + "','" + excelReader[5] + "','" + excelReader[6] + "','" + excelReader[7] + "','" + excelReader[8] + "','" + excelReader[9] + "','" + excelReader[10] + "','" + excelReader[11] + "','" + excelReader[12] + "','" + excelReader[13] + "','" + excelReader[14] + "','" + excelReader[15] + "','" + excelReader[16] + "','" + excelReader[17] + "','" + excelReader[18] + "','" + excelReader[19] + "','" + excelReader[20] + "','" + excelReader[21] + "','" + excelReader[22] + "','" + excelReader[23] + "','" + excelReader[24] + "','" + excelReader[25] + "','" + 0 + "')";
@@ -296,7 +286,7 @@ namespace CIS411
                     }
                     catch
                     {
-                        MessageBox.Show(excelReader[1].ToString() + "update");
+                        //MessageBox.Show(excelReader[1].ToString() + "update");
                         cmd.CommandText = "update STUDENT set term = '" + excelReader[0] + "', lastname = '" + last + "', firstname = '" + first + "',middle_name = '" + middle + "',cnet_username = '" + excelReader[5] + "',eaglemail = '" + excelReader[6] + "',class_standing = '" + excelReader[7] + "',degree_seeking = '" + excelReader[8] + "',major_1 = '" + excelReader[9] + "',major_2 = '" + excelReader[10] + "',minor_1 = '" + excelReader[11] + "',minor_2 = '" + excelReader[12] + "',credit_attempted = '" + excelReader[13] + "',sex = '" + excelReader[14] + "',hispanic = '" + excelReader[15] + "',amer_indian = '" + excelReader[16] + "',asian = '" + excelReader[17] + "',black = '" + excelReader[18] + "',pacific_islander = '" + excelReader[19] + "',White = '" + excelReader[20] + "',age = '" + excelReader[21] + "',campus = '" + excelReader[22] + "',housing = '" + excelReader[23] + "',transfer = '" + excelReader[24] + "',transfer_credit = '" + excelReader[25] + "' where clarion_id = '" + excelReader[1] + "'";
                         cmd.ExecuteNonQuery();
                         cmd.Clone();
@@ -329,7 +319,6 @@ namespace CIS411
             cmd2.Connection = cn;
             cn.Open();
            
-            // Add class names to comboClassList
             while (excelReader.Read())
             {
       
@@ -339,9 +328,9 @@ namespace CIS411
                 first= first.Replace("'"," ");
                 try
                 {
-                    cmd.CommandText = "insert into Course (term,subject,catalog,section) values ('" + excelReader[0] + "','" + excelReader[2] + "','" + excelReader[3] + "','" + excelReader[4] + "')";
+                    cmd.CommandText = "insert into Course (term,subject,catalog,section,prof_email) values ('" + excelReader[0] + "','" + excelReader[2] + "','" + excelReader[3] + "','" + excelReader[4] + "','"+excelReader[7]+"')";
                     cmd.ExecuteNonQuery();
-                   // cmd.Clone();
+                    cmd.Clone();
                 }
                 catch
                 {
@@ -368,14 +357,10 @@ namespace CIS411
            // AppDomain.CurrentDomain.SetData("DataDirectory", "~/cis411/cis411_Kris/db.mdf");
             //currentDomain.SetData("DataDirectory", "~/cis411/cis411_Kris/db.mdf");
            // MessageBox.Show(currentDomain.GetData("DataDirectory").ToString());
-            
         }
 
         public void loadlist()
         {
-
-            
-
             listBoxEnableTutors.Items.Clear();
             listBoxDisableTutors.Items.Clear();
             listBoxLoggedIn.Items.Clear();
@@ -408,7 +393,6 @@ namespace CIS411
                 while (rd.Read())
                 {
                     listBoxLoggedIn.Items.Add(rd[0] + "\tee" + rd[1] + " " + rd[4] + " " + rd[5] + " " + rd[9]);
-
                 }
             }
             rd.Close();
@@ -561,11 +545,8 @@ namespace CIS411
                 btnEditVisit.Text = "Save Edit";
             else
                 btnEditVisit.Text = "Edit Visit";
-            
-
         }
 
-        
         //null
         private void btnSave_Click(object sender, EventArgs e)
         {
