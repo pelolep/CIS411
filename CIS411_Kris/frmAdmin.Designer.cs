@@ -105,6 +105,8 @@ namespace CIS411
             this.txtAddSignOut = new System.Windows.Forms.TextBox();
             this.txtAddSignIn = new System.Windows.Forms.TextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lblAddTutor = new System.Windows.Forms.Label();
+            this.txtEditStudentID = new System.Windows.Forms.TextBox();
             this.tabControlAdmin.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.tabTutors.SuspendLayout();
@@ -1010,7 +1012,7 @@ namespace CIS411
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtAddSignIn;
         private System.Windows.Forms.TextBox txtAddSignOut;
-        #endregion
         private System.Windows.Forms.TabPage tabPage1;
+        #endregion
     }
 }

@@ -39,14 +39,26 @@ public class DataConnection
     public SqlDataReader GetReader(string command)
     {
         cmd.CommandText = command;
-        rd = cmd.ExecuteReader();
+        if (rd == null)
+            rd = cmd.ExecuteReader();
+        else
+        {
+            rd.Close();
+            rd = cmd.ExecuteReader();
+        }
         return rd;
     }
 
     public SqlDataReader GetReader(string column, string table)
     {
-        cmd.CommandText = "SELECT '" + column + "' FROM '" + table + "'";
-        rd = cmd.ExecuteReader();
+        cmd.CommandText = "SELECT " + column + " FROM " + table;
+        if (rd == null)
+            rd = cmd.ExecuteReader();
+        else
+        {
+            rd.Close();
+            rd = cmd.ExecuteReader();
+        }
         return rd;
     }
 
@@ -54,7 +66,13 @@ public class DataConnection
     {
         int i;
         cmd.CommandText = "SELECT " + column + " FROM " + table + " WHERE " + conditionColumn + " = " + (int.TryParse(conditionValue, out i) ? "" : "'") + conditionValue.ToString() + (int.TryParse(conditionValue, out i) ? "" : "'");
-        rd = cmd.ExecuteReader();
+        if (rd == null)
+            rd = cmd.ExecuteReader();
+        else
+        {
+            rd.Close();
+            rd = cmd.ExecuteReader();
+        }
         return rd;
     }
 
@@ -62,7 +80,13 @@ public class DataConnection
     {
         int i;
         cmd.CommandText = "SELECT " + column + " FROM " + table + " WHERE " + conditionColumn1 + " = " + (int.TryParse(conditionValue1, out i) ? "" : "'") + conditionValue1.ToString() + (int.TryParse(conditionValue1, out i) ? "" : "'" + " AND " + conditionColumn2 + " = " + (int.TryParse(conditionValue2, out i) ? "" : "'") + conditionValue2.ToString() + (int.TryParse(conditionValue2, out i) ? "" : "'"));
-        rd = cmd.ExecuteReader();
+        if (rd == null)
+            rd = cmd.ExecuteReader();
+        else
+        {
+            rd.Close();
+            rd = cmd.ExecuteReader();
+        }
         return rd;
     }
 

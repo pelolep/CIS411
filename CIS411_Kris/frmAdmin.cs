@@ -462,9 +462,9 @@ namespace CIS411
                 while (rd.Read())
                 {
                     if(rd[2].ToString() == "active")
-                    listBoxEnableTutors.Items.Add(rd[5].ToString() + " " +rd[6].ToString() + " " + rd[1]);
+                        listBoxEnableTutors.Items.Add(rd[0].ToString() + " " +rd[1].ToString() + " " + rd[2]);
                     else
-                        listBoxDisableTutors.Items.Add(rd[5].ToString() + " " + rd[6].ToString() + " " + rd[1]);
+                        listBoxDisableTutors.Items.Add(rd[0].ToString() + " " + rd[1].ToString() + " " + rd[2]);
                 }
             }
             /*
