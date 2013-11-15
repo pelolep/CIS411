@@ -99,11 +99,8 @@ namespace CIS411
             this.txtEditSignIn = new System.Windows.Forms.TextBox();
             this.lblEditSignOut = new System.Windows.Forms.Label();
             this.lblEditSignIn = new System.Windows.Forms.Label();
-<<<<<<< HEAD
             this.txtEditDate = new System.Windows.Forms.TextBox();
             this.lblAddClass = new System.Windows.Forms.Label();
-=======
->>>>>>> origin/Sean6
             this.txtAddTutor = new System.Windows.Forms.TextBox();
             this.txtAddSignOut = new System.Windows.Forms.TextBox();
             this.txtAddSignIn = new System.Windows.Forms.TextBox();
@@ -932,13 +929,8 @@ namespace CIS411
             this.grpBoxPassword.PerformLayout();
             this.tabMethods.ResumeLayout(false);
             this.ResumeLayout(false);
-<<<<<<< HEAD
             #endregion
-=======
-
->>>>>>> origin/Sean6
         }
-        #endregion
         #region Declarations
         private System.Windows.Forms.TabControl tabControlAdmin;
         private System.Windows.Forms.TabPage tabGeneral;
