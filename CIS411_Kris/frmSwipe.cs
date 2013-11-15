@@ -32,11 +32,11 @@ namespace CIS411
                 int cardInt;
                 if (int.TryParse(cardNumber, out cardInt))
                 {
-                    if (Program.mainForm.studentIDExists(Program.mainForm.StripID(cardInt)))
-                        if (Program.mainForm.studentSignedIn(Program.mainForm.StripID(cardInt)))
+                    if (frmMain.studentIDExists(frmMain.StripID(cardInt)))
+                        if (frmMain.studentSignedIn(frmMain.StripID(cardInt)))
                             Program.mainForm.signOut(cardInt);
                         else
-                            Program.mainForm.updatetxtStudentID(Program.mainForm.StripID(cardInt));
+                            Program.mainForm.updatetxtStudentID(frmMain.StripID(cardInt));
                     else
                         MessageBox.Show("Invalid ID, please try again");
                     Program.mainForm.Focus();

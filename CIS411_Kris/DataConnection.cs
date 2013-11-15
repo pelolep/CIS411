@@ -19,39 +19,38 @@ public class DataConnection
         cmd.Connection = cn;
     }
 
-    public SqlConnection getConn()
+    public SqlConnection GetConn()
     {
-        cn.Open();
         return cn;
     }
 
-    public void open()
+    public void Open()
     {
         cn.Open();
     }
 
-    public void close()
+    public void Close()
     {
-        if (!(rd.IsClosed))
+        if ((!(rd==null))&&(!(rd.IsClosed)))
             rd.Close();
         cn.Close();
     }
 
-    public SqlDataReader getReader(string command)
+    public SqlDataReader GetReader(string command)
     {
         cmd.CommandText = command;
         rd = cmd.ExecuteReader();
         return rd;
     }
 
-    public SqlDataReader getReader(string column, string table)
+    public SqlDataReader GetReader(string column, string table)
     {
         cmd.CommandText = "SELECT '" + column + "' FROM '" + table + "'";
         rd = cmd.ExecuteReader();
         return rd;
     }
 
-    public SqlDataReader getReader(string column, string table, string conditionColumn, string conditionValue)
+    public SqlDataReader GetReader(string column, string table, string conditionColumn, string conditionValue)
     {
         int i;
         cmd.CommandText = "SELECT " + column + " FROM " + table + " WHERE " + conditionColumn + " = " + (int.TryParse(conditionValue, out i) ? "" : "'") + conditionValue.ToString() + (int.TryParse(conditionValue, out i) ? "" : "'");
@@ -59,7 +58,15 @@ public class DataConnection
         return rd;
     }
 
-    public void query(string q)
+    public SqlDataReader GetReader(string column, string table, string conditionColumn1, string conditionValue1, string conditionColumn2, string conditionValue2)
+    {
+        int i;
+        cmd.CommandText = "SELECT " + column + " FROM " + table + " WHERE " + conditionColumn1 + " = " + (int.TryParse(conditionValue1, out i) ? "" : "'") + conditionValue1.ToString() + (int.TryParse(conditionValue1, out i) ? "" : "'" + " AND " + conditionColumn2 + " = " + (int.TryParse(conditionValue2, out i) ? "" : "'") + conditionValue2.ToString() + (int.TryParse(conditionValue2, out i) ? "" : "'"));
+        rd = cmd.ExecuteReader();
+        return rd;
+    }
+
+    public void Query(string q)
     {
         cmd.CommandText = q;
         cmd.ExecuteNonQuery();

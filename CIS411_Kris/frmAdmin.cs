@@ -21,10 +21,11 @@ namespace CIS411
 
 
 
-
+        /*
         SqlConnection cn;
         SqlCommand cmd;
         SqlDataReader rd;
+        */
         public frmAdmin()
         {
             InitializeComponent();
@@ -33,9 +34,11 @@ namespace CIS411
                comboAddMethod.Items.Add(Properties.Settings.Default.MethodNames[i]);
 
             }
+            /*
             cn = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\db.mdf;Integrated Security=True");
             cmd = new SqlCommand();
             cmd.Connection = cn;
+            */
         }
         
         //Adds Tutor to the list of tutors via Student ID and adds their information to the Tutors table
@@ -50,8 +53,8 @@ namespace CIS411
             rd = cmd.ExecuteReader();
             */
             DataConnection conn = new DataConnection();
-            conn.open();
-            SqlDataReader rd = conn.getReader("*","STUDENT","CLARION_ID",studentID);
+            conn.Open();
+            SqlDataReader rd = conn.GetReader("*","STUDENT","CLARION_ID",studentID);
             if (rd.HasRows)
             {
                 /*
@@ -66,11 +69,11 @@ namespace CIS411
                 }
                 valid = true;
                 */
-                conn.close();
-                conn.open();
-                conn.query("insert into tutor(clarion_id,status) values ('"+ studentID +"', '"+ "active" +"')");
+                conn.Close();
+                conn.Open();
+                conn.Query("insert into tutor(clarion_id,status) values ('"+ studentID +"', '"+ "active" +"')");
             }
-            conn.close();
+            conn.Close();
             loadlist();
             /*
             if (valid)
@@ -89,6 +92,12 @@ namespace CIS411
 
         private void btnDisableSelected_Click(object sender, EventArgs e)
         {
+            string[] name = listBoxEnableTutors.SelectedItem.ToString().Split();
+            DataConnection conn = new DataConnection();
+            conn.Open();
+            conn.Query("update tutor set status = 'inactive' where CLARION_ID = '" + name[2] + "'");
+            conn.Close();
+            /*
             cn.Open();
             try
             {
@@ -99,10 +108,17 @@ namespace CIS411
             catch
             { }
             cn.Close();
+            */
             loadlist();
         }
         private void btnEnableSelected_Click(object sender, EventArgs e)
         {
+            string[] name = listBoxDisableTutors.SelectedItem.ToString().Split();
+            DataConnection conn = new DataConnection();
+            conn.Open();
+            conn.Query("update tutor set status = 'active' where CLARION_ID = '" + name[2] + "'");
+            conn.Close();
+            /*
             cn.Open();
             try
             {
@@ -113,11 +129,17 @@ namespace CIS411
             catch
             { }
             cn.Close();
+            */
             loadlist();
         }
 
         private void btnDisableAll_Click(object sender, EventArgs e)
         {
+            DataConnection conn = new DataConnection();
+            conn.Open();
+            conn.Query("update tutor set status = 'inactive' where status = 'active'");
+            conn.Close();
+            /*
             cn.Open();
             cmd.CommandText = "select * from tutor";
             rd = cmd.ExecuteReader();
@@ -132,11 +154,17 @@ namespace CIS411
             cmd.ExecuteNonQuery();
             //cmd.Clone();
             cn.Close();
+            */
             loadlist();
         }
 
         private void btnEnableAll_Click(object sender, EventArgs e)
         {
+            DataConnection conn = new DataConnection();
+            conn.Open();
+            conn.Query("update tutor set status = 'active' where status = 'inactive'");
+            conn.Close();
+            /*
             cn.Open();
             cmd.CommandText = "select * from tutor";
             rd = cmd.ExecuteReader();
@@ -151,6 +179,7 @@ namespace CIS411
             cmd.ExecuteNonQuery();
            // cmd.Clone();
             cn.Close();
+            */
             loadlist();
         }
 		
@@ -266,9 +295,12 @@ namespace CIS411
                 excelConnection.Open();
                 System.Data.OleDb.OleDbDataReader excelReader;
                 excelReader = excelCommand.ExecuteReader();
+                DataConnection conn = new DataConnection();
+                conn.Open();
+                /*
                 cmd.Connection = cn;
                 cn.Open();
-                
+                */
                 // Add class names to comboClassList
                 while (excelReader.Read())
                 {
@@ -280,22 +312,29 @@ namespace CIS411
                     middle = middle.Replace("'", " ");
                     try
                     {
+                        conn.Query("insert into STUDENT ( term,clarion_id,lastname,firstname,middle_name,cnet_username,eaglemail,class_standing,degree_seeking,major_1,major_2,minor_1,minor_2,credit_attempted,sex,hispanic,amer_indian,asian,black,pacific_islander,White,age,campus,housing,transfer,transfer_credit,number_of_visit) values ('" + excelReader[0] + "','" + excelReader[1] + "','" + last + "','" + first + "','" + middle + "','" + excelReader[5] + "','" + excelReader[6] + "','" + excelReader[7] + "','" + excelReader[8] + "','" + excelReader[9] + "','" + excelReader[10] + "','" + excelReader[11] + "','" + excelReader[12] + "','" + excelReader[13] + "','" + excelReader[14] + "','" + excelReader[15] + "','" + excelReader[16] + "','" + excelReader[17] + "','" + excelReader[18] + "','" + excelReader[19] + "','" + excelReader[20] + "','" + excelReader[21] + "','" + excelReader[22] + "','" + excelReader[23] + "','" + excelReader[24] + "','" + excelReader[25] + "','" + 0 + "')");
+                        /*
                         cmd.CommandText = "insert into STUDENT ( term,clarion_id,lastname,firstname,middle_name,cnet_username,eaglemail,class_standing,degree_seeking,major_1,major_2,minor_1,minor_2,credit_attempted,sex,hispanic,amer_indian,asian,black,pacific_islander,White,age,campus,housing,transfer,transfer_credit,number_of_visit) values ('" + excelReader[0] + "','" + excelReader[1] + "','" + last + "','" + first + "','" + middle + "','" + excelReader[5] + "','" + excelReader[6] + "','" + excelReader[7] + "','" + excelReader[8] + "','" + excelReader[9] + "','" + excelReader[10] + "','" + excelReader[11] + "','" + excelReader[12] + "','" + excelReader[13] + "','" + excelReader[14] + "','" + excelReader[15] + "','" + excelReader[16] + "','" + excelReader[17] + "','" + excelReader[18] + "','" + excelReader[19] + "','" + excelReader[20] + "','" + excelReader[21] + "','" + excelReader[22] + "','" + excelReader[23] + "','" + excelReader[24] + "','" + excelReader[25] + "','" + 0 + "')";
                         cmd.ExecuteNonQuery();
                         cmd.Clone();
+                        */
                     }
                     catch
                     {
+                        conn.Query("update STUDENT set term = '" + excelReader[0] + "', lastname = '" + last + "', firstname = '" + first + "',middle_name = '" + middle + "',cnet_username = '" + excelReader[5] + "',eaglemail = '" + excelReader[6] + "',class_standing = '" + excelReader[7] + "',degree_seeking = '" + excelReader[8] + "',major_1 = '" + excelReader[9] + "',major_2 = '" + excelReader[10] + "',minor_1 = '" + excelReader[11] + "',minor_2 = '" + excelReader[12] + "',credit_attempted = '" + excelReader[13] + "',sex = '" + excelReader[14] + "',hispanic = '" + excelReader[15] + "',amer_indian = '" + excelReader[16] + "',asian = '" + excelReader[17] + "',black = '" + excelReader[18] + "',pacific_islander = '" + excelReader[19] + "',White = '" + excelReader[20] + "',age = '" + excelReader[21] + "',campus = '" + excelReader[22] + "',housing = '" + excelReader[23] + "',transfer = '" + excelReader[24] + "',transfer_credit = '" + excelReader[25] + "' where clarion_id = '" + excelReader[1] + "'");
+                        /*
                         //MessageBox.Show(excelReader[1].ToString() + "update");
                         cmd.CommandText = "update STUDENT set term = '" + excelReader[0] + "', lastname = '" + last + "', firstname = '" + first + "',middle_name = '" + middle + "',cnet_username = '" + excelReader[5] + "',eaglemail = '" + excelReader[6] + "',class_standing = '" + excelReader[7] + "',degree_seeking = '" + excelReader[8] + "',major_1 = '" + excelReader[9] + "',major_2 = '" + excelReader[10] + "',minor_1 = '" + excelReader[11] + "',minor_2 = '" + excelReader[12] + "',credit_attempted = '" + excelReader[13] + "',sex = '" + excelReader[14] + "',hispanic = '" + excelReader[15] + "',amer_indian = '" + excelReader[16] + "',asian = '" + excelReader[17] + "',black = '" + excelReader[18] + "',pacific_islander = '" + excelReader[19] + "',White = '" + excelReader[20] + "',age = '" + excelReader[21] + "',campus = '" + excelReader[22] + "',housing = '" + excelReader[23] + "',transfer = '" + excelReader[24] + "',transfer_credit = '" + excelReader[25] + "' where clarion_id = '" + excelReader[1] + "'";
                         cmd.ExecuteNonQuery();
                         cmd.Clone();
+                        */
                     }
                 }
                 
                 excelReader.Close();
                 excelConnection.Close();
-                cn.Close();
+                conn.Close();
+                //cn.Close();
         }
 
         private void btn_courses_import_Click(object sender, EventArgs e)
@@ -316,10 +355,12 @@ namespace CIS411
             excelConnection.Open();
             System.Data.OleDb.OleDbDataReader excelReader;
             excelReader = excelCommand.ExecuteReader();
+            DataConnection conn = new DataConnection();
+            /*
             cmd.Connection = cn;
             cmd2.Connection = cn;
             cn.Open();
-           
+            */
             while (excelReader.Read())
             {
       
@@ -329,32 +370,44 @@ namespace CIS411
                 first= first.Replace("'"," ");
                 try
                 {
+                    conn.Query("insert into Course (term,subject,catalog,section,prof_email) values ('" + excelReader[0] + "','" + excelReader[2] + "','" + excelReader[3] + "','" + excelReader[4] + "','"+excelReader[7]+"')");
+                    /*
                     cmd.CommandText = "insert into Course (term,subject,catalog,section,prof_email) values ('" + excelReader[0] + "','" + excelReader[2] + "','" + excelReader[3] + "','" + excelReader[4] + "','"+excelReader[7]+"')";
                     cmd.ExecuteNonQuery();
                     cmd.Clone();
+                    */
                 }
                 catch
                 {
                 }
                 try
                 {
+                    conn.Query("insert into PROFESSOR (PROF_EMAIL, LASTNAME, FIRSTNAME) values ('" + excelReader[7] + "', '" + last + "', '" + first + "')");
+                    /*
                     cmd2.CommandText = "insert into PROFESSOR (PROF_EMAIL, LASTNAME, FIRSTNAME) values ('" + excelReader[7] + "', '" + last + "', '" + first + "')";
                     cmd2.ExecuteNonQuery();
                     cmd2.Clone();
+                    */
                 }
                 catch
                 {
                 }
                 try
                 {
+                    conn.Query("insert into student_Course (clarion_id,term,subject,catalog,section) values ('"+excelReader[1]+"' ,'" + excelReader[0] + "','" + excelReader[2] + "','" + excelReader[3] + "','" + excelReader[4] + "')");
+                    /*
                     cmd.CommandText = "insert into student_Course (clarion_id,term,subject,catalog,section) values ('"+excelReader[1]+"' ,'" + excelReader[0] + "','" + excelReader[2] + "','" + excelReader[3] + "','" + excelReader[4] + "')";
                     cmd.ExecuteNonQuery();
                     cmd.Clone();
+                    */
                 }
-                catch { }
+                catch 
+                { 
+                }
             }
             excelReader.Close();
-            cn.Close();
+            conn.Close();
+            //cn.Close();
             excelConnection.Close();
         }
 
@@ -379,11 +432,17 @@ namespace CIS411
             listBoxEnableTutors.Items.Clear();
             listBoxDisableTutors.Items.Clear();
             listBoxLoggedIn.Items.Clear();
-
+            DataConnection conn = new DataConnection();
+            conn.Open();
+            SqlDataReader rd = conn.GetReader("STUDENT.FIRSTNAME, STUDENT.MIDDLE_NAME, STUDENT.LASTNAME", "TUTOR INNER JOIN STUDENT ON TUTOR.CLARION_ID=STUDENT.CLARION_ID");
+            
+            /*
             cn.Open();
+
+
             cmd.CommandText = "select * from tutor inner join student on tutor.clarion_id=student.clarion_id";
             rd = cmd.ExecuteReader();
-          
+            */
             if (rd.HasRows)
             {  
                 
@@ -395,12 +454,13 @@ namespace CIS411
                         listBoxDisableTutors.Items.Add(rd[5].ToString() + " " + rd[6].ToString() + " " + rd[1]);
                 }
             }
-           
+            /*
             rd.Close();
             cn.Close();
             cn.Open();
             cmd.CommandText = "select * from visit";
-            rd = cmd.ExecuteReader();
+            */
+            rd = conn.GetReader("*", "VISIT");
             listBoxLoggedIn.Items.Add("Date               time in       id      term     method");
             if (rd.HasRows)
             {
@@ -410,8 +470,11 @@ namespace CIS411
                     listBoxLoggedIn.Items.Add(rd[0] + "\tee" + rd[1] + " " + rd[4] + " " + rd[5] + " " + rd[9]);
                 }
             }
+            conn.Close();
+            /*
             rd.Close();
             cn.Close();
+            */
         }
 
         private void tabControlAdmin_SelectedIndexChanged(object sender, EventArgs e)
@@ -489,12 +552,18 @@ namespace CIS411
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
+            DataConnection conn = new DataConnection();
+            conn.Open();
+            conn.Query("insert into visit(Date, time_in, clarion_id, method) values ('" + DateTime.Today + "', '" + "10:52:02" + "', '" + "11111111" + "', '" + "testing" + "')");
+            conn.Close();
+            /*
             cn.Open();
             cmd.CommandText = "insert into visit(Date, time_in, clarion_id, method) values ('" + DateTime.Today + "', '" + "10:52:02" + "', '" + "11111111" + "', '" + "testing" + "')";
 
             cmd.ExecuteNonQuery();
             cmd.Clone();
             cn.Close();
+            */
             loadlist();
         }
 
@@ -576,12 +645,17 @@ namespace CIS411
             {
             */
             //cmd.Connection = cn;
+            DataConnection conn = new DataConnection();
+            conn.Open();
+            conn.Query("insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + nothing + "', '" + nothing + "', '" + nothing + "', '" + tutor + "', '" + method + "', '" + nothing + "')");
+            conn.Close();
+            /*
                 cn.Open();
                 cmd.CommandText = "insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + nothing + "', '" + nothing + "', '" + nothing + "', '" + tutor + "', '" + method + "', '" + nothing + "')";
                 cmd.ExecuteNonQuery();
                 cmd.Clone();
                 cn.Close();
-
+            */
 
           //  }
             lblTest.Text = date + "','" + timeIn + "', '" + timeOut + "', '" + studentID +  "', '" + method;
@@ -610,7 +684,7 @@ namespace CIS411
             {
                 comboAddTutoring.Enabled = true;
                 comboAddTutoring.Items.Add("Select a tutor...");
-                comboAddTutoring.Items.AddRange(getTutors());
+                comboAddTutoring.Items.AddRange(frmMain.getTutors());
                 comboAddTutoring.SelectedIndex = 0;
             }
             else
@@ -621,11 +695,19 @@ namespace CIS411
         }
 
         // Returns array of all tutors
+        /*
         public string[] getTutors()
         {
             List<string> tutorslist = new List<string>();
+            DataConnection conn = new DataConnection();
+            conn.Open();
+            SqlDataReader rd = conn.GetReader("STUDENT.FIRSTNAME,STUDENT.MIDDLE_NAME,STUDENT.LASTNAME","tutor inner join student","tutor.clarion_id","student.clarion_id");
+            if (rd.HasRows)
+                while (rd.Read())
+                    tutorslist.Add(rd[0] + " " + rd[1] + " " + rd[2]);
+            return tutorslist.ToArray();
+            /*
             string name = "";
-
             cmd.Connection = cn;
             cn.Open();
             cmd.CommandText = "select * from tutor inner join student on tutor.clarion_id=student.clarion_id";
@@ -650,5 +732,6 @@ namespace CIS411
 
             return tutors;
         }
+            */
     }
 }

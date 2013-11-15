@@ -13,9 +13,11 @@ namespace CIS411
 {
     public partial class frmSearchByName : Form
     {
+        /*
         SqlConnection cn = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\db.mdf;Integrated Security=True");
         SqlCommand cmd = new SqlCommand();
         SqlDataReader rd;
+        */
         public frmSearchByName()
         {
             InitializeComponent();
@@ -38,17 +40,17 @@ namespace CIS411
         private bool SearchForUser(string username, out int userID)
         {
             DataConnection conn = new DataConnection();
-            conn.open();
-            SqlDataReader rd = conn.getReader("CLARION_ID", "STUDENT", "CNET_USERNAME", username);
+            conn.Open();
+            SqlDataReader rd = conn.GetReader("CLARION_ID", "STUDENT", "CNET_USERNAME", username);
             if (rd.HasRows)
             {
                 rd.Read();
                 userID = int.Parse(rd[0].ToString());
-                conn.close();
+                conn.Close();
                 return true;
             }
             userID = -1;
-            conn.close();
+            conn.Close();
             return false;
             /*DataConnection.cmd.CommandText = "select CLARION_ID from STUDENT where CNET_USERNAME='" + username + "'";
             DataConnection.cn.Open();
