@@ -21,7 +21,6 @@ namespace CIS411
         AppDomain Directory = AppDomain.CurrentDomain;
 
 
-<<<<<<< HEAD
         /*
 =======
 
@@ -39,7 +38,6 @@ namespace CIS411
                comboAddMethod.Items.Add(Properties.Settings.Default.MethodNames[i]);
 
             }
-<<<<<<< HEAD
             /*
             cn = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\db.mdf;Integrated Security=True");
 =======
@@ -478,11 +476,11 @@ namespace CIS411
             */
             rd = conn.GetReader("*", "VISIT");
             listBoxLoggedIn.Items.Add("Date               time in       id      term     method");
-=======
+/*=======
             cmd.CommandText = "select * from visit inner join student on visit.clarion_id=student.clarion_id";
             rd = cmd.ExecuteReader();
             listBoxLoggedIn.Items.Add("Date                                   time in                                        id                            last name                             first name");
->>>>>>> origin/Matt8
+>>>>>>> origin/Matt8*/
             if (rd.HasRows)
             {
 
@@ -668,7 +666,6 @@ namespace CIS411
             {
             */
             //cmd.Connection = cn;
-<<<<<<< HEAD
             DataConnection conn = new DataConnection();
             conn.Open();
             conn.Query("insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + nothing + "', '" + nothing + "', '" + nothing + "', '" + tutor + "', '" + method + "', '" + nothing + "')");
@@ -684,13 +681,10 @@ namespace CIS411
                 cmd.Clone();
                 cn.Close();
 <<<<<<< HEAD
-            */
-=======
             }
+            */
            // catch
-            {}
->>>>>>> origin/Matt8
-
+            //{}
           //  }
             lblTest.Text = date + "','" + timeIn + "', '" + timeOut + "', '" + studentID +  "', '" + method;
         }
