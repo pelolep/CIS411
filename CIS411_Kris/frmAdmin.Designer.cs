@@ -54,14 +54,18 @@ namespace CIS411
             this.dateTimePickerEditTimeIn = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerAddTimeOut = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerAddTimeIn = new System.Windows.Forms.DateTimePicker();
+            this.lblAddTutor = new System.Windows.Forms.Label();
             this.comboAddMethod = new System.Windows.Forms.ComboBox();
             this.txtAddClass = new System.Windows.Forms.TextBox();
+            this.lblAddClass = new System.Windows.Forms.Label();
             this.lblAddMethod = new System.Windows.Forms.Label();
+            this.txtEditDate = new System.Windows.Forms.TextBox();
             this.lblEditDate = new System.Windows.Forms.Label();
             this.btnEditVisit = new System.Windows.Forms.Button();
             this.dateTimePickerEditMax = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerEditMin = new System.Windows.Forms.DateTimePicker();
             this.lblEditDateRange = new System.Windows.Forms.Label();
+            this.txtEditStudentID = new System.Windows.Forms.TextBox();
             this.lblEditTimeOut = new System.Windows.Forms.Label();
             this.lblEditTimeIn = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -93,20 +97,16 @@ namespace CIS411
             this.tabMethods = new System.Windows.Forms.TabPage();
             this.btnSaveMethods = new System.Windows.Forms.Button();
             this.btnAddMethod = new System.Windows.Forms.Button();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btnClose = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtEditSignOut = new System.Windows.Forms.TextBox();
             this.txtEditSignIn = new System.Windows.Forms.TextBox();
             this.lblEditSignOut = new System.Windows.Forms.Label();
             this.lblEditSignIn = new System.Windows.Forms.Label();
-            this.txtEditDate = new System.Windows.Forms.TextBox();
-            this.lblAddClass = new System.Windows.Forms.Label();
             this.txtAddTutor = new System.Windows.Forms.TextBox();
             this.txtAddSignOut = new System.Windows.Forms.TextBox();
             this.txtAddSignIn = new System.Windows.Forms.TextBox();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.lblAddTutor = new System.Windows.Forms.Label();
-            this.txtEditStudentID = new System.Windows.Forms.TextBox();
             this.tabControlAdmin.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.tabTutors.SuspendLayout();
@@ -372,7 +372,7 @@ namespace CIS411
             // 
             this.comboAddTutoring.Enabled = false;
             this.comboAddTutoring.FormattingEnabled = true;
-            this.comboAddTutoring.Location = new System.Drawing.Point(256, 243);
+            this.comboAddTutoring.Location = new System.Drawing.Point(256, 251);
             this.comboAddTutoring.Name = "comboAddTutoring";
             this.comboAddTutoring.Size = new System.Drawing.Size(121, 21);
             this.comboAddTutoring.TabIndex = 43;
@@ -826,6 +826,16 @@ namespace CIS411
             this.btnAddMethod.TabIndex = 1;
             this.btnAddMethod.Text = "Add new method";
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(650, 395);
+            this.tabPage1.TabIndex = 5;
+            this.tabPage1.Text = "Reports";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
             // btnClose
             // 
             this.btnClose.Location = new System.Drawing.Point(591, 439);
@@ -899,16 +909,6 @@ namespace CIS411
             this.txtAddSignIn.Size = new System.Drawing.Size(100, 20);
             this.txtAddSignIn.TabIndex = 14;
             // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(650, 395);
-            this.tabPage1.TabIndex = 5;
-            this.tabPage1.Text = "Reports";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -931,7 +931,7 @@ namespace CIS411
             this.grpBoxPassword.PerformLayout();
             this.tabMethods.ResumeLayout(false);
             this.ResumeLayout(false);
-            #endregion
+
         }
         #region Declarations
         private System.Windows.Forms.TabControl tabControlAdmin;
