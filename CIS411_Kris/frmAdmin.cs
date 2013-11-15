@@ -11,17 +11,22 @@ using System.Security.Cryptography;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Data.SqlClient;
 using System.Reflection;
+using System.IO;
 
 namespace CIS411
 {
     public partial class frmAdmin : Form
     {//        AppDomain currentDomain = AppDomain.CurrentDomain.SetData("DataDirectory", "App1.config");
 
-//        AppDomain currentDomain = AppDomain.CurrentDomain;
+        AppDomain Directory = AppDomain.CurrentDomain;
 
 
-
+<<<<<<< HEAD
         /*
+=======
+
+        
+>>>>>>> origin/Matt8
         SqlConnection cn;
         SqlCommand cmd;
         SqlDataReader rd;
@@ -34,8 +39,14 @@ namespace CIS411
                comboAddMethod.Items.Add(Properties.Settings.Default.MethodNames[i]);
 
             }
+<<<<<<< HEAD
             /*
             cn = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\db.mdf;Integrated Security=True");
+=======
+
+
+            cn = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\matt\Documents\GitHub\CIS411\CIS411_Kris\db.mdf;Integrated Security=True");
+>>>>>>> origin/Matt8
             cmd = new SqlCommand();
             cmd.Connection = cn;
             */
@@ -413,18 +424,22 @@ namespace CIS411
 
         private void frmAdmin_Load(object sender, EventArgs e)
         {
+
+            string folder = System.IO.Path.GetFullPath(System.Reflection.Assembly.GetEntryAssembly().Location);
+            string dbPath = System.IO.Path.Combine(folder, "CIS411_Kris");
+            string connString = "DataSource=" +dbPath;
             
-
-
-
-
-
-
+            string fileName = "CIS411_kris";
+            FileInfo f = new FileInfo(fileName);
+           // string aa [] = f.FullName.ToString().Split();
+            //Directory fullname = f.Directory;
+            //Directory.get
           //  MessageBox.Show("");
             loadlist();
            // AppDomain.CurrentDomain.SetData("DataDirectory", "~/cis411/cis411_Kris/db.mdf");
             //currentDomain.SetData("DataDirectory", "~/cis411/cis411_Kris/db.mdf");
-           // MessageBox.Show(currentDomain.GetData("DataDirectory").ToString());
+            
+           
         }
 
         public void loadlist()
@@ -458,16 +473,24 @@ namespace CIS411
             rd.Close();
             cn.Close();
             cn.Open();
+<<<<<<< HEAD
             cmd.CommandText = "select * from visit";
             */
             rd = conn.GetReader("*", "VISIT");
             listBoxLoggedIn.Items.Add("Date               time in       id      term     method");
+=======
+            cmd.CommandText = "select * from visit inner join student on visit.clarion_id=student.clarion_id";
+            rd = cmd.ExecuteReader();
+            listBoxLoggedIn.Items.Add("Date                                   time in                                        id                            last name                             first name");
+>>>>>>> origin/Matt8
             if (rd.HasRows)
             {
 
                 while (rd.Read())
                 {
-                    listBoxLoggedIn.Items.Add(rd[0] + "\tee" + rd[1] + " " + rd[4] + " " + rd[5] + " " + rd[9]);
+                    
+                    DateTime jdate= DateTime.Parse(rd[1].ToString());
+                    listBoxLoggedIn.Items.Add(jdate.ToString("dd/M/yyyy") + "                    "+rd[2] + "                    " + rd[0] + "                  "+rd[13] + "                            " + rd[14]);
                 }
             }
             conn.Close();
@@ -645,17 +668,28 @@ namespace CIS411
             {
             */
             //cmd.Connection = cn;
+<<<<<<< HEAD
             DataConnection conn = new DataConnection();
             conn.Open();
             conn.Query("insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + nothing + "', '" + nothing + "', '" + nothing + "', '" + tutor + "', '" + method + "', '" + nothing + "')");
             conn.Close();
             /*
+=======
+           // try
+            {
+>>>>>>> origin/Matt8
                 cn.Open();
-                cmd.CommandText = "insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + nothing + "', '" + nothing + "', '" + nothing + "', '" + tutor + "', '" + method + "', '" + nothing + "')";
+                cmd.CommandText = "insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + "2138" + "', '" + "LS" + "', '" + "540" + "', '" + tutor + "', '" + method + "', '" + "W01" + "')";
                 cmd.ExecuteNonQuery();
                 cmd.Clone();
                 cn.Close();
+<<<<<<< HEAD
             */
+=======
+            }
+           // catch
+            {}
+>>>>>>> origin/Matt8
 
           //  }
             lblTest.Text = date + "','" + timeIn + "', '" + timeOut + "', '" + studentID +  "', '" + method;
