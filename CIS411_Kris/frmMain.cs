@@ -256,24 +256,22 @@ namespace CIS411
             //string name = "";
             //MessageBox.Show("");
             comboClassList.Items.Add("Select a class...");
-            cmd.Connection = cn;
-            cn.Open();
-            cmd.CommandText = "select subject, catalog from student_course, student where student_course.clarion_id=" + studentID.ToString();
-
-            rd = cmd.ExecuteReader();
+            DataConnection conn = new DataConnection();
+            conn.open();
+            SqlDataReader rd = conn.getReader("subject, catalog", "student_course,student", "student_course.clarion_id", studentID.ToString());
             
             if (rd.HasRows)
             {
                 while (rd.Read())
                 {
-                    comboClassList.Items.Add(rd[0].ToString() + rd[1].ToString());
+                    if (!(comboClassList.Items.Contains(rd[0].ToString() + rd[1].ToString())))
+                        comboClassList.Items.Add(rd[0].ToString() + rd[1].ToString());
                 }
             }
-            rd.Close();
-            cn.Close();
+            conn.close();
             /*
 
-<<<<<<< HEAD
+            <<<<<<< HEAD
 
 
 
@@ -367,26 +365,30 @@ namespace CIS411
         public string[] getTutors()
         {
             List<string> tutorList = new List<string>();
-            string name = "";
+            /*string name = "";
             cmd.Connection = cn;
             cn.Open();
             cmd.CommandText = "select * from tutor inner join student on tutor.clarion_id=student.clarion_id where status = '"+"active"+"'";
+            rd = cmd.ExecuteReader();*/
 
-            rd = cmd.ExecuteReader();
+            DataConnection conn = new DataConnection();
+            conn.open();
+            SqlDataReader rd = conn.getReader("STUDENT.FIRSTNAME, STUDENT.LASTNAME", "TUTOR INNER JOIN STUDENT ON TUTOR.CLARION_ID=STUDENT.CLARION_ID", "STATUS","ACTIVE");
 
             if (rd.HasRows)
             {
                 while (rd.Read())
                 {
-                    if (rd[0].ToString() == studentID.ToString())
+                    tutorList.Add(rd[0] + " " + rd[1]);
+                    /*if (rd[0].ToString() == studentID.ToString())
                     {
 
                         name += rd[5] + " " + rd[6];
                         tutorList.Add(name);
-                        //tutors[i] = name;
-                        //i++;
+                        tutors[i] = name;
+                        i++;
                     }
-                    name = "";
+                    name = "";*/
                 }
             }
             rd.Close();

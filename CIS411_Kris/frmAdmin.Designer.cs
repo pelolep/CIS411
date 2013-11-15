@@ -54,18 +54,14 @@ namespace CIS411
             this.dateTimePickerEditTimeIn = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerAddTimeOut = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerAddTimeIn = new System.Windows.Forms.DateTimePicker();
-            this.lblAddTutor = new System.Windows.Forms.Label();
             this.comboAddMethod = new System.Windows.Forms.ComboBox();
             this.txtAddClass = new System.Windows.Forms.TextBox();
-            this.lblAddClass = new System.Windows.Forms.Label();
             this.lblAddMethod = new System.Windows.Forms.Label();
-            this.txtEditDate = new System.Windows.Forms.TextBox();
             this.lblEditDate = new System.Windows.Forms.Label();
             this.btnEditVisit = new System.Windows.Forms.Button();
             this.dateTimePickerEditMax = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerEditMin = new System.Windows.Forms.DateTimePicker();
             this.lblEditDateRange = new System.Windows.Forms.Label();
-            this.txtEditStudentID = new System.Windows.Forms.TextBox();
             this.lblEditTimeOut = new System.Windows.Forms.Label();
             this.lblEditTimeIn = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -97,21 +93,14 @@ namespace CIS411
             this.tabMethods = new System.Windows.Forms.TabPage();
             this.btnSaveMethods = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
-            this.dateTimePickerEditMin = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.txtEditSignOut = new System.Windows.Forms.TextBox();
             this.txtEditSignIn = new System.Windows.Forms.TextBox();
             this.txtEditStudentID = new System.Windows.Forms.TextBox();
             this.lblEditSignOut = new System.Windows.Forms.Label();
             this.lblEditSignIn = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.dateTimePickerEditMax = new System.Windows.Forms.DateTimePicker();
             this.txtEditDate = new System.Windows.Forms.TextBox();
-            this.lblEditDate = new System.Windows.Forms.Label();
-            this.lblAddMethod = new System.Windows.Forms.Label();
-            this.txtAddClass = new System.Windows.Forms.TextBox();
             this.lblAddClass = new System.Windows.Forms.Label();
-            this.comboAddMethod = new System.Windows.Forms.ComboBox();
             this.txtAddTutor = new System.Windows.Forms.TextBox();
             this.lblAddTutor = new System.Windows.Forms.Label(); 
             this.btnAddMethod = new System.Windows.Forms.Button();
@@ -1169,9 +1158,7 @@ namespace CIS411
             this.tabMethods.ResumeLayout(false);
             this.ResumeLayout(false);
             #endregion
-
         }
-
         #endregion
         #region Declarations
         private System.Windows.Forms.TabControl tabControlAdmin;
