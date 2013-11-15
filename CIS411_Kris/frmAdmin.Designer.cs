@@ -28,8 +28,6 @@ namespace CIS411
         /// </summary>
         private void InitializeComponent()
         {
-            if (true); // Preventing Form Designer from deleting the #region directives
-            #region Initialization
             this.tabControlAdmin = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
             this.comboCategory = new System.Windows.Forms.ComboBox();
@@ -38,6 +36,8 @@ namespace CIS411
             this.btn_student_import = new System.Windows.Forms.Button();
             this.btnReport = new System.Windows.Forms.Button();
             this.tabTutors = new System.Windows.Forms.TabPage();
+            this.lblInactiveTutors = new System.Windows.Forms.Label();
+            this.lblActiveTutors = new System.Windows.Forms.Label();
             this.btnAddTutor = new System.Windows.Forms.Button();
             this.btnDisableSelected = new System.Windows.Forms.Button();
             this.btnDisableAll = new System.Windows.Forms.Button();
@@ -92,22 +92,22 @@ namespace CIS411
             this.txtAdminStudentID = new System.Windows.Forms.TextBox();
             this.tabMethods = new System.Windows.Forms.TabPage();
             this.btnSaveMethods = new System.Windows.Forms.Button();
+            this.btnAddMethod = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtEditSignOut = new System.Windows.Forms.TextBox();
             this.txtEditSignIn = new System.Windows.Forms.TextBox();
-            this.txtEditStudentID = new System.Windows.Forms.TextBox();
             this.lblEditSignOut = new System.Windows.Forms.Label();
             this.lblEditSignIn = new System.Windows.Forms.Label();
+<<<<<<< HEAD
             this.txtEditDate = new System.Windows.Forms.TextBox();
             this.lblAddClass = new System.Windows.Forms.Label();
+=======
+>>>>>>> origin/Sean6
             this.txtAddTutor = new System.Windows.Forms.TextBox();
-            this.lblAddTutor = new System.Windows.Forms.Label(); 
-            this.btnAddMethod = new System.Windows.Forms.Button();
-            this.lblActiveTutors = new System.Windows.Forms.Label();
-            this.lblInactiveTutors = new System.Windows.Forms.Label();
             this.txtAddSignOut = new System.Windows.Forms.TextBox();
             this.txtAddSignIn = new System.Windows.Forms.TextBox();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabControlAdmin.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.tabTutors.SuspendLayout();
@@ -116,8 +116,6 @@ namespace CIS411
             this.grpBoxPassword.SuspendLayout();
             this.tabMethods.SuspendLayout();
             this.SuspendLayout();
-            #endregion
-            #region tabControlAdmin
             // 
             // tabControlAdmin
             // 
@@ -126,14 +124,13 @@ namespace CIS411
             this.tabControlAdmin.Controls.Add(this.tabVisits);
             this.tabControlAdmin.Controls.Add(this.tabPermission);
             this.tabControlAdmin.Controls.Add(this.tabMethods);
+            this.tabControlAdmin.Controls.Add(this.tabPage1);
             this.tabControlAdmin.Location = new System.Drawing.Point(12, 12);
             this.tabControlAdmin.Name = "tabControlAdmin";
             this.tabControlAdmin.SelectedIndex = 0;
             this.tabControlAdmin.Size = new System.Drawing.Size(658, 421);
             this.tabControlAdmin.TabIndex = 0;
             this.tabControlAdmin.SelectedIndexChanged += new System.EventHandler(this.tabControlAdmin_SelectedIndexChanged);
-            #endregion
-            #region tabGeneral
             // 
             // tabGeneral
             // 
@@ -149,25 +146,21 @@ namespace CIS411
             this.tabGeneral.TabIndex = 0;
             this.tabGeneral.Text = "General";
             this.tabGeneral.UseVisualStyleBackColor = true;
-            #endregion
-            #region comboCategory
             // 
             // comboCategory
             // 
+            this.comboCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboCategory.FormattingEnabled = true;
+            this.comboCategory.Items.AddRange(new object[] {
+            "All"});
             this.comboCategory.Location = new System.Drawing.Point(523, 8);
             this.comboCategory.Name = "comboCategory";
             this.comboCategory.Size = new System.Drawing.Size(121, 21);
             this.comboCategory.TabIndex = 4;
-            this.comboCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboCategory.Items.AddRange(new object[] {
-            "All"});
-            this.comboCategory.SelectedIndex = 0;
-            #endregion
-            #region comboSortBy
             // 
             // comboSortBy
             // 
+            this.comboSortBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboSortBy.FormattingEnabled = true;
             this.comboSortBy.Items.AddRange(new object[] {
             "Default",
@@ -181,10 +174,6 @@ namespace CIS411
             this.comboSortBy.Name = "comboSortBy";
             this.comboSortBy.Size = new System.Drawing.Size(121, 21);
             this.comboSortBy.TabIndex = 3;
-            this.comboSortBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboSortBy.SelectedIndex = 0;
-            #endregion
-            #region btn_courses_import
             // 
             // btn_courses_import
             // 
@@ -195,8 +184,6 @@ namespace CIS411
             this.btn_courses_import.Text = "Import Courses";
             this.btn_courses_import.UseVisualStyleBackColor = true;
             this.btn_courses_import.Click += new System.EventHandler(this.btn_courses_import_Click);
-            #endregion
-            #region btn_student_import
             // 
             // btn_student_import
             // 
@@ -207,8 +194,6 @@ namespace CIS411
             this.btn_student_import.Text = "Import Students";
             this.btn_student_import.UseVisualStyleBackColor = true;
             this.btn_student_import.Click += new System.EventHandler(this.btn_student_import_Click);
-            #endregion
-            #region btnReport
             // 
             // btnReport
             // 
@@ -219,8 +204,6 @@ namespace CIS411
             this.btnReport.Text = "Report";
             this.btnReport.UseVisualStyleBackColor = true;
             this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
-            #endregion
-            #region tabTutors
             // 
             // tabTutors
             // 
@@ -242,8 +225,24 @@ namespace CIS411
             this.tabTutors.TabIndex = 1;
             this.tabTutors.Text = "Tutors";
             this.tabTutors.UseVisualStyleBackColor = true;
-            #endregion
-            #region btnAddTutor
+            // 
+            // lblInactiveTutors
+            // 
+            this.lblInactiveTutors.AutoSize = true;
+            this.lblInactiveTutors.Location = new System.Drawing.Point(472, 20);
+            this.lblInactiveTutors.Name = "lblInactiveTutors";
+            this.lblInactiveTutors.Size = new System.Drawing.Size(81, 13);
+            this.lblInactiveTutors.TabIndex = 11;
+            this.lblInactiveTutors.Text = "Inactive Tutors:";
+            // 
+            // lblActiveTutors
+            // 
+            this.lblActiveTutors.AutoSize = true;
+            this.lblActiveTutors.Location = new System.Drawing.Point(222, 20);
+            this.lblActiveTutors.Name = "lblActiveTutors";
+            this.lblActiveTutors.Size = new System.Drawing.Size(73, 13);
+            this.lblActiveTutors.TabIndex = 10;
+            this.lblActiveTutors.Text = "Active Tutors:";
             // 
             // btnAddTutor
             // 
@@ -254,8 +253,6 @@ namespace CIS411
             this.btnAddTutor.Text = "Add";
             this.btnAddTutor.UseVisualStyleBackColor = true;
             this.btnAddTutor.Click += new System.EventHandler(this.btnAddTutor_Click);
-            #endregion
-            #region btnDisableSelected
             // 
             // btnDisableSelected
             // 
@@ -266,8 +263,6 @@ namespace CIS411
             this.btnDisableSelected.Text = ">";
             this.btnDisableSelected.UseVisualStyleBackColor = true;
             this.btnDisableSelected.Click += new System.EventHandler(this.btnDisableSelected_Click);
-            #endregion
-            #region btnDisableAll
             // 
             // btnDisableAll
             // 
@@ -278,8 +273,6 @@ namespace CIS411
             this.btnDisableAll.Text = ">>";
             this.btnDisableAll.UseVisualStyleBackColor = true;
             this.btnDisableAll.Click += new System.EventHandler(this.btnDisableAll_Click);
-            #endregion
-            #region btnEnableAll
             // 
             // btnEnableAll
             // 
@@ -290,8 +283,6 @@ namespace CIS411
             this.btnEnableAll.Text = "<<";
             this.btnEnableAll.UseVisualStyleBackColor = true;
             this.btnEnableAll.Click += new System.EventHandler(this.btnEnableAll_Click);
-            #endregion
-            #region btnEnableSelected
             // 
             // btnEnableSelected
             // 
@@ -302,8 +293,6 @@ namespace CIS411
             this.btnEnableSelected.Text = "<";
             this.btnEnableSelected.UseVisualStyleBackColor = true;
             this.btnEnableSelected.Click += new System.EventHandler(this.btnEnableSelected_Click);
-            #endregion
-            #region listBoxDisableTutors
             // 
             // listBoxDisableTutors
             // 
@@ -312,8 +301,6 @@ namespace CIS411
             this.listBoxDisableTutors.Name = "listBoxDisableTutors";
             this.listBoxDisableTutors.Size = new System.Drawing.Size(161, 212);
             this.listBoxDisableTutors.TabIndex = 3;
-            #endregion
-            #region listBoxEnableTutors
             // 
             // listBoxEnableTutors
             // 
@@ -322,8 +309,6 @@ namespace CIS411
             this.listBoxEnableTutors.Name = "listBoxEnableTutors";
             this.listBoxEnableTutors.Size = new System.Drawing.Size(174, 212);
             this.listBoxEnableTutors.TabIndex = 2;
-            #endregion
-            #region label1
             // 
             // label1
             // 
@@ -333,8 +318,6 @@ namespace CIS411
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Student ID:";
-            #endregion
-            #region txtTutorStudentID
             // 
             // txtTutorStudentID
             // 
@@ -342,8 +325,6 @@ namespace CIS411
             this.txtTutorStudentID.Name = "txtTutorStudentID";
             this.txtTutorStudentID.Size = new System.Drawing.Size(100, 20);
             this.txtTutorStudentID.TabIndex = 0;
-            #endregion
-            #region tabVisits
             // 
             // tabVisits
             // 
@@ -387,8 +368,6 @@ namespace CIS411
             this.tabVisits.TabIndex = 2;
             this.tabVisits.Text = "Visits";
             this.tabVisits.UseVisualStyleBackColor = true;
-            #endregion
-            #region lblEditVisit
             // 
             // comboAddTutoring
             // 
@@ -451,7 +430,7 @@ namespace CIS411
             // lblAddTutor
             // 
             this.lblAddTutor.AutoSize = true;
-            this.lblAddTutor.Location = new System.Drawing.Point(255, 229);
+            this.lblAddTutor.Location = new System.Drawing.Point(255, 235);
             this.lblAddTutor.Name = "lblAddTutor";
             this.lblAddTutor.Size = new System.Drawing.Size(32, 13);
             this.lblAddTutor.TabIndex = 36;
@@ -460,7 +439,7 @@ namespace CIS411
             // comboAddMethod
             // 
             this.comboAddMethod.FormattingEnabled = true;
-            this.comboAddMethod.Location = new System.Drawing.Point(22, 244);
+            this.comboAddMethod.Location = new System.Drawing.Point(22, 250);
             this.comboAddMethod.Name = "comboAddMethod";
             this.comboAddMethod.Size = new System.Drawing.Size(121, 21);
             this.comboAddMethod.TabIndex = 35;
@@ -468,7 +447,8 @@ namespace CIS411
             // 
             // txtAddClass
             // 
-            this.txtAddClass.Location = new System.Drawing.Point(149, 245);
+            this.txtAddClass.Enabled = false;
+            this.txtAddClass.Location = new System.Drawing.Point(149, 251);
             this.txtAddClass.Name = "txtAddClass";
             this.txtAddClass.Size = new System.Drawing.Size(100, 20);
             this.txtAddClass.TabIndex = 34;
@@ -476,7 +456,7 @@ namespace CIS411
             // lblAddClass
             // 
             this.lblAddClass.AutoSize = true;
-            this.lblAddClass.Location = new System.Drawing.Point(149, 229);
+            this.lblAddClass.Location = new System.Drawing.Point(149, 235);
             this.lblAddClass.Name = "lblAddClass";
             this.lblAddClass.Size = new System.Drawing.Size(32, 13);
             this.lblAddClass.TabIndex = 33;
@@ -485,7 +465,7 @@ namespace CIS411
             // lblAddMethod
             // 
             this.lblAddMethod.AutoSize = true;
-            this.lblAddMethod.Location = new System.Drawing.Point(19, 229);
+            this.lblAddMethod.Location = new System.Drawing.Point(19, 235);
             this.lblAddMethod.Name = "lblAddMethod";
             this.lblAddMethod.Size = new System.Drawing.Size(71, 13);
             this.lblAddMethod.TabIndex = 31;
@@ -510,9 +490,9 @@ namespace CIS411
             // 
             // btnEditVisit
             // 
-            this.btnEditVisit.Location = new System.Drawing.Point(368, 312);
+            this.btnEditVisit.Location = new System.Drawing.Point(559, 312);
             this.btnEditVisit.Name = "btnEditVisit";
-            this.btnEditVisit.Size = new System.Drawing.Size(75, 68);
+            this.btnEditVisit.Size = new System.Drawing.Size(75, 23);
             this.btnEditVisit.TabIndex = 16;
             this.btnEditVisit.Text = "Edit Visit";
             this.btnEditVisit.UseVisualStyleBackColor = true;
@@ -522,10 +502,10 @@ namespace CIS411
             // 
             this.dateTimePickerEditMax.CustomFormat = "MM\'/\'dd\'/\'yyyy";
             this.dateTimePickerEditMax.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePickerEditMax.Location = new System.Drawing.Point(237, 315);
+            this.dateTimePickerEditMax.Location = new System.Drawing.Point(334, 315);
             this.dateTimePickerEditMax.MinDate = new System.DateTime(2013, 1, 1, 0, 0, 0, 0);
             this.dateTimePickerEditMax.Name = "dateTimePickerEditMax";
-            this.dateTimePickerEditMax.Size = new System.Drawing.Size(100, 20);
+            this.dateTimePickerEditMax.Size = new System.Drawing.Size(200, 20);
             this.dateTimePickerEditMax.TabIndex = 28;
             this.dateTimePickerEditMax.Value = new System.DateTime(2013, 11, 7, 0, 0, 0, 0);
             // 
@@ -536,7 +516,7 @@ namespace CIS411
             this.dateTimePickerEditMin.Location = new System.Drawing.Point(128, 315);
             this.dateTimePickerEditMin.MinDate = new System.DateTime(2013, 1, 1, 0, 0, 0, 0);
             this.dateTimePickerEditMin.Name = "dateTimePickerEditMin";
-            this.dateTimePickerEditMin.Size = new System.Drawing.Size(103, 20);
+            this.dateTimePickerEditMin.Size = new System.Drawing.Size(200, 20);
             this.dateTimePickerEditMin.TabIndex = 27;
             this.dateTimePickerEditMin.Value = new System.DateTime(2013, 11, 7, 0, 0, 0, 0);
             // 
@@ -591,8 +571,6 @@ namespace CIS411
             this.lblEditVisit.Size = new System.Drawing.Size(50, 13);
             this.lblEditVisit.TabIndex = 18;
             this.lblEditVisit.Text = "Edit Visit:";
-            #endregion
-            #region dateTimePickerAdd
             // 
             // dateTimePickerAdd
             // 
@@ -604,8 +582,6 @@ namespace CIS411
             this.dateTimePickerAdd.Size = new System.Drawing.Size(103, 20);
             this.dateTimePickerAdd.TabIndex = 17;
             this.dateTimePickerAdd.Value = new System.DateTime(2013, 11, 7, 0, 0, 0, 0);
-            #endregion
-            #region lblDate
             // 
             // lblDate
             // 
@@ -615,26 +591,6 @@ namespace CIS411
             this.lblDate.Size = new System.Drawing.Size(30, 13);
             this.lblDate.TabIndex = 16;
             this.lblDate.Text = "Date";
-            #endregion
-            #region txtAddSignOut
-            // 
-            // txtAddSignOut
-            // 
-            this.txtAddSignOut.Location = new System.Drawing.Point(440, 212);
-            this.txtAddSignOut.Name = "txtAddSignOut";
-            this.txtAddSignOut.Size = new System.Drawing.Size(100, 20);
-            this.txtAddSignOut.TabIndex = 15;
-            #endregion
-            #region txtAddSignIn
-            // 
-            // txtAddSignIn
-            // 
-            this.txtAddSignIn.Location = new System.Drawing.Point(334, 212);
-            this.txtAddSignIn.Name = "txtAddSignIn";
-            this.txtAddSignIn.Size = new System.Drawing.Size(100, 20);
-            this.txtAddSignIn.TabIndex = 14;
-            #endregion
-            #region txtAddStudentID
             // 
             // txtAddStudentID
             // 
@@ -642,8 +598,6 @@ namespace CIS411
             this.txtAddStudentID.Name = "txtAddStudentID";
             this.txtAddStudentID.Size = new System.Drawing.Size(100, 20);
             this.txtAddStudentID.TabIndex = 13;
-            #endregion
-            #region btnAddVisit
             // 
             // btnAddVisit
             // 
@@ -654,8 +608,6 @@ namespace CIS411
             this.btnAddVisit.Text = "Add Visit";
             this.btnAddVisit.UseVisualStyleBackColor = true;
             this.btnAddVisit.Click += new System.EventHandler(this.btnAddVisit_Click);
-            #endregion
-            #region lblTimeOut
             // 
             // lblTimeOut
             // 
@@ -665,8 +617,6 @@ namespace CIS411
             this.lblTimeOut.Size = new System.Drawing.Size(50, 13);
             this.lblTimeOut.TabIndex = 9;
             this.lblTimeOut.Text = "Time Out";
-            #endregion
-            #region lblTimeIn
             // 
             // lblTimeIn
             // 
@@ -676,8 +626,6 @@ namespace CIS411
             this.lblTimeIn.Size = new System.Drawing.Size(42, 13);
             this.lblTimeIn.TabIndex = 8;
             this.lblTimeIn.Text = "Time In";
-            #endregion
-            #region lblStudentID
             // 
             // lblStudentID
             // 
@@ -687,8 +635,6 @@ namespace CIS411
             this.lblStudentID.Size = new System.Drawing.Size(58, 13);
             this.lblStudentID.TabIndex = 7;
             this.lblStudentID.Text = "Student ID";
-            #endregion
-            #region lblAddVisit
             // 
             // lblAddVisit
             // 
@@ -698,8 +644,6 @@ namespace CIS411
             this.lblAddVisit.Size = new System.Drawing.Size(51, 13);
             this.lblAddVisit.TabIndex = 3;
             this.lblAddVisit.Text = "Add Visit:";
-            #endregion
-            #region lblLoggedIn
             // 
             // lblLoggedIn
             // 
@@ -709,8 +653,6 @@ namespace CIS411
             this.lblLoggedIn.Size = new System.Drawing.Size(147, 13);
             this.lblLoggedIn.TabIndex = 2;
             this.lblLoggedIn.Text = "Students Currently Logged In:";
-            #endregion
-            #region btnLogOut
             // 
             // btnLogOut
             // 
@@ -721,8 +663,6 @@ namespace CIS411
             this.btnLogOut.Text = "Log Out";
             this.btnLogOut.UseVisualStyleBackColor = true;
             this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
-            #endregion
-            #region listBoxLoggedIn
             // 
             // listBoxLoggedIn
             // 
@@ -731,8 +671,6 @@ namespace CIS411
             this.listBoxLoggedIn.Name = "listBoxLoggedIn";
             this.listBoxLoggedIn.Size = new System.Drawing.Size(615, 121);
             this.listBoxLoggedIn.TabIndex = 0;
-            #endregion
-            #region tabPermission
             // 
             // tabPermission
             // 
@@ -748,8 +686,6 @@ namespace CIS411
             this.tabPermission.TabIndex = 3;
             this.tabPermission.Text = "Permissions";
             this.tabPermission.UseVisualStyleBackColor = true;
-            #endregion
-            #region grpBoxPassword
             // 
             // grpBoxPassword
             // 
@@ -766,8 +702,6 @@ namespace CIS411
             this.grpBoxPassword.TabIndex = 4;
             this.grpBoxPassword.TabStop = false;
             this.grpBoxPassword.Text = "Password";
-            #endregion
-            #region btnChangePassword
             // 
             // btnChangePassword
             // 
@@ -778,8 +712,6 @@ namespace CIS411
             this.btnChangePassword.Text = "Change Password";
             this.btnChangePassword.UseVisualStyleBackColor = true;
             this.btnChangePassword.Click += new System.EventHandler(this.btnChangePassword_Click);
-            #endregion
-            #region txtConfirmPassword
             // 
             // txtConfirmPassword
             // 
@@ -788,8 +720,6 @@ namespace CIS411
             this.txtConfirmPassword.Size = new System.Drawing.Size(144, 20);
             this.txtConfirmPassword.TabIndex = 8;
             this.txtConfirmPassword.UseSystemPasswordChar = true;
-            #endregion
-            #region txtNewPassword
             // 
             // txtNewPassword
             // 
@@ -798,8 +728,6 @@ namespace CIS411
             this.txtNewPassword.Size = new System.Drawing.Size(144, 20);
             this.txtNewPassword.TabIndex = 7;
             this.txtNewPassword.UseSystemPasswordChar = true;
-            #endregion
-            #region txtCurrentPassword
             // 
             // txtCurrentPassword
             // 
@@ -808,8 +736,6 @@ namespace CIS411
             this.txtCurrentPassword.Size = new System.Drawing.Size(144, 20);
             this.txtCurrentPassword.TabIndex = 6;
             this.txtCurrentPassword.UseSystemPasswordChar = true;
-            #endregion
-            #region lblConfirmPassword
             // 
             // lblConfirmPassword
             // 
@@ -819,8 +745,6 @@ namespace CIS411
             this.lblConfirmPassword.Size = new System.Drawing.Size(91, 13);
             this.lblConfirmPassword.TabIndex = 5;
             this.lblConfirmPassword.Text = "Confirm Password";
-            #endregion
-            #region lblNewPassword
             // 
             // lblNewPassword
             // 
@@ -830,8 +754,6 @@ namespace CIS411
             this.lblNewPassword.Size = new System.Drawing.Size(78, 13);
             this.lblNewPassword.TabIndex = 1;
             this.lblNewPassword.Text = "New Password";
-            #endregion
-            #region lblCurrentPassword
             // 
             // lblCurrentPassword
             // 
@@ -841,8 +763,6 @@ namespace CIS411
             this.lblCurrentPassword.Size = new System.Drawing.Size(90, 13);
             this.lblCurrentPassword.TabIndex = 0;
             this.lblCurrentPassword.Text = "Current Password";
-            #endregion
-            #region listBoxAdminUsers
             // 
             // listBoxAdminUsers
             // 
@@ -851,8 +771,6 @@ namespace CIS411
             this.listBoxAdminUsers.Name = "listBoxAdminUsers";
             this.listBoxAdminUsers.Size = new System.Drawing.Size(189, 251);
             this.listBoxAdminUsers.TabIndex = 3;
-            #endregion
-            #region lblAdminUsers
             // 
             // lblAdminUsers
             // 
@@ -862,8 +780,6 @@ namespace CIS411
             this.lblAdminUsers.Size = new System.Drawing.Size(69, 13);
             this.lblAdminUsers.TabIndex = 2;
             this.lblAdminUsers.Text = "Admin Users:";
-            #endregion
-            #region label2
             // 
             // label2
             // 
@@ -873,8 +789,6 @@ namespace CIS411
             this.label2.Size = new System.Drawing.Size(61, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Student ID:";
-            #endregion
-            #region txtAdminStudentID
             // 
             // txtAdminStudentID
             // 
@@ -882,12 +796,11 @@ namespace CIS411
             this.txtAdminStudentID.Name = "txtAdminStudentID";
             this.txtAdminStudentID.Size = new System.Drawing.Size(100, 20);
             this.txtAdminStudentID.TabIndex = 0;
-            #endregion
-            #region tabMethods
             // 
             // tabMethods
             // 
             this.tabMethods.Controls.Add(this.btnSaveMethods);
+            this.tabMethods.Controls.Add(this.btnAddMethod);
             this.tabMethods.Location = new System.Drawing.Point(4, 22);
             this.tabMethods.Name = "tabMethods";
             this.tabMethods.Padding = new System.Windows.Forms.Padding(3);
@@ -895,9 +808,6 @@ namespace CIS411
             this.tabMethods.TabIndex = 4;
             this.tabMethods.Text = "Methods";
             this.tabMethods.UseVisualStyleBackColor = true;
-            this.tabMethods.Controls.Add(btnAddMethod);
-            #endregion
-            #region btnSaveMethods
             // 
             // btnSaveMethods
             // 
@@ -908,20 +818,14 @@ namespace CIS411
             this.btnSaveMethods.Text = "Save Changes";
             this.btnSaveMethods.UseVisualStyleBackColor = true;
             this.btnSaveMethods.Click += new System.EventHandler(this.btnSaveMethods_Click);
-            #endregion
-            #region btnEditVisit
-			//
-            // btnEditVisit
             // 
-            this.btnEditVisit.Location = new System.Drawing.Point(559, 312);
-            this.btnEditVisit.Name = "btnEditVisit";
-            this.btnEditVisit.Size = new System.Drawing.Size(75, 23);
-            this.btnEditVisit.TabIndex = 16;
-            this.btnEditVisit.Text = "Edit Visit";
-            this.btnEditVisit.UseVisualStyleBackColor = true;
-            this.btnEditVisit.Click += new System.EventHandler(this.btnEditVisit_Click);
-            #endregion
-            #region btnClose
+            // btnAddMethod
+            // 
+            this.btnAddMethod.Location = new System.Drawing.Point(0, 0);
+            this.btnAddMethod.Name = "btnAddMethod";
+            this.btnAddMethod.Size = new System.Drawing.Size(100, 20);
+            this.btnAddMethod.TabIndex = 1;
+            this.btnAddMethod.Text = "Add new method";
             // 
             // btnClose
             // 
@@ -932,28 +836,6 @@ namespace CIS411
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            #endregion
-            #region btnAddMethod
-            //
-            // btnAddMethod
-            //
-            this.btnAddMethod.Name = "btnAddMethod";
-            this.btnAddMethod.Text = "Add new method";
-            this.btnAddMethod.Size = new System.Drawing.Size(100, 20);
-            this.btnAddMethod.Click += btnAddMethod_Click;
-            #endregion
-            #region dateTimePickerEditMin
-            // 
-            // dateTimePickerEditMin
-            // 
-            this.dateTimePickerEditMin.Location = new System.Drawing.Point(128, 315);
-            this.dateTimePickerEditMin.MinDate = new System.DateTime(2013, 1, 1, 0, 0, 0, 0);
-            this.dateTimePickerEditMin.Name = "dateTimePickerEditMin";
-            this.dateTimePickerEditMin.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePickerEditMin.TabIndex = 27;
-            this.dateTimePickerEditMin.Value = new System.DateTime(2013, 11, 7, 0, 0, 0, 0);
-            #endregion
-            #region label3
             // 
             // label3
             // 
@@ -963,8 +845,6 @@ namespace CIS411
             this.label3.Size = new System.Drawing.Size(30, 13);
             this.label3.TabIndex = 26;
             this.label3.Text = "Date";
-            #endregion
-            #region txtEditSignOut
             // 
             // txtEditSignOut
             // 
@@ -972,8 +852,6 @@ namespace CIS411
             this.txtEditSignOut.Name = "txtEditSignOut";
             this.txtEditSignOut.Size = new System.Drawing.Size(100, 20);
             this.txtEditSignOut.TabIndex = 25;
-            #endregion
-            #region txtEditSignIn
             // 
             // txtEditSignIn
             // 
@@ -981,17 +859,6 @@ namespace CIS411
             this.txtEditSignIn.Name = "txtEditSignIn";
             this.txtEditSignIn.Size = new System.Drawing.Size(100, 20);
             this.txtEditSignIn.TabIndex = 24;
-            #endregion
-            #region txtEditStudentID
-            // 
-            // txtEditStudentID
-            // 
-            this.txtEditStudentID.Location = new System.Drawing.Point(22, 315);
-            this.txtEditStudentID.Name = "txtEditStudentID";
-            this.txtEditStudentID.Size = new System.Drawing.Size(100, 20);
-            this.txtEditStudentID.TabIndex = 23;
-            #endregion
-            #region lblEditSignOut
             // 
             // lblEditSignOut
             // 
@@ -1001,8 +868,6 @@ namespace CIS411
             this.lblEditSignOut.Size = new System.Drawing.Size(48, 13);
             this.lblEditSignOut.TabIndex = 21;
             this.lblEditSignOut.Text = "Sign Out";
-            #endregion
-            #region lblEditSignIn
             // 
             // lblEditSignIn
             // 
@@ -1012,98 +877,6 @@ namespace CIS411
             this.lblEditSignIn.Size = new System.Drawing.Size(40, 13);
             this.lblEditSignIn.TabIndex = 20;
             this.lblEditSignIn.Text = "Sign In";
-            #endregion
-            #region label6
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(19, 297);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(58, 13);
-            this.label6.TabIndex = 19;
-            this.label6.Text = "Student ID";
-            #endregion
-            #region dateTimePickerEditMax
-            // 
-            // dateTimePickerEditMax
-            // 
-            this.dateTimePickerEditMax.Location = new System.Drawing.Point(334, 315);
-            this.dateTimePickerEditMax.MinDate = new System.DateTime(2013, 1, 1, 0, 0, 0, 0);
-            this.dateTimePickerEditMax.Name = "dateTimePickerEditMax";
-            this.dateTimePickerEditMax.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePickerEditMax.TabIndex = 28;
-            this.dateTimePickerEditMax.Value = new System.DateTime(2013, 11, 7, 0, 0, 0, 0);
-            #endregion
-            #region txtEditDate
-            this.txtEditDate.Enabled = false;
-            this.txtEditDate.Location = new System.Drawing.Point(22, 360);
-            this.txtEditDate.Name = "txtEditDate";
-            this.txtEditDate.Size = new System.Drawing.Size(100, 20);
-            this.txtEditDate.TabIndex = 30;
-            // lblActiveTutors
-            // 
-            this.lblActiveTutors.AutoSize = true;
-            this.lblActiveTutors.Location = new System.Drawing.Point(222, 20);
-            this.lblActiveTutors.Name = "lblActiveTutors";
-            this.lblActiveTutors.Size = new System.Drawing.Size(73, 13);
-            this.lblActiveTutors.TabIndex = 10;
-            this.lblActiveTutors.Text = "Active Tutors:";
-            #endregion
-            #region lblEditDate
-            // 
-            // lblEditDate
-            // 
-            this.lblEditDate.AutoSize = true;
-            this.lblEditDate.Location = new System.Drawing.Point(19, 342);
-            this.lblEditDate.Name = "lblEditDate";
-            this.lblEditDate.Size = new System.Drawing.Size(30, 13);
-            this.lblEditDate.TabIndex = 29;
-            this.lblEditDate.Text = "Date";
-            #endregion
-            #region lblAddMethod
-            // 
-            // lblAddMethod
-            // 
-            this.lblAddMethod.AutoSize = true;
-            this.lblAddMethod.Location = new System.Drawing.Point(19, 235);
-            this.lblAddMethod.Name = "lblAddMethod";
-            this.lblAddMethod.Size = new System.Drawing.Size(71, 13);
-            this.lblAddMethod.TabIndex = 31;
-            this.lblAddMethod.Text = "I was here for";
-            #endregion
-            #region txtAddClass
-            // 
-            // txtAddClass
-            // 
-            this.txtAddClass.Enabled = false;
-            this.txtAddClass.Location = new System.Drawing.Point(149, 251);
-            this.txtAddClass.Name = "txtAddClass";
-            this.txtAddClass.Size = new System.Drawing.Size(100, 20);
-            this.txtAddClass.TabIndex = 34;
-            #endregion
-            #region lblAddClass
-            // 
-            // lblAddClass
-            // 
-            this.lblAddClass.AutoSize = true;
-            this.lblAddClass.Location = new System.Drawing.Point(149, 235);
-            this.lblAddClass.Name = "lblAddClass";
-            this.lblAddClass.Size = new System.Drawing.Size(32, 13);
-            this.lblAddClass.TabIndex = 33;
-            this.lblAddClass.Text = "Class";
-            #endregion
-            #region comboAddMethod
-            // 
-            // comboAddMethod
-            // 
-            this.comboAddMethod.FormattingEnabled = true;
-            this.comboAddMethod.Location = new System.Drawing.Point(22, 250);
-            this.comboAddMethod.Name = "comboAddMethod";
-            this.comboAddMethod.Size = new System.Drawing.Size(121, 21);
-            this.comboAddMethod.TabIndex = 35;
-            #endregion
-            #region txtAddTutor
             // 
             // txtAddTutor
             // 
@@ -1112,28 +885,30 @@ namespace CIS411
             this.txtAddTutor.Name = "txtAddTutor";
             this.txtAddTutor.Size = new System.Drawing.Size(100, 20);
             this.txtAddTutor.TabIndex = 37;
-            #endregion
-            #region lblAddTutor
             // 
-            // lblAddTutor
+            // txtAddSignOut
             // 
-            this.lblAddTutor.AutoSize = true;
-            this.lblAddTutor.Location = new System.Drawing.Point(255, 235);
-            this.lblAddTutor.Name = "lblAddTutor";
-            this.lblAddTutor.Size = new System.Drawing.Size(32, 13);
-            this.lblAddTutor.TabIndex = 36;
-            this.lblAddTutor.Text = "Tutor";
+            this.txtAddSignOut.Location = new System.Drawing.Point(440, 212);
+            this.txtAddSignOut.Name = "txtAddSignOut";
+            this.txtAddSignOut.Size = new System.Drawing.Size(100, 20);
+            this.txtAddSignOut.TabIndex = 15;
             // 
-            // lblInactiveTutors
+            // txtAddSignIn
             // 
-            this.lblInactiveTutors.AutoSize = true;
-            this.lblInactiveTutors.Location = new System.Drawing.Point(472, 20);
-            this.lblInactiveTutors.Name = "lblInactiveTutors";
-            this.lblInactiveTutors.Size = new System.Drawing.Size(81, 13);
-            this.lblInactiveTutors.TabIndex = 11;
-            this.lblInactiveTutors.Text = "Inactive Tutors:";
-            #endregion
-            #region frmAdmin
+            this.txtAddSignIn.Location = new System.Drawing.Point(334, 212);
+            this.txtAddSignIn.Name = "txtAddSignIn";
+            this.txtAddSignIn.Size = new System.Drawing.Size(100, 20);
+            this.txtAddSignIn.TabIndex = 14;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(650, 395);
+            this.tabPage1.TabIndex = 5;
+            this.tabPage1.Text = "Reports";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // frmAdmin
             // 
@@ -1157,7 +932,11 @@ namespace CIS411
             this.grpBoxPassword.PerformLayout();
             this.tabMethods.ResumeLayout(false);
             this.ResumeLayout(false);
+<<<<<<< HEAD
             #endregion
+=======
+
+>>>>>>> origin/Sean6
         }
         #endregion
         #region Declarations
@@ -1240,5 +1019,6 @@ namespace CIS411
         private System.Windows.Forms.TextBox txtAddSignIn;
         private System.Windows.Forms.TextBox txtAddSignOut;
         #endregion
+        private System.Windows.Forms.TabPage tabPage1;
     }
 }
