@@ -30,7 +30,7 @@ namespace CIS411
         {
             InitializeComponent();
             tutoring = false;
-            cn = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\db.mdf;Integrated Security=True");
+            cn = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\matt\Documents\GitHub\CIS411\CIS411_Kris\db.mdf;Integrated Security=True");
             cmd = new SqlCommand();
             cn.Open(); //TESTING DATABASE
             cn.Close();
@@ -106,12 +106,35 @@ namespace CIS411
                 cmd.Clone();
                 cn.Close();
             }
-            string[] words = comboClassList.SelectedItem.ToString().Split();
+
+string[] words = comboClassList.SelectedItem.ToString().Split();
+           
+           /*
+            try
+            {
+                cn.Open();
+                cmd.CommandText = "select * from course where term = '" + words[0] + "', subject = '"+words[1]+"'";
+                cmd.ExecuteNonQuery();
+                cmd.Clone();
+            }
+               
+            catch { }
+ */
+            cn.Close();
+            
             string[] tutors = comboTutors.SelectedItem.ToString().Split();
             cn.Open();
-            //cmd.CommandText = "insert into VISIT (DATE, TIME_IN, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION) values ('" + System.DateTime.Today.ToString() + "','" + System.DateTime.UtcNow.TimeOfDay.ToString() + "','" + txtStudentID.Text + "', '" + "term" + "', '" + words[0] + "', '" + words[1] + "', '"+ tutors[0] +"' , '" + "method" + "', '" + words[2] + "')";
-           // cmd.CommandText = "insert into VISIT (DATE, TIME_IN, CLARION_ID, TERM, SUBJECT, CATALOG, METHOD, SECTION) values ('" + System.DateTime.Today.ToString() + "','" + System.DateTime.UtcNow.TimeOfDay.ToString() + "','" + txtStudentID.Text + "', '" + "term" + "', '" + words[0] + "', '" + words[1] + "', '" + "method" + "', '" + words[2] + "')";
-            //cmd.ExecuteNonQuery();                                                                                                                                                                                                                                              
+            try
+            {
+                cmd.CommandText = "insert into VISIT (DATE, TIME_IN, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION) values ('" + System.DateTime.Today.ToString() + "','" + System.DateTime.UtcNow.TimeOfDay.ToString() + "','" + txtStudentID.Text + "', '" +words[0].ToString() + "', '" + words[1].ToString() + "', '" + words[2].ToString() + "', '" + tutors[0] + "' , '" + "method" + "', '" + words[3].ToString() + "')";
+            }
+            catch 
+            {
+               
+            }
+                
+                // cmd.CommandText = "insert into VISIT (DATE, TIME_IN, CLARION_ID, TERM, SUBJECT, CATALOG, METHOD, SECTION) values ('" + System.DateTime.Today.ToString() + "','" + System.DateTime.UtcNow.TimeOfDay.ToString() + "','" + txtStudentID.Text + "', '" + "term" + "', '" + words[0] + "', '" + words[1] + "', '" + "method" + "', '" + words[2] + "')";
+            cmd.ExecuteNonQuery();                                                                                                                                                                                                                                              
             cmd.Clone();
             cn.Close();
             signIn();
@@ -183,7 +206,7 @@ namespace CIS411
                 {
 
                     if (int.Parse(rd[0].ToString()) == ID)
-                    {
+                    { 
                         rd.Close();
                         cn.Close();
                         return true;
@@ -258,7 +281,7 @@ namespace CIS411
             comboClassList.Items.Add("Select a class...");
             cmd.Connection = cn;
             cn.Open();
-            cmd.CommandText = "select subject, catalog from student_course, student where student_course.clarion_id=" + studentID.ToString();
+            cmd.CommandText = "select subject, catalog, clarion_ID, section, term from student_course where clarion_ID = '"+studentID+"'";
 
             rd = cmd.ExecuteReader();
             
@@ -266,7 +289,7 @@ namespace CIS411
             {
                 while (rd.Read())
                 {
-                    comboClassList.Items.Add(rd[0].ToString() + rd[1].ToString());
+                    comboClassList.Items.Add(rd[4] + " " +rd[0].ToString() + rd[1].ToString() + " " +rd[3]);
                 }
             }
             rd.Close();
@@ -378,14 +401,13 @@ namespace CIS411
             {
                 while (rd.Read())
                 {
-                    if (rd[0].ToString() == studentID.ToString())
-                    {
 
-                        name += rd[5] + " " + rd[6];
+                    
+                        name +=rd[0]+ " " +rd[5] + " " + rd[6];
                         tutorList.Add(name);
                         //tutors[i] = name;
                         //i++;
-                    }
+                    
                     name = "";
                 }
             }
