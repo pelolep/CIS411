@@ -488,7 +488,7 @@ namespace CIS411
         {
             bool b;
             DataConnection conn = new DataConnection();
-
+            conn.Open();
             /*
             cmd.Connection = cn;
             cn.Open();
