@@ -515,7 +515,32 @@ namespace CIS411
 
         private void frmAdmin_Load(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             loadlist();
+=======
+            // TODO: This line of code loads data into the 'DataSet1.DataTable2' table. You can move, or remove it, as needed.
+            //this.dataTable2TableAdapter.Fill(this.DataSet1.DataTable2);
+            // TODO: This line of code loads data into the 'DataSet1.DataTable1' table. You can move, or remove it, as needed.
+            this.DataTable1TableAdapter.Fill(this.DataSet1.DataTable1);
+            
+
+            string folder = System.IO.Path.GetFullPath(System.Reflection.Assembly.GetEntryAssembly().Location);
+            string dbPath = System.IO.Path.Combine(folder, "CIS411_Kris");
+            string connString = "DataSource=" +dbPath;
+            
+            string fileName = "CIS411_kris";
+            FileInfo f = new FileInfo(fileName);
+           // string aa [] = f.FullName.ToString().Split();
+            //Directory fullname = f.Directory;
+            //Directory.get
+          //  MessageBox.Show("");
+            loadlist();
+           // AppDomain.CurrentDomain.SetData("DataDirectory", "~/cis411/cis411_Kris/db.mdf");
+            //currentDomain.SetData("DataDirectory", "~/cis411/cis411_Kris/db.mdf");
+
+
+            this.reportViewer1.RefreshReport();
+>>>>>>> origin/Sean8
         }
 
         public void loadlist()
@@ -799,6 +824,66 @@ namespace CIS411
 
         
         }
+<<<<<<< HEAD
+=======
+        // Created by Sean: textBox1 inside the Reporting Tab
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        //Created by Sean: button1_Click inside the Reporting Tab
+        private void displayBtn_Click(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'DataSet1.DataTable1' table. You can move, or remove it, as needed.
+            this.DataTable1TableAdapter.Fill(this.DataSet1.DataTable1);
+            this.reportViewer1.RefreshReport();
+        }
+
+        //Created by Sean: Shows the query results from the SQL tables
+        private void reportViewer1_Load(object sender, EventArgs e)
+        {
+            //this.FreightTotalsDataTableTableAdapter.Fill(this.PayablesDataSet.FreightTotalsDataTable);
+            //this.FreightDataTableTableAdapter.Fill(this.PayablesDataSet.FreightDataTable);
+            //this.ReportViewer1.RefreshReport();
+            //dynamic CurrentReportDataSource = new Microsoft.Reporting.WinForms.ReportDataSource();
+            //comboBox1.SelectedIndex = 0;
+
+            //Option needs to be selected in comboBox1 first in order to determine which query to run
+            reportViewer1.Clear();
+
+            //In the properties of the report viewer, this views this current report to switch between
+            //reportViewer1.LocalReport.ReportEmbeddedResource = "CIS411.Report1.rdlc";
+        }
+
+       /* private void SwitchLocalReport(string selectedreportname)
+        {
+            dynamic CurrentReportDataSource = new Microsoft.Reporting.WinForms.ReportDataSource();
+        }
+        * */
+
+        //Created by Sean: Selects which query you want to fill in the reportViewer
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            
+            /*if (comboBox1.SelectedIndex == 0)
+            {
+
+            }
+            else if (comboBox1.SelectedIndex == 1)
+            {
+
+            }
+             * */
+        }
+        
+        //Created by Sean:
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+>>>>>>> origin/Sean8
         // Returns array of all tutors
         /*
         public string[] getTutors()

@@ -369,7 +369,18 @@ namespace CIS411
             bool b;
             DataConnection conn = new DataConnection();
             conn.Open();
+<<<<<<< HEAD
             SqlDataReader rd = conn.GetReader("clarion_id, time_out", "visit", "clarion_id", searchID.ToString(), "time_out", "null");
+=======
+            /*
+            cmd.Connection = cn;
+            cn.Open();
+            cmd.CommandText = "select clarion_id from visit where clarion_id='"+searchID+"' and time_out=NULL";
+
+            rd = cmd.ExecuteReader();
+            */
+            SqlDataReader rd = conn.GetReader("clarion_id", "visit", "clarion_id", searchID.ToString(), "time_out", "DBNull");
+>>>>>>> origin/Sean8
             b = rd.HasRows;
             conn.Close();
             return b;
