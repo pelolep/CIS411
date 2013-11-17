@@ -97,6 +97,20 @@ public class DataConnection
         return rd;
     }
 
+    public SqlDataReader GetReader(string column, string table, string conditionColumn, string conditionValue, string condition2)
+    {
+        int i;
+        cmd.CommandText = "SELECT " + column + " FROM " + table + " WHERE " + conditionColumn + " = " + (int.TryParse(conditionValue, out i) ? "" : "'") + conditionValue.ToString() + (int.TryParse(conditionValue, out i) ? "" : "'") + condition2;
+        if (rd == null)
+            rd = cmd.ExecuteReader();
+        else
+        {
+            rd.Close();
+            rd = cmd.ExecuteReader();
+        }
+        return rd;
+    }
+
     public SqlDataReader GetReader(string column, string table, string conditionColumn1, string conditionValue1, string conditionColumn2, string conditionValue2)
     {
         cmd.CommandText = GetReaderString(column, table, conditionColumn1, conditionValue1, conditionColumn2, conditionValue2);

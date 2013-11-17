@@ -483,8 +483,12 @@ namespace CIS411
 
                 try
                 {
+<<<<<<< HEAD
                     conn.Query("insert into PROFESSOR (PROF_EMAIL, LASTNAME, FIRSTNAME) values ('" + excelReader[7] + "', '" + last + "', '" + first + "')");
 
+=======
+                    conn.Query("insert into Course (term,subject,catalog,section,prof_email) values ('" + excelReader[0] + "','" + excelReader[2] + "','" + catalog + "','" + excelReader[4] + "','"+excelReader[7]+"')");
+>>>>>>> origin/Matt10
                     /*
                     cmd2.CommandText = "insert into PROFESSOR (PROF_EMAIL, LASTNAME, FIRSTNAME) values ('" + excelReader[7] + "', '" + last + "', '" + first + "')";
                     cmd2.ExecuteNonQuery();
@@ -497,8 +501,13 @@ namespace CIS411
                 }
                 try
                 {
+<<<<<<< HEAD
                     conn.Query("insert into Course (term,subject,catalog,section,prof_email) values ('" + excelReader[0] + "','" + excelReader[2] + "','" + excelReader[3] + "','" + excelReader[4] + "','"+excelReader[7]+"')");
 
+=======
+                    conn.Query("insert into PROFESSOR (PROF_EMAIL, LASTNAME, FIRSTNAME) values ('" + excelReader[7] + "', '" + last + "', '" + first + "')");
+                   
+>>>>>>> origin/Matt10
                     /*
                     cmd.CommandText = "insert into Course (term,subject,catalog,section,prof_email) values ('" + excelReader[0] + "','" + excelReader[2] + "','" + excelReader[3] + "','" + excelReader[4] + "','"+excelReader[7]+"')";
                     cmd.ExecuteNonQuery();
@@ -532,6 +541,7 @@ namespace CIS411
 
         private void frmAdmin_Load(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             /*
             string folder = System.IO.Path.GetFullPath(System.Reflection.Assembly.GetEntryAssembly().Location);
             string dbPath = System.IO.Path.Combine(folder, "CIS411_Kris");
@@ -544,6 +554,11 @@ namespace CIS411
             //Directory fullname = f.Directory;
             //Directory.get
           //  MessageBox.Show("");
+=======
+
+  
+            
+>>>>>>> origin/Matt10
             loadlist();
         
             
