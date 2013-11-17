@@ -733,7 +733,7 @@ namespace CIS411
         }
 
         //Created by Sean: button1_Click inside the Reporting Tab
-        private void button1_Click(object sender, EventArgs e)
+        private void displayBtn_Click(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'DataSet1.DataTable1' table. You can move, or remove it, as needed.
             this.DataTable1TableAdapter.Fill(this.DataSet1.DataTable1);

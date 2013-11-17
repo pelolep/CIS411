@@ -105,8 +105,7 @@ namespace CIS411
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.displayBtn = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtEditSignOut = new System.Windows.Forms.TextBox();
@@ -117,7 +116,7 @@ namespace CIS411
             this.txtAddSignOut = new System.Windows.Forms.TextBox();
             this.txtAddSignIn = new System.Windows.Forms.TextBox();
             this.DataTable1TableAdapter = new CIS411.DataSet1TableAdapters.DataTable1TableAdapter();
-            this.dataTable2BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.DataTable1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataSet1)).BeginInit();
             this.tabControlAdmin.SuspendLayout();
@@ -128,7 +127,6 @@ namespace CIS411
             this.grpBoxPassword.SuspendLayout();
             this.tabMethods.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataTable2BindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // DataTable1BindingSource
@@ -857,7 +855,7 @@ namespace CIS411
             this.tabPage1.Controls.Add(this.comboBox1);
             this.tabPage1.Controls.Add(this.reportViewer1);
             this.tabPage1.Controls.Add(this.textBox1);
-            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.displayBtn);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -902,23 +900,15 @@ namespace CIS411
             this.reportViewer1.TabIndex = 2;
             this.reportViewer1.Load += new System.EventHandler(this.reportViewer1_Load);
             // 
-            // textBox1
+            // displayBtn
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 6);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(115, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.displayBtn.Location = new System.Drawing.Point(115, 6);
+            this.displayBtn.Name = "displayBtn";
+            this.displayBtn.Size = new System.Drawing.Size(75, 23);
+            this.displayBtn.TabIndex = 0;
+            this.displayBtn.Text = "Display";
+            this.displayBtn.UseVisualStyleBackColor = true;
+            this.displayBtn.Click += new System.EventHandler(this.displayBtn_Click);
             // 
             // btnClose
             // 
@@ -997,10 +987,13 @@ namespace CIS411
             // 
             this.DataTable1TableAdapter.ClearBeforeFill = true;
             // 
-            // dataTable2BindingSource1
+            // textBox1
             // 
-            this.dataTable2BindingSource1.DataMember = "DataTable2";
-            this.dataTable2BindingSource1.DataSource = this.DataSet1;
+            this.textBox1.Location = new System.Drawing.Point(6, 6);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 1;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // frmAdmin
             // 
@@ -1027,7 +1020,6 @@ namespace CIS411
             this.tabMethods.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            //((System.ComponentModel.ISupportInitialize)(this.dataTable2BindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1113,16 +1105,15 @@ namespace CIS411
         private System.Windows.Forms.TabPage tabPage1;
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button displayBtn;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private System.Windows.Forms.BindingSource DataTable1BindingSource;
         private DataSet1 DataSet1;
         private DataSet1TableAdapters.DataTable1TableAdapter DataTable1TableAdapter;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBox1;
         //private DataSet1TableAdapters.DataTable2TableAdapter dataTable2TableAdapter;
-        private System.Windows.Forms.BindingSource dataTable2BindingSource1;
     }
 }
         #endregion
