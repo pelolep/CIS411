@@ -22,10 +22,6 @@ namespace CIS411
 
 
         /*
-=======
-
-        
->>>>>>> origin/Matt8
         SqlConnection cn;
         SqlCommand cmd;
         SqlDataReader rd;
@@ -104,7 +100,7 @@ namespace CIS411
             string[] name = listBoxEnableTutors.SelectedItem.ToString().Split();
             DataConnection conn = new DataConnection();
             conn.Open();
-            conn.Query("update tutor set status = 'inactive' where CLARION_ID = '" + name[2] + "'");
+            conn.Query("update tutor set status = 'inactive' where CLARION_ID = " + name[2]);
             conn.Close();
             /*
             cn.Open();
@@ -120,12 +116,13 @@ namespace CIS411
             */
             loadlist();
         }
+        
         private void btnEnableSelected_Click(object sender, EventArgs e)
         {
             string[] name = listBoxDisableTutors.SelectedItem.ToString().Split();
             DataConnection conn = new DataConnection();
             conn.Open();
-            conn.Query("update tutor set status = 'active' where CLARION_ID = '" + name[2] + "'");
+            conn.Query("update tutor set status = active where CLARION_ID = " + name[2]);
             conn.Close();
             /*
             cn.Open();
@@ -260,12 +257,12 @@ namespace CIS411
                 Excel.Workbook xlWorkBook = xlApp.Workbooks.Add();
                 Excel.Worksheet xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
                 
-                xlWorkSheet.Cells[1, 1] = "Student";
-                xlWorkSheet.Cells[1, 2] = "Hours";
-                xlWorkSheet.Cells[2, 1] = "Bill Warren";
-                xlWorkSheet.Cells[2, 2] = "30";
-                xlWorkSheet.Cells[3, 1] = "Kris Demor";
-                xlWorkSheet.Cells[3, 2] = "40";
+                xlWorkSheet.Cells[1, 1].Value = "Student";
+                xlWorkSheet.Cells[1, 2].Value = "Hours";
+                xlWorkSheet.Cells[2, 1].Value = "Bill Warren";
+                xlWorkSheet.Cells[2, 2].Value = "30";
+                xlWorkSheet.Cells[3, 1].Value = "Kris Demor";
+                xlWorkSheet.Cells[3, 2].Value = "40";
 
                 DataConnection conn = new DataConnection();
 
@@ -288,15 +285,21 @@ namespace CIS411
 
         private void btn_student_import_Click(object sender, EventArgs e)
         {
-           
-                OpenFileDialog o = new OpenFileDialog();
-                o.ShowDialog();
-                if (o.FileName == "")
+            string last, first, middle, connectionString = "";
+            OpenFileDialog studentsFile = new OpenFileDialog();
+            studentsFile.Filter = "Excel files (*.xls)|*.xls|All files (*.*)|*.*";
+            studentsFile.RestoreDirectory = true;
+            studentsFile.DefaultExt = "xlsx";
+            if (studentsFile.ShowDialog() == DialogResult.OK)
+            {
+                if (studentsFile.FileName == "")
                     return;
-                // int term, id, last, first, middle, username, eaglemail, standing, degree, major, major2, minor, minor2, credits_att, sex, his, am_in, asian, black, pac_is, white, age, campus, housing, trans, trans_cr, visits;
-                string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source="+o.FileName+";Extended Properties=Excel 12.0 Xml";
-                // Create the connection
-                string last, first, middle;
+                try
+                {
+                    connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=" + studentsFile.FileName + ";Extended Properties=Excel 12.0 Xml";
+                }
+                catch { return; };
+            }
 
                 System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
                 string excelQuery = @"Select * from [Export Worksheet$]";
@@ -311,6 +314,7 @@ namespace CIS411
                 cn.Open();
                 */
                 // Add class names to comboClassList
+                excelReader.Read();
                 while (excelReader.Read())
                 {
                     last = excelReader[2].ToString();
@@ -348,14 +352,108 @@ namespace CIS411
 
         private void btn_courses_import_Click(object sender, EventArgs e)
         {
-            string last, first;
-            OpenFileDialog o = new OpenFileDialog();
-            o.ShowDialog();
-            if (o.FileName == "")
+            /*
+            OpenFileDialog coursesFile = new OpenFileDialog();
+            coursesFile.Filter = "Excel files (*.xls)|*.xls|All files (*.*)|*.*";
+            coursesFile.RestoreDirectory = true;
+            coursesFile.DefaultExt = "xlsx";
+            Excel.Application xlApp;
+            Excel.Workbook xlWorkBook;
+            Excel.Worksheet xlWorkSheet;
+
+            if (coursesFile.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    xlApp = new Excel.Application();
+                    xlWorkBook = xlApp.Workbooks.Open(coursesFile.FileName);
+                    xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+                }
+                catch { return; };
+                DataConnection conn = new DataConnection();
+                string last, first;
+                List<int> rowsSkipped = new List<int>();
+                for (int i = 2; i <= xlWorkSheet.Rows.Count; i++)
+                {
+                    try
+                    {
+                        conn.Open();
+                        if (!(conn.GetReader("CLARION_ID", "STUDENT", "CLARION_ID", xlWorkSheet.Cells[i, 2].Value.ToString()).HasRows))
+                            if (MessageBox.Show("Student found in courses file that \n" +
+                                            "that is not in database. You should \n" +
+                                            "update the student file. Continue anyway?", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                            {
+                                conn.Close();
+                                return;
+                            }
+                            else
+                            {
+                                conn.Close();
+                                continue;
+                            }
+                        conn.Close();
+                        conn.Open();
+                        if ((xlWorkSheet.Cells[i, 6].Value.ToString() != "") && (conn.GetReader("PROF_EMAIL", "PROFESSOR", "PROF_EMAIL", xlWorkSheet.Cells[i, 6].Value.ToString()).HasRows))
+                        {
+                            last = xlWorkSheet.Cells[i, 6].Value;
+                            last = last.Replace("'", " ");
+                            first = xlWorkSheet.Cells[i, 7].Value;
+                            first = first.Replace("'", " ");
+                            conn.Close();
+                            conn.Open();
+                            conn.Query("INSERT INTO PROFESSOR (PROF_EMAIL, LASTNAME, FIRSTNAME) VALUES ('" + xlWorkSheet.Cells[i, 8].Value + "','" + last + "','" + first + "')");
+                        }
+                        conn.Close();
+                        conn.Open();
+                        if (!(conn.GetReader("*", "COURSE", "TERM", xlWorkSheet.Cells[i, 1].Value.ToString(), "SUBJECT", xlWorkSheet.Cells[i, 3].Value.ToString(), "CATALOG", xlWorkSheet.Cells[i, 4].Value.ToString(), "SECTION", xlWorkSheet.Cells[i, 5].Value.ToString()).HasRows))
+                        {
+                            conn.Close();
+                            conn.Open();
+                            conn.Query("INSERT INTO COURSE (TERM,SUBJECT,CATALOG,SECTION,PROF_EMAIL) VALUES ('" + xlWorkSheet.Cells[i, 1].Value + "','" + xlWorkSheet.Cells[i, 3].Value + "','" + xlWorkSheet.Cells[i, 4].Value + "','" + xlWorkSheet.Cells[i, 5].Value + "','" + xlWorkSheet.Cells[i, 8].Value + "')");
+                        }
+                        conn.Close();
+                        conn.Open();
+                        if (!(conn.GetReader("*", "STUDENT_COURSE", "CLARION_ID", xlWorkSheet.Cells[i, 2].Value.ToString(), "TERM", xlWorkSheet.Cells[i, 1].Value.ToString(), "SUBJECT", xlWorkSheet.Cells[i, 3].Value.ToString(), "CATALOG", xlWorkSheet.Cells[i, 4].Value.ToString(), "SECTION", xlWorkSheet.Cells[i, 5].Value.ToString()).HasRows))
+                        {
+                            conn.Close();
+                            conn.Open();
+                            conn.Query("INSERT INTO STUDENT_COURSE (CLARION_ID,TERM,SUBJECT,CATALOG,SECTION) VALUES (" + xlWorkSheet.Cells[i, 2].Value + ",'" + xlWorkSheet.Cells[i, 1].Value + "','" + xlWorkSheet.Cells[i, 3].Value + "','" + xlWorkSheet.Cells[i, 4].Value + "','" + xlWorkSheet.Cells[i, 5].Value + "')");
+                        }
+                        conn.Close();
+                    }
+                    catch
+                    {
+                        rowsSkipped.Add(i);
+                    }
+                }
+                string s = "Import done. Rows skipped: ";
+                for (int i = 0; i < rowsSkipped.Count; i++)
+                    s += rowsSkipped[i].ToString() + " ";
+                MessageBox.Show(s);
+            }
+            */
+            
+            string last, first, connectionString="";
+            OpenFileDialog coursesFile = new OpenFileDialog();
+            coursesFile.Filter = "Excel files (*.xls)|*.xls|All files (*.*)|*.*";
+            coursesFile.RestoreDirectory = true;
+            coursesFile.DefaultExt = "xlsx";
+            if (coursesFile.ShowDialog() == DialogResult.OK)
+            {
+                if (coursesFile.FileName == "")
+                    return;
+                try
+                {
+                    connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source=" + coursesFile.FileName + ";Extended Properties=Excel 12.0 Xml";
+                }
+                catch { return; };
+            }
+            else
                 return;
+            /*
             SqlCommand cmd2 = new SqlCommand();
             SqlCommand cmd3 = new SqlCommand();
-            string connectionString = @"Provider= Microsoft.ACE.OLEDB.12.0;Data Source="+o.FileName+";Extended Properties=Excel 12.0 Xml";
+            */
             // Create the connection
 
             System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
@@ -365,30 +463,22 @@ namespace CIS411
             System.Data.OleDb.OleDbDataReader excelReader;
             excelReader = excelCommand.ExecuteReader();
             DataConnection conn = new DataConnection();
+            conn.Open();
             /*
             cmd.Connection = cn;
             cmd2.Connection = cn;
             cn.Open();
             */
+            string s = "";
+            int i=2;
+            excelReader.Read();
             while (excelReader.Read())
             {
-      
+                i++;
                 last = excelReader[5].ToString();
                 last = last.Replace("'"," ");
                 first = excelReader[6].ToString();
                 first= first.Replace("'"," ");
-                try
-                {
-                    conn.Query("insert into Course (term,subject,catalog,section,prof_email) values ('" + excelReader[0] + "','" + excelReader[2] + "','" + excelReader[3] + "','" + excelReader[4] + "','"+excelReader[7]+"')");
-                    /*
-                    cmd.CommandText = "insert into Course (term,subject,catalog,section,prof_email) values ('" + excelReader[0] + "','" + excelReader[2] + "','" + excelReader[3] + "','" + excelReader[4] + "','"+excelReader[7]+"')";
-                    cmd.ExecuteNonQuery();
-                    cmd.Clone();
-                    */
-                }
-                catch
-                {
-                }
                 try
                 {
                     conn.Query("insert into PROFESSOR (PROF_EMAIL, LASTNAME, FIRSTNAME) values ('" + excelReader[7] + "', '" + last + "', '" + first + "')");
@@ -398,8 +488,22 @@ namespace CIS411
                     cmd2.Clone();
                     */
                 }
-                catch
+                catch (Exception ex)
                 {
+                    s += "\n\tProfessor on row " + i.ToString() + "\n" + ex.Message.ToString();
+                }
+                try
+                {
+                    conn.Query("insert into Course (term,subject,catalog,section,prof_email) values ('" + excelReader[0] + "','" + excelReader[2] + "','" + excelReader[3] + "','" + excelReader[4] + "','"+excelReader[7]+"')");
+                    /*
+                    cmd.CommandText = "insert into Course (term,subject,catalog,section,prof_email) values ('" + excelReader[0] + "','" + excelReader[2] + "','" + excelReader[3] + "','" + excelReader[4] + "','"+excelReader[7]+"')";
+                    cmd.ExecuteNonQuery();
+                    cmd.Clone();
+                    */
+                }
+                catch (Exception ex)
+                {
+                    s += "\n\tCourse on row " + i.ToString() + "\n" + ex.Message.ToString();
                 }
                 try
                 {
@@ -410,10 +514,12 @@ namespace CIS411
                     cmd.Clone();
                     */
                 }
-                catch 
-                { 
+                catch (Exception ex)
+                {
+                    s += "\n\tStudent_Course on row " + i.ToString() + "\n" + ex.Message.ToString();
                 }
             }
+            conn.Query("insert into Course (term,subject,catalog,section) values ('0','0','0','0')");
             excelReader.Close();
             conn.Close();
             //cn.Close();
@@ -422,13 +528,14 @@ namespace CIS411
 
         private void frmAdmin_Load(object sender, EventArgs e)
         {
-
+            /*
             string folder = System.IO.Path.GetFullPath(System.Reflection.Assembly.GetEntryAssembly().Location);
             string dbPath = System.IO.Path.Combine(folder, "CIS411_Kris");
             string connString = "DataSource=" +dbPath;
             
             string fileName = "CIS411_kris";
             FileInfo f = new FileInfo(fileName);
+            */
            // string aa [] = f.FullName.ToString().Split();
             //Directory fullname = f.Directory;
             //Directory.get
@@ -447,7 +554,7 @@ namespace CIS411
             listBoxLoggedIn.Items.Clear();
             DataConnection conn = new DataConnection();
             conn.Open();
-            SqlDataReader rd = conn.GetReader("STUDENT.FIRSTNAME, STUDENT.MIDDLE_NAME, STUDENT.LASTNAME", "TUTOR INNER JOIN STUDENT ON TUTOR.CLARION_ID=STUDENT.CLARION_ID");
+            SqlDataReader rd = conn.GetReader("STUDENT.FIRSTNAME, STUDENT.LASTNAME, STUDENT.CLARION_ID", "TUTOR INNER JOIN STUDENT ON TUTOR.CLARION_ID=STUDENT.CLARION_ID");
             
             /*
             cn.Open();
@@ -712,7 +819,7 @@ namespace CIS411
             {
                 comboAddTutoring.Enabled = true;
                 comboAddTutoring.Items.Add("Select a tutor...");
-                comboAddTutoring.Items.AddRange(frmMain.getTutors());
+                comboAddTutoring.Items.AddRange(frmMain.getTutors(true));
                 comboAddTutoring.SelectedIndex = 0;
             }
             else
@@ -721,7 +828,6 @@ namespace CIS411
 
         
         }
-
         // Returns array of all tutors
         /*
         public string[] getTutors()
