@@ -19,7 +19,7 @@ namespace CIS411
     {//        AppDomain currentDomain = AppDomain.CurrentDomain.SetData("DataDirectory", "App1.config");
 
         AppDomain Directory = AppDomain.CurrentDomain;
-
+        
 
         /*
 =======
@@ -365,6 +365,7 @@ namespace CIS411
             System.Data.OleDb.OleDbDataReader excelReader;
             excelReader = excelCommand.ExecuteReader();
             DataConnection conn = new DataConnection();
+            conn.Open();
             /*
             cmd.Connection = cn;
             cmd2.Connection = cn;
@@ -377,9 +378,11 @@ namespace CIS411
                 last = last.Replace("'"," ");
                 first = excelReader[6].ToString();
                 first= first.Replace("'"," ");
+                string catalog = excelReader[3].ToString().Replace(" ", "");
+
                 try
                 {
-                    conn.Query("insert into Course (term,subject,catalog,section,prof_email) values ('" + excelReader[0] + "','" + excelReader[2] + "','" + excelReader[3] + "','" + excelReader[4] + "','"+excelReader[7]+"')");
+                    conn.Query("insert into Course (term,subject,catalog,section,prof_email) values ('" + excelReader[0] + "','" + excelReader[2] + "','" + catalog + "','" + excelReader[4] + "','"+excelReader[7]+"')");
                     /*
                     cmd.CommandText = "insert into Course (term,subject,catalog,section,prof_email) values ('" + excelReader[0] + "','" + excelReader[2] + "','" + excelReader[3] + "','" + excelReader[4] + "','"+excelReader[7]+"')";
                     cmd.ExecuteNonQuery();
@@ -392,6 +395,7 @@ namespace CIS411
                 try
                 {
                     conn.Query("insert into PROFESSOR (PROF_EMAIL, LASTNAME, FIRSTNAME) values ('" + excelReader[7] + "', '" + last + "', '" + first + "')");
+                   
                     /*
                     cmd2.CommandText = "insert into PROFESSOR (PROF_EMAIL, LASTNAME, FIRSTNAME) values ('" + excelReader[7] + "', '" + last + "', '" + first + "')";
                     cmd2.ExecuteNonQuery();
@@ -403,7 +407,7 @@ namespace CIS411
                 }
                 try
                 {
-                    conn.Query("insert into student_Course (clarion_id,term,subject,catalog,section) values ('"+excelReader[1]+"' ,'" + excelReader[0] + "','" + excelReader[2] + "','" + excelReader[3] + "','" + excelReader[4] + "')");
+                    conn.Query("insert into student_Course (clarion_id,term,subject,catalog,section) values ('"+excelReader[1]+"' ,'" + excelReader[0] + "','" + excelReader[2] + "','" + catalog + "','" + excelReader[4] + "')");
                     /*
                     cmd.CommandText = "insert into student_Course (clarion_id,term,subject,catalog,section) values ('"+excelReader[1]+"' ,'" + excelReader[0] + "','" + excelReader[2] + "','" + excelReader[3] + "','" + excelReader[4] + "')";
                     cmd.ExecuteNonQuery();
@@ -423,19 +427,10 @@ namespace CIS411
         private void frmAdmin_Load(object sender, EventArgs e)
         {
 
-            string folder = System.IO.Path.GetFullPath(System.Reflection.Assembly.GetEntryAssembly().Location);
-            string dbPath = System.IO.Path.Combine(folder, "CIS411_Kris");
-            string connString = "DataSource=" +dbPath;
+  
             
-            string fileName = "CIS411_kris";
-            FileInfo f = new FileInfo(fileName);
-           // string aa [] = f.FullName.ToString().Split();
-            //Directory fullname = f.Directory;
-            //Directory.get
-          //  MessageBox.Show("");
             loadlist();
-           // AppDomain.CurrentDomain.SetData("DataDirectory", "~/cis411/cis411_Kris/db.mdf");
-            //currentDomain.SetData("DataDirectory", "~/cis411/cis411_Kris/db.mdf");
+        
             
            
         }
@@ -447,7 +442,7 @@ namespace CIS411
             listBoxLoggedIn.Items.Clear();
             DataConnection conn = new DataConnection();
             conn.Open();
-            SqlDataReader rd = conn.GetReader("STUDENT.FIRSTNAME, STUDENT.MIDDLE_NAME, STUDENT.LASTNAME", "TUTOR INNER JOIN STUDENT ON TUTOR.CLARION_ID=STUDENT.CLARION_ID");
+            SqlDataReader rd = conn.GetReader("STUDENT.FIRSTNAME, STUDENT.MIDDLE_NAME, STUDENT.clarion_id, tutor.status", "TUTOR INNER JOIN STUDENT ON TUTOR.CLARION_ID=STUDENT.CLARION_ID");
             
             /*
             cn.Open();
@@ -461,7 +456,7 @@ namespace CIS411
                 
                 while (rd.Read())
                 {
-                    if(rd[2].ToString() == "active")
+                    if(rd[3].ToString() == "active")
                         listBoxEnableTutors.Items.Add(rd[0].ToString() + " " +rd[1].ToString() + " " + rd[2]);
                     else
                         listBoxDisableTutors.Items.Add(rd[0].ToString() + " " + rd[1].ToString() + " " + rd[2]);
@@ -474,13 +469,13 @@ namespace CIS411
 <<<<<<< HEAD
             cmd.CommandText = "select * from visit";
             */
-            rd = conn.GetReader("*", "VISIT");
-            listBoxLoggedIn.Items.Add("Date               time in       id      term     method");
-/*=======
-            cmd.CommandText = "select * from visit inner join student on visit.clarion_id=student.clarion_id";
-            rd = cmd.ExecuteReader();
+            rd = conn.GetReader("*", "VISIT","student", "visit.clarion_id=student.clarion_id and time_out is null", 1);
             listBoxLoggedIn.Items.Add("Date                                   time in                                        id                            last name                             first name");
->>>>>>> origin/Matt8*/
+            /*=======
+                        cmd.CommandText = "select * from visit inner join student on visit.clarion_id=student.clarion_id";
+                        rd = cmd.ExecuteReader();
+                        listBoxLoggedIn.Items.Add("Date                                   time in                                        id                            last name                             first name");
+            >>>>>>> origin/Matt8*/
             if (rd.HasRows)
             {
 
@@ -653,7 +648,7 @@ namespace CIS411
             string course = txtAddClass.Text;
             int tutor = 2;
             
-            string nothing = " ";
+            string nothing = "other";
 
             /*if (method == "Tutoring")
             {
