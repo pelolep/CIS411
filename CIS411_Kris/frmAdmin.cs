@@ -515,9 +515,6 @@ namespace CIS411
 
         private void frmAdmin_Load(object sender, EventArgs e)
         {
-<<<<<<< HEAD
-            loadlist();
-=======
             // TODO: This line of code loads data into the 'DataSet1.DataTable2' table. You can move, or remove it, as needed.
             //this.dataTable2TableAdapter.Fill(this.DataSet1.DataTable2);
             // TODO: This line of code loads data into the 'DataSet1.DataTable1' table. You can move, or remove it, as needed.
@@ -540,7 +537,6 @@ namespace CIS411
 
 
             this.reportViewer1.RefreshReport();
->>>>>>> origin/Sean8
         }
 
         public void loadlist()
@@ -824,8 +820,6 @@ namespace CIS411
 
         
         }
-<<<<<<< HEAD
-=======
         // Created by Sean: textBox1 inside the Reporting Tab
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -882,8 +876,6 @@ namespace CIS411
         {
 
         }
-
->>>>>>> origin/Sean8
         // Returns array of all tutors
         /*
         public string[] getTutors()
