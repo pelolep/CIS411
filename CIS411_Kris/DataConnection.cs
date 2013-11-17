@@ -5,14 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 
+
 public class DataConnection
 {
     public SqlConnection cn;
     public SqlCommand cmd;
     public SqlDataReader rd;
     public DataConnection()
-    {
-        cn = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\db.mdf;Integrated Security=True");
+    { 
+        string folder = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+        string dbPath = System.IO.Path.Combine(folder, "db.mdf");
+        int bin = dbPath.IndexOf("bin");
+        dbPath = dbPath.Remove(bin);
+ 
+        AppDomain currentDomain = AppDomain.CurrentDomain;
+        currentDomain.SetData("database", dbPath + "db.mdf");
+        cn = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename='"+currentDomain.GetData("database")+"';Integrated Security=True");
         cmd = new SqlCommand();
         cn.Open(); //TESTING DATABASE
         cn.Close();
@@ -64,8 +72,21 @@ public class DataConnection
 
     public SqlDataReader GetReader(string column, string table, string conditionColumn, string conditionValue)
     {
-        int i;
         cmd.CommandText = GetReaderString(column, table, conditionColumn, conditionValue);
+        if (rd == null)
+            rd = cmd.ExecuteReader();
+        else
+        {
+            rd.Close();
+            rd = cmd.ExecuteReader();
+        }
+        return rd;
+    }
+
+    public SqlDataReader GetReader(string column, string table, string conditionColumn, string conditionValue, string condition2)
+    {
+        int i;
+        cmd.CommandText = "SELECT " + column + " FROM " + table + " WHERE " + conditionColumn + " = " + (int.TryParse(conditionValue, out i) ? "" : "'") + conditionValue.ToString() + (int.TryParse(conditionValue, out i) ? "" : "'") + condition2;
         if (rd == null)
             rd = cmd.ExecuteReader();
         else
@@ -167,5 +188,18 @@ public class DataConnection
     {
         cmd.CommandText = q;
         cmd.ExecuteNonQuery();
+    }
+
+    public SqlDataReader GetReader(string column, string table, string table2, string condition, int asdf)
+    {
+        cmd.CommandText = "SELECT " + column + " FROM " + table + " inner join " + table2 +" on " + condition;
+        if (rd == null)
+            rd = cmd.ExecuteReader();
+        else
+        {
+            rd.Close();
+            rd = cmd.ExecuteReader();
+        }
+        return rd;
     }
 }
