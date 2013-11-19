@@ -62,37 +62,14 @@ namespace CIS411
             SqlDataReader rd = conn.GetReader("*","STUDENT","CLARION_ID",studentID);
             if (rd.HasRows)
             {
-                /*
-                while (rd.Read())
-                {
-                    
-                    if (rd[0].ToString() == studentID.ToString())
-                    {
-                        
-                        real = true;
-                    }
-                }
-                valid = true;
-                */
+
                 conn.Close();
                 conn.Open();
                 conn.Query("insert into tutor(clarion_id,status) values ('"+ studentID +"', '"+ "active" +"')");
             }
             conn.Close();
             loadlist();
-            /*
-            if (valid)
-            {
-                cn.Open();
-                cmd.CommandText = "insert into tutor(clarion_id,status) values ('"+ studentID +"', '"+ "active" +"')";
 
-                cmd.ExecuteNonQuery();
-                //cmd.Clone();
-                cn.Close();
-            }
-            cn.Close();
-            loadlist();
-            */
         }
 
         private void btnDisableSelected_Click(object sender, EventArgs e)
@@ -491,7 +468,7 @@ namespace CIS411
                 }
                 try
                 {
-                    conn.Query("insert into Course (term,subject,catalog,section,prof_email) values ('" + excelReader[0] + "','" + excelReader[2] + "','" + excelReader[3] + "','" + excelReader[4] + "','"+excelReader[7]+"')");
+                    conn.Query("insert into Course (term,subject,catalog,section,prof_email) values ('" + excelReader[0] + "','" + excelReader[2] + "','" + catalog + "','" + excelReader[4] + "','"+excelReader[7]+"')");
                 }
                 catch (Exception ex)
                 {
@@ -506,7 +483,11 @@ namespace CIS411
                     s += "\n\tStudent_Course on row " + i.ToString() + "\n" + ex.Message.ToString();
                 }
             }
-            conn.Query("insert into Course (term,subject,catalog,section) values ('0','0','0','0')");
+            try
+            {
+                conn.Query("insert into Course (term,subject,catalog,section) values ('other','other','other','other')");
+            }
+            catch { }
             excelReader.Close();
             conn.Close();
             //cn.Close();
@@ -548,13 +529,6 @@ namespace CIS411
             conn.Open();
             SqlDataReader rd = conn.GetReader("STUDENT.FIRSTNAME, STUDENT.MIDDLE_NAME, STUDENT.clarion_id, tutor.status", "TUTOR INNER JOIN STUDENT ON TUTOR.CLARION_ID=STUDENT.CLARION_ID");
             
-            /*
-            cn.Open();
-
-
-            cmd.CommandText = "select * from tutor inner join student on tutor.clarion_id=student.clarion_id";
-            rd = cmd.ExecuteReader();
-            */
             if (rd.HasRows)
             {  
                 
@@ -566,20 +540,10 @@ namespace CIS411
                         listBoxDisableTutors.Items.Add(rd[0].ToString() + " " + rd[1].ToString() + " " + rd[2]);
                 }
             }
-            /*
-            rd.Close();
-            cn.Close();
-            cn.Open();
-<<<<<<< HEAD
-            cmd.CommandText = "select * from visit";
-            */
+
             rd = conn.GetReader("*", "VISIT","student", "visit.clarion_id=student.clarion_id and time_out is null", 1);
             listBoxLoggedIn.Items.Add("Date                                   time in                                        id                            last name                             first name");
-            /*=======
-                        cmd.CommandText = "select * from visit inner join student on visit.clarion_id=student.clarion_id";
-                        rd = cmd.ExecuteReader();
-                        listBoxLoggedIn.Items.Add("Date                                   time in                                        id                            last name                             first name");
-            >>>>>>> origin/Matt8*/
+
             if (rd.HasRows)
             {
 
@@ -590,11 +554,10 @@ namespace CIS411
                     listBoxLoggedIn.Items.Add(jdate.ToString("dd/M/yyyy") + "                    "+rd[2] + "                    " + rd[0] + "                  "+rd[13] + "                            " + rd[14]);
                 }
             }
+
+
             conn.Close();
-            /*
-            rd.Close();
-            cn.Close();
-            */
+
         }
 
         private void tabControlAdmin_SelectedIndexChanged(object sender, EventArgs e)
@@ -674,16 +637,13 @@ namespace CIS411
         {
             DataConnection conn = new DataConnection();
             conn.Open();
+            try
+            {
             conn.Query("insert into visit(Date, time_in, clarion_id, method) values ('" + DateTime.Today + "', '" + "10:52:02" + "', '" + "11111111" + "', '" + "testing" + "')");
+            }
+            catch{}
             conn.Close();
-            /*
-            cn.Open();
-            cmd.CommandText = "insert into visit(Date, time_in, clarion_id, method) values ('" + DateTime.Today + "', '" + "10:52:02" + "', '" + "11111111" + "', '" + "testing" + "')";
 
-            cmd.ExecuteNonQuery();
-            cmd.Clone();
-            cn.Close();
-            */
             loadlist();
         }
 
@@ -732,60 +692,116 @@ namespace CIS411
         private void comboTutoring_SelectedIndex(object sender, EventArgs e)
         {
             comboAddTutoring.Enabled = true;
-            txtAddClass.Enabled = true;
         }
 
         private void btnAddVisit_Click(object sender, EventArgs e)
         {
-            /*Won't run because of tutor ID issue.
-             * The Tutor ID being uploaded to the visits
-             * table does not line up with the Tutor table
-             * 
-             * 
-             */
-            
-            string studentID = txtAddStudentID.Text;
-            string date = dateTimePickerAdd.Text;
-            string timeIn = dateTimePickerAddTimeIn.Text;
-            string timeOut = dateTimePickerAddTimeOut.Text;
-            string method = comboAddMethod.SelectedIndex.ToString();
-            string course = txtAddClass.Text;
-            int tutor = 2;
-            
-            string nothing = "other";
-
-            /*if (method == "Tutoring")
+            try
             {
-                if (course == null || tutor == null)
+                /*Won't run because of tutor ID issue.
+                 * The Tutor ID being uploaded to the visits
+                 * table does not line up with the Tutor table
+                 * 
+                 * 
+                 */
+                string studentID = "", date = "", timeIn = "", timeOut = "", method = "", time_difference = "";
+                string[] selectedTutor, selectedClass;
+                int tutor = 0;
+                // 11319440
+                studentID = txtAddStudentID.Text;
+                date = dateTimePickerAdd.Text;
+                timeIn = dateTimePickerAddTimeIn.Text;
+                timeOut = dateTimePickerAddTimeOut.Text;
+                try
                 {
-                    MessageBox.Show("Please Enter a course and a tutor.");
+                    method = comboAddMethod.SelectedItem.ToString();
                 }
+                catch { }
+                //course = txtAddClass.Text;
+                // comboaddClass
+                TimeSpan dd = DateTime.Parse(timeOut).Subtract(DateTime.Parse(timeIn));
+                time_difference = dd.ToString();
+                //timedifference =DateTime.Parse( timenow.Subtract(timein).ToString());j
+                selectedClass = new string[5];
+
+
+                if (method == "Tutoring")
+                {
+                    selectedTutor = comboAddTutoring.SelectedItem.ToString().Split();
+                    tutor = int.Parse(selectedTutor[0]);
+                }
+                try
+                {
+                    selectedClass = comboaddClass.SelectedItem.ToString().Split();
+                }
+                catch { }
+                string nothing = "other";
+
+                DataConnection conn = new DataConnection();
+                conn.Open();
+
+                if (method == "Tutoring")
+                {
+                    if ((string)comboaddClass.SelectedItem.ToString().ToLower() == "other")
+                    {
+                        try
+                        {
+                            conn.Query("insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION, time_difference) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + nothing + "', '" + nothing + "', '" + nothing + "', '" + tutor + "', '" + method + "', '" + nothing + "', '" + time_difference + "')");
+                        }
+                        catch { }
+                    }
+                    else
+                    {
+                        conn.Query("insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION,time_difference) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + selectedClass[0] + "', '" + selectedClass[1] + "', '" + selectedClass[2] + "', '" + tutor + "', '" + method + "', '" + selectedClass[3] + "', '" + time_difference + "')");
+
+                    }
+                }
+                else // method isn't tutoring
+                {
+                    if ((string)comboaddClass.SelectedItem.ToString().ToLower() == "other")
+                    {
+                        try
+                        {
+                            conn.Query("insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG,METHOD, SECTION,time_difference) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + nothing + "', '" + nothing + "', '" + nothing + "', '" + method + "', '" + nothing + "','" + time_difference + "')");
+
+                        }
+                        catch { }
+                    }
+                    else
+                    {
+                        conn.Query("insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG, METHOD, SECTION,time_difference) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + selectedClass[0] + "', '" + selectedClass[1] + "', '" + selectedClass[2] + "', '" + method + "', '" + selectedClass[3] + "','" + time_difference + "')");
+
+                    }
+                }
+                //cmd.Connection = cn;
+
+
+                conn.Close();
+                /*
+    =======
+               // try
+                {
+    >>>>>>> origin/Matt8
+                    cn.Open();
+                    cmd.CommandText = "insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + "2138" + "', '" + "LS" + "', '" + "540" + "', '" + tutor + "', '" + method + "', '" + "W01" + "')";
+                    cmd.ExecuteNonQuery();
+                    cmd.Clone();
+                    cn.Close();
+    <<<<<<< HEAD
+                }
+                */
+                // catch
+                //{}
+                //  }
+                //lblTest.Text = date + "','" + timeIn + "', '" + timeOut + "', '" + studentID +  "', '" + method;
+
+                comboaddClass.Enabled = false;
+                comboAddTutoring.Enabled = false;
+                txtAddStudentID.Text = "";
+                comboaddClass.Items.Clear();
+                comboAddTutoring.Items.Clear();
             }
-            else
-            {
-            */
-            //cmd.Connection = cn;
-            DataConnection conn = new DataConnection();
-            conn.Open();
-            conn.Query("insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + nothing + "', '" + nothing + "', '" + nothing + "', '" + tutor + "', '" + method + "', '" + nothing + "')");
-            conn.Close();
-            /*
-=======
-           // try
-            {
->>>>>>> origin/Matt8
-                cn.Open();
-                cmd.CommandText = "insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + "2138" + "', '" + "LS" + "', '" + "540" + "', '" + tutor + "', '" + method + "', '" + "W01" + "')";
-                cmd.ExecuteNonQuery();
-                cmd.Clone();
-                cn.Close();
-<<<<<<< HEAD
-            }
-            */
-           // catch
-            //{}
-          //  }
-            lblTest.Text = date + "','" + timeIn + "', '" + timeOut + "', '" + studentID +  "', '" + method;
+            catch { MessageBox.Show("please check info and try again"); };
         }
         
         //Retrieves the Student Visit Records to edit
@@ -806,6 +822,8 @@ namespace CIS411
 
         private void comboAddMethod_SelectedIndexChanged(object sender, EventArgs e)
         {
+            comboaddClass.Items.Clear();
+            comboAddTutoring.Items.Clear();
 
             if (comboAddMethod.SelectedIndex == 0)
             {
@@ -817,6 +835,29 @@ namespace CIS411
             else
                 comboAddTutoring.Enabled = false;
 
+            comboaddClass.Items.Add("Select a class...");
+            DataConnection conn = new DataConnection();
+            conn.Open();
+            try
+            {
+                SqlDataReader rd = conn.GetReader("term, subject, catalog, section, clarion_id", "student_course", "clarion_id", txtAddStudentID.Text.ToString());
+                if (rd.HasRows)
+                {
+
+                    while (rd.Read())
+                    {
+                        comboaddClass.Items.Add(rd[0].ToString() + " " + rd[1].ToString() + " " + rd[2].ToString() + " " + rd[3].ToString());
+                    }
+                }
+                conn.Close();
+                comboaddClass.Items.Add("Other");
+                comboaddClass.SelectedIndex = 0;
+                comboaddClass.Enabled = true;
+            }
+            catch
+            {
+                MessageBox.Show("please check student id");
+            }
 
         
         }
@@ -873,6 +914,11 @@ namespace CIS411
         
         //Created by Sean:
         private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboAddTutoring_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

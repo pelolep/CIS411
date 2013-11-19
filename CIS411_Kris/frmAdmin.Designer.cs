@@ -29,7 +29,7 @@ namespace CIS411
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource2 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.DataTable1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.DataSet1 = new CIS411.DataSet1();
             this.tabControlAdmin = new System.Windows.Forms.TabControl();
@@ -60,7 +60,6 @@ namespace CIS411
             this.dateTimePickerAddTimeIn = new System.Windows.Forms.DateTimePicker();
             this.lblAddTutor = new System.Windows.Forms.Label();
             this.comboAddMethod = new System.Windows.Forms.ComboBox();
-            this.txtAddClass = new System.Windows.Forms.TextBox();
             this.lblAddClass = new System.Windows.Forms.Label();
             this.lblAddMethod = new System.Windows.Forms.Label();
             this.txtEditDate = new System.Windows.Forms.TextBox();
@@ -105,6 +104,7 @@ namespace CIS411
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.displayBtn = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -116,7 +116,7 @@ namespace CIS411
             this.txtAddSignOut = new System.Windows.Forms.TextBox();
             this.txtAddSignIn = new System.Windows.Forms.TextBox();
             this.DataTable1TableAdapter = new CIS411.DataSet1TableAdapters.DataTable1TableAdapter();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.comboaddClass = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.DataTable1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataSet1)).BeginInit();
             this.tabControlAdmin.SuspendLayout();
@@ -350,6 +350,7 @@ namespace CIS411
             // 
             // tabVisits
             // 
+            this.tabVisits.Controls.Add(this.comboaddClass);
             this.tabVisits.Controls.Add(this.comboAddTutoring);
             this.tabVisits.Controls.Add(this.lblTest);
             this.tabVisits.Controls.Add(this.dateTimePickerEditTimeOut);
@@ -358,7 +359,6 @@ namespace CIS411
             this.tabVisits.Controls.Add(this.dateTimePickerAddTimeIn);
             this.tabVisits.Controls.Add(this.lblAddTutor);
             this.tabVisits.Controls.Add(this.comboAddMethod);
-            this.tabVisits.Controls.Add(this.txtAddClass);
             this.tabVisits.Controls.Add(this.lblAddClass);
             this.tabVisits.Controls.Add(this.lblAddMethod);
             this.tabVisits.Controls.Add(this.txtEditDate);
@@ -395,10 +395,11 @@ namespace CIS411
             // 
             this.comboAddTutoring.Enabled = false;
             this.comboAddTutoring.FormattingEnabled = true;
-            this.comboAddTutoring.Location = new System.Drawing.Point(256, 251);
+            this.comboAddTutoring.Location = new System.Drawing.Point(264, 251);
             this.comboAddTutoring.Name = "comboAddTutoring";
             this.comboAddTutoring.Size = new System.Drawing.Size(121, 21);
             this.comboAddTutoring.TabIndex = 43;
+            this.comboAddTutoring.SelectedIndexChanged += new System.EventHandler(this.comboAddTutoring_SelectedIndexChanged);
             // 
             // lblTest
             // 
@@ -466,14 +467,6 @@ namespace CIS411
             this.comboAddMethod.Size = new System.Drawing.Size(121, 21);
             this.comboAddMethod.TabIndex = 35;
             this.comboAddMethod.SelectedIndexChanged += new System.EventHandler(this.comboAddMethod_SelectedIndexChanged);
-            // 
-            // txtAddClass
-            // 
-            this.txtAddClass.Enabled = false;
-            this.txtAddClass.Location = new System.Drawing.Point(149, 251);
-            this.txtAddClass.Name = "txtAddClass";
-            this.txtAddClass.Size = new System.Drawing.Size(100, 20);
-            this.txtAddClass.TabIndex = 34;
             // 
             // lblAddClass
             // 
@@ -852,16 +845,6 @@ namespace CIS411
             // 
             // tabPage1
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(650, 395);
-            this.tabPage1.TabIndex = 5;
-            this.tabPage1.Text = "Reports";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage1
-            // 
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.comboBox1);
             this.tabPage1.Controls.Add(this.reportViewer1);
@@ -901,15 +884,23 @@ namespace CIS411
             // reportViewer1
             // 
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            reportDataSource2.Name = "DataSet1";
-            reportDataSource2.Value = this.DataTable1BindingSource;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource2);
+            reportDataSource1.Name = "DataSet1";
+            reportDataSource1.Value = this.DataTable1BindingSource;
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "CIS411.Report1.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(3, 35);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.Size = new System.Drawing.Size(644, 357);
             this.reportViewer1.TabIndex = 2;
             this.reportViewer1.Load += new System.EventHandler(this.reportViewer1_Load);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(6, 6);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 1;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // displayBtn
             // 
@@ -920,16 +911,6 @@ namespace CIS411
             this.displayBtn.Text = "Display";
             this.displayBtn.UseVisualStyleBackColor = true;
             this.displayBtn.Click += new System.EventHandler(this.displayBtn_Click);
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(650, 395);
-            this.tabPage1.TabIndex = 5;
-            this.tabPage1.Text = "Reports";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // btnClose
             // 
@@ -1008,13 +989,14 @@ namespace CIS411
             // 
             this.DataTable1TableAdapter.ClearBeforeFill = true;
             // 
-            // textBox1
+            // comboaddClass
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 6);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.comboaddClass.Enabled = false;
+            this.comboaddClass.FormattingEnabled = true;
+            this.comboaddClass.Location = new System.Drawing.Point(149, 251);
+            this.comboaddClass.Name = "comboaddClass";
+            this.comboaddClass.Size = new System.Drawing.Size(109, 21);
+            this.comboaddClass.TabIndex = 44;
             // 
             // frmAdmin
             // 
@@ -1102,7 +1084,6 @@ namespace CIS411
         private System.Windows.Forms.Label lblEditTimeIn;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblAddMethod;
-        private System.Windows.Forms.TextBox txtAddClass;
         private System.Windows.Forms.Label lblAddClass;
         private System.Windows.Forms.ComboBox comboAddMethod;
         private System.Windows.Forms.Label lblAddTutor;
@@ -1134,6 +1115,7 @@ namespace CIS411
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ComboBox comboaddClass;
         //private DataSet1TableAdapters.DataTable2TableAdapter dataTable2TableAdapter;
     }
         #endregion

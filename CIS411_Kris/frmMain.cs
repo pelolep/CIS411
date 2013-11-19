@@ -246,7 +246,7 @@ namespace CIS411
         private void signIn()
         {
             DataConnection conn = new DataConnection();
-            
+
             if (tutoring)
             {
                 int tutorid = 0;
@@ -256,39 +256,40 @@ namespace CIS411
                     tutorid = int.Parse(rd[0].ToString());
                 }
                 conn.Open();
-                conn.Query("insert into tutor_hour(tutor_id,Date,Time_in)values('" + tutorid + "', '" + System.DateTime.Today.ToString("d") + "', '" + DateTime.Parse(DateTime.Now.ToString("HH:mm:ss tt")) + "')");
+                conn.Query("insert into tutor_hour(tutor_id,Date,Time_in)values('" + tutorid + "', '" + DateTime.Today.ToString() + "', '" + DateTime.Parse(DateTime.Now.ToString("HH:mm:ss tt")) + "')");
 
             }
-            
+
             string[] selectedClass = comboClassList.SelectedItem.ToString().Split();
             if (comboTutors.Visible == false)
             {
                 conn.Open();
                 if (selectedClass[0].ToString() == "other")
-                    conn.Query("insert into visit(clarion_id,date,time_in,term,subject,catalog,section,method)values('" + studentID + "', '" +System.DateTime.Today.ToString("d") + "','" + DateTime.Parse(DateTime.Now.ToString("HH:mm:ss tt")) + "','" + "other" + "','" + "other" + "','" + "other" + "','" + "other" + "', '" + "method" + "')");
+                    conn.Query("insert into visit(clarion_id,date,time_in,term,subject,catalog,section,method)values('" + studentID + "', '" + System.DateTime.Today.ToString("d") + "','" + DateTime.Parse(DateTime.Now.ToString("HH:mm:ss tt")) + "','" + "other" + "','" + "other" + "','" + "other" + "','" + "other" + "', '" + "method" + "')");
                 else
-                    conn.Query("insert into visit(clarion_id,date,time_in,term,subject,catalog,section,method)values('" + studentID + "', '" +System.DateTime.Today.ToString("d") + "','" + DateTime.Parse(DateTime.Now.ToString("HH:mm:ss tt")) + "','" + selectedClass[0] + "','" + selectedClass[1] + "','" + selectedClass[2] + "','" + selectedClass[3] + "', '" + "method" + "')");
+                    conn.Query("insert into visit(clarion_id,date,time_in,term,subject,catalog,section,method)values('" + studentID + "', '" + System.DateTime.Today.ToString("d") + "','" + DateTime.Parse(DateTime.Now.ToString("HH:mm:ss tt")) + "','" + selectedClass[0] + "','" + selectedClass[1] + "','" + selectedClass[2] + "','" + selectedClass[3] + "', '" + "method" + "')");
             }
-            string[] selectedTutor={""};
-            if (comboTutors.SelectedItem!=null)
-                selectedTutor = comboTutors.SelectedItem.ToString().Split();
+
+
+            string[] selectedTutor = comboTutors.SelectedItem.ToString().Split();
             conn.Open();
-            try
+            // try
             {
-                if (selectedClass[0].ToString().ToLower() == "other")
+                if (selectedClass[0].ToString() == "other")
                     conn.Query("insert into visit(clarion_id,date,time_in,term,subject,catalog,section,method)values('" + studentID + "', '" + DateTime.Today.ToString("d") + "','" + DateTime.Parse(DateTime.Now.ToString("HH:mm:ss tt")) + "','" + "other" + "','" + "other" + "','" + "other" + "','" + "other" + "', '" + "method" + "')");
                 else
-                conn.Query("insert into VISIT (DATE, TIME_IN, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION) values ('" + System.DateTime.Today.ToString("d") + "','" + DateTime.Parse(DateTime.UtcNow.ToString("HH:mm:ss tt")) + "','" + txtStudentID.Text + "', '" + selectedClass[0] + "', '" + selectedClass[1] + "', '" + selectedClass[2] + "', '" + selectedTutor[0] + "' , '" + "method" + "', '" + selectedClass[3] + "')");
-
+                    MessageBox.Show("hit" + selectedClass[0] + " " + selectedClass[1] + " " + selectedClass[2] + " " + selectedClass[3]);
+                conn.Query("insert into VISIT (DATE, TIME_IN, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION) values ('" + System.DateTime.Today.ToString("d") + "','" + DateTime.Parse(DateTime.Now.ToString("HH:mm:ss tt")) + "','" + txtStudentID.Text + "', '" + selectedClass[0] + "', '" + selectedClass[1] + "', '" + selectedClass[2] + "', '" + selectedTutor[0] + "' , '" + "method" + "', '" + selectedClass[3] + "')");
                 //cmd.CommandText = "insert into VISIT (DATE, TIME_IN, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION) values ('" + System.DateTime.Today.ToString() + "','" + System.DateTime.UtcNow.TimeOfDay.ToString() + "','" + txtStudentID.Text + "', '" + selectedClass[0].ToString() + "', '" + selectedClass[1].ToString() + "', '" + selectedClass[2].ToString() + "', '" + selectedTutor[0] + "' , '" + "method" + "', '" + selectedClass[3].ToString() + "')";
             }
-            catch (Exception ex)
+            // catch
             {
-                string s = ex.Message.ToString();
-                MessageBox.Show("Failed to sign in", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
 
+
             conn.Close();
+            MessageBox.Show("You have been signed in");
             resetForm();
         }
 
@@ -325,12 +326,12 @@ namespace CIS411
             List<string> tutorList = new List<string>();
             DataConnection conn = new DataConnection();
             conn.Open();
-            SqlDataReader rd = conn.GetReader("STUDENT.FIRSTNAME, STUDENT.LASTNAME" + (includeIDs ? ", tutor.tutor_id" : ""), "TUTOR INNER JOIN STUDENT ON TUTOR.CLARION_ID=STUDENT.CLARION_ID", "STATUS","ACTIVE");
+            SqlDataReader rd = conn.GetReader("STUDENT.FIRSTNAME, STUDENT.LASTNAME, tutor.tutor_id" , "TUTOR INNER JOIN STUDENT ON TUTOR.CLARION_ID=STUDENT.CLARION_ID", "STATUS","ACTIVE");
             if (rd.HasRows)
             {
                 while (rd.Read())
                 {
-                    tutorList.Add((includeIDs ? rd[2].ToString() : "") + " " +rd[0] + " " + rd[1]);
+                    tutorList.Add(rd[2] + " " +rd[0] + " " + rd[1]);
                 }
             }
             conn.Close();
@@ -369,26 +370,32 @@ namespace CIS411
             bool b;
             DataConnection conn = new DataConnection();
             conn.Open();
-            SqlDataReader rd = conn.GetReader("clarion_id, time_out", "visit", "clarion_id", searchID.ToString(), "time_out", "null");
 
+            SqlDataReader rd = conn.GetReader("clarion_id, time_out", "visit", "clarion_id", searchID.ToString(), "and time_out is null");
             b = rd.HasRows;
             conn.Close();
             return b;
 
         }
 
-        public void signOut(int searchID)
+        public void signOut(int searchID)///////////
         {
             System.DateTime timein=DateTime.Parse("12:12:25"), timenow, timedifference; // sign out works for everything but searching for the time out
             DataConnection conn = new DataConnection();
             conn.Open();
-            SqlDataReader rd = conn.GetReader("time_in, time_out", "visit", "clarion_id", studentID.ToString(), "time_out", "null");
+           string o = "";
+            SqlDataReader rd = conn.GetReader("time_in, time_out", "visit", "clarion_id", studentID.ToString(), "and time_out is null");
+
             if (rd.HasRows)
             {
 
+                MessageBox.Show("");
                 while (rd.Read())
                 {
                     timein = DateTime.Parse( rd[0].ToString());
+                
+          
+
                 }
                 rd.Close();
             }
@@ -397,10 +404,11 @@ namespace CIS411
                 conn.Close();
                 return;
             }
- 
+
             timenow = DateTime.Parse(DateTime.Now.ToString("HH:mm:ss tt"));
 
             timedifference =DateTime.Parse( timenow.Subtract(timein).ToString());
+MessageBox.Show("hit");
             conn.Query("update visit set time_out = '" + timenow + "' , time_difference = '" + timedifference + "' where clarion_id= '" + studentID + "' and time_out is null");
             conn.Close();
 
