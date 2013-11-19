@@ -382,10 +382,11 @@ namespace CIS411
 
         public void signOut(int searchID)///////////
         {
-            System.DateTime timein=DateTime.Parse("12:12:25"), timenow, timedifference; // sign out works for everything but searching for the time out
+            System.DateTime timein = DateTime.Parse("12:12:25"), timenow;
+            System.TimeSpan timedifference; // sign out works for everything but searching for the time out
             DataConnection conn = new DataConnection();
             conn.Open();
-           string o = "";
+            string o = "";
             SqlDataReader rd = conn.GetReader("time_in, time_out", "visit", "clarion_id", studentID.ToString(), "and time_out is null");
 
             if (rd.HasRows)
@@ -394,9 +395,9 @@ namespace CIS411
                 MessageBox.Show("");
                 while (rd.Read())
                 {
-                    timein = DateTime.Parse( rd[0].ToString());
-                
-          
+                    timein = DateTime.Parse(rd[0].ToString());
+
+
 
                 }
                 rd.Close();
@@ -409,9 +410,14 @@ namespace CIS411
 
             timenow = DateTime.Parse(DateTime.Now.ToString("HH:mm:ss tt"));
 
-            timedifference =DateTime.Parse( timenow.Subtract(timein).ToString());
-MessageBox.Show("hit");
-            conn.Query("update visit set time_out = '" + timenow + "' , time_difference = '" + timedifference + "' where clarion_id= '" + studentID + "' and time_out is null");
+            timedifference = timenow.Subtract(timein);
+            if (timedifference < TimeSpan.Zero)
+            {
+                MessageBox.Show("Sign out time is before sign in time. Ask your coordinator if you forgot to sign out yesterday.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            MessageBox.Show("hit");
+            conn.Query("update visit set time_out = '" + timenow + "' , time_difference = '" + timedifference.ToString("c") + "' where clarion_id= '" + studentID + "' and time_out is null");
             conn.Close();
 
 

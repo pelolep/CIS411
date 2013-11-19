@@ -52,8 +52,8 @@ namespace CIS411
             this.label1 = new System.Windows.Forms.Label();
             this.txtTutorStudentID = new System.Windows.Forms.TextBox();
             this.tabVisits = new System.Windows.Forms.TabPage();
+            this.comboaddClass = new System.Windows.Forms.ComboBox();
             this.comboAddTutoring = new System.Windows.Forms.ComboBox();
-            this.lblTest = new System.Windows.Forms.Label();
             this.dateTimePickerEditTimeOut = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerEditTimeIn = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerAddTimeOut = new System.Windows.Forms.DateTimePicker();
@@ -116,7 +116,6 @@ namespace CIS411
             this.txtAddSignOut = new System.Windows.Forms.TextBox();
             this.txtAddSignIn = new System.Windows.Forms.TextBox();
             this.DataTable1TableAdapter = new CIS411.DataSet1TableAdapters.DataTable1TableAdapter();
-            this.comboaddClass = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.DataTable1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataSet1)).BeginInit();
             this.tabControlAdmin.SuspendLayout();
@@ -352,7 +351,6 @@ namespace CIS411
             // 
             this.tabVisits.Controls.Add(this.comboaddClass);
             this.tabVisits.Controls.Add(this.comboAddTutoring);
-            this.tabVisits.Controls.Add(this.lblTest);
             this.tabVisits.Controls.Add(this.dateTimePickerEditTimeOut);
             this.tabVisits.Controls.Add(this.dateTimePickerEditTimeIn);
             this.tabVisits.Controls.Add(this.dateTimePickerAddTimeOut);
@@ -391,6 +389,15 @@ namespace CIS411
             this.tabVisits.Text = "Visits";
             this.tabVisits.UseVisualStyleBackColor = true;
             // 
+            // comboaddClass
+            // 
+            this.comboaddClass.Enabled = false;
+            this.comboaddClass.FormattingEnabled = true;
+            this.comboaddClass.Location = new System.Drawing.Point(149, 251);
+            this.comboaddClass.Name = "comboaddClass";
+            this.comboaddClass.Size = new System.Drawing.Size(109, 21);
+            this.comboaddClass.TabIndex = 44;
+            // 
             // comboAddTutoring
             // 
             this.comboAddTutoring.Enabled = false;
@@ -400,15 +407,6 @@ namespace CIS411
             this.comboAddTutoring.Size = new System.Drawing.Size(121, 21);
             this.comboAddTutoring.TabIndex = 43;
             this.comboAddTutoring.SelectedIndexChanged += new System.EventHandler(this.comboAddTutoring_SelectedIndexChanged);
-            // 
-            // lblTest
-            // 
-            this.lblTest.AutoSize = true;
-            this.lblTest.Location = new System.Drawing.Point(449, 275);
-            this.lblTest.Name = "lblTest";
-            this.lblTest.Size = new System.Drawing.Size(35, 13);
-            this.lblTest.TabIndex = 42;
-            this.lblTest.Text = "label3";
             // 
             // dateTimePickerEditTimeOut
             // 
@@ -989,15 +987,6 @@ namespace CIS411
             // 
             this.DataTable1TableAdapter.ClearBeforeFill = true;
             // 
-            // comboaddClass
-            // 
-            this.comboaddClass.Enabled = false;
-            this.comboaddClass.FormattingEnabled = true;
-            this.comboaddClass.Location = new System.Drawing.Point(149, 251);
-            this.comboaddClass.Name = "comboaddClass";
-            this.comboaddClass.Size = new System.Drawing.Size(109, 21);
-            this.comboaddClass.TabIndex = 44;
-            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1092,7 +1081,6 @@ namespace CIS411
         private System.Windows.Forms.DateTimePicker dateTimePickerEditTimeIn;
         private System.Windows.Forms.DateTimePicker dateTimePickerAddTimeOut;
         private System.Windows.Forms.DateTimePicker dateTimePickerAddTimeIn;
-        private System.Windows.Forms.Label lblTest;
         private System.Windows.Forms.ComboBox comboAddTutoring;
         private System.Windows.Forms.Label lblInactiveTutors;
         private System.Windows.Forms.Label lblActiveTutors;

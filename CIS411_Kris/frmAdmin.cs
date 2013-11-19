@@ -565,7 +565,7 @@ namespace CIS411
         {
             //clears the list box to enter new information
             listBoxLoggedIn.Items.Clear();
-            listBoxLoggedIn.Items.Add("DATE             TIME IN      TIME OUT");
+            listBoxLoggedIn.Items.Add("DATE           TIME IN    TIME OUT");
             //creates new dataconnection
             DataConnection conn = new DataConnection();
             conn.Open();
@@ -579,8 +579,10 @@ namespace CIS411
                 {
                     DateTime thedate = DateTime.Parse(rd[1].ToString());
 
-                    if (DateTime.Parse(rd[1].ToString()) >= minDate && DateTime.Parse(rd[1].ToString()) >= maxDate)
-                        listBoxLoggedIn.Items.Add(thedate.ToString("dd/M/yyyy") + "    " + rd[2] + "     " + rd[3]);
+                    if (DateTime.Parse(rd[1].ToString()) >= minDate && DateTime.Parse(rd[1].ToString()) <= maxDate)
+                        
+                        listBoxLoggedIn.Items.Add(thedate.ToString("dd/M/yyyy") + " " + rd[2] + " " + rd[3]);
+
                     
                         
                 }
@@ -674,7 +676,7 @@ namespace CIS411
             string []selectedStudent=listBoxLoggedIn.SelectedItem.ToString().Split();
             int student_ID = int.Parse(selectedStudent[0]);
 
-           // frmMain.signOut(student_ID);
+            //frmMain.signOut(student_ID);
             loadlist(); 
               
         }
@@ -835,8 +837,10 @@ namespace CIS411
             }
             catch { MessageBox.Show("please check info and try again"); };
         }
-        
-        //Retrieves the Student Visit Records to edit
+
+
+        //Retrieves the Student Visit Records to edit 
+        //By: Kris
         private void btnEditVisit_Click(object sender, EventArgs e)
         {
             
@@ -845,27 +849,67 @@ namespace CIS411
             if (btnEditVisit.Text == "Edit Visit")
             {
                 //Puts the student id, min search date, and max search date into variables
-                int studentID = int.Parse(txtEditStudentID.Text);
-                DateTime minSearch = DateTime.Parse(dateTimePickerEditMin.Text);
-                DateTime maxSearch = DateTime.Parse(dateTimePickerEditMax.Text);
+                    int studentID = int.Parse(txtEditStudentID.Text);
+                    DateTime minSearch = DateTime.Parse(dateTimePickerEditMin.Text);
+                    DateTime maxSearch = DateTime.Parse(dateTimePickerEditMax.Text);
 
-                //loads the results of the search into the listBoxLoggedIn
+                    //loads the results of the search into the listBoxLoggedIn
 
-                loadvisits(studentID, minSearch, maxSearch);
-
-
-
-                btnEditVisit.Text = "Save Edit";
+                    loadvisits(studentID, minSearch, maxSearch);
 
 
-            }
+
+
+                    btnEditVisit.Text = "Edit This Visit";
+                    btnLogOut.Visible = false;
+                    btnLogOut.Enabled = false;
+                }
+
+                //Enters the selected visit into the edit form
+                else if (btnEditVisit.Text =="Edit This Visit")
+                {
+                    dateTimePickerEditTimeIn.Enabled = true;
+                    dateTimePickerEditTimeOut.Enabled = true;
+                    
+                    string[] selectedVisitEdit = listBoxLoggedIn.SelectedItem.ToString().Split();
+                    string dateEdit = selectedVisitEdit[0];
+                    DateTime TimeInEdit = DateTime.Parse(selectedVisitEdit[1]);
+                    DateTime TimeOutEdit = DateTime.Parse(selectedVisitEdit[2]);
+
+                    txtEditDate.Text = dateEdit;
+                    dateTimePickerEditTimeIn.Value = TimeInEdit;
+                    dateTimePickerEditTimeOut.Value = TimeOutEdit;
+
+                    btnEditVisit.Text = "Save Edit";
+
+                 }
+
+            
             else
             {
+                //actually updates the visit information
+                DataConnection conn = new DataConnection();
+                conn.Open();
+                    conn.Open();
+                    conn.Query("update VISIT set CLARION_ID = '" + txtEditStudentID.Text + "', DATE = '" + txtEditDate.Text + "', TIME_IN ='" + dateTimePickerEditTimeIn.Value + "', TIME_OUT = '" + dateTimePickerEditTimeOut.Value);
+                conn.Close();
                 
+                 
+
+                //resets the Edit form
+                txtEditStudentID.Clear();
+                txtEditDate.Clear();
+                dateTimePickerEditTimeIn.Enabled = false;
+                dateTimePickerEditTimeOut.Enabled = false;
+                
+
                 btnEditVisit.Text = "Edit Visit";
+                btnLogOut.Visible = true;
+                btnLogOut.Enabled = true;
                 loadlist();
             }
         }
+
 
 
 
