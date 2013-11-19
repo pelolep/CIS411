@@ -877,11 +877,7 @@ namespace CIS411
         //Created by Sean: Shows the query results from the SQL tables
         private void reportViewer1_Load(object sender, EventArgs e)
         {
-            //this.FreightTotalsDataTableTableAdapter.Fill(this.PayablesDataSet.FreightTotalsDataTable);
-            //this.FreightDataTableTableAdapter.Fill(this.PayablesDataSet.FreightDataTable);
-            //this.ReportViewer1.RefreshReport();
-            //dynamic CurrentReportDataSource = new Microsoft.Reporting.WinForms.ReportDataSource();
-            //comboBox1.SelectedIndex = 0;
+            
 
             //Option needs to be selected in comboBox1 first in order to determine which query to run
             reportViewer1.Clear();
@@ -921,6 +917,11 @@ namespace CIS411
         private void comboAddTutoring_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void ClearBtn_Click(object sender, EventArgs e)
+        {
+            reportViewer1.Clear();
         }
         // Returns array of all tutors
         /*

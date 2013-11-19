@@ -29,7 +29,7 @@ namespace CIS411
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource2 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.DataTable1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.DataSet1 = new CIS411.DataSet1();
             this.tabControlAdmin = new System.Windows.Forms.TabControl();
@@ -52,6 +52,7 @@ namespace CIS411
             this.label1 = new System.Windows.Forms.Label();
             this.txtTutorStudentID = new System.Windows.Forms.TextBox();
             this.tabVisits = new System.Windows.Forms.TabPage();
+            this.comboaddClass = new System.Windows.Forms.ComboBox();
             this.comboAddTutoring = new System.Windows.Forms.ComboBox();
             this.lblTest = new System.Windows.Forms.Label();
             this.dateTimePickerEditTimeOut = new System.Windows.Forms.DateTimePicker();
@@ -116,7 +117,7 @@ namespace CIS411
             this.txtAddSignOut = new System.Windows.Forms.TextBox();
             this.txtAddSignIn = new System.Windows.Forms.TextBox();
             this.DataTable1TableAdapter = new CIS411.DataSet1TableAdapters.DataTable1TableAdapter();
-            this.comboaddClass = new System.Windows.Forms.ComboBox();
+            this.ClearBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DataTable1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataSet1)).BeginInit();
             this.tabControlAdmin.SuspendLayout();
@@ -390,6 +391,15 @@ namespace CIS411
             this.tabVisits.TabIndex = 2;
             this.tabVisits.Text = "Visits";
             this.tabVisits.UseVisualStyleBackColor = true;
+            // 
+            // comboaddClass
+            // 
+            this.comboaddClass.Enabled = false;
+            this.comboaddClass.FormattingEnabled = true;
+            this.comboaddClass.Location = new System.Drawing.Point(149, 251);
+            this.comboaddClass.Name = "comboaddClass";
+            this.comboaddClass.Size = new System.Drawing.Size(109, 21);
+            this.comboaddClass.TabIndex = 44;
             // 
             // comboAddTutoring
             // 
@@ -845,6 +855,7 @@ namespace CIS411
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.ClearBtn);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.comboBox1);
             this.tabPage1.Controls.Add(this.reportViewer1);
@@ -861,7 +872,7 @@ namespace CIS411
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(303, 11);
+            this.label4.Location = new System.Drawing.Point(231, 11);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(81, 13);
             this.label4.TabIndex = 4;
@@ -871,22 +882,20 @@ namespace CIS411
             // comboBox1
             // 
             this.comboBox1.DataSource = this.DataTable1BindingSource;
-            this.comboBox1.DisplayMember = "TOTAL_NUM_OF_VISITS_PER_TERM";
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(390, 8);
+            this.comboBox1.Location = new System.Drawing.Point(318, 8);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 3;
-            this.comboBox1.ValueMember = "TOTAL_NUM_OF_VISITS_PER_TERM";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // reportViewer1
             // 
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            reportDataSource1.Name = "DataSet1";
-            reportDataSource1.Value = this.DataTable1BindingSource;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
+            reportDataSource2.Name = "DataSet1";
+            reportDataSource2.Value = this.DataTable1BindingSource;
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource2);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "CIS411.Report1.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(3, 35);
             this.reportViewer1.Name = "reportViewer1";
@@ -904,7 +913,7 @@ namespace CIS411
             // 
             // displayBtn
             // 
-            this.displayBtn.Location = new System.Drawing.Point(115, 6);
+            this.displayBtn.Location = new System.Drawing.Point(137, 6);
             this.displayBtn.Name = "displayBtn";
             this.displayBtn.Size = new System.Drawing.Size(75, 23);
             this.displayBtn.TabIndex = 0;
@@ -989,14 +998,15 @@ namespace CIS411
             // 
             this.DataTable1TableAdapter.ClearBeforeFill = true;
             // 
-            // comboaddClass
+            // ClearBtn
             // 
-            this.comboaddClass.Enabled = false;
-            this.comboaddClass.FormattingEnabled = true;
-            this.comboaddClass.Location = new System.Drawing.Point(149, 251);
-            this.comboaddClass.Name = "comboaddClass";
-            this.comboaddClass.Size = new System.Drawing.Size(109, 21);
-            this.comboaddClass.TabIndex = 44;
+            this.ClearBtn.Location = new System.Drawing.Point(558, 4);
+            this.ClearBtn.Name = "ClearBtn";
+            this.ClearBtn.Size = new System.Drawing.Size(75, 23);
+            this.ClearBtn.TabIndex = 5;
+            this.ClearBtn.Text = "ClearBtn";
+            this.ClearBtn.UseVisualStyleBackColor = true;
+            this.ClearBtn.Click += new System.EventHandler(this.ClearBtn_Click);
             // 
             // frmAdmin
             // 
@@ -1116,6 +1126,7 @@ namespace CIS411
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ComboBox comboaddClass;
+        private System.Windows.Forms.Button ClearBtn;
         //private DataSet1TableAdapters.DataTable2TableAdapter dataTable2TableAdapter;
     }
         #endregion
