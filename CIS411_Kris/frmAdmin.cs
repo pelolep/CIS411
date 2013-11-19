@@ -870,8 +870,8 @@ namespace CIS411
         private void displayBtn_Click(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'DataSet1.DataTable1' table. You can move, or remove it, as needed.
-            this.DataTable1TableAdapter.Fill(this.DataSet1.DataTable1);
-            this.reportViewer1.RefreshReport();
+            //this.DataTable1TableAdapter.Fill(this.DataSet1.DataTable1);
+            //this.reportViewer1.RefreshReport();
         }
 
         //Created by Sean: Shows the query results from the SQL tables
@@ -895,17 +895,32 @@ namespace CIS411
         //Created by Sean: Selects which query you want to fill in the reportViewer
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            
-            /*if (comboBox1.SelectedIndex == 0)
+            if (comboBox1.SelectedItem.ToString() == "Total Visits")
+            {
+                this.DataTable1TableAdapter.Fill(this.DataSet1.DataTable1);
+                this.reportViewer1.RefreshReport();
+            }
+            else if (comboBox1.SelectedItem.ToString() == "Total Tutors")
+            {
+                this.DataTable1TableAdapter.Fill(this.DataSet1.DataTable1);
+                this.reportViewer1.RefreshReport();
+            }
+            else if (comboBox1.SelectedItem.ToString() == "Total Tutor Hours")
+            {
+                
+            }
+            else if (comboBox1.SelectedItem.ToString() == "Total Hours Per Tutor")
             {
 
             }
-            else if (comboBox1.SelectedIndex == 1)
+            else if (comboBox1.SelectedItem.ToString() == "Total Hours Per Method")
             {
 
             }
-             * */
+            else if (comboBox1.SelectedItem.ToString() == "Total Hours Per Class")
+            {
+
+            }
         }
         
         //Created by Sean:
@@ -918,7 +933,7 @@ namespace CIS411
         {
 
         }
-
+        //Created by Sean: Clears report form
         private void ClearBtn_Click(object sender, EventArgs e)
         {
             reportViewer1.Clear();
