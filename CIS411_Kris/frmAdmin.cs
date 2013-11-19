@@ -560,6 +560,40 @@ namespace CIS411
 
         }
 
+        //fills the listBox with range of visits for edit visit
+        public void loadvisits(int studentID, DateTime minDate, DateTime maxDate)
+        {
+            //clears the list box to enter new information
+            listBoxLoggedIn.Items.Clear();
+            listBoxLoggedIn.Items.Add("DATE             TIME IN      TIME OUT");
+            //creates new dataconnection
+            DataConnection conn = new DataConnection();
+            conn.Open();
+            
+            //gets visits request
+            SqlDataReader rd = conn.GetReader("CLARION_ID, VISIT.DATE, VISIT.TIME_IN, VISIT.TIME_OUT", "visit");
+            if (rd.HasRows)
+            {
+
+                while (rd.Read())
+                {
+                    DateTime thedate = DateTime.Parse(rd[1].ToString());
+
+                    if (DateTime.Parse(rd[1].ToString()) >= minDate && DateTime.Parse(rd[1].ToString()) >= maxDate)
+                        listBoxLoggedIn.Items.Add(thedate.ToString("dd/M/yyyy") + "    " + rd[2] + "     " + rd[3]);
+                    
+                        
+                }
+            }
+            rd.Close();
+
+
+            //closes connection
+            conn.Close();
+
+
+        }
+
         private void tabControlAdmin_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControlAdmin.SelectedTab.Name == "tabAdmin")
@@ -633,18 +667,16 @@ namespace CIS411
             btnSaveMethods.Enabled = true;
         }
 
+        
+        
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            DataConnection conn = new DataConnection();
-            conn.Open();
-            try
-            {
-            conn.Query("insert into visit(Date, time_in, clarion_id, method) values ('" + DateTime.Today + "', '" + "10:52:02" + "', '" + "11111111" + "', '" + "testing" + "')");
-            }
-            catch{}
-            conn.Close();
+            string []selectedStudent=listBoxLoggedIn.SelectedItem.ToString().Split();
+            int student_ID = int.Parse(selectedStudent[0]);
 
-            loadlist();
+           // frmMain.signOut(student_ID);
+            loadlist(); 
+              
         }
 
         List<TextBox> txtMethods = new List<TextBox>();
@@ -808,12 +840,35 @@ namespace CIS411
         private void btnEditVisit_Click(object sender, EventArgs e)
         {
             
+
            //Change button text to save and return to Edit Visit
-            if (btnEditVisit.Text == "EditVisit")
+            if (btnEditVisit.Text == "Edit Visit")
+            {
+                //Puts the student id, min search date, and max search date into variables
+                int studentID = int.Parse(txtEditStudentID.Text);
+                DateTime minSearch = DateTime.Parse(dateTimePickerEditMin.Text);
+                DateTime maxSearch = DateTime.Parse(dateTimePickerEditMax.Text);
+
+                //loads the results of the search into the listBoxLoggedIn
+
+                loadvisits(studentID, minSearch, maxSearch);
+
+
+
                 btnEditVisit.Text = "Save Edit";
+
+
+            }
             else
+            {
+                
                 btnEditVisit.Text = "Edit Visit";
+                loadlist();
+            }
         }
+
+
+
         //null
         private void btnSave_Click(object sender, EventArgs e)
         {
