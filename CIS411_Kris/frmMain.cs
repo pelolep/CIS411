@@ -84,6 +84,7 @@ namespace CIS411
             { 
                 //If signed in, then logout student and display "Thank you for logging out" Message
                 signOut(studentID);
+                resetForm();
                 MessageBox.Show("Thank you for signing out.");
                 return;
             }
@@ -97,6 +98,7 @@ namespace CIS411
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             signIn();
+            resetForm();
         }
 
         private void btnSwipe_Click(object sender, EventArgs e)
@@ -290,7 +292,6 @@ namespace CIS411
 
             conn.Close();
             MessageBox.Show("You have been signed in");
-            resetForm();
         }
 
         private void resetForm()
@@ -378,12 +379,11 @@ namespace CIS411
 
         }
 
-        public void signOut(int searchID)///////////
+        static public void signOut(int studentID)
         {
             System.DateTime timein=DateTime.Parse("12:12:25"), timenow, timedifference; // sign out works for everything but searching for the time out
             DataConnection conn = new DataConnection();
             conn.Open();
-           string o = "";
             SqlDataReader rd = conn.GetReader("time_in, time_out", "visit", "clarion_id", studentID.ToString(), "and time_out is null");
 
             if (rd.HasRows)
@@ -393,9 +393,6 @@ namespace CIS411
                 while (rd.Read())
                 {
                     timein = DateTime.Parse( rd[0].ToString());
-                
-          
-
                 }
                 rd.Close();
             }
@@ -414,7 +411,6 @@ MessageBox.Show("hit");
 
 
             MessageBox.Show("You have been signed out."); //ADD TO THIS
-            resetForm();
         }
 
         private void manualStudentIDEntry()

@@ -230,16 +230,21 @@ namespace CIS411
 
             if (reportFile.ShowDialog() == DialogResult.OK)
             {
+                SqlDataReader[] readers = getReportReaders();
                 Excel.Application xlApp = new Excel.Application();
                 Excel.Workbook xlWorkBook = xlApp.Workbooks.Add();
                 Excel.Worksheet xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
                 
+                // TODO: Use the readers array in a loop and output 
+                // each row from them into xlWorkSheet.Cells
+                /*
                 xlWorkSheet.Cells[1, 1].Value = "Student";
                 xlWorkSheet.Cells[1, 2].Value = "Hours";
                 xlWorkSheet.Cells[2, 1].Value = "Bill Warren";
                 xlWorkSheet.Cells[2, 2].Value = "30";
                 xlWorkSheet.Cells[3, 1].Value = "Kris Demor";
                 xlWorkSheet.Cells[3, 2].Value = "40";
+                */
 
                 DataConnection conn = new DataConnection();
 
@@ -258,6 +263,13 @@ namespace CIS411
             }
             reportFile.Dispose();
             this.Focus();
+        }
+
+        SqlDataReader[] getReportReaders()
+        {
+            SqlDataReader[] readers = new SqlDataReader[listBoxReport.Items.Count];//?
+            // TODO: Get an array of readers that correspond to what is in the listBox            
+            return readers;
         }
 
         private void btn_student_import_Click(object sender, EventArgs e)
@@ -499,7 +511,6 @@ namespace CIS411
             // TODO: This line of code loads data into the 'DataSet1.DataTable2' table. You can move, or remove it, as needed.
             //this.dataTable2TableAdapter.Fill(this.DataSet1.DataTable2);
             // TODO: This line of code loads data into the 'DataSet1.DataTable1' table. You can move, or remove it, as needed.
-            this.DataTable1TableAdapter.Fill(this.DataSet1.DataTable1);
             
 
             string folder = System.IO.Path.GetFullPath(System.Reflection.Assembly.GetEntryAssembly().Location);
@@ -515,9 +526,6 @@ namespace CIS411
             loadlist();
            // AppDomain.CurrentDomain.SetData("DataDirectory", "~/cis411/cis411_Kris/db.mdf");
             //currentDomain.SetData("DataDirectory", "~/cis411/cis411_Kris/db.mdf");
-
-
-            this.reportViewer1.RefreshReport();
         }
 
         public void loadlist()
@@ -608,6 +616,7 @@ namespace CIS411
             txtMethods[methodIndex].Size = new System.Drawing.Size(100, 20);
             txtMethods[methodIndex].TabIndex = (methodIndex + 1) * 2;
             txtMethods[methodIndex].TextChanged += txtMethods_TextChanged;
+            txtMethods[methodIndex].MaxLength = 50;
             tabMethods.Controls.Add(txtMethods[methodIndex]);
         }
 
@@ -869,23 +878,10 @@ namespace CIS411
         //Created by Sean: button1_Click inside the Reporting Tab
         private void displayBtn_Click(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'DataSet1.DataTable1' table. You can move, or remove it, as needed.
-            //this.DataTable1TableAdapter.Fill(this.DataSet1.DataTable1);
-            //this.reportViewer1.RefreshReport();
+            //TODO: This should add a placeholder to the listbox that represents 
+            //      the data that will be placed into the excel file
         }
-
-        //Created by Sean: Shows the query results from the SQL tables
-        private void reportViewer1_Load(object sender, EventArgs e)
-        {
-            
-
-            //Option needs to be selected in comboBox1 first in order to determine which query to run
-            reportViewer1.Clear();
-
-            //In the properties of the report viewer, this views this current report to switch between
-            //reportViewer1.LocalReport.ReportEmbeddedResource = "CIS411.Report1.rdlc";
-        }
-
+        
        /* private void SwitchLocalReport(string selectedreportname)
         {
             dynamic CurrentReportDataSource = new Microsoft.Reporting.WinForms.ReportDataSource();
@@ -895,29 +891,28 @@ namespace CIS411
         //Created by Sean: Selects which query you want to fill in the reportViewer
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedItem.ToString() == "Total Visits")
+            string selectString = "";
+            if (comboCountCategory.SelectedItem.ToString() == "Total Visits")
             {
-                this.DataTable1TableAdapter.Fill(this.DataSet1.DataTable1);
-                this.reportViewer1.RefreshReport();
+                selectString = DataConnection.GetSelectString("COUNT(*)", "VISIT");
             }
-            else if (comboBox1.SelectedItem.ToString() == "Total Tutors")
-            {
-                this.DataTable1TableAdapter.Fill(this.DataSet1.DataTable1);
-                this.reportViewer1.RefreshReport();
-            }
-            else if (comboBox1.SelectedItem.ToString() == "Total Tutor Hours")
-            {
-                
-            }
-            else if (comboBox1.SelectedItem.ToString() == "Total Hours Per Tutor")
+            else if (comboCountCategory.SelectedItem.ToString() == "Total Tutors")
             {
 
             }
-            else if (comboBox1.SelectedItem.ToString() == "Total Hours Per Method")
+            else if (comboCountCategory.SelectedItem.ToString() == "Total Tutor Hours")
+            {
+                selectString = "SELECT dateadd(second, SUM(DATEPART(SECOND, TIME_DIFFERENCE)),  108) FROM TUTOR_HOUR";
+            }
+            else if (comboCountCategory.SelectedItem.ToString() == "Total Hours Per Tutor")
             {
 
             }
-            else if (comboBox1.SelectedItem.ToString() == "Total Hours Per Class")
+            else if (comboCountCategory.SelectedItem.ToString() == "Total Hours Per Method")
+            {
+
+            }
+            else if (comboCountCategory.SelectedItem.ToString() == "Total Hours Per Class")
             {
 
             }
@@ -936,7 +931,7 @@ namespace CIS411
         //Created by Sean: Clears report form
         private void ClearBtn_Click(object sender, EventArgs e)
         {
-            reportViewer1.Clear();
+            listBoxReport.Items.Clear();
         }
         // Returns array of all tutors
         /*
