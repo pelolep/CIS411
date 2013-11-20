@@ -83,8 +83,9 @@ namespace CIS411
             if (studentSignedIn(studentID))
             { 
                 //If signed in, then logout student and display "Thank you for logging out" Message
-                signOut(studentID);
-                MessageBox.Show("Thank you for signing out.");
+                if (signOut(studentID))
+                    MessageBox.Show("Thank you for signing out.");
+                resetForm();
                 return;
             }
             
@@ -380,7 +381,7 @@ namespace CIS411
 
         }
 
-        public void signOut(int searchID)///////////
+        static public bool signOut(int studentID)///////////
         {
             System.DateTime timein = DateTime.Parse("12:12:25"), timenow;
             System.TimeSpan timedifference; // sign out works for everything but searching for the time out
@@ -405,7 +406,7 @@ namespace CIS411
             else
             {
                 conn.Close();
-                return;
+                return false;
             }
 
             timenow = DateTime.Parse(DateTime.Now.ToString("HH:mm:ss tt"));
@@ -414,15 +415,12 @@ namespace CIS411
             if (timedifference < TimeSpan.Zero)
             {
                 MessageBox.Show("Sign out time is before sign in time. Ask your coordinator if you forgot to sign out yesterday.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                return false;
             }
             MessageBox.Show("hit");
             conn.Query("update visit set time_out = '" + timenow + "' , time_difference = '" + timedifference.ToString("c") + "' where clarion_id= '" + studentID + "' and time_out is null");
             conn.Close();
-
-
-            MessageBox.Show("You have been signed out."); //ADD TO THIS
-            resetForm();
+            return true;
         }
 
         private void manualStudentIDEntry()

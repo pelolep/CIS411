@@ -505,7 +505,7 @@ namespace CIS411
             // 
             this.btnEditVisit.Location = new System.Drawing.Point(559, 312);
             this.btnEditVisit.Name = "btnEditVisit";
-            this.btnEditVisit.Size = new System.Drawing.Size(75, 23);
+            this.btnEditVisit.Size = new System.Drawing.Size(75, 68);
             this.btnEditVisit.TabIndex = 16;
             this.btnEditVisit.Text = "Edit Visit";
             this.btnEditVisit.UseVisualStyleBackColor = true;

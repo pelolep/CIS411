@@ -34,7 +34,7 @@ namespace CIS411
                 {
                     if (frmMain.studentIDExists(frmMain.StripID(cardInt)))
                         if (frmMain.studentSignedIn(frmMain.StripID(cardInt)))
-                            Program.mainForm.signOut(cardInt);
+                            frmMain.signOut(cardInt);
                         else
                             Program.mainForm.updatetxtStudentID(frmMain.StripID(cardInt));
                     else

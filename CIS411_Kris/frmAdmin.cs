@@ -542,7 +542,7 @@ namespace CIS411
             }
 
             rd = conn.GetReader("*", "VISIT","student", "visit.clarion_id=student.clarion_id and time_out is null", 1);
-            listBoxLoggedIn.Items.Add("Date                                   time in                                        id                            last name                             first name");
+            listBoxLoggedIn.Items.Add("DATE \t TIME IN\tID\tLAST NAME\tFIRST NAME");
 
             if (rd.HasRows)
             {
@@ -551,7 +551,7 @@ namespace CIS411
                 {
                     
                     DateTime jdate= DateTime.Parse(rd[1].ToString());
-                    listBoxLoggedIn.Items.Add(jdate.ToString("dd/M/yyyy") + "                    "+rd[2] + "                    " + rd[0] + "                  "+rd[13] + "                            " + rd[14]);
+                    listBoxLoggedIn.Items.Add(jdate.ToString("dd/M/yyyy") + "\t"+rd[2] + "\t" + rd[0] + "\t"+rd[13] + "                            " + rd[14]);
                 }
             }
 
@@ -565,7 +565,8 @@ namespace CIS411
         {
             //clears the list box to enter new information
             listBoxLoggedIn.Items.Clear();
-            listBoxLoggedIn.Items.Add("DATE           TIME IN    TIME OUT");
+            //TAB THIS
+            listBoxLoggedIn.Items.Add("DATETIME IN    TIME OUT");
             //creates new dataconnection
             DataConnection conn = new DataConnection();
             conn.Open();
@@ -580,7 +581,7 @@ namespace CIS411
                     DateTime thedate = DateTime.Parse(rd[1].ToString());
 
                     if (DateTime.Parse(rd[1].ToString()) >= minDate && DateTime.Parse(rd[1].ToString()) <= maxDate)
-                        
+                        //TAB THIS
                         listBoxLoggedIn.Items.Add(thedate.ToString("dd/M/yyyy") + " " + rd[2] + " " + rd[3]);
 
                     
@@ -676,7 +677,7 @@ namespace CIS411
             string []selectedStudent=listBoxLoggedIn.SelectedItem.ToString().Split();
             int student_ID = int.Parse(selectedStudent[0]);
 
-            //frmMain.signOut(student_ID);
+            frmMain.signOut(student_ID);
             loadlist(); 
               
         }
@@ -887,11 +888,21 @@ namespace CIS411
             
             else
             {
-                //actually updates the visit information
+                TimeSpan timedifference;
+                DateTime timeOut = dateTimePickerEditTimeOut.Value;
+                DateTime timeIn = dateTimePickerEditTimeIn.Value;
+                timedifference = timeOut.Subtract(timeIn);
+                if (timedifference < TimeSpan.Zero)
+                {
+                    MessageBox.Show("Sign out time is before sign in time.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                    
+                    //actually updates the visit information
                 DataConnection conn = new DataConnection();
                 conn.Open();
-                    conn.Open();
-                    conn.Query("update VISIT set CLARION_ID = '" + txtEditStudentID.Text + "', DATE = '" + txtEditDate.Text + "', TIME_IN ='" + dateTimePickerEditTimeIn.Value + "', TIME_OUT = '" + dateTimePickerEditTimeOut.Value);
+                    //conn.Open();
+                    conn.Query("update VISIT set CLARION_ID = '" + txtEditStudentID.Text + "', DATE = '" + txtEditDate.Text + "', TIME_IN ='" + dateTimePickerEditTimeIn.Value + "', TIME_OUT = '" + dateTimePickerEditTimeOut.Value + "', TIME_DIFFERENCE = '" + timedifference.ToString("c"));
                 conn.Close();
                 
                  
