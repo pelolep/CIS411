@@ -90,8 +90,10 @@ namespace CIS411
             this.lblNewPassword = new System.Windows.Forms.Label();
             this.lblCurrentPassword = new System.Windows.Forms.Label();
             this.tabReports = new System.Windows.Forms.TabPage();
+            this.btnMoveDown = new System.Windows.Forms.Button();
+            this.btnMoveUp = new System.Windows.Forms.Button();
             this.lblGroup = new System.Windows.Forms.Label();
-            this.comboGroup = new System.Windows.Forms.ComboBox();
+            this.comboFilter = new System.Windows.Forms.ComboBox();
             this.lblCount = new System.Windows.Forms.Label();
             this.btnReport = new System.Windows.Forms.Button();
             this.listBoxReport = new System.Windows.Forms.ListBox();
@@ -743,8 +745,10 @@ namespace CIS411
             // 
             // tabReports
             // 
+            this.tabReports.Controls.Add(this.btnMoveDown);
+            this.tabReports.Controls.Add(this.btnMoveUp);
             this.tabReports.Controls.Add(this.lblGroup);
-            this.tabReports.Controls.Add(this.comboGroup);
+            this.tabReports.Controls.Add(this.comboFilter);
             this.tabReports.Controls.Add(this.lblCount);
             this.tabReports.Controls.Add(this.btnReport);
             this.tabReports.Controls.Add(this.listBoxReport);
@@ -762,24 +766,42 @@ namespace CIS411
             this.tabReports.Text = "Reports";
             this.tabReports.UseVisualStyleBackColor = true;
             // 
+            // btnMoveDown
+            // 
+            this.btnMoveDown.Location = new System.Drawing.Point(100, 138);
+            this.btnMoveDown.Name = "btnMoveDown";
+            this.btnMoveDown.Size = new System.Drawing.Size(75, 23);
+            this.btnMoveDown.TabIndex = 17;
+            this.btnMoveDown.Text = "Move Down";
+            this.btnMoveDown.UseVisualStyleBackColor = true;
+            // 
+            // btnMoveUp
+            // 
+            this.btnMoveUp.Location = new System.Drawing.Point(4, 138);
+            this.btnMoveUp.Name = "btnMoveUp";
+            this.btnMoveUp.Size = new System.Drawing.Size(75, 23);
+            this.btnMoveUp.TabIndex = 16;
+            this.btnMoveUp.Text = "Move Up";
+            this.btnMoveUp.UseVisualStyleBackColor = true;
+            // 
             // lblGroup
             // 
             this.lblGroup.AutoSize = true;
             this.lblGroup.Location = new System.Drawing.Point(6, 85);
             this.lblGroup.Name = "lblGroup";
-            this.lblGroup.Size = new System.Drawing.Size(50, 13);
+            this.lblGroup.Size = new System.Drawing.Size(29, 13);
             this.lblGroup.TabIndex = 15;
-            this.lblGroup.Text = "Group by";
+            this.lblGroup.Text = "Filter";
             // 
-            // comboGroup
+            // comboFilter
             // 
-            this.comboGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboGroup.FormattingEnabled = true;
-            this.comboGroup.Location = new System.Drawing.Point(62, 82);
-            this.comboGroup.Name = "comboGroup";
-            this.comboGroup.Size = new System.Drawing.Size(113, 21);
-            this.comboGroup.TabIndex = 14;
-            this.comboGroup.SelectedIndexChanged += new System.EventHandler(this.comboGroup_SelectedIndexChanged);
+            this.comboFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboFilter.FormattingEnabled = true;
+            this.comboFilter.Location = new System.Drawing.Point(62, 82);
+            this.comboFilter.Name = "comboFilter";
+            this.comboFilter.Size = new System.Drawing.Size(113, 21);
+            this.comboFilter.TabIndex = 14;
+            this.comboFilter.SelectedIndexChanged += new System.EventHandler(this.comboGroup_SelectedIndexChanged);
             // 
             // lblCount
             // 
@@ -805,6 +827,8 @@ namespace CIS411
             this.listBoxReport.FormattingEnabled = true;
             this.listBoxReport.Location = new System.Drawing.Point(181, 6);
             this.listBoxReport.Name = "listBoxReport";
+            this.listBoxReport.ScrollAlwaysVisible = true;
+            this.listBoxReport.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.listBoxReport.Size = new System.Drawing.Size(463, 381);
             this.listBoxReport.TabIndex = 11;
             this.listBoxReport.SelectedIndexChanged += new System.EventHandler(this.listBoxReport_SelectedIndexChanged);
@@ -835,7 +859,7 @@ namespace CIS411
             "Fall"});
             this.comboTerm.Location = new System.Drawing.Point(81, 21);
             this.comboTerm.Name = "comboTerm";
-            this.comboTerm.Size = new System.Drawing.Size(58, 21);
+            this.comboTerm.Size = new System.Drawing.Size(74, 21);
             this.comboTerm.TabIndex = 7;
             this.comboTerm.SelectedIndexChanged += new System.EventHandler(this.comboTerm_SelectedIndexChanged);
             // 
@@ -865,7 +889,7 @@ namespace CIS411
             this.txtYear.Name = "txtYear";
             this.txtYear.Size = new System.Drawing.Size(31, 20);
             this.txtYear.TabIndex = 1;
-            this.txtYear.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.txtYear.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_KeyPress);
             // 
             // btnDisplay
             // 
@@ -1055,10 +1079,12 @@ namespace CIS411
         private System.Windows.Forms.Button btn_courses_import;
         private System.Windows.Forms.Button btn_student_import;
         private System.Windows.Forms.Label lblGroup;
-        private System.Windows.Forms.ComboBox comboGroup;
+        private System.Windows.Forms.ComboBox comboFilter;
         private System.Windows.Forms.Label lblCount;
         private System.Windows.Forms.Button btnReport;
         private System.Windows.Forms.ListBox listBoxReport;
+        private System.Windows.Forms.Button btnMoveDown;
+        private System.Windows.Forms.Button btnMoveUp;
         //private DataSet1TableAdapters.DataTable2TableAdapter dataTable2TableAdapter;
     }
         #endregion
