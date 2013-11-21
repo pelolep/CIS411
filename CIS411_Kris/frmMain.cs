@@ -410,7 +410,7 @@ MessageBox.Show("hit");
             conn.Close();
 
 
-            MessageBox.Show("You have been signed out."); //ADD TO THIS
+            MessageBox.Show("You have been signed out.");
         }
 
         private void manualStudentIDEntry()

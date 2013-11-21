@@ -961,6 +961,13 @@ namespace CIS411
             if (comboCountCategory.SelectedItem.ToString() == "Method")
             {
                 comboGroup.Items.Clear();
+                DataConnection conn = new DataConnection();
+                conn.Open();
+                SqlDataReader rd = conn.GetReader("DISTINCT METHOD", "VISIT");
+                while (rd.Read())
+                    comboGroup.Items.Add(rd[0].ToString());
+                conn.Close();
+                /*
                 comboGroup.Items.Add("Tutoring");
                 comboGroup.Items.Add("Group Meeting");
                 comboGroup.Items.Add("Supplemental Instruction");
@@ -969,6 +976,7 @@ namespace CIS411
                 comboGroup.Items.Add("Self Study");
                 comboGroup.Items.Add("Video");
                 comboGroup.Items.Add("Other");
+                */
                 comboGroup.Items.Add("Don't Group");
             }
             else if (comboCountCategory.SelectedItem.ToString() == "Student")
