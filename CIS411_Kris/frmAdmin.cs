@@ -873,6 +873,11 @@ namespace CIS411
         // Created by Sean: textBox1 inside the Reporting Tab
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            int item = -9999;
+            //if(textBox1_TextChanged !=
+            int.TryParse(txtYear.Text,out item);
+            if(item == 0 && txtYear.Text != "")
+            MessageBox.Show("Please type a year. Example: 2013");
         }
 
         //Created by Sean: button1_Click inside the Reporting Tab
@@ -880,6 +885,20 @@ namespace CIS411
         {
             //TODO: This should add a placeholder to the listbox that represents 
             //      the data that will be placed into the excel file
+            string selectString = "";
+
+            if (comboCountCategory.SelectedItem.ToString() == "Method" && comboGroup.SelectedItem.ToString() == "Tutoring")
+            {
+                selectString = DataConnection.GetSelectString("COUNT(*)", "VISIT", "WHERE", "METHOD = 'Tutoring'");
+            }
+            else if (comboCountCategory.SelectedItem.ToString() == "Total Tutors")
+            {
+
+            }
+            else if (comboCountCategory.SelectedItem.ToString() == "Total Tutor Hours")
+            {
+                selectString = "SELECT dateadd(second, SUM(DATEPART(SECOND, TIME_DIFFERENCE)),  108) FROM TUTOR_HOUR";
+            }
         }
         
        /* private void SwitchLocalReport(string selectedreportname)
@@ -889,7 +908,7 @@ namespace CIS411
         * */
 
         //Created by Sean: Selects which query you want to fill in the reportViewer
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        /*private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectString = "";
             if (comboCountCategory.SelectedItem.ToString() == "Total Visits")
@@ -917,6 +936,7 @@ namespace CIS411
 
             }
         }
+         * */
         
         //Created by Sean:
         private void label4_Click(object sender, EventArgs e)
@@ -932,6 +952,60 @@ namespace CIS411
         private void ClearBtn_Click(object sender, EventArgs e)
         {
             listBoxReport.Items.Clear();
+        }
+
+        //From report
+        private void comboCountCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboCountCategory.SelectedItem.ToString() == "Method")
+            {
+                comboGroup.Items.Clear();
+                comboGroup.Items.Add("Tutoring");
+                comboGroup.Items.Add("Group Meeting");
+                comboGroup.Items.Add("Supplemental Instruction");
+                comboGroup.Items.Add("Writing Center");
+                comboGroup.Items.Add("Computer Use");
+                comboGroup.Items.Add("Self Study");
+                comboGroup.Items.Add("Video");
+                comboGroup.Items.Add("Other");
+                comboGroup.Items.Add("Don't Group");
+            }
+            else if (comboCountCategory.SelectedItem.ToString() == "Student")
+            {
+                comboGroup.Items.Clear();
+                comboGroup.Items.Add("Total Hours");
+                comboGroup.Items.Add("Visits");
+                comboGroup.Items.Add("Don't Group");
+
+            }
+            else if (comboCountCategory.SelectedItem.ToString() == "Tutor")
+            {
+                comboGroup.Items.Clear();
+                comboGroup.Items.Add("Total Hours");
+                comboGroup.Items.Add("Days Worked");
+                comboGroup.Items.Add("Don't Group");
+            }
+            else if (comboCountCategory.SelectedItem.ToString() == "Course")
+            {
+                comboGroup.Items.Clear();
+                comboGroup.Items.Add("Total Courses");
+                comboGroup.Items.Add("Don't Group");
+            }
+        }
+        //From report
+        private void comboGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        //from report
+        private void comboTerm_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBoxReport_SelectedIndexChanged(object sender, EventArgs e)
+        {
+         
         }
         // Returns array of all tutors
         /*
