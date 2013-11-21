@@ -542,7 +542,7 @@ namespace CIS411
             }
 
             rd = conn.GetReader("*", "VISIT","student", "visit.clarion_id=student.clarion_id and time_out is null", 1);
-            listBoxLoggedIn.Items.Add("DATE \t TIME IN\tID\tLAST NAME\tFIRST NAME");
+            listBoxLoggedIn.Items.Add("DATE\t\tTIME IN\t\tID\t\tLAST NAME\tFIRST NAME");
 
             if (rd.HasRows)
             {
@@ -551,7 +551,7 @@ namespace CIS411
                 {
                     
                     DateTime jdate= DateTime.Parse(rd[1].ToString());
-                    listBoxLoggedIn.Items.Add(jdate.ToString("dd/M/yyyy") + "\t"+rd[2] + "\t" + rd[0] + "\t"+rd[13] + "                            " + rd[14]);
+                    listBoxLoggedIn.Items.Add(jdate.ToString("dd/M/yyyy") + "\t" + rd[2] + "\t\t" + rd[0] + "\t" + rd[13] + "\t\t" + rd[14]);
                 }
             }
 
@@ -675,7 +675,7 @@ namespace CIS411
         private void btnLogOut_Click(object sender, EventArgs e)
         {
             string []selectedStudent=listBoxLoggedIn.SelectedItem.ToString().Split();
-            int student_ID = int.Parse(selectedStudent[0]);
+            int student_ID = int.Parse(selectedStudent[3]);
 
             frmMain.signOut(student_ID);
             loadlist(); 
@@ -875,11 +875,14 @@ namespace CIS411
                     string[] selectedVisitEdit = listBoxLoggedIn.SelectedItem.ToString().Split();
                     string dateEdit = selectedVisitEdit[0];
                     DateTime TimeInEdit = DateTime.Parse(selectedVisitEdit[1]);
-                    DateTime TimeOutEdit = DateTime.Parse(selectedVisitEdit[2]);
-
+                    if (selectedVisitEdit[2] != "")
+                    {
+                        DateTime TimeOutEdit = DateTime.Parse(selectedVisitEdit[2]);
+                        dateTimePickerEditTimeOut.Value = TimeOutEdit;
+                    }
                     txtEditDate.Text = dateEdit;
                     dateTimePickerEditTimeIn.Value = TimeInEdit;
-                    dateTimePickerEditTimeOut.Value = TimeOutEdit;
+                    
 
                     btnEditVisit.Text = "Save Edit";
 
@@ -888,21 +891,27 @@ namespace CIS411
             
             else
             {
+
+                //DateTime.Parse(DateTime.Now.ToString("HH:mm:ss tt")
                 TimeSpan timedifference;
-                DateTime timeOut = dateTimePickerEditTimeOut.Value;
-                DateTime timeIn = dateTimePickerEditTimeIn.Value;
+                DateTime timeOut = DateTime.Parse(dateTimePickerEditTimeOut.Value.ToString("HH:mm:ss tt"));
+                DateTime timeIn = DateTime.Parse(dateTimePickerEditTimeIn.Value.ToString("HH:mm:ss tt"));
                 timedifference = timeOut.Subtract(timeIn);
                 if (timedifference < TimeSpan.Zero)
                 {
-                    MessageBox.Show("Sign out time is before sign in time.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Sign out time is before sign in time. "+ timeOut.ToString() + " " + timeIn.ToString() + " " +timedifference.ToString(), "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                    
+
+                string[] selectedVisitEdit = listBoxLoggedIn.SelectedItem.ToString().Split();
+                DateTime originalTimeInEdit = DateTime.Parse(selectedVisitEdit[1]);
+                
+
                     //actually updates the visit information
                 DataConnection conn = new DataConnection();
                 conn.Open();
                     //conn.Open();
-                    conn.Query("update VISIT set CLARION_ID = '" + txtEditStudentID.Text + "', DATE = '" + txtEditDate.Text + "', TIME_IN ='" + dateTimePickerEditTimeIn.Value + "', TIME_OUT = '" + dateTimePickerEditTimeOut.Value + "', TIME_DIFFERENCE = '" + timedifference.ToString("c"));
+                conn.Query("update VISIT set CLARION_ID = '" + txtEditStudentID.Text + "' , DATE = '" + txtEditDate.Text + "' , TIME_IN ='" + timeIn + "' , TIME_OUT = '" + timeOut + "' , TIME_DIFFERENCE = '" + timedifference.ToString("c") + "' where CLARION_ID = '" + txtEditStudentID.Text + "' AND DATE = '" + txtEditDate.Text + "' AND TIME_IN ='" + originalTimeInEdit + "'");
                 conn.Close();
                 
                  
