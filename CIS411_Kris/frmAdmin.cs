@@ -890,6 +890,7 @@ namespace CIS411
             if (comboCountCategory.SelectedItem.ToString() == "Method" && comboGroup.SelectedItem.ToString() == "Tutoring")
             {
                 selectString = DataConnection.GetSelectString("COUNT(*)", "VISIT", "WHERE", "METHOD = 'Tutoring'");
+
             }
             else if (comboCountCategory.SelectedItem.ToString() == "Total Tutors")
             {
