@@ -496,15 +496,14 @@ namespace CIS411
 
         private void frmAdmin_Load(object sender, EventArgs e)
         {
+
             // TODO: This line of code loads data into the 'DataSet1.DataTable2' table. You can move, or remove it, as needed.
             //this.dataTable2TableAdapter.Fill(this.DataSet1.DataTable2);
             // TODO: This line of code loads data into the 'DataSet1.DataTable1' table. You can move, or remove it, as needed.
             this.DataTable1TableAdapter.Fill(this.DataSet1.DataTable1);
             
 
-            string folder = System.IO.Path.GetFullPath(System.Reflection.Assembly.GetEntryAssembly().Location);
-            string dbPath = System.IO.Path.Combine(folder, "CIS411_Kris");
-            string connString = "DataSource=" +dbPath;
+       
             
             string fileName = "CIS411_kris";
             FileInfo f = new FileInfo(fileName);
