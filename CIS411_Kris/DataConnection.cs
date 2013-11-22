@@ -12,24 +12,40 @@ public class DataConnection
     public SqlCommand cmd;
     public SqlDataReader rd;
     public DataConnection()
-    { 
-        string folder = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
-        string dbPath = System.IO.Path.Combine(folder, "db.mdf");
-        int bin = dbPath.IndexOf("bin");
-        dbPath = dbPath.Remove(bin);
- 
-        AppDomain currentDomain = AppDomain.CurrentDomain;
-        currentDomain.SetData("database", dbPath + "db.mdf");
-        cn = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename='"+currentDomain.GetData("database")+"';Integrated Security=True");
+    {
+        cn = GetConn();
         cmd = new SqlCommand();
         cn.Open(); //TESTING DATABASE
         cn.Close();
         cmd.Connection = cn;
     }
 
-    public SqlConnection GetConn()
+    static int getSemester(int year, string term)
     {
-        return cn;
+        switch (term.ToLower())
+        {
+            case "spring":
+                return 2000 + ((year % 100 * 10)) + 1;
+            case "summer":
+                return 2000 + ((year % 100 * 10)) + 5;
+            case "fall":
+                return 2000 + ((year % 100 * 10)) + 8;
+            case "winter":
+                return 2000 + ((year % 100 * 10)) + 9;
+            default:
+                return -1;
+        }
+    }
+
+    static public SqlConnection GetConn()
+    {
+        string dbPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+        //string dbPath = System.IO.Path.Combine(folder, "db.mdf");
+        int bin = dbPath.IndexOf("bin");
+        dbPath = dbPath.Remove(bin);
+        AppDomain currentDomain = AppDomain.CurrentDomain;
+        currentDomain.SetData("database", dbPath + "db.mdf");
+        return new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename='" + currentDomain.GetData("database") + "';Integrated Security=True");;
     }
 
     public void Open()
@@ -70,9 +86,9 @@ public class DataConnection
         return rd;
     }
 
-    public SqlDataReader GetReader(string column, string table, string conditionColumn, string conditionValue)
+    public SqlDataReader GetReader(string column, string table, string condition)
     {
-        cmd.CommandText = GetReaderString(column, table, conditionColumn, conditionValue);
+        cmd.CommandText = GetSelectString(column, table, condition);
         if (rd == null)
             rd = cmd.ExecuteReader();
         else
@@ -83,9 +99,9 @@ public class DataConnection
         return rd;
     }
 
-    public SqlDataReader GetReader(string column, string table, string conditionColumn1, string conditionValue1, string conditionColumn2, string conditionValue2)
+    public SqlDataReader GetReader(string column, string table, string whereColumn, string whereValue)
     {
-        cmd.CommandText = GetReaderString(column, table, conditionColumn1, conditionValue1, conditionColumn2, conditionValue2);
+        cmd.CommandText = GetSelectString(column, table, whereColumn, whereValue);
         if (rd == null)
             rd = cmd.ExecuteReader();
         else
@@ -96,9 +112,9 @@ public class DataConnection
         return rd;
     }
 
-    public SqlDataReader GetReader(string column, string table, string conditionColumn1, string conditionValue1, string conditionColumn2, string conditionValue2, string conditionColumn3, string conditionValue3)
+    public SqlDataReader GetReader(string column, string table, string whereColumn1, string whereValue1, string whereColumn2, string whereValue2)
     {
-        cmd.CommandText = GetReaderString(column, table, conditionColumn1, conditionValue1, conditionColumn2, conditionValue2, conditionColumn3, conditionValue3);
+        cmd.CommandText = GetSelectString(column, table, whereColumn1, whereValue1, whereColumn2, whereValue2);
         if (rd == null)
             rd = cmd.ExecuteReader();
         else
@@ -109,9 +125,9 @@ public class DataConnection
         return rd;
     }
 
-    public SqlDataReader GetReader(string column, string table, string conditionColumn1, string conditionValue1, string conditionColumn2, string conditionValue2, string conditionColumn3, string conditionValue3, string conditionColumn4, string conditionValue4)
+    public SqlDataReader GetReader(string column, string table, string whereColumn1, string whereValue1, string whereColumn2, string whereValue2, string whereColumn3, string whereValue3)
     {
-        cmd.CommandText = GetReaderString(column, table, conditionColumn1, conditionValue1, conditionColumn2, conditionValue2, conditionColumn3, conditionValue3, conditionColumn4, conditionValue4);
+        cmd.CommandText = GetSelectString(column, table, whereColumn1, whereValue1, whereColumn2, whereValue2, whereColumn3, whereValue3);
         if (rd == null)
             rd = cmd.ExecuteReader();
         else
@@ -122,9 +138,9 @@ public class DataConnection
         return rd;
     }
 
-    public SqlDataReader GetReader(string column, string table, string conditionColumn1, string conditionValue1, string conditionColumn2, string conditionValue2, string conditionColumn3, string conditionValue3, string conditionColumn4, string conditionValue4, string conditionColumn5, string conditionValue5)
+    public SqlDataReader GetReader(string column, string table, string whereColumn1, string whereValue1, string whereColumn2, string whereValue2, string whereColumn3, string whereValue3, string whereColumn4, string whereValue4)
     {
-        cmd.CommandText = GetReaderString(column, table, conditionColumn1, conditionValue1, conditionColumn2, conditionValue2, conditionColumn3, conditionValue3, conditionColumn4, conditionValue4, conditionColumn5, conditionValue5);
+        cmd.CommandText = GetSelectString(column, table, whereColumn1, whereValue1, whereColumn2, whereValue2, whereColumn3, whereValue3, whereColumn4, whereValue4);
         if (rd == null)
             rd = cmd.ExecuteReader();
         else
@@ -135,39 +151,62 @@ public class DataConnection
         return rd;
     }
 
-    public string GetReaderString(string column, string table)
+    public SqlDataReader GetReader(string column, string table, string whereColumn1, string whereValue1, string whereColumn2, string whereValue2, string whereColumn3, string whereValue3, string whereColumn4, string whereValue4, string whereColumn5, string whereValue5)
+    {
+        cmd.CommandText = GetSelectString(column, table, whereColumn1, whereValue1, whereColumn2, whereValue2, whereColumn3, whereValue3, whereColumn4, whereValue4, whereColumn5, whereValue5);
+        if (rd == null)
+            rd = cmd.ExecuteReader();
+        else
+        {
+            rd.Close();
+            rd = cmd.ExecuteReader();
+        }
+        return rd;
+    }
+
+    static public string GetSelectString(string column, string table)
     {
         return "SELECT " + column + " FROM " + table;
     }
-
-    public string GetReaderString(string column, string table, string conditionColumn, string conditionValue)
+    
+    static public string GetSelectString(string column, string table, string condition)
     {
-        int i;
-        return GetReaderString(column, table) + " WHERE " + conditionColumn + " = " + (int.TryParse(conditionValue, out i) ? "" : "'") + conditionValue.ToString() + (int.TryParse(conditionValue, out i) ? "" : "'");
+        return GetSelectString(column, table) + " " + condition;
     }
 
-    public string GetReaderString(string column, string table, string conditionColumn1, string conditionValue1, string conditionColumn2, string conditionValue2)
+    static public string GetSelectString(string column, string table, string whereColumn, string whereValue)
     {
         int i;
-        return GetReaderString(column, table, conditionColumn1, conditionValue1) + " AND " + conditionColumn2 + " = " + (int.TryParse(conditionValue2, out i) ? "" : "'") + conditionValue2.ToString() + (int.TryParse(conditionValue2, out i) ? "" : "'");
+        return GetSelectString(column, table) + " WHERE " + whereColumn + " = " + (int.TryParse(whereValue, out i) ? "" : "'") + whereValue.ToString() + (int.TryParse(whereValue, out i) ? "" : "'");
     }
 
-    public string GetReaderString(string column, string table, string conditionColumn1, string conditionValue1, string conditionColumn2, string conditionValue2, string conditionColumn3, string conditionValue3)
+    static public string GetSelectString(string column, string table, string whereColumn, string whereValue, string condition)
     {
-        int i;
-        return GetReaderString(column, table, conditionColumn1, conditionValue1, conditionColumn2, conditionValue2) + " AND " + conditionColumn3 + " = " + (int.TryParse(conditionValue3, out i) ? "" : "'") + conditionValue3.ToString() + (int.TryParse(conditionValue3, out i) ? "" : "'");
+        return GetSelectString(column, table, whereColumn, whereValue) + " " + condition;
     }
 
-    public string GetReaderString(string column, string table, string conditionColumn1, string conditionValue1, string conditionColumn2, string conditionValue2, string conditionColumn3, string conditionValue3, string conditionColumn4, string conditionValue4)
+    static public string GetSelectString(string column, string table, string whereColumn1, string whereValue1, string whereColumn2, string whereValue2)
     {
         int i;
-        return GetReaderString(column, table, conditionColumn1, conditionValue1, conditionColumn2, conditionValue2, conditionColumn3, conditionValue3) + " AND " + conditionColumn4 + " = " + (int.TryParse(conditionValue4, out i) ? "" : "'") + conditionValue4.ToString() + (int.TryParse(conditionValue4, out i) ? "" : "'");
+        return GetSelectString(column, table, whereColumn1, whereValue1) + " AND " + whereColumn2 + " = " + (int.TryParse(whereValue2, out i) ? "" : "'") + whereValue2.ToString() + (int.TryParse(whereValue2, out i) ? "" : "'");
     }
 
-    public string GetReaderString(string column, string table, string conditionColumn1, string conditionValue1, string conditionColumn2, string conditionValue2, string conditionColumn3, string conditionValue3, string conditionColumn4, string conditionValue4, string conditionColumn5, string conditionValue5)
+    static public string GetSelectString(string column, string table, string whereColumn1, string whereValue1, string whereColumn2, string whereValue2, string whereColumn3, string whereValue3)
     {
         int i;
-        return GetReaderString(column, table, conditionColumn1, conditionValue1, conditionColumn2, conditionValue2, conditionColumn3, conditionValue3, conditionColumn4, conditionValue4) + " AND " + conditionColumn5 + " = " + (int.TryParse(conditionValue5, out i) ? "" : "'") + conditionValue5.ToString() + (int.TryParse(conditionValue5, out i) ? "" : "'");
+        return GetSelectString(column, table, whereColumn1, whereValue1, whereColumn2, whereValue2) + " AND " + whereColumn3 + " = " + (int.TryParse(whereValue3, out i) ? "" : "'") + whereValue3.ToString() + (int.TryParse(whereValue3, out i) ? "" : "'");
+    }
+
+    static public string GetSelectString(string column, string table, string whereColumn1, string whereValue1, string whereColumn2, string whereValue2, string whereColumn3, string whereValue3, string whereColumn4, string whereValue4)
+    {
+        int i;
+        return GetSelectString(column, table, whereColumn1, whereValue1, whereColumn2, whereValue2, whereColumn3, whereValue3) + " AND " + whereColumn4 + " = " + (int.TryParse(whereValue4, out i) ? "" : "'") + whereValue4.ToString() + (int.TryParse(whereValue4, out i) ? "" : "'");
+    }
+
+    static public string GetSelectString(string column, string table, string whereColumn1, string whereValue1, string whereColumn2, string whereValue2, string whereColumn3, string whereValue3, string whereColumn4, string whereValue4, string whereColumn5, string whereValue5)
+    {
+        int i;
+        return GetSelectString(column, table, whereColumn1, whereValue1, whereColumn2, whereValue2, whereColumn3, whereValue3, whereColumn4, whereValue4) + " AND " + whereColumn5 + " = " + (int.TryParse(whereValue5, out i) ? "" : "'") + whereValue5.ToString() + (int.TryParse(whereValue5, out i) ? "" : "'");
     }
 
     public void Query(string q)
@@ -176,10 +215,10 @@ public class DataConnection
         cmd.ExecuteNonQuery();
     }
 
-        public SqlDataReader GetReader(string column, string table, string conditionColumn, string conditionValue, string condition2)
+        public SqlDataReader GetReader(string column, string table, string whereColumn, string whereValue, string condition2)
     {
         int i;
-        cmd.CommandText = "SELECT " + column + " FROM " + table + " WHERE " + conditionColumn + " = " + (int.TryParse(conditionValue, out i) ? "" : "'") + conditionValue.ToString() + (int.TryParse(conditionValue, out i) ? "" : "'") + condition2;
+        cmd.CommandText = "SELECT " + column + " FROM " + table + " WHERE " + whereColumn + " = " + (int.TryParse(whereValue, out i) ? "" : "'") + whereValue.ToString() + (int.TryParse(whereValue, out i) ? "" : "'") + condition2;
         if (rd == null)
             rd = cmd.ExecuteReader();
         else

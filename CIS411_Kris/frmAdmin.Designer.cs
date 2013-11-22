@@ -28,29 +28,7 @@ namespace CIS411
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            this.DataTable1BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.DataSet1 = new CIS411.DataSet1();
             this.tabControlAdmin = new System.Windows.Forms.TabControl();
-            this.tabGeneral = new System.Windows.Forms.TabPage();
-            this.comboCategory = new System.Windows.Forms.ComboBox();
-            this.comboSortBy = new System.Windows.Forms.ComboBox();
-            this.btn_courses_import = new System.Windows.Forms.Button();
-            this.btn_student_import = new System.Windows.Forms.Button();
-            this.btnReport = new System.Windows.Forms.Button();
-            this.tabTutors = new System.Windows.Forms.TabPage();
-            this.lblInactiveTutors = new System.Windows.Forms.Label();
-            this.lblActiveTutors = new System.Windows.Forms.Label();
-            this.btnAddTutor = new System.Windows.Forms.Button();
-            this.btnDisableSelected = new System.Windows.Forms.Button();
-            this.btnDisableAll = new System.Windows.Forms.Button();
-            this.btnEnableAll = new System.Windows.Forms.Button();
-            this.btnEnableSelected = new System.Windows.Forms.Button();
-            this.listBoxDisableTutors = new System.Windows.Forms.ListBox();
-            this.listBoxEnableTutors = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtTutorStudentID = new System.Windows.Forms.TextBox();
             this.tabVisits = new System.Windows.Forms.TabPage();
             this.comboaddClass = new System.Windows.Forms.ComboBox();
             this.comboAddTutoring = new System.Windows.Forms.ComboBox();
@@ -84,7 +62,24 @@ namespace CIS411
             this.lblLoggedIn = new System.Windows.Forms.Label();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.listBoxLoggedIn = new System.Windows.Forms.ListBox();
-            this.tabPermission = new System.Windows.Forms.TabPage();
+            this.tabTutors = new System.Windows.Forms.TabPage();
+            this.lblInactiveTutors = new System.Windows.Forms.Label();
+            this.lblActiveTutors = new System.Windows.Forms.Label();
+            this.btnAddTutor = new System.Windows.Forms.Button();
+            this.btnDisableSelected = new System.Windows.Forms.Button();
+            this.btnDisableAll = new System.Windows.Forms.Button();
+            this.btnEnableAll = new System.Windows.Forms.Button();
+            this.btnEnableSelected = new System.Windows.Forms.Button();
+            this.listBoxDisableTutors = new System.Windows.Forms.ListBox();
+            this.listBoxEnableTutors = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtTutorStudentID = new System.Windows.Forms.TextBox();
+            this.tabMethods = new System.Windows.Forms.TabPage();
+            this.btnSaveMethods = new System.Windows.Forms.Button();
+            this.btnAddMethod = new System.Windows.Forms.Button();
+            this.tabAdmin = new System.Windows.Forms.TabPage();
+            this.btn_courses_import = new System.Windows.Forms.Button();
+            this.btn_student_import = new System.Windows.Forms.Button();
             this.grpBoxPassword = new System.Windows.Forms.GroupBox();
             this.btnChangePassword = new System.Windows.Forms.Button();
             this.txtConfirmPassword = new System.Windows.Forms.TextBox();
@@ -93,19 +88,20 @@ namespace CIS411
             this.lblConfirmPassword = new System.Windows.Forms.Label();
             this.lblNewPassword = new System.Windows.Forms.Label();
             this.lblCurrentPassword = new System.Windows.Forms.Label();
-            this.listBoxAdminUsers = new System.Windows.Forms.ListBox();
-            this.lblAdminUsers = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtAdminStudentID = new System.Windows.Forms.TextBox();
-            this.tabMethods = new System.Windows.Forms.TabPage();
-            this.btnSaveMethods = new System.Windows.Forms.Button();
-            this.btnAddMethod = new System.Windows.Forms.Button();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.label4 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.displayBtn = new System.Windows.Forms.Button();
+            this.tabReports = new System.Windows.Forms.TabPage();
+            this.btnMoveDown = new System.Windows.Forms.Button();
+            this.btnMoveUp = new System.Windows.Forms.Button();
+            this.lblGroup = new System.Windows.Forms.Label();
+            this.comboFilter = new System.Windows.Forms.ComboBox();
+            this.lblCount = new System.Windows.Forms.Label();
+            this.btnReport = new System.Windows.Forms.Button();
+            this.listBoxReport = new System.Windows.Forms.ListBox();
+            this.comboCountCategory = new System.Windows.Forms.ComboBox();
+            this.comboTerm = new System.Windows.Forms.ComboBox();
+            this.lblYear = new System.Windows.Forms.Label();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.txtYear = new System.Windows.Forms.TextBox();
+            this.btnDisplay = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtEditSignOut = new System.Windows.Forms.TextBox();
@@ -115,237 +111,28 @@ namespace CIS411
             this.txtAddTutor = new System.Windows.Forms.TextBox();
             this.txtAddSignOut = new System.Windows.Forms.TextBox();
             this.txtAddSignIn = new System.Windows.Forms.TextBox();
-            this.DataTable1TableAdapter = new CIS411.DataSet1TableAdapters.DataTable1TableAdapter();
-            ((System.ComponentModel.ISupportInitialize)(this.DataTable1BindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DataSet1)).BeginInit();
             this.tabControlAdmin.SuspendLayout();
-            this.tabGeneral.SuspendLayout();
-            this.tabTutors.SuspendLayout();
             this.tabVisits.SuspendLayout();
-            this.tabPermission.SuspendLayout();
-            this.grpBoxPassword.SuspendLayout();
+            this.tabTutors.SuspendLayout();
             this.tabMethods.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabAdmin.SuspendLayout();
+            this.grpBoxPassword.SuspendLayout();
+            this.tabReports.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // DataTable1BindingSource
-            // 
-            this.DataTable1BindingSource.DataMember = "DataTable1";
-            this.DataTable1BindingSource.DataSource = this.DataSet1;
-            // 
-            // DataSet1
-            // 
-            this.DataSet1.DataSetName = "DataSet1";
-            this.DataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // tabControlAdmin
             // 
-            this.tabControlAdmin.Controls.Add(this.tabGeneral);
-            this.tabControlAdmin.Controls.Add(this.tabTutors);
             this.tabControlAdmin.Controls.Add(this.tabVisits);
-            this.tabControlAdmin.Controls.Add(this.tabPermission);
+            this.tabControlAdmin.Controls.Add(this.tabTutors);
             this.tabControlAdmin.Controls.Add(this.tabMethods);
-            this.tabControlAdmin.Controls.Add(this.tabPage1);
+            this.tabControlAdmin.Controls.Add(this.tabAdmin);
+            this.tabControlAdmin.Controls.Add(this.tabReports);
             this.tabControlAdmin.Location = new System.Drawing.Point(12, 12);
             this.tabControlAdmin.Name = "tabControlAdmin";
             this.tabControlAdmin.SelectedIndex = 0;
             this.tabControlAdmin.Size = new System.Drawing.Size(658, 421);
             this.tabControlAdmin.TabIndex = 0;
             this.tabControlAdmin.SelectedIndexChanged += new System.EventHandler(this.tabControlAdmin_SelectedIndexChanged);
-            // 
-            // tabGeneral
-            // 
-            this.tabGeneral.Controls.Add(this.comboCategory);
-            this.tabGeneral.Controls.Add(this.comboSortBy);
-            this.tabGeneral.Controls.Add(this.btn_courses_import);
-            this.tabGeneral.Controls.Add(this.btn_student_import);
-            this.tabGeneral.Controls.Add(this.btnReport);
-            this.tabGeneral.Location = new System.Drawing.Point(4, 22);
-            this.tabGeneral.Name = "tabGeneral";
-            this.tabGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGeneral.Size = new System.Drawing.Size(650, 395);
-            this.tabGeneral.TabIndex = 0;
-            this.tabGeneral.Text = "General";
-            this.tabGeneral.UseVisualStyleBackColor = true;
-            // 
-            // comboCategory
-            // 
-            this.comboCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboCategory.FormattingEnabled = true;
-            this.comboCategory.Items.AddRange(new object[] {
-            "All"});
-            this.comboCategory.Location = new System.Drawing.Point(523, 8);
-            this.comboCategory.Name = "comboCategory";
-            this.comboCategory.Size = new System.Drawing.Size(121, 21);
-            this.comboCategory.TabIndex = 4;
-            // 
-            // comboSortBy
-            // 
-            this.comboSortBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboSortBy.FormattingEnabled = true;
-            this.comboSortBy.Items.AddRange(new object[] {
-            "Default",
-            "Hours",
-            "Credits",
-            "Class_Standing",
-            "Major",
-            "Transfer",
-            "Number of Visits"});
-            this.comboSortBy.Location = new System.Drawing.Point(523, 37);
-            this.comboSortBy.Name = "comboSortBy";
-            this.comboSortBy.Size = new System.Drawing.Size(121, 21);
-            this.comboSortBy.TabIndex = 3;
-            // 
-            // btn_courses_import
-            // 
-            this.btn_courses_import.Location = new System.Drawing.Point(6, 35);
-            this.btn_courses_import.Name = "btn_courses_import";
-            this.btn_courses_import.Size = new System.Drawing.Size(93, 23);
-            this.btn_courses_import.TabIndex = 2;
-            this.btn_courses_import.Text = "Import Courses";
-            this.btn_courses_import.UseVisualStyleBackColor = true;
-            this.btn_courses_import.Click += new System.EventHandler(this.btn_courses_import_Click);
-            // 
-            // btn_student_import
-            // 
-            this.btn_student_import.Location = new System.Drawing.Point(6, 64);
-            this.btn_student_import.Name = "btn_student_import";
-            this.btn_student_import.Size = new System.Drawing.Size(93, 23);
-            this.btn_student_import.TabIndex = 1;
-            this.btn_student_import.Text = "Import Students";
-            this.btn_student_import.UseVisualStyleBackColor = true;
-            this.btn_student_import.Click += new System.EventHandler(this.btn_student_import_Click);
-            // 
-            // btnReport
-            // 
-            this.btnReport.Location = new System.Drawing.Point(408, 8);
-            this.btnReport.Name = "btnReport";
-            this.btnReport.Size = new System.Drawing.Size(93, 23);
-            this.btnReport.TabIndex = 0;
-            this.btnReport.Text = "Report";
-            this.btnReport.UseVisualStyleBackColor = true;
-            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
-            // 
-            // tabTutors
-            // 
-            this.tabTutors.Controls.Add(this.lblInactiveTutors);
-            this.tabTutors.Controls.Add(this.lblActiveTutors);
-            this.tabTutors.Controls.Add(this.btnAddTutor);
-            this.tabTutors.Controls.Add(this.btnDisableSelected);
-            this.tabTutors.Controls.Add(this.btnDisableAll);
-            this.tabTutors.Controls.Add(this.btnEnableAll);
-            this.tabTutors.Controls.Add(this.btnEnableSelected);
-            this.tabTutors.Controls.Add(this.listBoxDisableTutors);
-            this.tabTutors.Controls.Add(this.listBoxEnableTutors);
-            this.tabTutors.Controls.Add(this.label1);
-            this.tabTutors.Controls.Add(this.txtTutorStudentID);
-            this.tabTutors.Location = new System.Drawing.Point(4, 22);
-            this.tabTutors.Name = "tabTutors";
-            this.tabTutors.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTutors.Size = new System.Drawing.Size(650, 395);
-            this.tabTutors.TabIndex = 1;
-            this.tabTutors.Text = "Tutors";
-            this.tabTutors.UseVisualStyleBackColor = true;
-            // 
-            // lblInactiveTutors
-            // 
-            this.lblInactiveTutors.AutoSize = true;
-            this.lblInactiveTutors.Location = new System.Drawing.Point(472, 20);
-            this.lblInactiveTutors.Name = "lblInactiveTutors";
-            this.lblInactiveTutors.Size = new System.Drawing.Size(81, 13);
-            this.lblInactiveTutors.TabIndex = 11;
-            this.lblInactiveTutors.Text = "Inactive Tutors:";
-            // 
-            // lblActiveTutors
-            // 
-            this.lblActiveTutors.AutoSize = true;
-            this.lblActiveTutors.Location = new System.Drawing.Point(222, 20);
-            this.lblActiveTutors.Name = "lblActiveTutors";
-            this.lblActiveTutors.Size = new System.Drawing.Size(73, 13);
-            this.lblActiveTutors.TabIndex = 10;
-            this.lblActiveTutors.Text = "Active Tutors:";
-            // 
-            // btnAddTutor
-            // 
-            this.btnAddTutor.Location = new System.Drawing.Point(74, 66);
-            this.btnAddTutor.Name = "btnAddTutor";
-            this.btnAddTutor.Size = new System.Drawing.Size(75, 23);
-            this.btnAddTutor.TabIndex = 9;
-            this.btnAddTutor.Text = "Add";
-            this.btnAddTutor.UseVisualStyleBackColor = true;
-            this.btnAddTutor.Click += new System.EventHandler(this.btnAddTutor_Click);
-            // 
-            // btnDisableSelected
-            // 
-            this.btnDisableSelected.Location = new System.Drawing.Point(412, 216);
-            this.btnDisableSelected.Name = "btnDisableSelected";
-            this.btnDisableSelected.Size = new System.Drawing.Size(39, 35);
-            this.btnDisableSelected.TabIndex = 8;
-            this.btnDisableSelected.Text = ">";
-            this.btnDisableSelected.UseVisualStyleBackColor = true;
-            this.btnDisableSelected.Click += new System.EventHandler(this.btnDisableSelected_Click);
-            // 
-            // btnDisableAll
-            // 
-            this.btnDisableAll.Location = new System.Drawing.Point(412, 175);
-            this.btnDisableAll.Name = "btnDisableAll";
-            this.btnDisableAll.Size = new System.Drawing.Size(39, 35);
-            this.btnDisableAll.TabIndex = 7;
-            this.btnDisableAll.Text = ">>";
-            this.btnDisableAll.UseVisualStyleBackColor = true;
-            this.btnDisableAll.Click += new System.EventHandler(this.btnDisableAll_Click);
-            // 
-            // btnEnableAll
-            // 
-            this.btnEnableAll.Location = new System.Drawing.Point(412, 80);
-            this.btnEnableAll.Name = "btnEnableAll";
-            this.btnEnableAll.Size = new System.Drawing.Size(39, 35);
-            this.btnEnableAll.TabIndex = 6;
-            this.btnEnableAll.Text = "<<";
-            this.btnEnableAll.UseVisualStyleBackColor = true;
-            this.btnEnableAll.Click += new System.EventHandler(this.btnEnableAll_Click);
-            // 
-            // btnEnableSelected
-            // 
-            this.btnEnableSelected.Location = new System.Drawing.Point(412, 39);
-            this.btnEnableSelected.Name = "btnEnableSelected";
-            this.btnEnableSelected.Size = new System.Drawing.Size(39, 35);
-            this.btnEnableSelected.TabIndex = 4;
-            this.btnEnableSelected.Text = "<";
-            this.btnEnableSelected.UseVisualStyleBackColor = true;
-            this.btnEnableSelected.Click += new System.EventHandler(this.btnEnableSelected_Click);
-            // 
-            // listBoxDisableTutors
-            // 
-            this.listBoxDisableTutors.FormattingEnabled = true;
-            this.listBoxDisableTutors.Location = new System.Drawing.Point(472, 39);
-            this.listBoxDisableTutors.Name = "listBoxDisableTutors";
-            this.listBoxDisableTutors.Size = new System.Drawing.Size(161, 212);
-            this.listBoxDisableTutors.TabIndex = 3;
-            // 
-            // listBoxEnableTutors
-            // 
-            this.listBoxEnableTutors.FormattingEnabled = true;
-            this.listBoxEnableTutors.Location = new System.Drawing.Point(222, 39);
-            this.listBoxEnableTutors.Name = "listBoxEnableTutors";
-            this.listBoxEnableTutors.Size = new System.Drawing.Size(174, 212);
-            this.listBoxEnableTutors.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 42);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Student ID:";
-            // 
-            // txtTutorStudentID
-            // 
-            this.txtTutorStudentID.Location = new System.Drawing.Point(74, 39);
-            this.txtTutorStudentID.Name = "txtTutorStudentID";
-            this.txtTutorStudentID.Size = new System.Drawing.Size(100, 20);
-            this.txtTutorStudentID.TabIndex = 0;
             // 
             // tabVisits
             // 
@@ -685,20 +472,188 @@ namespace CIS411
             this.listBoxLoggedIn.Size = new System.Drawing.Size(615, 121);
             this.listBoxLoggedIn.TabIndex = 0;
             // 
-            // tabPermission
+            // tabTutors
             // 
-            this.tabPermission.Controls.Add(this.grpBoxPassword);
-            this.tabPermission.Controls.Add(this.listBoxAdminUsers);
-            this.tabPermission.Controls.Add(this.lblAdminUsers);
-            this.tabPermission.Controls.Add(this.label2);
-            this.tabPermission.Controls.Add(this.txtAdminStudentID);
-            this.tabPermission.Location = new System.Drawing.Point(4, 22);
-            this.tabPermission.Name = "tabPermission";
-            this.tabPermission.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPermission.Size = new System.Drawing.Size(650, 395);
-            this.tabPermission.TabIndex = 3;
-            this.tabPermission.Text = "Permissions";
-            this.tabPermission.UseVisualStyleBackColor = true;
+            this.tabTutors.Controls.Add(this.lblInactiveTutors);
+            this.tabTutors.Controls.Add(this.lblActiveTutors);
+            this.tabTutors.Controls.Add(this.btnAddTutor);
+            this.tabTutors.Controls.Add(this.btnDisableSelected);
+            this.tabTutors.Controls.Add(this.btnDisableAll);
+            this.tabTutors.Controls.Add(this.btnEnableAll);
+            this.tabTutors.Controls.Add(this.btnEnableSelected);
+            this.tabTutors.Controls.Add(this.listBoxDisableTutors);
+            this.tabTutors.Controls.Add(this.listBoxEnableTutors);
+            this.tabTutors.Controls.Add(this.label1);
+            this.tabTutors.Controls.Add(this.txtTutorStudentID);
+            this.tabTutors.Location = new System.Drawing.Point(4, 22);
+            this.tabTutors.Name = "tabTutors";
+            this.tabTutors.Padding = new System.Windows.Forms.Padding(3);
+            this.tabTutors.Size = new System.Drawing.Size(650, 395);
+            this.tabTutors.TabIndex = 1;
+            this.tabTutors.Text = "Tutors";
+            this.tabTutors.UseVisualStyleBackColor = true;
+            // 
+            // lblInactiveTutors
+            // 
+            this.lblInactiveTutors.AutoSize = true;
+            this.lblInactiveTutors.Location = new System.Drawing.Point(472, 20);
+            this.lblInactiveTutors.Name = "lblInactiveTutors";
+            this.lblInactiveTutors.Size = new System.Drawing.Size(81, 13);
+            this.lblInactiveTutors.TabIndex = 11;
+            this.lblInactiveTutors.Text = "Inactive Tutors:";
+            // 
+            // lblActiveTutors
+            // 
+            this.lblActiveTutors.AutoSize = true;
+            this.lblActiveTutors.Location = new System.Drawing.Point(222, 20);
+            this.lblActiveTutors.Name = "lblActiveTutors";
+            this.lblActiveTutors.Size = new System.Drawing.Size(73, 13);
+            this.lblActiveTutors.TabIndex = 10;
+            this.lblActiveTutors.Text = "Active Tutors:";
+            // 
+            // btnAddTutor
+            // 
+            this.btnAddTutor.Location = new System.Drawing.Point(74, 66);
+            this.btnAddTutor.Name = "btnAddTutor";
+            this.btnAddTutor.Size = new System.Drawing.Size(75, 23);
+            this.btnAddTutor.TabIndex = 9;
+            this.btnAddTutor.Text = "Add";
+            this.btnAddTutor.UseVisualStyleBackColor = true;
+            this.btnAddTutor.Click += new System.EventHandler(this.btnAddTutor_Click);
+            // 
+            // btnDisableSelected
+            // 
+            this.btnDisableSelected.Location = new System.Drawing.Point(412, 216);
+            this.btnDisableSelected.Name = "btnDisableSelected";
+            this.btnDisableSelected.Size = new System.Drawing.Size(39, 35);
+            this.btnDisableSelected.TabIndex = 8;
+            this.btnDisableSelected.Text = ">";
+            this.btnDisableSelected.UseVisualStyleBackColor = true;
+            this.btnDisableSelected.Click += new System.EventHandler(this.btnDisableSelected_Click);
+            // 
+            // btnDisableAll
+            // 
+            this.btnDisableAll.Location = new System.Drawing.Point(412, 175);
+            this.btnDisableAll.Name = "btnDisableAll";
+            this.btnDisableAll.Size = new System.Drawing.Size(39, 35);
+            this.btnDisableAll.TabIndex = 7;
+            this.btnDisableAll.Text = ">>";
+            this.btnDisableAll.UseVisualStyleBackColor = true;
+            this.btnDisableAll.Click += new System.EventHandler(this.btnDisableAll_Click);
+            // 
+            // btnEnableAll
+            // 
+            this.btnEnableAll.Location = new System.Drawing.Point(412, 80);
+            this.btnEnableAll.Name = "btnEnableAll";
+            this.btnEnableAll.Size = new System.Drawing.Size(39, 35);
+            this.btnEnableAll.TabIndex = 6;
+            this.btnEnableAll.Text = "<<";
+            this.btnEnableAll.UseVisualStyleBackColor = true;
+            this.btnEnableAll.Click += new System.EventHandler(this.btnEnableAll_Click);
+            // 
+            // btnEnableSelected
+            // 
+            this.btnEnableSelected.Location = new System.Drawing.Point(412, 39);
+            this.btnEnableSelected.Name = "btnEnableSelected";
+            this.btnEnableSelected.Size = new System.Drawing.Size(39, 35);
+            this.btnEnableSelected.TabIndex = 4;
+            this.btnEnableSelected.Text = "<";
+            this.btnEnableSelected.UseVisualStyleBackColor = true;
+            this.btnEnableSelected.Click += new System.EventHandler(this.btnEnableSelected_Click);
+            // 
+            // listBoxDisableTutors
+            // 
+            this.listBoxDisableTutors.FormattingEnabled = true;
+            this.listBoxDisableTutors.Location = new System.Drawing.Point(472, 39);
+            this.listBoxDisableTutors.Name = "listBoxDisableTutors";
+            this.listBoxDisableTutors.Size = new System.Drawing.Size(161, 212);
+            this.listBoxDisableTutors.TabIndex = 3;
+            // 
+            // listBoxEnableTutors
+            // 
+            this.listBoxEnableTutors.FormattingEnabled = true;
+            this.listBoxEnableTutors.Location = new System.Drawing.Point(222, 39);
+            this.listBoxEnableTutors.Name = "listBoxEnableTutors";
+            this.listBoxEnableTutors.Size = new System.Drawing.Size(174, 212);
+            this.listBoxEnableTutors.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 42);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Student ID:";
+            // 
+            // txtTutorStudentID
+            // 
+            this.txtTutorStudentID.Location = new System.Drawing.Point(74, 39);
+            this.txtTutorStudentID.Name = "txtTutorStudentID";
+            this.txtTutorStudentID.Size = new System.Drawing.Size(100, 20);
+            this.txtTutorStudentID.TabIndex = 0;
+            // 
+            // tabMethods
+            // 
+            this.tabMethods.Controls.Add(this.btnSaveMethods);
+            this.tabMethods.Controls.Add(this.btnAddMethod);
+            this.tabMethods.Location = new System.Drawing.Point(4, 22);
+            this.tabMethods.Name = "tabMethods";
+            this.tabMethods.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMethods.Size = new System.Drawing.Size(650, 395);
+            this.tabMethods.TabIndex = 4;
+            this.tabMethods.Text = "Methods";
+            this.tabMethods.UseVisualStyleBackColor = true;
+            // 
+            // btnSaveMethods
+            // 
+            this.btnSaveMethods.Location = new System.Drawing.Point(569, 330);
+            this.btnSaveMethods.Name = "btnSaveMethods";
+            this.btnSaveMethods.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveMethods.TabIndex = 0;
+            this.btnSaveMethods.Text = "Save Changes";
+            this.btnSaveMethods.UseVisualStyleBackColor = true;
+            this.btnSaveMethods.Click += new System.EventHandler(this.btnSaveMethods_Click);
+            // 
+            // btnAddMethod
+            // 
+            this.btnAddMethod.Location = new System.Drawing.Point(0, 0);
+            this.btnAddMethod.Name = "btnAddMethod";
+            this.btnAddMethod.Size = new System.Drawing.Size(100, 20);
+            this.btnAddMethod.TabIndex = 1;
+            this.btnAddMethod.Text = "Add new method";
+            this.btnAddMethod.Click += new System.EventHandler(this.btnAddMethod_Click);
+            // 
+            // tabAdmin
+            // 
+            this.tabAdmin.Controls.Add(this.btn_courses_import);
+            this.tabAdmin.Controls.Add(this.btn_student_import);
+            this.tabAdmin.Controls.Add(this.grpBoxPassword);
+            this.tabAdmin.Location = new System.Drawing.Point(4, 22);
+            this.tabAdmin.Name = "tabAdmin";
+            this.tabAdmin.Padding = new System.Windows.Forms.Padding(3);
+            this.tabAdmin.Size = new System.Drawing.Size(650, 395);
+            this.tabAdmin.TabIndex = 3;
+            this.tabAdmin.Text = "Administration";
+            this.tabAdmin.UseVisualStyleBackColor = true;
+            // 
+            // btn_courses_import
+            // 
+            this.btn_courses_import.Location = new System.Drawing.Point(19, 34);
+            this.btn_courses_import.Name = "btn_courses_import";
+            this.btn_courses_import.Size = new System.Drawing.Size(93, 23);
+            this.btn_courses_import.TabIndex = 6;
+            this.btn_courses_import.Text = "Import Courses";
+            this.btn_courses_import.UseVisualStyleBackColor = true;
+            // 
+            // btn_student_import
+            // 
+            this.btn_student_import.Location = new System.Drawing.Point(19, 63);
+            this.btn_student_import.Name = "btn_student_import";
+            this.btn_student_import.Size = new System.Drawing.Size(93, 23);
+            this.btn_student_import.TabIndex = 5;
+            this.btn_student_import.Text = "Import Students";
+            this.btn_student_import.UseVisualStyleBackColor = true;
             // 
             // grpBoxPassword
             // 
@@ -777,138 +732,163 @@ namespace CIS411
             this.lblCurrentPassword.TabIndex = 0;
             this.lblCurrentPassword.Text = "Current Password";
             // 
-            // listBoxAdminUsers
+            // tabReports
             // 
-            this.listBoxAdminUsers.FormattingEnabled = true;
-            this.listBoxAdminUsers.Location = new System.Drawing.Point(13, 83);
-            this.listBoxAdminUsers.Name = "listBoxAdminUsers";
-            this.listBoxAdminUsers.Size = new System.Drawing.Size(189, 251);
-            this.listBoxAdminUsers.TabIndex = 3;
+            this.tabReports.Controls.Add(this.btnMoveDown);
+            this.tabReports.Controls.Add(this.btnMoveUp);
+            this.tabReports.Controls.Add(this.lblGroup);
+            this.tabReports.Controls.Add(this.comboFilter);
+            this.tabReports.Controls.Add(this.lblCount);
+            this.tabReports.Controls.Add(this.btnReport);
+            this.tabReports.Controls.Add(this.listBoxReport);
+            this.tabReports.Controls.Add(this.comboCountCategory);
+            this.tabReports.Controls.Add(this.comboTerm);
+            this.tabReports.Controls.Add(this.lblYear);
+            this.tabReports.Controls.Add(this.btnClear);
+            this.tabReports.Controls.Add(this.txtYear);
+            this.tabReports.Controls.Add(this.btnDisplay);
+            this.tabReports.Location = new System.Drawing.Point(4, 22);
+            this.tabReports.Name = "tabReports";
+            this.tabReports.Padding = new System.Windows.Forms.Padding(3);
+            this.tabReports.Size = new System.Drawing.Size(650, 395);
+            this.tabReports.TabIndex = 5;
+            this.tabReports.Text = "Reports";
+            this.tabReports.UseVisualStyleBackColor = true;
             // 
-            // lblAdminUsers
+            // btnMoveDown
             // 
-            this.lblAdminUsers.AutoSize = true;
-            this.lblAdminUsers.Location = new System.Drawing.Point(10, 67);
-            this.lblAdminUsers.Name = "lblAdminUsers";
-            this.lblAdminUsers.Size = new System.Drawing.Size(69, 13);
-            this.lblAdminUsers.TabIndex = 2;
-            this.lblAdminUsers.Text = "Admin Users:";
+            this.btnMoveDown.Location = new System.Drawing.Point(100, 138);
+            this.btnMoveDown.Name = "btnMoveDown";
+            this.btnMoveDown.Size = new System.Drawing.Size(75, 23);
+            this.btnMoveDown.TabIndex = 17;
+            this.btnMoveDown.Text = "Move Down";
+            this.btnMoveDown.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // btnMoveUp
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 34);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Student ID:";
+            this.btnMoveUp.Location = new System.Drawing.Point(4, 138);
+            this.btnMoveUp.Name = "btnMoveUp";
+            this.btnMoveUp.Size = new System.Drawing.Size(75, 23);
+            this.btnMoveUp.TabIndex = 16;
+            this.btnMoveUp.Text = "Move Up";
+            this.btnMoveUp.UseVisualStyleBackColor = true;
             // 
-            // txtAdminStudentID
+            // lblGroup
             // 
-            this.txtAdminStudentID.Location = new System.Drawing.Point(74, 27);
-            this.txtAdminStudentID.Name = "txtAdminStudentID";
-            this.txtAdminStudentID.Size = new System.Drawing.Size(100, 20);
-            this.txtAdminStudentID.TabIndex = 0;
+            this.lblGroup.AutoSize = true;
+            this.lblGroup.Location = new System.Drawing.Point(6, 85);
+            this.lblGroup.Name = "lblGroup";
+            this.lblGroup.Size = new System.Drawing.Size(29, 13);
+            this.lblGroup.TabIndex = 15;
+            this.lblGroup.Text = "Filter";
             // 
-            // tabMethods
+            // comboFilter
             // 
-            this.tabMethods.Controls.Add(this.btnSaveMethods);
-            this.tabMethods.Controls.Add(this.btnAddMethod);
-            this.tabMethods.Location = new System.Drawing.Point(4, 22);
-            this.tabMethods.Name = "tabMethods";
-            this.tabMethods.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMethods.Size = new System.Drawing.Size(650, 395);
-            this.tabMethods.TabIndex = 4;
-            this.tabMethods.Text = "Methods";
-            this.tabMethods.UseVisualStyleBackColor = true;
+            this.comboFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboFilter.FormattingEnabled = true;
+            this.comboFilter.Location = new System.Drawing.Point(62, 82);
+            this.comboFilter.Name = "comboFilter";
+            this.comboFilter.Size = new System.Drawing.Size(113, 21);
+            this.comboFilter.TabIndex = 14;
+            this.comboFilter.SelectedIndexChanged += new System.EventHandler(this.comboGroup_SelectedIndexChanged);
             // 
-            // btnSaveMethods
+            // lblCount
             // 
-            this.btnSaveMethods.Location = new System.Drawing.Point(569, 330);
-            this.btnSaveMethods.Name = "btnSaveMethods";
-            this.btnSaveMethods.Size = new System.Drawing.Size(75, 23);
-            this.btnSaveMethods.TabIndex = 0;
-            this.btnSaveMethods.Text = "Save Changes";
-            this.btnSaveMethods.UseVisualStyleBackColor = true;
-            this.btnSaveMethods.Click += new System.EventHandler(this.btnSaveMethods_Click);
+            this.lblCount.AutoSize = true;
+            this.lblCount.Location = new System.Drawing.Point(6, 58);
+            this.lblCount.Name = "lblCount";
+            this.lblCount.Size = new System.Drawing.Size(35, 13);
+            this.lblCount.TabIndex = 13;
+            this.lblCount.Text = "Count";
             // 
-            // btnAddMethod
+            // btnReport
             // 
-            this.btnAddMethod.Location = new System.Drawing.Point(0, 0);
-            this.btnAddMethod.Name = "btnAddMethod";
-            this.btnAddMethod.Size = new System.Drawing.Size(100, 20);
-            this.btnAddMethod.TabIndex = 1;
-            this.btnAddMethod.Text = "Add new method";
-            this.btnAddMethod.Click += new System.EventHandler(this.btnAddMethod_Click);
+            this.btnReport.Location = new System.Drawing.Point(9, 349);
+            this.btnReport.Name = "btnReport";
+            this.btnReport.Size = new System.Drawing.Size(75, 38);
+            this.btnReport.TabIndex = 12;
+            this.btnReport.Text = "Generate Report";
+            this.btnReport.UseVisualStyleBackColor = true;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 
-            // tabPage1
+            // listBoxReport
             // 
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.comboBox1);
-            this.tabPage1.Controls.Add(this.reportViewer1);
-            this.tabPage1.Controls.Add(this.textBox1);
-            this.tabPage1.Controls.Add(this.displayBtn);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(650, 395);
-            this.tabPage1.TabIndex = 5;
-            this.tabPage1.Text = "Reports";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.listBoxReport.FormattingEnabled = true;
+            this.listBoxReport.Location = new System.Drawing.Point(181, 6);
+            this.listBoxReport.Name = "listBoxReport";
+            this.listBoxReport.ScrollAlwaysVisible = true;
+            this.listBoxReport.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.listBoxReport.Size = new System.Drawing.Size(463, 381);
+            this.listBoxReport.TabIndex = 11;
+            this.listBoxReport.SelectedIndexChanged += new System.EventHandler(this.listBoxReport_SelectedIndexChanged);
             // 
-            // label4
+            // comboCountCategory
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(303, 11);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(81, 13);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Select a Report";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            this.comboCountCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCountCategory.FormattingEnabled = true;
+            this.comboCountCategory.Items.AddRange(new object[] {
+            "Method",
+            "Student",
+            "Tutor",
+            "Course"});
+            this.comboCountCategory.Location = new System.Drawing.Point(62, 55);
+            this.comboCountCategory.Name = "comboCountCategory";
+            this.comboCountCategory.Size = new System.Drawing.Size(113, 21);
+            this.comboCountCategory.TabIndex = 10;
+            this.comboCountCategory.SelectedIndexChanged += new System.EventHandler(this.comboCountCategory_SelectedIndexChanged);
             // 
-            // comboBox1
+            // comboTerm
             // 
-            this.comboBox1.DataSource = this.DataTable1BindingSource;
-            this.comboBox1.DisplayMember = "TOTAL_NUM_OF_VISITS_PER_TERM";
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(390, 8);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 3;
-            this.comboBox1.ValueMember = "TOTAL_NUM_OF_VISITS_PER_TERM";
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboTerm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboTerm.FormattingEnabled = true;
+            this.comboTerm.Items.AddRange(new object[] {
+            "Winter",
+            "Sprint",
+            "Summer",
+            "Fall"});
+            this.comboTerm.Location = new System.Drawing.Point(81, 21);
+            this.comboTerm.Name = "comboTerm";
+            this.comboTerm.Size = new System.Drawing.Size(74, 21);
+            this.comboTerm.TabIndex = 7;
+            this.comboTerm.SelectedIndexChanged += new System.EventHandler(this.comboTerm_SelectedIndexChanged);
             // 
-            // reportViewer1
+            // lblYear
             // 
-            this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            reportDataSource1.Name = "DataSet1";
-            reportDataSource1.Value = this.DataTable1BindingSource;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "CIS411.Report1.rdlc";
-            this.reportViewer1.Location = new System.Drawing.Point(3, 35);
-            this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.Size = new System.Drawing.Size(644, 357);
-            this.reportViewer1.TabIndex = 2;
-            this.reportViewer1.Load += new System.EventHandler(this.reportViewer1_Load);
+            this.lblYear.AutoSize = true;
+            this.lblYear.Location = new System.Drawing.Point(6, 24);
+            this.lblYear.Name = "lblYear";
+            this.lblYear.Size = new System.Drawing.Size(32, 13);
+            this.lblYear.TabIndex = 6;
+            this.lblYear.Text = "Year:";
             // 
-            // textBox1
+            // btnClear
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 6);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.btnClear.Location = new System.Drawing.Point(100, 109);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.TabIndex = 5;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.ClearBtn_Click);
             // 
-            // displayBtn
+            // txtYear
             // 
-            this.displayBtn.Location = new System.Drawing.Point(115, 6);
-            this.displayBtn.Name = "displayBtn";
-            this.displayBtn.Size = new System.Drawing.Size(75, 23);
-            this.displayBtn.TabIndex = 0;
-            this.displayBtn.Text = "Display";
-            this.displayBtn.UseVisualStyleBackColor = true;
-            this.displayBtn.Click += new System.EventHandler(this.displayBtn_Click);
+            this.txtYear.Location = new System.Drawing.Point(44, 21);
+            this.txtYear.MaxLength = 4;
+            this.txtYear.Name = "txtYear";
+            this.txtYear.Size = new System.Drawing.Size(31, 20);
+            this.txtYear.TabIndex = 1;
+            this.txtYear.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_KeyPress);
+            // 
+            // btnDisplay
+            // 
+            this.btnDisplay.Location = new System.Drawing.Point(4, 109);
+            this.btnDisplay.Name = "btnDisplay";
+            this.btnDisplay.Size = new System.Drawing.Size(75, 23);
+            this.btnDisplay.TabIndex = 0;
+            this.btnDisplay.Text = "Display";
+            this.btnDisplay.UseVisualStyleBackColor = true;
+            this.btnDisplay.Click += new System.EventHandler(this.displayBtn_Click);
             // 
             // btnClose
             // 
@@ -982,11 +962,7 @@ namespace CIS411
             this.txtAddSignIn.Name = "txtAddSignIn";
             this.txtAddSignIn.Size = new System.Drawing.Size(100, 20);
             this.txtAddSignIn.TabIndex = 14;
-            // 
-            // DataTable1TableAdapter
-            // 
-            this.DataTable1TableAdapter.ClearBeforeFill = true;
-            // 
+            //
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -997,27 +973,22 @@ namespace CIS411
             this.Name = "frmAdmin";
             this.Text = "Administration";
             this.Load += new System.EventHandler(this.frmAdmin_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.DataTable1BindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DataSet1)).EndInit();
             this.tabControlAdmin.ResumeLayout(false);
-            this.tabGeneral.ResumeLayout(false);
-            this.tabTutors.ResumeLayout(false);
-            this.tabTutors.PerformLayout();
             this.tabVisits.ResumeLayout(false);
             this.tabVisits.PerformLayout();
-            this.tabPermission.ResumeLayout(false);
-            this.tabPermission.PerformLayout();
+            this.tabTutors.ResumeLayout(false);
+            this.tabTutors.PerformLayout();
+            this.tabMethods.ResumeLayout(false);
+            this.tabAdmin.ResumeLayout(false);
             this.grpBoxPassword.ResumeLayout(false);
             this.grpBoxPassword.PerformLayout();
-            this.tabMethods.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.tabReports.ResumeLayout(false);
+            this.tabReports.PerformLayout();
             this.ResumeLayout(false);
 
         }
         #region Declarations
         private System.Windows.Forms.TabControl tabControlAdmin;
-        private System.Windows.Forms.TabPage tabGeneral;
         private System.Windows.Forms.TabPage tabTutors;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.TextBox txtTutorStudentID;
@@ -1040,11 +1011,7 @@ namespace CIS411
         private System.Windows.Forms.TextBox txtAddStudentID;
         private System.Windows.Forms.Label lblAddVisit;
         private System.Windows.Forms.Button btnEditVisit;
-        private System.Windows.Forms.TabPage tabPermission;
-        private System.Windows.Forms.TextBox txtAdminStudentID;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lblAdminUsers;
-        private System.Windows.Forms.ListBox listBoxAdminUsers;
+        private System.Windows.Forms.TabPage tabAdmin;
         private System.Windows.Forms.GroupBox grpBoxPassword;
         private System.Windows.Forms.Label lblCurrentPassword;
         private System.Windows.Forms.Button btnChangePassword;
@@ -1053,11 +1020,6 @@ namespace CIS411
         private System.Windows.Forms.TextBox txtCurrentPassword;
         private System.Windows.Forms.Label lblConfirmPassword;
         private System.Windows.Forms.Label lblNewPassword;
-        private System.Windows.Forms.Button btnReport;
-        private System.Windows.Forms.Button btn_courses_import;
-        private System.Windows.Forms.Button btn_student_import;
-        private System.Windows.Forms.ComboBox comboSortBy;
-        private System.Windows.Forms.ComboBox comboCategory;
         private System.Windows.Forms.TabPage tabMethods;
         private System.Windows.Forms.Button btnSaveMethods;
         private System.Windows.Forms.DateTimePicker dateTimePickerAdd;
@@ -1092,18 +1054,25 @@ namespace CIS411
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtAddSignIn;
         private System.Windows.Forms.TextBox txtAddSignOut;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabReports;
         #endregion
 
-        private System.Windows.Forms.Button displayBtn;
-        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
-        private System.Windows.Forms.BindingSource DataTable1BindingSource;
-        private DataSet1 DataSet1;
-        private DataSet1TableAdapters.DataTable1TableAdapter DataTable1TableAdapter;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button btnDisplay;
+        private System.Windows.Forms.TextBox txtYear;
         private System.Windows.Forms.ComboBox comboaddClass;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Label lblYear;
+        private System.Windows.Forms.ComboBox comboTerm;
+        private System.Windows.Forms.ComboBox comboCountCategory;
+        private System.Windows.Forms.Button btn_courses_import;
+        private System.Windows.Forms.Button btn_student_import;
+        private System.Windows.Forms.Label lblGroup;
+        private System.Windows.Forms.ComboBox comboFilter;
+        private System.Windows.Forms.Label lblCount;
+        private System.Windows.Forms.Button btnReport;
+        private System.Windows.Forms.ListBox listBoxReport;
+        private System.Windows.Forms.Button btnMoveDown;
+        private System.Windows.Forms.Button btnMoveUp;
         //private DataSet1TableAdapters.DataTable2TableAdapter dataTable2TableAdapter;
     }
         #endregion

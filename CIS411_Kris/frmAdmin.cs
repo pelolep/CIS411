@@ -233,15 +233,13 @@ namespace CIS411
                 Excel.Application xlApp = new Excel.Application();
                 Excel.Workbook xlWorkBook = xlApp.Workbooks.Add();
                 Excel.Worksheet xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
-                
-                xlWorkSheet.Cells[1, 1].Value = "Student";
-                xlWorkSheet.Cells[1, 2].Value = "Hours";
-                xlWorkSheet.Cells[2, 1].Value = "Bill Warren";
-                xlWorkSheet.Cells[2, 2].Value = "30";
-                xlWorkSheet.Cells[3, 1].Value = "Kris Demor";
-                xlWorkSheet.Cells[3, 2].Value = "40";
-
-                DataConnection conn = new DataConnection();
+                string[] row;
+                for (int i = 0; i < listBoxReport.Items.Count; i++)
+                {
+                    row = listBoxReport.Items[i].ToString().Split('\t');
+                    for (int j = 0; j < row.Length; j++)
+                        xlWorkSheet.Cells[i, j].Value = row[j];
+                }
 
                 try
                 {
@@ -255,9 +253,29 @@ namespace CIS411
                     else
                         MessageBox.Show(ex.ToString());
                 }
+                /*
+                // TODO: Use the readers array in a loop and output 
+                // each row from them into xlWorkSheet.Cells
+                SqlDataReader[] readers = getReportReaders(); /*
+                xlWorkSheet.Cells[1, 1].Value = "Student";
+                xlWorkSheet.Cells[1, 2].Value = "Hours";
+                xlWorkSheet.Cells[2, 1].Value = "Bill Warren";
+                xlWorkSheet.Cells[2, 2].Value = "30";
+                xlWorkSheet.Cells[3, 1].Value = "Kris Demor";
+                xlWorkSheet.Cells[3, 2].Value = "40";
+                DataConnection conn = new DataConnection();
+                */
+                xlApp.Quit();
             }
             reportFile.Dispose();
             this.Focus();
+        }
+
+        SqlDataReader[] getReportReaders()
+        {
+            SqlDataReader[] readers = new SqlDataReader[listBoxReport.Items.Count];//?
+            // TODO: Get an array of readers that correspond to what is in the listBox            
+            return readers;
         }
 
         private void btn_student_import_Click(object sender, EventArgs e)
@@ -500,7 +518,6 @@ namespace CIS411
             // TODO: This line of code loads data into the 'DataSet1.DataTable2' table. You can move, or remove it, as needed.
             //this.dataTable2TableAdapter.Fill(this.DataSet1.DataTable2);
             // TODO: This line of code loads data into the 'DataSet1.DataTable1' table. You can move, or remove it, as needed.
-            this.DataTable1TableAdapter.Fill(this.DataSet1.DataTable1);
             
 
        
@@ -514,9 +531,6 @@ namespace CIS411
             loadlist();
            // AppDomain.CurrentDomain.SetData("DataDirectory", "~/cis411/cis411_Kris/db.mdf");
             //currentDomain.SetData("DataDirectory", "~/cis411/cis411_Kris/db.mdf");
-
-
-            this.reportViewer1.RefreshReport();
         }
 
         public void loadlist()
@@ -644,6 +658,7 @@ namespace CIS411
             txtMethods[methodIndex].Size = new System.Drawing.Size(100, 20);
             txtMethods[methodIndex].TabIndex = (methodIndex + 1) * 2;
             txtMethods[methodIndex].TextChanged += txtMethods_TextChanged;
+            txtMethods[methodIndex].MaxLength = 50;
             tabMethods.Controls.Add(txtMethods[methodIndex]);
         }
 
@@ -983,57 +998,129 @@ namespace CIS411
 
         
         }
-        // Created by Sean: textBox1 inside the Reporting Tab
-        private void textBox1_TextChanged(object sender, EventArgs e)
+
+        static public void txt_KeyPress(object sender, KeyPressEventArgs e)
         {
+            if (((e.KeyChar < '0') || (e.KeyChar > '9'))&&(e.KeyChar!='\b'))
+                e.Handled = true;
         }
 
         //Created by Sean: button1_Click inside the Reporting Tab
         private void displayBtn_Click(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'DataSet1.DataTable1' table. You can move, or remove it, as needed.
-            this.DataTable1TableAdapter.Fill(this.DataSet1.DataTable1);
-            this.reportViewer1.RefreshReport();
+            //TODO: This should add a placeholder to the listbox that represents 
+            //      the data that will be placed into the excel file
+            string column, table, filterColumn = "", condition = "", row = "";
+            DataConnection conn = new DataConnection();
+            SqlDataReader rd;
+            conn.Open();
+            switch (comboCountCategory.SelectedItem.ToString())
+            {
+                case "Method":
+                    column = "METHOD, COUNT(DISTINCT CLARION_ID)";
+                    table = "VISIT";
+                    condition = "GROUP BY METHOD";
+                    filterColumn = "METHOD";
+                    break;
+                case "Student":
+                    column = "COUNT(DISTINCT STUDENT_ID)";
+                    table = "VISIT";
+                    filterColumn = "METHOD";
+                    break;
+                case "Tutor":
+                    column = "COUNT(TUTOR_ID)";
+                    table = "VISIT";
+                    condition = "WHERE TUTOR_ID IS NOT NULL";
+                    break;
+                case "Course":
+                    column = "SUBJECT, COURSE, COUNT(*)";
+                    table = "VISIT";
+                    condition = "GROUP BY(SUBJECT,COURSE)";
+                    filterColumn = "SUBJECT";
+                    break;
+                case "Visits":
+                    column = "COUNT(*)";
+                    table = "VISIT";
+                    filterColumn = "METHOD";
+                    break;
+                default:
+                    column = "-1";
+                    table = "-1";
+                    break;
+            }
+            if (!((column == "-1") && (table == "-1")))
+                if (comboFilter.SelectedIndex != 0)
+                    if (condition != "")
+                        rd = conn.GetReader(column, table, condition);
+                    else
+                        rd = conn.GetReader(column, table);
+                else
+                    if (condition != "")
+                        rd = conn.GetReader(column, table, filterColumn, comboFilter.SelectedItem.ToString(), condition);
+                    else
+                        rd = conn.GetReader(column, table);
+            else
+                return;
+            while (rd.Read())
+            {
+                for (int i = 0; i < rd.FieldCount; i++)
+                    row += rd[i] + "\t";
+                listBoxReport.Items.Add(row);
+                row = "";
+            }
+            /*
+            if (comboCountCategory.SelectedItem.ToString() == "Method" && comboGroup.SelectedItem.ToString() == "Tutoring")
+            {
+
+            }
+            else if (comboCountCategory.SelectedItem.ToString() == "Total Tutors")
+            {
+
+            }
+            else if (comboCountCategory.SelectedItem.ToString() == "Total Tutor Hours")
+            {
+                selectString = "SELECT dateadd(second, SUM(DATEPART(SECOND, TIME_DIFFERENCE)),  108) FROM TUTOR_HOUR";
+            }
+            */
         }
 
-        //Created by Sean: Shows the query results from the SQL tables
-        private void reportViewer1_Load(object sender, EventArgs e)
-        {
-            //this.FreightTotalsDataTableTableAdapter.Fill(this.PayablesDataSet.FreightTotalsDataTable);
-            //this.FreightDataTableTableAdapter.Fill(this.PayablesDataSet.FreightDataTable);
-            //this.ReportViewer1.RefreshReport();
-            //dynamic CurrentReportDataSource = new Microsoft.Reporting.WinForms.ReportDataSource();
-            //comboBox1.SelectedIndex = 0;
-
-            //Option needs to be selected in comboBox1 first in order to determine which query to run
-            reportViewer1.Clear();
-
-            //In the properties of the report viewer, this views this current report to switch between
-            //reportViewer1.LocalReport.ReportEmbeddedResource = "CIS411.Report1.rdlc";
-        }
-
-       /* private void SwitchLocalReport(string selectedreportname)
-        {
-            dynamic CurrentReportDataSource = new Microsoft.Reporting.WinForms.ReportDataSource();
-        }
-        * */
+        /* private void SwitchLocalReport(string selectedreportname)
+         {
+             dynamic CurrentReportDataSource = new Microsoft.Reporting.WinForms.ReportDataSource();
+         }
+         * */
 
         //Created by Sean: Selects which query you want to fill in the reportViewer
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        /*private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            
-            /*if (comboBox1.SelectedIndex == 0)
+            string selectString = "";
+            if (comboCountCategory.SelectedItem.ToString() == "Total Visits")
+            {
+                selectString = DataConnection.GetSelectString("COUNT(*)", "VISIT");
+            }
+            else if (comboCountCategory.SelectedItem.ToString() == "Total Tutors")
             {
 
             }
-            else if (comboBox1.SelectedIndex == 1)
+            else if (comboCountCategory.SelectedItem.ToString() == "Total Tutor Hours")
+            {
+                selectString = "SELECT dateadd(second, SUM(DATEPART(SECOND, TIME_DIFFERENCE)),  108) FROM TUTOR_HOUR";
+            }
+            else if (comboCountCategory.SelectedItem.ToString() == "Total Hours Per Tutor")
             {
 
             }
-             * */
+            else if (comboCountCategory.SelectedItem.ToString() == "Total Hours Per Method")
+            {
+
+            }
+            else if (comboCountCategory.SelectedItem.ToString() == "Total Hours Per Class")
+            {
+
+            }
         }
-        
+         * */
+
         //Created by Sean:
         private void label4_Click(object sender, EventArgs e)
         {
@@ -1043,6 +1130,69 @@ namespace CIS411
         private void comboAddTutoring_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+        //Created by Sean: Clears report form
+        private void ClearBtn_Click(object sender, EventArgs e)
+        {
+            listBoxReport.Items.Clear();
+        }
+
+        //From report
+        private void comboCountCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboFilter.Items.Clear();
+            comboFilter.Items.Add("Don't filter");
+            comboFilter.SelectedIndex = 0;
+            if (comboCountCategory.SelectedItem.ToString() == "Method")
+            {
+                DataConnection conn = new DataConnection();
+                conn.Open();
+                SqlDataReader rd = conn.GetReader("DISTINCT METHOD", "VISIT");
+                while (rd.Read())
+                    comboFilter.Items.Add(rd[0].ToString());
+                conn.Close();
+                /*
+                comboGroup.Items.Add("Tutoring");
+                comboGroup.Items.Add("Group Meeting");
+                comboGroup.Items.Add("Supplemental Instruction");
+                comboGroup.Items.Add("Writing Center");
+                comboGroup.Items.Add("Computer Use");
+                comboGroup.Items.Add("Self Study");
+                comboGroup.Items.Add("Video");
+                comboGroup.Items.Add("Other");
+                */
+                
+            }
+            else if (comboCountCategory.SelectedItem.ToString() == "Student")
+            {
+                comboFilter.Items.Add("Total Hours");
+                comboFilter.Items.Add("Visits");
+
+            }
+            else if (comboCountCategory.SelectedItem.ToString() == "Tutor")
+            {
+                comboFilter.Items.Add("Total Hours");
+                comboFilter.Items.Add("Days Worked");
+            }
+            else if (comboCountCategory.SelectedItem.ToString() == "Course")
+            {
+                comboFilter.Items.Add("Total Courses");
+            }
+        }
+        //From report
+        private void comboGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        //from report
+        private void comboTerm_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBoxReport_SelectedIndexChanged(object sender, EventArgs e)
+        {
+         
         }
         // Returns array of all tutors
         /*

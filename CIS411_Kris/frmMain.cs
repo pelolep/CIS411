@@ -427,69 +427,59 @@ namespace CIS411
 
         static public bool signOut(int studentID)///////////
         {
-//<<<<<<< HEAD
+/*<<<<<<< HEAD
             System.DateTime timein, timenow;
             System.TimeSpan timedifference; // sign out works for everything but searching for the time out
             DataConnection conn = new DataConnection();
             conn.Open();
             string o = "";
-/*=======
+=======*/
 
-            System.DateTime timein = DateTime.Parse("12:12:25"), timenow, timedifference; // sign out works for everything but searching for the time out
+            System.DateTime timein, timenow;
+            System.TimeSpan timedifference; // sign out works for everything but searching for the time out
             DataConnection conn = new DataConnection();
             conn.Open();
->>>>>>> origin/Matt12*/
+//>>>>>>> origin/Matt12
             SqlDataReader rd = conn.GetReader("time_in, time_out", "visit", "clarion_id", studentID.ToString(), "and time_out is null");
-/*          if (rd.HasRows)
+            if (rd.HasRows)
             {
-                while (rd.Read())
-                {
-//<<<<<<< HEAD
-                    timein = DateTime.Parse(rd[0].ToString());
-
-
-=======
-                    timein = DateTime.Parse( rd[0].ToString());
-                    
-                }
+                rd.Read();
+                timein = DateTime.Parse( rd[0].ToString());
                 rd.Close();
 
                 timenow = DateTime.Parse(DateTime.Now.ToString("HH:mm:ss tt"));
-                MessageBox.Show(timenow.ToShortTimeString());
-                timedifference =DateTime.Parse( timenow.Subtract(timein).ToString());
-                MessageBox.Show(DateTime.Now.Subtract(timein).ToString());
+                //MessageBox.Show(timenow.ToShortTimeString());
+                timedifference = timenow.Subtract(timein);
+                if (timedifference < TimeSpan.Zero)
+                {
+                    MessageBox.Show("Sign out time is before sign in time. Ask your coordinator if you forgot to sign out yesterday.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+                //MessageBox.Show(DateTime.Now.Subtract(timein).ToString());
                 conn.Query("update visit set time_out = '" + timenow + "' , time_difference = '" + timedifference + "' where clarion_id= '" + studentID + "' and time_out is null");
                 conn.Close();
-                return;
+                return true;
             }
             else
             {
                 conn.Close();
-            }
-
-
-            conn.Open();
-            rd = conn.GetReader("time_in, time_out", "tutor_hour", "tutor_id", tutorid.ToString(), "and time_out is null");
->>>>>>> origin/Matt12*/
-            rd.Read();
-            timein = DateTime.Parse(rd[0].ToString());
-            timenow = DateTime.Now;
-            timedifference = timenow.Subtract(timein);
-            if (timedifference < TimeSpan.Zero)
-            {
-                MessageBox.Show("Sign out time is before sign in time. Ask your coordinator if you forgot to sign out yesterday.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-
+/*          conn.Open();
+            rd = conn.GetReader("time_in, time_out", "tutor_hour", "tutor_id", tutorid.ToString(), "and time_out is null");
+>>>>>>> origin/Matt12
             if (rd.HasRows)
             {
+                rd.Read();
+                timein = DateTime.Parse(rd[0].ToString());
+                timenow = DateTime.Now;
+                timedifference = timenow.Subtract(timein);
                 /*
                 while (rd.Read())
                 {
                     timein = DateTime.Parse(rd[0].ToString());
                 }
                 rd.Close();
-                */
                 conn.Close();
                 conn.Open();
                 //timedifference = DateTime.Parse(timenow.Subtract(timein).ToString());

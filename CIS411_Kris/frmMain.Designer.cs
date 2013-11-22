@@ -92,6 +92,7 @@ namespace CIS411
             this.txtStudentID.TabIndex = 0;
             this.txtStudentID.MaxLength = 8;
             this.txtStudentID.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtStudentID_PreviewKeyDown);
+            this.txtStudentID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(frmAdmin.txt_KeyPress);
             this.txtStudentID.AcceptsReturn = false;
             this.txtStudentID.Visible = true;
             #endregion
