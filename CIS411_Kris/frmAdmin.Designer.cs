@@ -28,6 +28,7 @@ namespace CIS411
         /// </summary>
         private void InitializeComponent()
         {
+            if (true) ;
             this.tabControlAdmin = new System.Windows.Forms.TabControl();
             this.tabVisits = new System.Windows.Forms.TabPage();
             this.comboaddClass = new System.Windows.Forms.ComboBox();
@@ -763,6 +764,7 @@ namespace CIS411
             this.btnMoveDown.TabIndex = 17;
             this.btnMoveDown.Text = "Move Down";
             this.btnMoveDown.UseVisualStyleBackColor = true;
+            this.btnMoveDown.Click += new System.EventHandler(this.btnMoveDown_Click);
             // 
             // btnMoveUp
             // 
@@ -772,15 +774,16 @@ namespace CIS411
             this.btnMoveUp.TabIndex = 16;
             this.btnMoveUp.Text = "Move Up";
             this.btnMoveUp.UseVisualStyleBackColor = true;
+            this.btnMoveUp.Click += new System.EventHandler(this.btnMoveUp_Click);
             // 
             // lblGroup
             // 
             this.lblGroup.AutoSize = true;
             this.lblGroup.Location = new System.Drawing.Point(6, 85);
             this.lblGroup.Name = "lblGroup";
-            this.lblGroup.Size = new System.Drawing.Size(29, 13);
+            this.lblGroup.Size = new System.Drawing.Size(53, 13);
             this.lblGroup.TabIndex = 15;
-            this.lblGroup.Text = "Filter";
+            this.lblGroup.Text = "Filter/Sort";
             // 
             // comboFilter
             // 
@@ -817,7 +820,7 @@ namespace CIS411
             this.listBoxReport.Location = new System.Drawing.Point(181, 6);
             this.listBoxReport.Name = "listBoxReport";
             this.listBoxReport.ScrollAlwaysVisible = true;
-            this.listBoxReport.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.listBoxReport.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.listBoxReport.Size = new System.Drawing.Size(463, 381);
             this.listBoxReport.TabIndex = 11;
             this.listBoxReport.SelectedIndexChanged += new System.EventHandler(this.listBoxReport_SelectedIndexChanged);
@@ -962,7 +965,7 @@ namespace CIS411
             this.txtAddSignIn.Name = "txtAddSignIn";
             this.txtAddSignIn.Size = new System.Drawing.Size(100, 20);
             this.txtAddSignIn.TabIndex = 14;
-            //
+            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

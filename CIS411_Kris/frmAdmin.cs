@@ -238,7 +238,7 @@ namespace CIS411
                 {
                     row = listBoxReport.Items[i].ToString().Split('\t');
                     for (int j = 0; j < row.Length; j++)
-                        xlWorkSheet.Cells[i, j].Value = row[j];
+                        xlWorkSheet.Cells[i+1, j+1].Value = row[j];
                 }
 
                 try
@@ -1023,7 +1023,7 @@ namespace CIS411
                     filterColumn = "METHOD";
                     break;
                 case "Student":
-                    column = "COUNT(DISTINCT STUDENT_ID)";
+                    column = "COUNT(DISTINCT CLARION_ID)";
                     table = "VISIT";
                     filterColumn = "METHOD";
                     break;
@@ -1049,7 +1049,7 @@ namespace CIS411
                     break;
             }
             if (!((column == "-1") && (table == "-1")))
-                if (comboFilter.SelectedIndex != 0)
+                if (comboFilter.SelectedIndex == 0)
                     if (condition != "")
                         rd = conn.GetReader(column, table, condition);
                     else
@@ -1066,6 +1066,7 @@ namespace CIS411
                 for (int i = 0; i < rd.FieldCount; i++)
                     row += rd[i] + "\t";
                 listBoxReport.Items.Add(row);
+                listBoxReport.Items.Add("");
                 row = "";
             }
             /*
@@ -1141,7 +1142,7 @@ namespace CIS411
         private void comboCountCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboFilter.Items.Clear();
-            comboFilter.Items.Add("Don't filter");
+            comboFilter.Items.Add("All");
             comboFilter.SelectedIndex = 0;
             if (comboCountCategory.SelectedItem.ToString() == "Method")
             {
@@ -1193,6 +1194,19 @@ namespace CIS411
         private void listBoxReport_SelectedIndexChanged(object sender, EventArgs e)
         {
          
+        }
+
+        private void btnMoveUp_Click(object sender, EventArgs e)
+        {
+            /*
+            for (int i = 0; i < listBoxReport.SelectedIndices.Count; i++)
+                if (listBoxReport.SelectedIndices[0]==
+            */
+        }
+
+        private void btnMoveDown_Click(object sender, EventArgs e)
+        {
+
         }
         // Returns array of all tutors
         /*
