@@ -1017,48 +1017,289 @@ namespace CIS411
             switch (comboCountCategory.SelectedItem.ToString())
             {
                 case "Method":
-                    column = "METHOD, COUNT(DISTINCT CLARION_ID)";
+                    column = "method, COUNT(DISTINCT CLARION_ID)";
                     table = "VISIT";
-                    condition = "GROUP BY METHOD";
+                    MessageBox.Show(comboFilter.SelectedItem.ToString());
+                    condition = "  GROUP BY METHOD  ";
+                    if (comboFilter.SelectedItem.ToString() == "Do not filter")
+                    {
+                        MessageBox.Show("wind");
+                        rd = conn.GetReader(column, table, condition);
+                        while (rd.Read())
+                        {
+                            for (int i = 0; i < rd.FieldCount; i++)
+                                row += rd[i] + "\t";
+                            listBoxReport.Items.Add(row);
+                            row = "";
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("sad panda");
+                        rd = conn.GetReader("method, COUNT(DISTINCT CLARION_ID)", "visit", "method", comboFilter.SelectedItem.ToString(), "  GROUP BY METHOD ");
+                        if (rd.HasRows)
+                        {
+                            while (rd.Read())
+                            {
+                                for (int i = 0; i < rd.FieldCount; i++)
+                                    row += rd[i] + "\t";
+                                listBoxReport.Items.Add(row);
+                                row = "";
+                            }
+                        }
+
+                    }
+
+
+ 
+                    /*
+                    
+                    //condition = " method " + " = "+ " '"+"other"+"' ";
                     filterColumn = "METHOD";
+                     * */
                     break;
                 case "Student":
-                    column = "COUNT(DISTINCT CLARION_ID)";
+                    int newid = -1;
+                    TimeSpan newtime = new TimeSpan();
+                    column = "CLARION_ID,time_difference ";
                     table = "VISIT";
-                    filterColumn = "METHOD";
+                    condition = "where time_difference is not null";
+
+                    if (comboFilter.SelectedItem.ToString() == "Do not filter")
+                    {
+                        rd = conn.GetReader(column, table, condition);
+                        while (rd.Read())
+                        {
+                            if (newid == int.Parse(rd[0].ToString()))
+                                newtime += TimeSpan.Parse(rd[1].ToString());
+                            else
+                            {
+                                if(newid !=-1)
+                                listBoxReport.Items.Add(newid + " " + newtime);
+                                newid = int.Parse(rd[0].ToString());
+                                newtime = TimeSpan.Parse(rd[1].ToString());
+                            }
+                            
+   
+                        }
+                        listBoxReport.Items.Add(newid + " " + newtime);
+                        listBoxReport.Items.Add("");
+                        column = "CLARION_ID,count(distinct time_difference)";
+                        table = "VISIT";
+                        condition = "where time_difference is not null group by clarion_id";
+
+                            rd = conn.GetReader(column, table, condition);
+                            while (rd.Read())
+                            {
+                                for (int i = 0; i < rd.FieldCount; i++)
+                                    row += rd[i] + "\t";
+                                listBoxReport.Items.Add(row);
+                                row = "";
+                            }
+                    }
+                    else if (comboFilter.SelectedItem.ToString() == "Visits")
+                    {
+                        column = "CLARION_ID,count(distinct time_difference)";
+                        table = "VISIT";
+                        condition = "where time_difference is not null group by clarion_id";
+
+                            rd = conn.GetReader(column, table, condition);
+                            while (rd.Read())
+                            {
+                                for (int i = 0; i < rd.FieldCount; i++)
+                                    row += rd[i] + "\t";
+                                listBoxReport.Items.Add(row);
+                                row = "";
+                            }
+                    }
+                    else
+                    {
+                        column = "CLARION_ID,time_difference ";
+                        table = "VISIT";
+                        condition = "where time_difference is not null";
+
+                            rd = conn.GetReader(column, table, condition);
+                            while (rd.Read())
+                            {
+                                if (newid == int.Parse(rd[0].ToString()))
+                                    newtime += TimeSpan.Parse(rd[1].ToString());
+                                else
+                                {
+                                    if (newid != -1)
+                                        listBoxReport.Items.Add(newid + " " + newtime);
+                                    newid = int.Parse(rd[0].ToString());
+                                    newtime = TimeSpan.Parse(rd[1].ToString());
+                                }
+
+
+                            }
+                            listBoxReport.Items.Add(newid + " " + newtime);
+                    }
+
                     break;
                 case "Tutor":
-                    column = "COUNT(TUTOR_ID)";
-                    table = "VISIT";
-                    condition = "WHERE TUTOR_ID IS NOT NULL";
+
+                     newid = -1;
+                   newtime = new TimeSpan();
+                    column = "tutor_ID,time_difference ";
+                    table = "tutor_hour";
+                    condition = "where time_difference is not null";
+
+                    if (comboFilter.SelectedItem.ToString() == "Do not filter")
+                    {
+                        rd = conn.GetReader(column, table, condition);
+                        while (rd.Read())
+                        {
+                            if (newid == int.Parse(rd[0].ToString()))
+                                newtime += TimeSpan.Parse(rd[1].ToString());
+                            else
+                            {
+                                if(newid !=-1)
+                                listBoxReport.Items.Add(newid + " " + newtime);
+                                newid = int.Parse(rd[0].ToString());
+                                newtime = TimeSpan.Parse(rd[1].ToString());
+                            }
+                            
+   
+                        }
+                        if (newid != -1)
+                        listBoxReport.Items.Add(newid + " " + newtime);
+                        listBoxReport.Items.Add("");
+                        column = "tutor_ID,count(distinct time_difference)";
+                        table = "tutor_hour";
+                        condition = "where time_difference is not null group by tutor_id";
+
+                            rd = conn.GetReader(column, table, condition);
+                            while (rd.Read())
+                            {
+                                for (int i = 0; i < rd.FieldCount; i++)
+                                    row += rd[i] + "\t";
+                                listBoxReport.Items.Add(row);
+                                row = "";
+                            }
+                    }
+                    else if (comboFilter.SelectedItem.ToString() == "Days Worked")
+                    {
+                        column = "tutor_ID,count(distinct time_difference)";
+                        table = "tutor_hour";
+                        condition = "where time_difference is not null group by tutor_id";
+
+                            rd = conn.GetReader(column, table, condition);
+                            while (rd.Read())
+                            {
+                                for (int i = 0; i < rd.FieldCount; i++)
+                                    row += rd[i] + "\t";
+                                listBoxReport.Items.Add(row);
+                                row = "";
+                            }
+                    }
+                    else
+                    {
+                        column = "tutor_ID,time_difference ";
+                        table = "tutor_hour";
+                        condition = "where time_difference is not null";
+
+                            rd = conn.GetReader(column, table, condition);
+                            while (rd.Read())
+                            {
+                                if (newid == int.Parse(rd[0].ToString()))
+                                    newtime += TimeSpan.Parse(rd[1].ToString());
+                                else
+                                {
+                                    if (newid != -1)
+                                        listBoxReport.Items.Add(newid + " " + newtime);
+                                    newid = int.Parse(rd[0].ToString());
+                                    newtime = TimeSpan.Parse(rd[1].ToString());
+                                }
+
+
+                            }
+                            if (newid != -1)
+                            listBoxReport.Items.Add(newid + " " + newtime);
+                    }
+
+
+
+
                     break;
+
+
+
+
                 case "Course":
-                    column = "SUBJECT, COURSE, COUNT(*)";
+                    column = "SUBJECT, COUNT(*)";
                     table = "VISIT";
-                    condition = "GROUP BY(SUBJECT,COURSE)";
+                    condition = "GROUP BY(SUBJECT)";
                     filterColumn = "SUBJECT";
+                    if (comboFilter.SelectedItem.ToString() == "Do not filter")
+                    {
+                        rd = conn.GetReader(column, table, condition);
+                        while (rd.Read())
+                        {
+                            for (int i = 0; i < rd.FieldCount; i++)
+                                row += rd[i] + "\t";
+                            listBoxReport.Items.Add(row);
+                            row = "";
+                        }
+                    }
+                    else if (comboFilter.SelectedItem.ToString() == "Total Courses")
+                    {
+                        int count = 0;
+                        rd = conn.GetReader(column, table, condition);
+                        while (rd.Read())
+                        {
+                            //for (int i = 0; i < rd.FieldCount; i++)
+                            count++;
+                        }
+                        listBoxReport.Items.Add("total courses " + count);
+                           
+                    }
+                    else
+                    {
+                        rd = conn.GetReader(column, "visit", filterColumn, comboFilter.SelectedItem.ToString(), condition);
+
+                        if (rd.HasRows)
+                        {
+                            while (rd.Read())
+                            {
+                                for (int i = 0; i < rd.FieldCount; i++)
+                                    row += rd[i] + "\t";
+                                listBoxReport.Items.Add(row);
+                                row = "";
+                            }
+                        }
+                    }
+
                     break;
-                case "Visits":
-                    column = "COUNT(*)";
-                    table = "VISIT";
-                    filterColumn = "METHOD";
-                    break;
+                
                 default:
                     column = "-1";
                     table = "-1";
                     break;
             }
+            /*
             if (!((column == "-1") && (table == "-1")))
                 if (comboFilter.SelectedIndex == 0)
                     if (condition != "")
+                    {
+MessageBox.Show("sfgfdsgfg");
                         rd = conn.GetReader(column, table, condition);
+                        
+                    }
                     else
                         rd = conn.GetReader(column, table);
                 else
                     if (condition != "")
+                    {
+
                         rd = conn.GetReader(column, table, filterColumn, comboFilter.SelectedItem.ToString(), condition);
+                    }
                     else
+                    {
+                        MessageBox.Show("");
                         rd = conn.GetReader(column, table);
+                    }
             else
                 return;
             while (rd.Read())
@@ -1069,6 +1310,7 @@ namespace CIS411
                 listBoxReport.Items.Add("");
                 row = "";
             }
+           //  */
             /*
             if (comboCountCategory.SelectedItem.ToString() == "Method" && comboGroup.SelectedItem.ToString() == "Tutoring")
             {
@@ -1143,6 +1385,7 @@ namespace CIS411
         {
             comboFilter.Items.Clear();
             comboFilter.Items.Add("All");
+
             comboFilter.SelectedIndex = 0;
             if (comboCountCategory.SelectedItem.ToString() == "Method")
             {
@@ -1177,6 +1420,12 @@ namespace CIS411
             }
             else if (comboCountCategory.SelectedItem.ToString() == "Course")
             {
+                DataConnection conn = new DataConnection();
+                conn.Open();
+                SqlDataReader rd = conn.GetReader("DISTINCT subject", "VISIT");
+                while (rd.Read())
+                    comboFilter.Items.Add(rd[0].ToString());
+                conn.Close();
                 comboFilter.Items.Add("Total Courses");
             }
         }
