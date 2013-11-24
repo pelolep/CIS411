@@ -295,7 +295,10 @@ namespace CIS411
                 }
                 catch { return; };
             }
-
+            else
+            {
+                return;
+            }
                 System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
                 string excelQuery = @"Select * from [Export Worksheet$]";
                 System.Data.OleDb.OleDbCommand excelCommand = new System.Data.OleDb.OleDbCommand(excelQuery, excelConnection);
@@ -1021,7 +1024,7 @@ namespace CIS411
                     table = "VISIT";
                     MessageBox.Show(comboFilter.SelectedItem.ToString());
                     condition = "  GROUP BY METHOD  ";
-                    if (comboFilter.SelectedItem.ToString() == "Do not filter")
+                    if (comboFilter.SelectedItem.ToString() == "All")
                     {
                         MessageBox.Show("wind");
                         rd = conn.GetReader(column, table, condition);
@@ -1066,7 +1069,7 @@ namespace CIS411
                     table = "VISIT";
                     condition = "where time_difference is not null";
 
-                    if (comboFilter.SelectedItem.ToString() == "Do not filter")
+                    if (comboFilter.SelectedItem.ToString() == "All")
                     {
                         rd = conn.GetReader(column, table, condition);
                         while (rd.Read())
@@ -1127,14 +1130,14 @@ namespace CIS411
                                 else
                                 {
                                     if (newid != -1)
-                                        listBoxReport.Items.Add(newid + " " + newtime);
+                                        listBoxReport.Items.Add(newid + "\t" + newtime);
                                     newid = int.Parse(rd[0].ToString());
                                     newtime = TimeSpan.Parse(rd[1].ToString());
                                 }
 
 
                             }
-                            listBoxReport.Items.Add(newid + " " + newtime);
+                            listBoxReport.Items.Add(newid + "\t" + newtime);
                     }
 
                     break;
@@ -1146,7 +1149,7 @@ namespace CIS411
                     table = "tutor_hour";
                     condition = "where time_difference is not null";
 
-                    if (comboFilter.SelectedItem.ToString() == "Do not filter")
+                    if (comboFilter.SelectedItem.ToString() == "All")
                     {
                         rd = conn.GetReader(column, table, condition);
                         while (rd.Read())
@@ -1156,7 +1159,7 @@ namespace CIS411
                             else
                             {
                                 if(newid !=-1)
-                                listBoxReport.Items.Add(newid + " " + newtime);
+                                listBoxReport.Items.Add(newid + "\t" + newtime);
                                 newid = int.Parse(rd[0].ToString());
                                 newtime = TimeSpan.Parse(rd[1].ToString());
                             }
@@ -1164,7 +1167,7 @@ namespace CIS411
    
                         }
                         if (newid != -1)
-                        listBoxReport.Items.Add(newid + " " + newtime);
+                        listBoxReport.Items.Add(newid + "" + newtime);
                         listBoxReport.Items.Add("");
                         column = "tutor_ID,count(distinct time_difference)";
                         table = "tutor_hour";
@@ -1208,7 +1211,7 @@ namespace CIS411
                                 else
                                 {
                                     if (newid != -1)
-                                        listBoxReport.Items.Add(newid + " " + newtime);
+                                        listBoxReport.Items.Add(newid + "\t" + newtime);
                                     newid = int.Parse(rd[0].ToString());
                                     newtime = TimeSpan.Parse(rd[1].ToString());
                                 }
@@ -1216,7 +1219,7 @@ namespace CIS411
 
                             }
                             if (newid != -1)
-                            listBoxReport.Items.Add(newid + " " + newtime);
+                                listBoxReport.Items.Add(newid + "" + newtime);
                     }
 
 
@@ -1454,6 +1457,16 @@ MessageBox.Show("sfgfdsgfg");
         }
 
         private void btnMoveDown_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_courses_import_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_student_import_Click_1(object sender, EventArgs e)
         {
 
         }
