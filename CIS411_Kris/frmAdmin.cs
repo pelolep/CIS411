@@ -1159,7 +1159,7 @@ namespace CIS411
                             else
                             {
                                 if(newid !=-1)
-                                listBoxReport.Items.Add(newid + "\t" + newtime);
+                                    listBoxReport.Items.Add(newid + "\t" + newtime);
                                 newid = int.Parse(rd[0].ToString());
                                 newtime = TimeSpan.Parse(rd[1].ToString());
                             }
@@ -1467,6 +1467,11 @@ MessageBox.Show("sfgfdsgfg");
         }
 
         private void btn_student_import_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtYear_TextChanged(object sender, EventArgs e)
         {
 
         }
