@@ -1021,7 +1021,7 @@ namespace CIS411
                     table = "VISIT";
                     MessageBox.Show(comboFilter.SelectedItem.ToString());
                     condition = "  GROUP BY METHOD  ";
-                    if (comboFilter.SelectedItem.ToString() == "Do not filter")
+                    if (comboFilter.SelectedIndex==0)
                     {
                         MessageBox.Show("wind");
                         rd = conn.GetReader(column, table, condition);
@@ -1440,22 +1440,34 @@ MessageBox.Show("sfgfdsgfg");
 
         }
 
-        private void listBoxReport_SelectedIndexChanged(object sender, EventArgs e)
-        {
-         
-        }
-
         private void btnMoveUp_Click(object sender, EventArgs e)
         {
-            /*
-            for (int i = 0; i < listBoxReport.SelectedIndices.Count; i++)
-                if (listBoxReport.SelectedIndices[0]==
-            */
+            listBoxReport.BeginUpdate();
+            int numSelected = listBoxReport.SelectedItems.Count;
+            for (int i = 0;i<numSelected;i++)
+                if (listBoxReport.SelectedIndices[i] > 0)
+                {
+                    int toInsert = listBoxReport.SelectedIndices[i] - 1;
+                    listBoxReport.Items.Insert(toInsert, listBoxReport.SelectedItems[i]);
+                    listBoxReport.Items.RemoveAt(toInsert + 2);
+                    listBoxReport.SelectedItem = listBoxReport.Items[toInsert];
+                }
+            listBoxReport.EndUpdate();
         }
 
         private void btnMoveDown_Click(object sender, EventArgs e)
         {
-
+            listBoxReport.BeginUpdate();
+            int numSelected = listBoxReport.SelectedItems.Count;
+            for (int i = numSelected-1; i >= 0; i--)
+                if (listBoxReport.SelectedIndices[i] < listBoxReport.Items.Count-1)
+                {
+                    int toInsert = listBoxReport.SelectedIndices[i] + 2;
+                    listBoxReport.Items.Insert(toInsert, listBoxReport.SelectedItems[i]);
+                    listBoxReport.Items.RemoveAt(toInsert - 2);
+                    listBoxReport.SelectedItem = listBoxReport.Items[toInsert - 1];
+                }
+            listBoxReport.EndUpdate();
         }
         // Returns array of all tutors
         /*
