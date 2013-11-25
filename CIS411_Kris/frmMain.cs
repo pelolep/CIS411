@@ -460,11 +460,8 @@ namespace CIS411
                 conn.Close();
                 return true;
             }
-
-                conn.Close();
-
-
-          conn.Open();
+            conn.Close();
+            conn.Open();
             rd = conn.GetReader("time_in, time_out", "tutor_hour", "tutor_id", tutorid.ToString(), "and time_out is null");
 
             if (rd.HasRows)
@@ -473,7 +470,6 @@ namespace CIS411
                 timein = DateTime.Parse(rd[0].ToString());
                 timenow = DateTime.Now;
                 timedifference = timenow.Subtract(timein);
-              
                 while (rd.Read())
                 {
                     timein = DateTime.Parse(rd[0].ToString());
@@ -481,7 +477,7 @@ namespace CIS411
                 rd.Close();
                 conn.Close();
                 conn.Open();
-                //timedifference = DateTime.Parse(timenow.Subtract(timein).ToString());
+                 timedifference = (timenow.Subtract(timein));
                 conn.Query("update tutor_hour set time_out = '" + timenow + "' , time_difference = '" + timedifference + "' where tutor_id= '" + tutorid + "' and time_out is null");
                 conn.Close();
                 return true;
