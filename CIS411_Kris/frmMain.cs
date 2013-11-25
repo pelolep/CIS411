@@ -460,21 +460,20 @@ namespace CIS411
                 conn.Close();
                 return true;
             }
-            else
-            {
+
                 conn.Close();
-                return false;
-            }
-/*          conn.Open();
+
+
+          conn.Open();
             rd = conn.GetReader("time_in, time_out", "tutor_hour", "tutor_id", tutorid.ToString(), "and time_out is null");
->>>>>>> origin/Matt12
+
             if (rd.HasRows)
             {
                 rd.Read();
                 timein = DateTime.Parse(rd[0].ToString());
                 timenow = DateTime.Now;
                 timedifference = timenow.Subtract(timein);
-                /*
+              
                 while (rd.Read())
                 {
                     timein = DateTime.Parse(rd[0].ToString());
