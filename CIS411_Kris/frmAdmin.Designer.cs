@@ -645,7 +645,7 @@ namespace CIS411
             this.btn_courses_import.TabIndex = 6;
             this.btn_courses_import.Text = "Import Courses";
             this.btn_courses_import.UseVisualStyleBackColor = true;
-           // this.btn_courses_import.Click += new System.EventHandler(this.btn_courses_import_Click_1);
+            this.btn_courses_import.Click += new System.EventHandler(this.btn_courses_import_Click);
             // 
             // btn_student_import
             // 
@@ -655,6 +655,7 @@ namespace CIS411
             this.btn_student_import.TabIndex = 5;
             this.btn_student_import.Text = "Import Students";
             this.btn_student_import.UseVisualStyleBackColor = true;
+            this.btn_student_import.Click += new System.EventHandler(this.btn_student_import_Click);
             // 
             // grpBoxPassword
             // 
@@ -881,7 +882,6 @@ namespace CIS411
             this.txtYear.Name = "txtYear";
             this.txtYear.Size = new System.Drawing.Size(31, 20);
             this.txtYear.TabIndex = 1;
-           // this.txtYear.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_KeyPress);
             // 
             // btnDisplay
             // 
