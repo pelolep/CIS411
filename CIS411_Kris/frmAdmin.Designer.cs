@@ -850,6 +850,11 @@ namespace CIS411
             // 
             this.comboTerm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboTerm.FormattingEnabled = true;
+            this.comboTerm.Items.AddRange(new object[] {
+            "Fall", 
+            "Winter",
+            "Spring",
+            "Summer"});
             this.comboTerm.Location = new System.Drawing.Point(81, 21);
             this.comboTerm.Name = "comboTerm";
             this.comboTerm.Size = new System.Drawing.Size(74, 21);
