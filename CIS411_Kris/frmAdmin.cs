@@ -1164,6 +1164,7 @@ namespace CIS411
                                 else
                                 {
                                     if (newid != -1)
+                                        listBoxReport.Items.Add(newid.ToString().PadRight(60 - newid.ToString().Length) + "\t" + newtime);
                                     newid = int.Parse(rd[0].ToString());
                                     newtime = TimeSpan.Parse(rd[1].ToString());
                                 }
@@ -1176,19 +1177,20 @@ namespace CIS411
                     break;
                 case "Tutor":
 
-                     newid = -1;
-                   newtime = new TimeSpan();
-                    column = "tutor_ID,time_difference ";
-                    table = "tutor_hour";
-                    condition = "where time_difference is not null";
+                    newid = -1;
+                    newtime = new TimeSpan();
+                    column = "tutor_ID, time_difference, term ";
+                    table = "VISIT";
+                    condition = "where time_difference is not null and tutor_id is not null and term = '" + term.ToString() + "' ORDER BY tutor_id";
 
                     if (comboFilter.SelectedItem.ToString() == "All")
                     {
-                        listBoxReport.Items.Add("Tutors");
+                        listBoxReport.Items.Add("tutor");
                         rd = conn.GetReader(column, table, condition);
                         while (rd.Read())
                         {
-                            if (newid == int.Parse(rd[0].ToString()))
+                            
+                            if (newid == int.Parse(rd[0].ToString()) && newid !=-1)
                                 newtime += TimeSpan.Parse(rd[1].ToString());
                             else
                             {
@@ -1200,17 +1202,16 @@ namespace CIS411
                             
    
                         }
-                        if (newid != -1)
-                            listBoxReport.Items.Add(newid.ToString().PadRight(60 - newid.ToString().Length) + "\t" + newtime);
+                        listBoxReport.Items.Add(newid.ToString().PadRight(60 - newid.ToString().Length) + "\t" + newtime);
                         listBoxReport.Items.Add("");
-                        column = "tutor_ID,count(distinct time_difference)";
-                        table = "tutor_hour";
-                        condition = "where time_difference is not null group by tutor_id";
+                        column = "tutor_ID, count(distinct time_difference), term";
+                        table = "VISIT";
+                        condition = "where time_difference is not null and tutor_id is not null and term = '" + term.ToString() + "' group by tutor_id, term";
 
                             rd = conn.GetReader(column, table, condition);
                             while (rd.Read())
                             {
-                                for (int i = 0; i < rd.FieldCount; i++)
+                                for (int i = 0; i < 2; i++)
                                     row += rd[i].ToString().PadRight(60 - rd[i].ToString().Length) + "\t";
                                 listBoxReport.Items.Add(row);
                                 row = "";
@@ -1219,14 +1220,14 @@ namespace CIS411
                     else if (comboFilter.SelectedItem.ToString() == "Days Worked")
                     {
                         listBoxReport.Items.Add("Days Worked");
-                        column = "tutor_ID,count(distinct time_difference)";
-                        table = "tutor_hour";
-                        condition = "where time_difference is not null group by tutor_id";
+                        column = "tutor_ID,count(distinct time_difference), term";
+                        table = "VISIT";
+                        condition = "where time_difference is not null and tutor_id is not null and term= '" + term.ToString() + "' group by tutor_id, term";
 
                             rd = conn.GetReader(column, table, condition);
                             while (rd.Read())
                             {
-                                for (int i = 0; i < rd.FieldCount; i++)
+                                for (int i = 0; i < 2; i++)
                                     row += rd[i].ToString().PadRight(60 - rd[i].ToString().Length) + "\t";
                                 listBoxReport.Items.Add(row);
                                 row = "";
@@ -1235,14 +1236,14 @@ namespace CIS411
                     else
                     {
                         listBoxReport.Items.Add("Total Hours");
-                        column = "tutor_ID,time_difference ";
-                        table = "tutor_hour";
-                        condition = "where time_difference is not null";
+                        column = "tutor_ID,time_difference, term ";
+                        table = "VISIT";
+                        condition = "where time_difference is not null and tutor_id is not null and term = '" + term.ToString() + "' ORDER BY tutor_id";
 
                             rd = conn.GetReader(column, table, condition);
                             while (rd.Read())
                             {
-                                if (newid == int.Parse(rd[0].ToString()))
+                                if (newid == int.Parse(rd[0].ToString()) && newid != -1)
                                     newtime += TimeSpan.Parse(rd[1].ToString());
                                 else
                                 {
@@ -1254,11 +1255,11 @@ namespace CIS411
 
 
                             }
-                            if (newid != -1)
-                                listBoxReport.Items.Add(newid.ToString().PadRight(60 - newid.ToString().Length) + "\t" + newtime);
+                            listBoxReport.Items.Add(newid.ToString().PadRight(60 - newid.ToString().Length) + "\t" + newtime);
                     }
                     listBoxReport.Items.Add("");
                     break;
+
                 case "Course":
                     column = "SUBJECT, COUNT(*), term";
                     table = "VISIT";

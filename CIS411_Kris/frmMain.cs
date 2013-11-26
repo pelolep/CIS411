@@ -303,10 +303,10 @@ namespace CIS411
                 string[] selectedTutor = comboTutors.SelectedItem.ToString().Split();
                 conn.Open();
 
-                if (selectedClass[0].ToString() == "other")
+                if (comboClassList.SelectedItem.ToString() == "Other")
                     conn.Query("insert into visit(clarion_id,date,time_in,term,subject,catalog,section,method)values('" + studentID + "', '" + DateTime.Today.ToString("d") + "','" + DateTime.Parse(DateTime.Now.ToString("HH:mm:ss tt")) + "','" + "other" + "','" + "other" + "','" + "other" + "','" + "other" + "', '" + method + "')");
                 else
-                    MessageBox.Show("hit" + selectedClass[0] + " " + selectedClass[1] + " " + selectedClass[2] + " " + selectedClass[3]);
+                    //MessageBox.Show("hit" + selectedClass[0] + " " + selectedClass[1] + " " + selectedClass[2] + " " + selectedClass[3]);
                 conn.Query("insert into VISIT (DATE, TIME_IN, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION) values ('" + System.DateTime.Today.ToString("d") + "','" + DateTime.Parse(DateTime.Now.ToString("HH:mm:ss tt")) + "','" + txtStudentID.Text + "', '" + selectedClass[0] + "', '" + selectedClass[1] + "', '" + selectedClass[2] + "', '" + selectedTutor[0] + "' , '" + method + "', '" + selectedClass[3] + "')");
                 //cmd.CommandText = "insert into VISIT (DATE, TIME_IN, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION) values ('" + System.DateTime.Today.ToString() + "','" + System.DateTime.UtcNow.TimeOfDay.ToString() + "','" + txtStudentID.Text + "', '" + selectedClass[0].ToString() + "', '" + selectedClass[1].ToString() + "', '" + selectedClass[2].ToString() + "', '" + selectedTutor[0] + "' , '" + "method" + "', '" + selectedClass[3].ToString() + "')";
             }
@@ -402,7 +402,9 @@ namespace CIS411
             SqlDataReader rd = conn.GetReader("clarion_id, time_out", "visit", "clarion_id", searchID.ToString(), "and time_out is null");
             b = rd.HasRows;
             conn.Close();
-            
+
+            MessageBox.Show(b.ToString());
+
             if (b == false)
             {
                 conn.Open();
