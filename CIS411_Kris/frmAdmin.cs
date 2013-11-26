@@ -1018,22 +1018,31 @@ namespace CIS411
             string column, table, condition = "", row = "";
             DataConnection conn = new DataConnection();
             SqlDataReader rd;
-            conn.Open();
             int year = 0, term=0;
             bool y = int.TryParse(txtYear.Text, out year);
-           
+            term = DataConnection.getTerm(year, comboTerm.SelectedItem.ToString());
+            conn.Open();
+            rd = conn.GetReader("*", "VISIT", "WHERE TERM = '" + term.ToString() + "'");
+            if (!(rd.HasRows))
+            {
+                conn.Close();
+                return;
+            }
+            conn.Close();
+            conn.Open();
+            /*
             term += (int.Parse(year.ToString())/1000)*1000;
             term += (int.Parse(year.ToString()) % 100) * 10;
  
-            if (comboTerm.SelectedIndex == 0)
+            if (comboTerm.SelectedItem.ToString() == "Winter")
                 term += 9;
-            else if (comboTerm.SelectedIndex == 1)
+            else if (comboTerm.SelectedItem.ToString() == "Spring")
                 term += 1;
-            else if (comboTerm.SelectedIndex == 2)
+            else if (comboTerm.SelectedItem.ToString() == "Summer")
                 term += 5;
             else
                 term += 8;
-
+            */
             switch (comboCountCategory.SelectedItem.ToString())
             {
                 case "Method":
@@ -1043,6 +1052,7 @@ namespace CIS411
                     condition = " where term = '" + term + "' GROUP BY METHOD, term";
                     if (comboFilter.SelectedItem.ToString() == "All")
                     {
+                        listBoxReport.Items.Add("Method");
                        // MessageBox.Show("wind");
                         rd = conn.GetReader(column, table, condition);
                         while (rd.Read())
@@ -1062,6 +1072,7 @@ namespace CIS411
                     }
                     else
                     {
+                        listBoxReport.Items.Add(comboFilter.SelectedItem.ToString());
                         rd = conn.GetReader("method, COUNT(DISTINCT CLARION_ID), term", "visit", " where term = '" + term.ToString() + "' and method = '" + comboFilter.SelectedItem.ToString() + "'  GROUP BY METHOD, term ");
                         if (rd.HasRows)
                         {
@@ -1075,9 +1086,7 @@ namespace CIS411
                         }
 
                     }
-
-
- 
+                    listBoxReport.Items.Add("");
                     /*
                     
                     //condition = " method " + " = "+ " '"+"other"+"' ";
@@ -1093,6 +1102,7 @@ namespace CIS411
 
                     if (comboFilter.SelectedItem.ToString() == "All")
                     {
+                        listBoxReport.Items.Add("Student");
                         rd = conn.GetReader(column, table, condition);
                         while (rd.Read())
                         {
@@ -1125,6 +1135,7 @@ namespace CIS411
                     }
                     else if (comboFilter.SelectedItem.ToString() == "Visits")
                     {
+                        listBoxReport.Items.Add("Visits");
                         column = "CLARION_ID,count(distinct time_difference), term";
                         table = "VISIT";
                         condition = "where time_difference is not null and term= '"+term.ToString()+"' group by clarion_id, term";
@@ -1140,6 +1151,7 @@ namespace CIS411
                     }
                     else
                     {
+                        listBoxReport.Items.Add("Total Hours");
                         column = "CLARION_ID,time_difference, term ";
                         table = "VISIT";
                         condition = "where time_difference is not null and term = '"+term.ToString()+"'";
@@ -1160,7 +1172,7 @@ namespace CIS411
                             }
                             listBoxReport.Items.Add(newid.ToString().PadRight(60 - newid.ToString().Length) + "\t" + newtime);
                     }
-
+                    listBoxReport.Items.Add("");
                     break;
                 case "Tutor":
 
@@ -1172,6 +1184,7 @@ namespace CIS411
 
                     if (comboFilter.SelectedItem.ToString() == "All")
                     {
+                        listBoxReport.Items.Add("Tutors");
                         rd = conn.GetReader(column, table, condition);
                         while (rd.Read())
                         {
@@ -1205,6 +1218,7 @@ namespace CIS411
                     }
                     else if (comboFilter.SelectedItem.ToString() == "Days Worked")
                     {
+                        listBoxReport.Items.Add("Days Worked");
                         column = "tutor_ID,count(distinct time_difference)";
                         table = "tutor_hour";
                         condition = "where time_difference is not null group by tutor_id";
@@ -1220,6 +1234,7 @@ namespace CIS411
                     }
                     else
                     {
+                        listBoxReport.Items.Add("Total Hours");
                         column = "tutor_ID,time_difference ";
                         table = "tutor_hour";
                         condition = "where time_difference is not null";
@@ -1242,21 +1257,15 @@ namespace CIS411
                             if (newid != -1)
                                 listBoxReport.Items.Add(newid.ToString().PadRight(60 - newid.ToString().Length) + "\t" + newtime);
                     }
-
-
-
-
+                    listBoxReport.Items.Add("");
                     break;
-
-
-
-
                 case "Course":
                     column = "SUBJECT, COUNT(*), term";
                     table = "VISIT";
                     condition = "where term = '"+term.ToString()+"' GROUP BY SUBJECT, term";
                     if (comboFilter.SelectedItem.ToString() == "All")
                     {
+                        listBoxReport.Items.Add("Courses");
                         rd = conn.GetReader(column, table, condition);
                         while (rd.Read())
                         {
@@ -1268,6 +1277,7 @@ namespace CIS411
                     }
                     else if (comboFilter.SelectedItem.ToString() == "Total Courses")
                     {
+                        listBoxReport.Items.Add("Total Courses");
                         int count = 0;
                         rd = conn.GetReader(column, table, condition);
                         while (rd.Read())
@@ -1280,6 +1290,7 @@ namespace CIS411
                     }
                     else
                     {
+                        listBoxReport.Items.Add(comboFilter.SelectedItem.ToString());
                         condition = "where term = '" + term.ToString() + "' and subject = '" + comboFilter.SelectedItem.ToString() + "' GROUP BY SUBJECT, term";
 
                         rd = conn.GetReader(column, table, condition);
@@ -1295,7 +1306,7 @@ namespace CIS411
                             }
                         }
                     }
-
+                    listBoxReport.Items.Add("");
                     break;
                 
                 default:

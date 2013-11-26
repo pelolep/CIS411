@@ -20,9 +20,9 @@ public class DataConnection
         cmd.Connection = cn;
     }
 
-    static int getSemester(int year, string term)
+    static public int getTerm(int year, string semester)
     {
-        switch (term.ToLower())
+        switch (semester.ToLower())
         {
             case "spring":
                 return 2000 + ((year % 100 * 10)) + 1;
@@ -45,7 +45,8 @@ public class DataConnection
         dbPath = dbPath.Remove(bin);
         AppDomain currentDomain = AppDomain.CurrentDomain;
         currentDomain.SetData("database", dbPath + "db.mdf");
-        return new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename='" + currentDomain.GetData("database") + "';Integrated Security=True");;
+        //return new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename='" + currentDomain.GetData("database") + "';Integrated Security=True");;
+        return new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\db.mdf;Integrated Security=True");;
     }
 
     public void Open()
