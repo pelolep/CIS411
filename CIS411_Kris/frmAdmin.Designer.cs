@@ -113,7 +113,6 @@ namespace CIS411
             this.txtAddTutor = new System.Windows.Forms.TextBox();
             this.txtAddSignOut = new System.Windows.Forms.TextBox();
             this.txtAddSignIn = new System.Windows.Forms.TextBox();
-            this.database2DataSet = new CIS411.Database2DataSet();
             this.database2DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabControlAdmin.SuspendLayout();
             this.tabVisits.SuspendLayout();
@@ -122,8 +121,6 @@ namespace CIS411
             this.tabAdmin.SuspendLayout();
             this.grpBoxPassword.SuspendLayout();
             this.tabReports.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.database2DataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.database2DataSetBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlAdmin
@@ -972,16 +969,6 @@ namespace CIS411
             this.txtAddSignIn.Size = new System.Drawing.Size(100, 20);
             this.txtAddSignIn.TabIndex = 14;
             // 
-            // database2DataSet
-            // 
-            this.database2DataSet.DataSetName = "Database2DataSet";
-            this.database2DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // database2DataSetBindingSource
-            // 
-            this.database2DataSetBindingSource.DataSource = this.database2DataSet;
-            this.database2DataSetBindingSource.Position = 0;
-            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1003,8 +990,6 @@ namespace CIS411
             this.grpBoxPassword.PerformLayout();
             this.tabReports.ResumeLayout(false);
             this.tabReports.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.database2DataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.database2DataSetBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1094,7 +1079,6 @@ namespace CIS411
         private System.Windows.Forms.ListBox listBoxReport;
         private System.Windows.Forms.Button btnMoveDown;
         private System.Windows.Forms.Button btnMoveUp;
-        private Database2DataSet database2DataSet;
         private System.Windows.Forms.BindingSource database2DataSetBindingSource;
         //private DataSet1TableAdapters.DataTable2TableAdapter dataTable2TableAdapter;
     }
