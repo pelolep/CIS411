@@ -346,90 +346,11 @@ namespace CIS411
                 excelConnection.Close();
                 conn.Close();
                 //cn.Close();
+                MessageBox.Show("students information imported");
         }
 
         private void btn_courses_import_Click(object sender, EventArgs e)
         {
-            /*
-            OpenFileDialog coursesFile = new OpenFileDialog();
-            coursesFile.Filter = "Excel files (*.xls)|*.xls|All files (*.*)|*.*";
-            coursesFile.RestoreDirectory = true;
-            coursesFile.DefaultExt = "xlsx";
-            Excel.Application xlApp;
-            Excel.Workbook xlWorkBook;
-            Excel.Worksheet xlWorkSheet;
-
-            if (coursesFile.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    xlApp = new Excel.Application();
-                    xlWorkBook = xlApp.Workbooks.Open(coursesFile.FileName);
-                    xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
-                }
-                catch { return; };
-                DataConnection conn = new DataConnection();
-                string last, first;
-                List<int> rowsSkipped = new List<int>();
-                for (int i = 2; i <= xlWorkSheet.Rows.Count; i++)
-                {
-                    try
-                    {
-                        conn.Open();
-                        if (!(conn.GetReader("CLARION_ID", "STUDENT", "CLARION_ID", xlWorkSheet.Cells[i, 2].Value.ToString()).HasRows))
-                            if (MessageBox.Show("Student found in courses file that \n" +
-                                            "that is not in database. You should \n" +
-                                            "update the student file. Continue anyway?", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-                            {
-                                conn.Close();
-                                return;
-                            }
-                            else
-                            {
-                                conn.Close();
-                                continue;
-                            }
-                        conn.Close();
-                        conn.Open();
-                        if ((xlWorkSheet.Cells[i, 6].Value.ToString() != "") && (conn.GetReader("PROF_EMAIL", "PROFESSOR", "PROF_EMAIL", xlWorkSheet.Cells[i, 6].Value.ToString()).HasRows))
-                        {
-                            last = xlWorkSheet.Cells[i, 6].Value;
-                            last = last.Replace("'", " ");
-                            first = xlWorkSheet.Cells[i, 7].Value;
-                            first = first.Replace("'", " ");
-                            conn.Close();
-                            conn.Open();
-                            conn.Query("INSERT INTO PROFESSOR (PROF_EMAIL, LASTNAME, FIRSTNAME) VALUES ('" + xlWorkSheet.Cells[i, 8].Value + "','" + last + "','" + first + "')");
-                        }
-                        conn.Close();
-                        conn.Open();
-                        if (!(conn.GetReader("*", "COURSE", "TERM", xlWorkSheet.Cells[i, 1].Value.ToString(), "SUBJECT", xlWorkSheet.Cells[i, 3].Value.ToString(), "CATALOG", xlWorkSheet.Cells[i, 4].Value.ToString(), "SECTION", xlWorkSheet.Cells[i, 5].Value.ToString()).HasRows))
-                        {
-                            conn.Close();
-                            conn.Open();
-                            conn.Query("INSERT INTO COURSE (TERM,SUBJECT,CATALOG,SECTION,PROF_EMAIL) VALUES ('" + xlWorkSheet.Cells[i, 1].Value + "','" + xlWorkSheet.Cells[i, 3].Value + "','" + xlWorkSheet.Cells[i, 4].Value + "','" + xlWorkSheet.Cells[i, 5].Value + "','" + xlWorkSheet.Cells[i, 8].Value + "')");
-                        }
-                        conn.Close();
-                        conn.Open();
-                        if (!(conn.GetReader("*", "STUDENT_COURSE", "CLARION_ID", xlWorkSheet.Cells[i, 2].Value.ToString(), "TERM", xlWorkSheet.Cells[i, 1].Value.ToString(), "SUBJECT", xlWorkSheet.Cells[i, 3].Value.ToString(), "CATALOG", xlWorkSheet.Cells[i, 4].Value.ToString(), "SECTION", xlWorkSheet.Cells[i, 5].Value.ToString()).HasRows))
-                        {
-                            conn.Close();
-                            conn.Open();
-                            conn.Query("INSERT INTO STUDENT_COURSE (CLARION_ID,TERM,SUBJECT,CATALOG,SECTION) VALUES (" + xlWorkSheet.Cells[i, 2].Value + ",'" + xlWorkSheet.Cells[i, 1].Value + "','" + xlWorkSheet.Cells[i, 3].Value + "','" + xlWorkSheet.Cells[i, 4].Value + "','" + xlWorkSheet.Cells[i, 5].Value + "')");
-                        }
-                        conn.Close();
-                    }
-                    catch
-                    {
-                        rowsSkipped.Add(i);
-                    }
-                }
-                string s = "Import done. Rows skipped: ";
-                for (int i = 0; i < rowsSkipped.Count; i++)
-                    s += rowsSkipped[i].ToString() + " ";
-                MessageBox.Show(s);
-            }
-            */
             
             string last, first, connectionString="";
             OpenFileDialog coursesFile = new OpenFileDialog();
@@ -513,11 +434,14 @@ namespace CIS411
             conn.Close();
             //cn.Close();
             excelConnection.Close();
+            MessageBox.Show("students courses imported");
         }
 
         private void frmAdmin_Load(object sender, EventArgs e)
         {
-
+            dateTimePickerAdd.Value = DateTime.Today;
+            dateTimePickerEditMin.Value = DateTime.Today;
+            dateTimePickerEditMax.Value = DateTime.Today;
             // TODO: This line of code loads data into the 'DataSet1.DataTable2' table. You can move, or remove it, as needed.
             //this.dataTable2TableAdapter.Fill(this.DataSet1.DataTable2);
             // TODO: This line of code loads data into the 'DataSet1.DataTable1' table. You can move, or remove it, as needed.
@@ -856,6 +780,8 @@ namespace CIS411
             }
             catch { MessageBox.Show("please check info and try again"); };
             MessageBox.Show("Thank you for adding a visit!");
+            comboAddMethod.Enabled = false;
+            txtAddStudentID.Text = "";
         }
 
 
@@ -1015,10 +941,10 @@ namespace CIS411
         {
             //TODO: This should add a placeholder to the listbox that represents 
             //      the data that will be placed into the excel file
-            string column, table, condition = "", row = "";
+            string column, table, condition = "", row = "", first="", last="";
             DataConnection conn = new DataConnection();
             SqlDataReader rd;
-            int year = 0, term=0;
+            int year = 0, term=0, count = 0;
             bool y = int.TryParse(txtYear.Text, out year);
             term = DataConnection.getTerm(year, comboTerm.SelectedItem.ToString());
             conn.Open();
@@ -1095,174 +1021,154 @@ namespace CIS411
                     break;
                 case "Student":
                     int newid = -1;
+                    count = 0;
                     TimeSpan newtime = new TimeSpan();
-                    column = "CLARION_ID, time_difference, term ";
-                    table = "VISIT";
-                    condition = "where time_difference is not null and term = '"+term.ToString()+"'";
 
-                    if (comboFilter.SelectedItem.ToString() == "All")
+                    if (comboFilter.SelectedItem.ToString() == "All" || comboFilter.SelectedItem.ToString() == "Total Hours")
                     {
                         listBoxReport.Items.Add("Student");
-                        rd = conn.GetReader(column, table, condition);
+                       // rd = conn.GetReader(column, table, condition);
+                        rd = conn.joinQuery("select visit.clarion_id, visit.time_difference, visit.term, student.lastname, student.firstname from visit inner join student on visit.clarion_id = student.clarion_id where time_difference is not null and visit.term = '" + term.ToString() + "'");
+
                         while (rd.Read())
                         {
-                            if (newid == int.Parse(rd[0].ToString()) && newid !=-1)
+                            if (newid == int.Parse(rd[0].ToString()))
+                            {
                                 newtime += TimeSpan.Parse(rd[1].ToString());
+                                first = rd[4].ToString();
+                                last = rd[3].ToString();
+                            }
                             else
                             {
-                                if(newid !=-1)
-                                    listBoxReport.Items.Add(newid.ToString().PadRight(60 - newid.ToString().Length) + "\t" + newtime);
+                                if (newid != -1)
+                                    listBoxReport.Items.Add(first.PadRight(20 - first.Length) + "\t" + last.PadRight(40 - (first.Length + last.Length)) + "\t" + newtime);
                                 newid = int.Parse(rd[0].ToString());
                                 newtime = TimeSpan.Parse(rd[1].ToString());
                             }
                             
    
                         }
-                        listBoxReport.Items.Add(newid.ToString().PadRight(60 - newid.ToString().Length) + "\t" + newtime);
+                        if(newid != -1)
+                            listBoxReport.Items.Add(first.PadRight(20 - first.Length) + "\t" + last.PadRight(40 - (first.Length + last.Length)) + "\t" + newtime);
+                        if (comboFilter.SelectedItem.ToString() == "All")
                         listBoxReport.Items.Add("");
+                    }
+                    if (comboFilter.SelectedItem.ToString() == "All" || comboFilter.SelectedItem.ToString() == "Visits")
+                    {
+                        newid = -1;
+                        count = 0;
                         column = "CLARION_ID,count(distinct time_difference), term";
                         table = "VISIT";
                         condition = "where time_difference is not null and term = '"+term.ToString()+"' group by clarion_id, term";
 
-                            rd = conn.GetReader(column, table, condition);
-                            while (rd.Read())
+                           // rd = conn.GetReader(column, table, condition);
+                        rd = conn.joinQuery("select visit.clarion_id, visit.time_difference, visit.term, student.lastname, student.firstname from visit inner join student on visit.clarion_id = student.clarion_id where time_difference is not null and visit.term = '" + term.ToString() + "'");
+
+
+                        while (rd.Read())
+                        {
+                            if (newid == int.Parse(rd[0].ToString()))
                             {
-                                for (int i = 0; i < 2; i++)
-                                    row += rd[i].ToString().PadRight(60 - rd[i].ToString().Length) + "\t";
-                                listBoxReport.Items.Add(row);
-                                row = "";
+                                count++;
+                                first = rd[4].ToString();
+                                last = rd[3].ToString();
                             }
-                    }
-                    else if (comboFilter.SelectedItem.ToString() == "Visits")
-                    {
-                        listBoxReport.Items.Add("Visits");
-                        column = "CLARION_ID,count(distinct time_difference), term";
-                        table = "VISIT";
-                        condition = "where time_difference is not null and term= '"+term.ToString()+"' group by clarion_id, term";
-
-                            rd = conn.GetReader(column, table, condition);
-                            while (rd.Read())
+                            else
                             {
-                                for (int i = 0; i < 2; i++)
-                                    row += rd[i].ToString().PadRight(60 - rd[i].ToString().Length) + "\t";
-                                listBoxReport.Items.Add(row);
-                                row = "";
+                                if (newid != -1)
+                                    listBoxReport.Items.Add(first.PadRight(20 - first.Length) + "\t" + last.PadRight(40 - (first.Length + last.Length)) + "\t" + count);
+                                newid = int.Parse(rd[0].ToString());
+                                count = 0;
                             }
+
+
+                        }
+                        if (newid != -1)
+                            listBoxReport.Items.Add(first.PadRight(20 - first.Length) + "\t" + last.PadRight(40 - (first.Length + last.Length)) + "\t" + count);
+                       
                     }
-                    else
-                    {
-                        listBoxReport.Items.Add("Total Hours");
-                        column = "CLARION_ID,time_difference, term ";
-                        table = "VISIT";
-                        condition = "where time_difference is not null and term = '"+term.ToString()+"'";
-
-                            rd = conn.GetReader(column, table, condition);
-                            while (rd.Read())
-                            {
-                                if (newid == int.Parse(rd[0].ToString()) && newid != -1)
-                                    newtime += TimeSpan.Parse(rd[1].ToString());
-                                else
-                                {
-                                    if (newid != -1)
-                                        listBoxReport.Items.Add(newid.ToString().PadRight(60 - newid.ToString().Length) + "\t" + newtime);
-                                    newid = int.Parse(rd[0].ToString());
-                                    newtime = TimeSpan.Parse(rd[1].ToString());
-                                }
-
-
-                            }
-                            listBoxReport.Items.Add(newid.ToString().PadRight(60 - newid.ToString().Length) + "\t" + newtime);
-                    }
+                   
                     listBoxReport.Items.Add("");
                     break;
                 case "Tutor":
 
                     newid = -1;
+                    count = 0;
                     newtime = new TimeSpan();
                     column = "tutor_ID, time_difference, term ";
                     table = "VISIT";
                     condition = "where time_difference is not null and tutor_id is not null and term = '" + term.ToString() + "' ORDER BY tutor_id";
 
-                    if (comboFilter.SelectedItem.ToString() == "All")
+                    if (comboFilter.SelectedItem.ToString() == "All" || comboFilter.SelectedItem.ToString() == "Total Hours")
                     {
+                        newid = -1;
+                        count = 0;
                         listBoxReport.Items.Add("tutor");
-                        rd = conn.GetReader(column, table, condition);
+                      //  rd = conn.GetReader(column, table, condition);
+                        rd = conn.joinQuery("select visit.tutor_id, tutor.clarion_id, visit.time_difference, visit.term, student.lastname, student.firstname from visit inner join tutor on visit.tutor_id = tutor.tutor_id inner join student on tutor.clarion_id = student.clarion_id where time_difference is not null and visit.term = '" + term.ToString() + "' order by visit.tutor_id");
+
                         while (rd.Read())
                         {
-                            
-                            if (newid == int.Parse(rd[0].ToString()) && newid !=-1)
-                                newtime += TimeSpan.Parse(rd[1].ToString());
+
+                            if (newid == int.Parse(rd[0].ToString()))
+                            {
+                                newtime += TimeSpan.Parse(rd[2].ToString());
+                                first = rd[5].ToString();
+                                last = rd[4].ToString();
+                            }
                             else
                             {
-                                if(newid !=-1)
-                                    listBoxReport.Items.Add(newid.ToString().PadRight(60 - newid.ToString().Length) + "\t" + newtime);
+                                if (newid != -1)
+                                    listBoxReport.Items.Add(first.PadRight(20 - first.Length) + "\t" + last.PadRight(40 - (first.Length + last.Length)) + "\t" + newtime);
                                 newid = int.Parse(rd[0].ToString());
-                                newtime = TimeSpan.Parse(rd[1].ToString());
+                                newtime = TimeSpan.Parse(rd[2].ToString());
                             }
                             
    
                         }
-                        listBoxReport.Items.Add(newid.ToString().PadRight(60 - newid.ToString().Length) + "\t" + newtime);
+                        if (newid != -1)
+                            listBoxReport.Items.Add(first.PadRight(20 - first.Length) + "\t" + last.PadRight(40 - (first.Length + last.Length)) + "\t" + newtime);
+                        
+                       // listBoxReport.Items.Add(newid.ToString().PadRight(60 - newid.ToString().Length) + "\t" + newtime);
                         listBoxReport.Items.Add("");
+                    }
+                    if (comboFilter.SelectedItem.ToString() == "All" || comboFilter.SelectedItem.ToString() == "Days Worked")
+                    {
+                        newid = -1;
+                        count = 0;
                         column = "tutor_ID, count(distinct time_difference), term";
                         table = "VISIT";
                         condition = "where time_difference is not null and tutor_id is not null and term = '" + term.ToString() + "' group by tutor_id, term";
 
-                            rd = conn.GetReader(column, table, condition);
-                            while (rd.Read())
+                        rd = conn.joinQuery("select visit.tutor_id, tutor.clarion_id, visit.time_difference, visit.term, student.lastname, student.firstname from visit inner join tutor on visit.tutor_id = tutor.tutor_id inner join student on tutor.clarion_id = student.clarion_id where time_difference is not null and visit.term = '" + term.ToString() + "' order by visit.tutor_id");
+                        while (rd.Read())
                             {
-                                for (int i = 0; i < 2; i++)
-                                    row += rd[i].ToString().PadRight(60 - rd[i].ToString().Length) + "\t";
-                                listBoxReport.Items.Add(row);
-                                row = "";
-                            }
-                    }
-                    else if (comboFilter.SelectedItem.ToString() == "Days Worked")
-                    {
-                        listBoxReport.Items.Add("Days Worked");
-                        column = "tutor_ID,count(distinct time_difference), term";
-                        table = "VISIT";
-                        condition = "where time_difference is not null and tutor_id is not null and term= '" + term.ToString() + "' group by tutor_id, term";
-
-                            rd = conn.GetReader(column, table, condition);
-                            while (rd.Read())
-                            {
-                                for (int i = 0; i < 2; i++)
-                                    row += rd[i].ToString().PadRight(60 - rd[i].ToString().Length) + "\t";
-                                listBoxReport.Items.Add(row);
-                                row = "";
-                            }
-                    }
-                    else
-                    {
-                        listBoxReport.Items.Add("Total Hours");
-                        column = "tutor_ID,time_difference, term ";
-                        table = "VISIT";
-                        condition = "where time_difference is not null and tutor_id is not null and term = '" + term.ToString() + "' ORDER BY tutor_id";
-
-                            rd = conn.GetReader(column, table, condition);
-                            while (rd.Read())
-                            {
-                                if (newid == int.Parse(rd[0].ToString()) && newid != -1)
-                                    newtime += TimeSpan.Parse(rd[1].ToString());
+                                if (newid == int.Parse(rd[0].ToString()))
+                                {
+                                    count++;
+                                    first = rd[5].ToString();
+                                    last = rd[4].ToString();
+                                }
                                 else
                                 {
                                     if (newid != -1)
-                                        listBoxReport.Items.Add(newid.ToString().PadRight(60 - newid.ToString().Length) + "\t" + newtime);
+                                        listBoxReport.Items.Add(first.PadRight(20 - first.Length) + "\t" + last.PadRight(40 - (first.Length + last.Length)) + "\t" + count);
                                     newid = int.Parse(rd[0].ToString());
-                                    newtime = TimeSpan.Parse(rd[1].ToString());
+                                    count = 0;
                                 }
-
-
                             }
-                            listBoxReport.Items.Add(newid.ToString().PadRight(60 - newid.ToString().Length) + "\t" + newtime);
+                        if (newid != -1)
+                        listBoxReport.Items.Add(first.PadRight(20 - first.Length) + "\t" + last.PadRight(40 - (first.Length + last.Length)) + "\t" + count);
+                        
                     }
+                    
                     listBoxReport.Items.Add("");
                     break;
 
                 case "Course":
                     column = "SUBJECT, COUNT(*), term";
                     table = "VISIT";
+                    count = 0;
                     condition = "where term = '"+term.ToString()+"' GROUP BY SUBJECT, term";
                     if (comboFilter.SelectedItem.ToString() == "All")
                     {
@@ -1279,7 +1185,6 @@ namespace CIS411
                     else if (comboFilter.SelectedItem.ToString() == "Total Courses")
                     {
                         listBoxReport.Items.Add("Total Courses");
-                        int count = 0;
                         rd = conn.GetReader(column, table, condition);
                         while (rd.Read())
                         {
@@ -1505,6 +1410,15 @@ MessageBox.Show("sfgfdsgfg");
                     listBoxReport.SelectedItem = listBoxReport.Items[toInsert - 1];
                 }
             listBoxReport.EndUpdate();
+        }
+
+        private void txtAddStudentID_TextChanged(object sender, EventArgs e)
+        {
+
+            if (txtAddStudentID.Text.Length == 8)
+                comboAddMethod.Enabled = true;
+            else
+                comboAddMethod.Enabled = false;
         }
         // Returns array of all tutors
         /*
