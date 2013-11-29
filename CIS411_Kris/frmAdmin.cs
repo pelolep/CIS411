@@ -1022,6 +1022,7 @@ namespace CIS411
                 case "Student":
                     int newid = -1;
                     int nontradcount = 0;
+                    int limit = 0;
                     
                     count = 0;
                     TimeSpan newtime = new TimeSpan();
@@ -1039,10 +1040,11 @@ namespace CIS411
                                 newtime += TimeSpan.Parse(rd[1].ToString());
                                 first = rd[4].ToString();
                                 last = rd[3].ToString();
-                                if (int.Parse(rd[5].ToString()) >= 25)
+                                if (int.Parse(rd[5].ToString()) >= 25 && limit==0)
                                 {
                                     first = "* " + rd[4].ToString();
                                     nontradcount++;
+                                    limit++;
                
                                 }
                             }
@@ -1052,7 +1054,7 @@ namespace CIS411
                                     listBoxReport.Items.Add(first.PadRight(20 - first.Length) + "\t" + last.PadRight(40 - (first.Length + last.Length)) + "\t" + newtime);
                                 newid = int.Parse(rd[0].ToString());
                                 newtime = TimeSpan.Parse(rd[1].ToString());
-                                
+                                limit = 0;
                             }
                             
    
@@ -1071,6 +1073,7 @@ namespace CIS411
                         newid = -1;
                         count = 0;
                         nontradcount = 0;
+                        limit = 0;
                         column = "CLARION_ID,count(distinct time_difference), term";
                         table = "VISIT";
                         condition = "where time_difference is not null and term = '"+term.ToString()+"' group by clarion_id, term";
@@ -1086,10 +1089,11 @@ namespace CIS411
                                 count++;
                                 first = rd[4].ToString();
                                 last = rd[3].ToString();
-                                if (int.Parse(rd[5].ToString()) >= 25)
+                                if (int.Parse(rd[5].ToString()) >= 25 && limit==0)
                                 {
                                     first = "* " + rd[4].ToString();
                                     nontradcount++;
+                                    limit++;
                
                                 }
                                 
@@ -1108,7 +1112,7 @@ namespace CIS411
                         {
                             listBoxReport.Items.Add(first.PadRight(20 - first.Length) + "\t" + last.PadRight(40 - (first.Length + last.Length)) + "\t" + count);
                             listBoxReport.Items.Add("nontraditional students".PadRight(60 - 23) + "\t" + nontradcount);
-
+                            limit = 0;
                         }
                     }
                    
