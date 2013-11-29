@@ -1021,6 +1021,8 @@ namespace CIS411
                     break;
                 case "Student":
                     int newid = -1;
+                    int nontradcount = 0;
+                    
                     count = 0;
                     TimeSpan newtime = new TimeSpan();
 
@@ -1028,7 +1030,7 @@ namespace CIS411
                     {
                         listBoxReport.Items.Add("Student");
                        // rd = conn.GetReader(column, table, condition);
-                        rd = conn.joinQuery("select visit.clarion_id, visit.time_difference, visit.term, student.lastname, student.firstname from visit inner join student on visit.clarion_id = student.clarion_id where time_difference is not null and visit.term = '" + term.ToString() + "'");
+                        rd = conn.joinQuery("select visit.clarion_id, visit.time_difference, visit.term, student.lastname, student.firstname, student.age from visit inner join student on visit.clarion_id = student.clarion_id where time_difference is not null and visit.term = '" + term.ToString() + "'");
 
                         while (rd.Read())
                         {
@@ -1037,6 +1039,12 @@ namespace CIS411
                                 newtime += TimeSpan.Parse(rd[1].ToString());
                                 first = rd[4].ToString();
                                 last = rd[3].ToString();
+                                if (int.Parse(rd[5].ToString()) >= 25)
+                                {
+                                    first = "* " + rd[4].ToString();
+                                    nontradcount++;
+               
+                                }
                             }
                             else
                             {
@@ -1044,12 +1052,17 @@ namespace CIS411
                                     listBoxReport.Items.Add(first.PadRight(20 - first.Length) + "\t" + last.PadRight(40 - (first.Length + last.Length)) + "\t" + newtime);
                                 newid = int.Parse(rd[0].ToString());
                                 newtime = TimeSpan.Parse(rd[1].ToString());
+                                
                             }
                             
    
                         }
-                        if(newid != -1)
+                        if (newid != -1)
+                        {
                             listBoxReport.Items.Add(first.PadRight(20 - first.Length) + "\t" + last.PadRight(40 - (first.Length + last.Length)) + "\t" + newtime);
+                            listBoxReport.Items.Add("nontraditional students".PadRight(60 - 23) + "\t" + nontradcount);
+
+                        }
                         if (comboFilter.SelectedItem.ToString() == "All")
                         listBoxReport.Items.Add("");
                     }
@@ -1057,12 +1070,13 @@ namespace CIS411
                     {
                         newid = -1;
                         count = 0;
+                        nontradcount = 0;
                         column = "CLARION_ID,count(distinct time_difference), term";
                         table = "VISIT";
                         condition = "where time_difference is not null and term = '"+term.ToString()+"' group by clarion_id, term";
 
                            // rd = conn.GetReader(column, table, condition);
-                        rd = conn.joinQuery("select visit.clarion_id, visit.time_difference, visit.term, student.lastname, student.firstname from visit inner join student on visit.clarion_id = student.clarion_id where time_difference is not null and visit.term = '" + term.ToString() + "'");
+                        rd = conn.joinQuery("select visit.clarion_id, visit.time_difference, visit.term, student.lastname, student.firstname, student.age from visit inner join student on visit.clarion_id = student.clarion_id where time_difference is not null and visit.term = '" + term.ToString() + "'");
 
 
                         while (rd.Read())
@@ -1072,6 +1086,13 @@ namespace CIS411
                                 count++;
                                 first = rd[4].ToString();
                                 last = rd[3].ToString();
+                                if (int.Parse(rd[5].ToString()) >= 25)
+                                {
+                                    first = "* " + rd[4].ToString();
+                                    nontradcount++;
+               
+                                }
+                                
                             }
                             else
                             {
@@ -1084,8 +1105,11 @@ namespace CIS411
 
                         }
                         if (newid != -1)
+                        {
                             listBoxReport.Items.Add(first.PadRight(20 - first.Length) + "\t" + last.PadRight(40 - (first.Length + last.Length)) + "\t" + count);
-                       
+                            listBoxReport.Items.Add("nontraditional students".PadRight(60 - 23) + "\t" + nontradcount);
+
+                        }
                     }
                    
                     listBoxReport.Items.Add("");
@@ -1094,6 +1118,7 @@ namespace CIS411
 
                     newid = -1;
                     count = 0;
+
                     newtime = new TimeSpan();
                     column = "tutor_ID, time_difference, term ";
                     table = "VISIT";

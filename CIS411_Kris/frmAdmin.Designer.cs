@@ -338,6 +338,7 @@ namespace CIS411
             // txtEditStudentID
             // 
             this.txtEditStudentID.Location = new System.Drawing.Point(22, 315);
+            this.txtEditStudentID.MaxLength = 8;
             this.txtEditStudentID.Name = "txtEditStudentID";
             this.txtEditStudentID.Size = new System.Drawing.Size(100, 20);
             this.txtEditStudentID.TabIndex = 23;
@@ -987,7 +988,7 @@ namespace CIS411
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 474);
+            this.ClientSize = new System.Drawing.Size(682, 460);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.tabControlAdmin);
             this.Name = "frmAdmin";
