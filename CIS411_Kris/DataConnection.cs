@@ -45,8 +45,8 @@ public class DataConnection
         dbPath = dbPath.Remove(bin);
         AppDomain currentDomain = AppDomain.CurrentDomain;
         currentDomain.SetData("database", dbPath + "db.mdf");
-        //return new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename='" + currentDomain.GetData("database") + "';Integrated Security=True");;
-        return new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\db.mdf;Integrated Security=True");;
+        return new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename='" + currentDomain.GetData("database") + "';Integrated Security=True");;
+        //return new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\db.mdf;Integrated Security=True");;
     }
 
     public void Open()

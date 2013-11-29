@@ -1023,6 +1023,7 @@ namespace CIS411
                     int newid = -1;
                     int nontradcount = 0;
                     int limit = 0;
+                    int limit2 = 0;
                     
                     count = 0;
                     TimeSpan newtime = new TimeSpan();
@@ -1038,9 +1039,10 @@ namespace CIS411
                             if (newid == int.Parse(rd[0].ToString()))
                             {
                                 newtime += TimeSpan.Parse(rd[1].ToString());
-                                first = rd[4].ToString();
-                                last = rd[3].ToString();
-                                if (int.Parse(rd[5].ToString()) >= 25 && limit==0)
+                                
+                               // first = rd[4].ToString();
+                                //last = rd[3].ToString();
+                                if (int.Parse(rd[5].ToString()) >= 25 && limit==0 && limit2==0)
                                 {
                                     first = "* " + rd[4].ToString();
                                     nontradcount++;
@@ -1050,12 +1052,28 @@ namespace CIS411
                             }
                             else
                             {
+
                                 if (newid != -1)
+                                {
                                     listBoxReport.Items.Add(first.PadRight(20 - first.Length) + "\t" + last.PadRight(40 - (first.Length + last.Length)) + "\t" + newtime);
+                                    limit2 = 0;
+                                }
                                 newid = int.Parse(rd[0].ToString());
                                 newtime = TimeSpan.Parse(rd[1].ToString());
                                 limit = 0;
+                                first = rd[4].ToString();
+                                last = rd[3].ToString();
+                                
+                                if (int.Parse(rd[5].ToString()) >= 25 && limit == 0)
+                                {
+                                    first = "* " + rd[4].ToString();
+                                    nontradcount++;
+                                    limit2++;
+
+                                }
+                                
                             }
+                            
                             
    
                         }
@@ -1074,6 +1092,7 @@ namespace CIS411
                         count = 0;
                         nontradcount = 0;
                         limit = 0;
+                        limit2 = 0;
                         column = "CLARION_ID,count(distinct time_difference), term";
                         table = "VISIT";
                         condition = "where time_difference is not null and term = '"+term.ToString()+"' group by clarion_id, term";
@@ -1087,9 +1106,9 @@ namespace CIS411
                             if (newid == int.Parse(rd[0].ToString()))
                             {
                                 count++;
-                                first = rd[4].ToString();
-                                last = rd[3].ToString();
-                                if (int.Parse(rd[5].ToString()) >= 25 && limit==0)
+                                //first = rd[4].ToString();
+                              //  last = rd[3].ToString();
+                                if (int.Parse(rd[5].ToString()) >= 25 && limit==0 && limit2==0)
                                 {
                                     first = "* " + rd[4].ToString();
                                     nontradcount++;
@@ -1100,10 +1119,24 @@ namespace CIS411
                             }
                             else
                             {
+
                                 if (newid != -1)
+                                {
                                     listBoxReport.Items.Add(first.PadRight(20 - first.Length) + "\t" + last.PadRight(40 - (first.Length + last.Length)) + "\t" + count);
+                                    limit2 = 0;
+                                }
                                 newid = int.Parse(rd[0].ToString());
                                 count = 0;
+                                limit = 0;
+                                first = rd[4].ToString();
+                                last = rd[3].ToString();
+                                if (int.Parse(rd[5].ToString()) >= 25 && limit == 0)
+                                {
+                                    first = "* " + rd[4].ToString();
+                                    nontradcount++;
+                                    limit2++;
+
+                                }
                             }
 
 
