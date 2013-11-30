@@ -28,7 +28,6 @@ namespace CIS411
         /// </summary>
         private void InitializeComponent()
         {
-            if (true) ;
             this.components = new System.ComponentModel.Container();
             this.tabControlAdmin = new System.Windows.Forms.TabControl();
             this.tabVisits = new System.Windows.Forms.TabPage();
@@ -80,8 +79,6 @@ namespace CIS411
             this.btnSaveMethods = new System.Windows.Forms.Button();
             this.btnAddMethod = new System.Windows.Forms.Button();
             this.tabAdmin = new System.Windows.Forms.TabPage();
-            this.btn_courses_import = new System.Windows.Forms.Button();
-            this.btn_student_import = new System.Windows.Forms.Button();
             this.grpBoxPassword = new System.Windows.Forms.GroupBox();
             this.btnChangePassword = new System.Windows.Forms.Button();
             this.txtConfirmPassword = new System.Windows.Forms.TextBox();
@@ -115,6 +112,7 @@ namespace CIS411
             this.txtAddSignIn = new System.Windows.Forms.TextBox();
             this.database2DataSet = new CIS411.Database2DataSet();
             this.database2DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.btnImport = new System.Windows.Forms.Button();
             this.tabControlAdmin.SuspendLayout();
             this.tabVisits.SuspendLayout();
             this.tabTutors.SuspendLayout();
@@ -632,8 +630,7 @@ namespace CIS411
             // 
             // tabAdmin
             // 
-            this.tabAdmin.Controls.Add(this.btn_courses_import);
-            this.tabAdmin.Controls.Add(this.btn_student_import);
+            this.tabAdmin.Controls.Add(this.btnImport);
             this.tabAdmin.Controls.Add(this.grpBoxPassword);
             this.tabAdmin.Location = new System.Drawing.Point(4, 22);
             this.tabAdmin.Name = "tabAdmin";
@@ -642,26 +639,6 @@ namespace CIS411
             this.tabAdmin.TabIndex = 3;
             this.tabAdmin.Text = "Administration";
             this.tabAdmin.UseVisualStyleBackColor = true;
-            // 
-            // btn_courses_import
-            // 
-            this.btn_courses_import.Location = new System.Drawing.Point(19, 34);
-            this.btn_courses_import.Name = "btn_courses_import";
-            this.btn_courses_import.Size = new System.Drawing.Size(93, 23);
-            this.btn_courses_import.TabIndex = 6;
-            this.btn_courses_import.Text = "Import Courses";
-            this.btn_courses_import.UseVisualStyleBackColor = true;
-            this.btn_courses_import.Click += new System.EventHandler(this.btn_courses_import_Click);
-            // 
-            // btn_student_import
-            // 
-            this.btn_student_import.Location = new System.Drawing.Point(19, 63);
-            this.btn_student_import.Name = "btn_student_import";
-            this.btn_student_import.Size = new System.Drawing.Size(93, 23);
-            this.btn_student_import.TabIndex = 5;
-            this.btn_student_import.Text = "Import Students";
-            this.btn_student_import.UseVisualStyleBackColor = true;
-            this.btn_student_import.Click += new System.EventHandler(this.btn_student_import_Click);
             // 
             // grpBoxPassword
             // 
@@ -851,7 +828,7 @@ namespace CIS411
             this.comboTerm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboTerm.FormattingEnabled = true;
             this.comboTerm.Items.AddRange(new object[] {
-            "Fall", 
+            "Fall",
             "Winter",
             "Spring",
             "Summer"});
@@ -982,6 +959,16 @@ namespace CIS411
             this.database2DataSetBindingSource.DataSource = this.database2DataSet;
             this.database2DataSetBindingSource.Position = 0;
             // 
+            // btnImport
+            // 
+            this.btnImport.Location = new System.Drawing.Point(15, 34);
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(93, 49);
+            this.btnImport.TabIndex = 7;
+            this.btnImport.Text = "Import Course and Student Data";
+            this.btnImport.UseVisualStyleBackColor = true;
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1085,8 +1072,6 @@ namespace CIS411
         private System.Windows.Forms.Label lblYear;
         private System.Windows.Forms.ComboBox comboTerm;
         private System.Windows.Forms.ComboBox comboCountCategory;
-        private System.Windows.Forms.Button btn_courses_import;
-        private System.Windows.Forms.Button btn_student_import;
         private System.Windows.Forms.Label lblGroup;
         private System.Windows.Forms.ComboBox comboFilter;
         private System.Windows.Forms.Label lblCount;
@@ -1096,6 +1081,7 @@ namespace CIS411
         private System.Windows.Forms.Button btnMoveUp;
         private Database2DataSet database2DataSet;
         private System.Windows.Forms.BindingSource database2DataSetBindingSource;
+        private System.Windows.Forms.Button btnImport;
         //private DataSet1TableAdapters.DataTable2TableAdapter dataTable2TableAdapter;
     }
         #endregion
