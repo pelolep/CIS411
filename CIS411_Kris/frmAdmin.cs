@@ -1022,8 +1022,8 @@ namespace CIS411
                 case "Student":
                     int newid = -1;
                     int nontradcount = 0;
-                    int limit = 0;
-                    int limit2 = 0;
+                    int studentcount = 0;
+       
                     
                     count = 0;
                     TimeSpan newtime = new TimeSpan();
@@ -1036,39 +1036,31 @@ namespace CIS411
 
                         while (rd.Read())
                         {
+                            
                             if (newid == int.Parse(rd[0].ToString()))
                             {
                                 newtime += TimeSpan.Parse(rd[1].ToString());
-                                
-                               // first = rd[4].ToString();
-                                //last = rd[3].ToString();
-                                if (int.Parse(rd[5].ToString()) >= 25 && limit==0 && limit2==0)
-                                {
-                                    first = "* " + rd[4].ToString();
-                                    nontradcount++;
-                                    limit++;
-               
-                                }
+
                             }
                             else
                             {
-
+                               
                                 if (newid != -1)
                                 {
                                     listBoxReport.Items.Add(first.PadRight(20 - first.Length) + "\t" + last.PadRight(40 - (first.Length + last.Length)) + "\t" + newtime);
-                                    limit2 = 0;
+                                    studentcount++;
                                 }
                                 newid = int.Parse(rd[0].ToString());
                                 newtime = TimeSpan.Parse(rd[1].ToString());
-                                limit = 0;
+                               
                                 first = rd[4].ToString();
                                 last = rd[3].ToString();
                                 
-                                if (int.Parse(rd[5].ToString()) >= 25 && limit == 0)
+                                if (int.Parse(rd[5].ToString()) >= 25)
                                 {
                                     first = "* " + rd[4].ToString();
                                     nontradcount++;
-                                    limit2++;
+                                    
 
                                 }
                                 
@@ -1079,8 +1071,10 @@ namespace CIS411
                         }
                         if (newid != -1)
                         {
+                            studentcount++;
                             listBoxReport.Items.Add(first.PadRight(20 - first.Length) + "\t" + last.PadRight(40 - (first.Length + last.Length)) + "\t" + newtime);
                             listBoxReport.Items.Add("nontraditional students".PadRight(60 - 23) + "\t" + nontradcount);
+                            listBoxReport.Items.Add("traditional students".PadRight(60 - 20) + "\t" + (studentcount-nontradcount));
 
                         }
                         if (comboFilter.SelectedItem.ToString() == "All")
@@ -1091,8 +1085,9 @@ namespace CIS411
                         newid = -1;
                         count = 0;
                         nontradcount = 0;
-                        limit = 0;
-                        limit2 = 0;
+                        studentcount = 0;
+                        
+                     
                         column = "CLARION_ID,count(distinct time_difference), term";
                         table = "VISIT";
                         condition = "where time_difference is not null and term = '"+term.ToString()+"' group by clarion_id, term";
@@ -1106,35 +1101,29 @@ namespace CIS411
                             if (newid == int.Parse(rd[0].ToString()))
                             {
                                 count++;
-                                //first = rd[4].ToString();
-                              //  last = rd[3].ToString();
-                                if (int.Parse(rd[5].ToString()) >= 25 && limit==0 && limit2==0)
-                                {
-                                    first = "* " + rd[4].ToString();
-                                    nontradcount++;
-                                    limit++;
-               
-                                }
+
                                 
                             }
                             else
                             {
+                                
 
                                 if (newid != -1)
                                 {
+                                    studentcount++;
                                     listBoxReport.Items.Add(first.PadRight(20 - first.Length) + "\t" + last.PadRight(40 - (first.Length + last.Length)) + "\t" + count);
-                                    limit2 = 0;
+                                  
                                 }
                                 newid = int.Parse(rd[0].ToString());
-                                count = 0;
-                                limit = 0;
+                                count = 1;
+                              
                                 first = rd[4].ToString();
                                 last = rd[3].ToString();
-                                if (int.Parse(rd[5].ToString()) >= 25 && limit == 0)
+                                if (int.Parse(rd[5].ToString()) >= 25)
                                 {
                                     first = "* " + rd[4].ToString();
                                     nontradcount++;
-                                    limit2++;
+                                    
 
                                 }
                             }
@@ -1143,9 +1132,11 @@ namespace CIS411
                         }
                         if (newid != -1)
                         {
+                            studentcount++;
                             listBoxReport.Items.Add(first.PadRight(20 - first.Length) + "\t" + last.PadRight(40 - (first.Length + last.Length)) + "\t" + count);
                             listBoxReport.Items.Add("nontraditional students".PadRight(60 - 23) + "\t" + nontradcount);
-                            limit = 0;
+                            listBoxReport.Items.Add("traditional students".PadRight(60 - 20) + "\t" + (studentcount-nontradcount));
+
                         }
                     }
                    
@@ -1175,8 +1166,7 @@ namespace CIS411
                             if (newid == int.Parse(rd[0].ToString()))
                             {
                                 newtime += TimeSpan.Parse(rd[2].ToString());
-                                first = rd[5].ToString();
-                                last = rd[4].ToString();
+                              
                             }
                             else
                             {
@@ -1184,6 +1174,8 @@ namespace CIS411
                                     listBoxReport.Items.Add(first.PadRight(20 - first.Length) + "\t" + last.PadRight(40 - (first.Length + last.Length)) + "\t" + newtime);
                                 newid = int.Parse(rd[0].ToString());
                                 newtime = TimeSpan.Parse(rd[2].ToString());
+                                first = rd[5].ToString();
+                                last = rd[4].ToString();
                             }
                             
    
@@ -1208,15 +1200,16 @@ namespace CIS411
                                 if (newid == int.Parse(rd[0].ToString()))
                                 {
                                     count++;
-                                    first = rd[5].ToString();
-                                    last = rd[4].ToString();
+                                   
                                 }
                                 else
                                 {
                                     if (newid != -1)
                                         listBoxReport.Items.Add(first.PadRight(20 - first.Length) + "\t" + last.PadRight(40 - (first.Length + last.Length)) + "\t" + count);
                                     newid = int.Parse(rd[0].ToString());
-                                    count = 0;
+                                    count = 1;
+                                    first = rd[5].ToString();
+                                    last = rd[4].ToString();
                                 }
                             }
                         if (newid != -1)
