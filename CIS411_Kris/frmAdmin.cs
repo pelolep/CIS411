@@ -224,9 +224,8 @@ namespace CIS411
                 catch { return; };
             }
             else
-            {
                 return;
-            }
+            this.Cursor = Cursors.WaitCursor;
             System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
             string excelQuery = @"Select * from [Export Worksheet$]";
             System.Data.OleDb.OleDbCommand excelCommand = new System.Data.OleDb.OleDbCommand(excelQuery, excelConnection);
@@ -252,17 +251,12 @@ namespace CIS411
                 catch
                 {
                     conn.Query("update STUDENT set term = '" + excelReader[0] + "', lastname = '" + last + "', firstname = '" + first + "',middle_name = '" + middle + "',cnet_username = '" + excelReader[5] + "',eaglemail = '" + excelReader[6] + "',class_standing = '" + excelReader[7] + "',degree_seeking = '" + excelReader[8] + "',major_1 = '" + excelReader[9] + "',major_2 = '" + excelReader[10] + "',minor_1 = '" + excelReader[11] + "',minor_2 = '" + excelReader[12] + "',credit_attempted = '" + excelReader[13] + "',sex = '" + excelReader[14] + "',hispanic = '" + excelReader[15] + "',amer_indian = '" + excelReader[16] + "',asian = '" + excelReader[17] + "',black = '" + excelReader[18] + "',pacific_islander = '" + excelReader[19] + "',White = '" + excelReader[20] + "',age = '" + excelReader[21] + "',campus = '" + excelReader[22] + "',housing = '" + excelReader[23] + "',transfer = '" + excelReader[24] + "',transfer_credit = '" + excelReader[25] + "' where clarion_id = '" + excelReader[1] + "'");
-                    /*
-                    //MessageBox.Show(excelReader[1].ToString() + "update");
-                    cmd.CommandText = "update STUDENT set term = '" + excelReader[0] + "', lastname = '" + last + "', firstname = '" + first + "',middle_name = '" + middle + "',cnet_username = '" + excelReader[5] + "',eaglemail = '" + excelReader[6] + "',class_standing = '" + excelReader[7] + "',degree_seeking = '" + excelReader[8] + "',major_1 = '" + excelReader[9] + "',major_2 = '" + excelReader[10] + "',minor_1 = '" + excelReader[11] + "',minor_2 = '" + excelReader[12] + "',credit_attempted = '" + excelReader[13] + "',sex = '" + excelReader[14] + "',hispanic = '" + excelReader[15] + "',amer_indian = '" + excelReader[16] + "',asian = '" + excelReader[17] + "',black = '" + excelReader[18] + "',pacific_islander = '" + excelReader[19] + "',White = '" + excelReader[20] + "',age = '" + excelReader[21] + "',campus = '" + excelReader[22] + "',housing = '" + excelReader[23] + "',transfer = '" + excelReader[24] + "',transfer_credit = '" + excelReader[25] + "' where clarion_id = '" + excelReader[1] + "'";
-                    cmd.ExecuteNonQuery();
-                    cmd.Clone();
-                    */
                 }
             }
             excelReader.Close();
             excelConnection.Close();
             conn.Close();
+            this.Cursor = Cursors.Default;
         }
 
         private void ImportCourses()
@@ -285,12 +279,8 @@ namespace CIS411
             }
             else
                 return;
-            /*
-            SqlCommand cmd2 = new SqlCommand();
-            SqlCommand cmd3 = new SqlCommand();
-            */
             // Create the connection
-
+            this.Cursor = Cursors.WaitCursor;
             System.Data.OleDb.OleDbConnection excelConnection = new System.Data.OleDb.OleDbConnection(connectionString);
             string excelQuery = @"Select * from [sheet1$]";
             System.Data.OleDb.OleDbCommand excelCommand = new System.Data.OleDb.OleDbCommand(excelQuery, excelConnection);
@@ -299,11 +289,6 @@ namespace CIS411
             excelReader = excelCommand.ExecuteReader();
             DataConnection conn = new DataConnection();
             conn.Open();
-            /*
-            cmd.Connection = cn;
-            cmd2.Connection = cn;
-            cn.Open();
-            */
             string s = "";
             int i=2;
             excelReader.Read();
@@ -348,8 +333,8 @@ namespace CIS411
             catch { }
             excelReader.Close();
             conn.Close();
-            //cn.Close();
             excelConnection.Close();
+            this.Cursor = Cursors.Default;
         }
 
         private void frmAdmin_Load(object sender, EventArgs e)
@@ -706,46 +691,45 @@ namespace CIS411
             if (btnEditVisit.Text == "Edit Visit")
             {
                 //Puts the student id, min search date, and max search date into variables
-                    int studentID = int.Parse(txtEditStudentID.Text);
-                    DateTime minSearch = DateTime.Parse(dateTimePickerEditMin.Text);
-                    DateTime maxSearch = DateTime.Parse(dateTimePickerEditMax.Text);
+                int studentID = int.Parse(txtEditStudentID.Text);
+                DateTime minSearch = DateTime.Parse(dateTimePickerEditMin.Text);
+                DateTime maxSearch = DateTime.Parse(dateTimePickerEditMax.Text);
 
-                    //loads the results of the search into the listBoxLoggedIn
+                //loads the results of the search into the listBoxLoggedIn
 
-                    loadvisits(studentID, minSearch, maxSearch);
-
-
+                loadvisits(studentID, minSearch, maxSearch);
 
 
-                    btnEditVisit.Text = "Edit This Visit";
-                    btnLogOut.Visible = false;
-                    btnLogOut.Enabled = false;
-                }
+
+
+                btnEditVisit.Text = "Edit This Visit";
+                btnLogOut.Visible = false;
+                btnLogOut.Enabled = false;
+            }
 
                 //Enters the selected visit into the edit form
-                else if (btnEditVisit.Text =="Edit This Visit")
+            else if (btnEditVisit.Text == "Edit This Visit")
+            {
+                dateTimePickerEditTimeIn.Enabled = true;
+                dateTimePickerEditTimeOut.Enabled = true;
+
+                string[] selectedVisitEdit = listBoxLoggedIn.SelectedItem.ToString().Split();
+                string dateEdit = selectedVisitEdit[0];
+                DateTime TimeInEdit = DateTime.Parse(selectedVisitEdit[1]);
+                if (selectedVisitEdit[2] != "")
                 {
-                    dateTimePickerEditTimeIn.Enabled = true;
-                    dateTimePickerEditTimeOut.Enabled = true;
-                    
-                    string[] selectedVisitEdit = listBoxLoggedIn.SelectedItem.ToString().Split();
-                    string dateEdit = selectedVisitEdit[0];
-                    DateTime TimeInEdit = DateTime.Parse(selectedVisitEdit[1]);
-                    if (selectedVisitEdit[2] != "")
-                    {
-                        DateTime TimeOutEdit = DateTime.Parse(selectedVisitEdit[2]);
-                        dateTimePickerEditTimeOut.Value = TimeOutEdit;
-                    }
-                    txtEditDate.Text = dateEdit;
-                    dateTimePickerEditTimeIn.Value = TimeInEdit;
-                    
+                    DateTime TimeOutEdit = DateTime.Parse(selectedVisitEdit[2]);
+                    dateTimePickerEditTimeOut.Value = TimeOutEdit;
+                }
+                txtEditDate.Text = dateEdit;
+                dateTimePickerEditTimeIn.Value = TimeInEdit;
 
-                    btnEditVisit.Text = "Save Edit";
 
-                 }
+                btnEditVisit.Text = "Save Edit";
+                btnDeleteVisit.Enabled = true;
+            }
 
-            
-            else
+            else // if (btnEditVisit.Text == "Save Edit")
             {
 
                 //DateTime.Parse(DateTime.Now.ToString("HH:mm:ss tt")
@@ -755,21 +739,26 @@ namespace CIS411
                 timedifference = timeOut.Subtract(timeIn);
                 if (timedifference < TimeSpan.Zero)
                 {
-                    MessageBox.Show("Sign out time is before sign in time. "+ timeOut.ToString() + " " + timeIn.ToString() + " " +timedifference.ToString(), "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Sign out time is before sign in time. " + timeOut.ToString() + " " + timeIn.ToString() + " " + timedifference.ToString(), "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                string[] selectedVisitEdit = listBoxLoggedIn.SelectedItem.ToString().Split();
-                DateTime originalTimeInEdit = DateTime.Parse(selectedVisitEdit[1]);
-                string editDate = selectedVisitEdit[0];
-                
+                //string[] selectedVisitEdit = listBoxLoggedIn.SelectedItem.ToString().Split();
+                DateTime originalTimeInEdit = getVisitOriginalTimeIn();
+                string editDate = getVisitOriginalDate();
 
-                    //actually updates the visit information
+
+                //actually updates the visit information
                 DataConnection conn = new DataConnection();
                 conn.Open();
-                    //conn.Open();
-                
-                conn.Query("update VISIT set CLARION_ID = '" + txtEditStudentID.Text + "' , DATE = '" + editDate + "' , TIME_IN ='" + timeIn.ToString("HH:mm:ss tt") + "' , TIME_OUT = '" + timeOut.ToString("HH:mm:ss tt") + "' , TIME_DIFFERENCE = '" + timedifference.ToString("c") + "' where CLARION_ID = '" + txtEditStudentID.Text + "' AND DATE = '" + editDate + "' AND TIME_IN ='" + originalTimeInEdit.ToString("HH:mm:ss tt") + "'");
+                try
+                {
+                    conn.Query("update VISIT set CLARION_ID = '" + txtEditStudentID.Text + "' , DATE = '" + editDate + "' , TIME_IN ='" + timeIn.ToString("HH:mm:ss tt") + "' , TIME_OUT = '" + timeOut.ToString("HH:mm:ss tt") + "' , TIME_DIFFERENCE = '" + timedifference.ToString("c") + "' where CLARION_ID = '" + txtEditStudentID.Text + "' AND DATE = '" + editDate + "' AND TIME_IN ='" + originalTimeInEdit.ToString("HH:mm:ss tt") + "'");
+                }
+                catch
+                {
+                    MessageBox.Show("Error while attempting to update visit. Please reload visit information and try again.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 conn.Close();
 
                 MessageBox.Show("Thank you for editing this visit!");
@@ -780,7 +769,7 @@ namespace CIS411
                 dateTimePickerEditTimeIn.Enabled = false;
                 dateTimePickerEditTimeOut.Enabled = false;
 
-                
+
 
                 btnEditVisit.Text = "Edit Visit";
                 btnLogOut.Visible = true;
@@ -789,8 +778,15 @@ namespace CIS411
             }
         }
 
+        private DateTime getVisitOriginalTimeIn()
+        {
+            return DateTime.Parse(listBoxLoggedIn.SelectedItem.ToString().Split()[1]);
+        }
 
-
+        private string getVisitOriginalDate()
+        {
+            return listBoxLoggedIn.SelectedItem.ToString().Split()[0];
+        }
 
         //null
         private void btnSave_Click(object sender, EventArgs e)
@@ -1237,12 +1233,6 @@ MessageBox.Show("sfgfdsgfg");
         }
          * */
 
-        //Created by Sean:
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void comboAddTutoring_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -1347,6 +1337,22 @@ MessageBox.Show("sfgfdsgfg");
         {
             ImportCourses();
             ImportStudents();
+            MessageBox.Show("Imports Complete.");
+        }
+
+        private void btnDeleteVisit_Click(object sender, EventArgs e)
+        {
+            DataConnection conn = new DataConnection();
+            conn.Open();
+            try
+            {
+                conn.Query("DELETE FROM VISIT WHERE CLARION_ID = " + txtEditStudentID.Text + " AND DATE = " + getVisitOriginalDate() + " AND TIME_IN = " + getVisitOriginalTimeIn().ToString("HH:mm:ss tt"));
+            }
+            catch
+            {
+                MessageBox.Show("Error while attempting to delete visit. Please reload visit information and try again.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            conn.Close();
         }
         // Returns array of all tutors
         /*

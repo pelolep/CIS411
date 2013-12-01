@@ -79,6 +79,7 @@ namespace CIS411
             this.btnSaveMethods = new System.Windows.Forms.Button();
             this.btnAddMethod = new System.Windows.Forms.Button();
             this.tabAdmin = new System.Windows.Forms.TabPage();
+            this.btnImport = new System.Windows.Forms.Button();
             this.grpBoxPassword = new System.Windows.Forms.GroupBox();
             this.btnChangePassword = new System.Windows.Forms.Button();
             this.txtConfirmPassword = new System.Windows.Forms.TextBox();
@@ -112,7 +113,7 @@ namespace CIS411
             this.txtAddSignIn = new System.Windows.Forms.TextBox();
             this.database2DataSet = new CIS411.Database2DataSet();
             this.database2DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btnImport = new System.Windows.Forms.Button();
+            this.btnDeleteVisit = new System.Windows.Forms.Button();
             this.tabControlAdmin.SuspendLayout();
             this.tabVisits.SuspendLayout();
             this.tabTutors.SuspendLayout();
@@ -140,6 +141,7 @@ namespace CIS411
             // 
             // tabVisits
             // 
+            this.tabVisits.Controls.Add(this.btnDeleteVisit);
             this.tabVisits.Controls.Add(this.comboaddClass);
             this.tabVisits.Controls.Add(this.comboAddTutoring);
             this.tabVisits.Controls.Add(this.dateTimePickerEditTimeOut);
@@ -294,9 +296,9 @@ namespace CIS411
             // 
             // btnEditVisit
             // 
-            this.btnEditVisit.Location = new System.Drawing.Point(559, 312);
+            this.btnEditVisit.Location = new System.Drawing.Point(559, 315);
             this.btnEditVisit.Name = "btnEditVisit";
-            this.btnEditVisit.Size = new System.Drawing.Size(75, 68);
+            this.btnEditVisit.Size = new System.Drawing.Size(75, 32);
             this.btnEditVisit.TabIndex = 16;
             this.btnEditVisit.Text = "Edit Visit";
             this.btnEditVisit.UseVisualStyleBackColor = true;
@@ -640,6 +642,16 @@ namespace CIS411
             this.tabAdmin.Text = "Administration";
             this.tabAdmin.UseVisualStyleBackColor = true;
             // 
+            // btnImport
+            // 
+            this.btnImport.Location = new System.Drawing.Point(15, 34);
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(93, 49);
+            this.btnImport.TabIndex = 7;
+            this.btnImport.Text = "Import Course and Student Data";
+            this.btnImport.UseVisualStyleBackColor = true;
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            // 
             // grpBoxPassword
             // 
             this.grpBoxPassword.Controls.Add(this.btnChangePassword);
@@ -959,15 +971,16 @@ namespace CIS411
             this.database2DataSetBindingSource.DataSource = this.database2DataSet;
             this.database2DataSetBindingSource.Position = 0;
             // 
-            // btnImport
+            // btnDeleteVisit
             // 
-            this.btnImport.Location = new System.Drawing.Point(15, 34);
-            this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(93, 49);
-            this.btnImport.TabIndex = 7;
-            this.btnImport.Text = "Import Course and Student Data";
-            this.btnImport.UseVisualStyleBackColor = true;
-            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            this.btnDeleteVisit.Enabled = false;
+            this.btnDeleteVisit.Location = new System.Drawing.Point(559, 353);
+            this.btnDeleteVisit.Name = "btnDeleteVisit";
+            this.btnDeleteVisit.Size = new System.Drawing.Size(75, 32);
+            this.btnDeleteVisit.TabIndex = 45;
+            this.btnDeleteVisit.Text = "Delete Visit";
+            this.btnDeleteVisit.UseVisualStyleBackColor = true;
+            this.btnDeleteVisit.Click += new System.EventHandler(this.btnDeleteVisit_Click);
             // 
             // frmAdmin
             // 
@@ -1082,6 +1095,7 @@ namespace CIS411
         private Database2DataSet database2DataSet;
         private System.Windows.Forms.BindingSource database2DataSetBindingSource;
         private System.Windows.Forms.Button btnImport;
+        private System.Windows.Forms.Button btnDeleteVisit;
         //private DataSet1TableAdapters.DataTable2TableAdapter dataTable2TableAdapter;
     }
         #endregion
