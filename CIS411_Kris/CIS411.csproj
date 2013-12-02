@@ -98,6 +98,12 @@
     <Compile Include="frmAdminPass.Designer.cs">
       <DependentUpon>frmAdminPass.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmEditList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEditList.Designer.cs">
+      <DependentUpon>frmEditList.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +131,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmAdminPass.resx">
       <DependentUpon>frmAdminPass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditList.resx">
+      <DependentUpon>frmEditList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>

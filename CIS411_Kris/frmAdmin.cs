@@ -575,47 +575,7 @@ namespace CIS411
 
         }
 
-        //fills the listBox with range of visits for edit visit
-        public void loadvisits(int studentID, DateTime minDate, DateTime maxDate)
-        {
-            //clears the list box to enter new information
-            listBoxLoggedIn.Items.Clear();
-            //TAB THIS
-            listBoxLoggedIn.Items.Add("DATE NAME TIME IN    TIME OUT METHOD");
-            //creates new dataconnection
-            DataConnection conn = new DataConnection();
-              
-            conn.Open();
-            
-            //gets visits request
-            //just added STUDENT.FIRSTNAME, STUDENT.LASTNAME, STUDENT TABLE
-            SqlDataReader rd = conn.GetReader("VISIT.CLARION_ID, VISIT.DATE, VISIT.TIME_IN, VISIT.TIME_OUT, STUDENT.FIRSTNAME, STUDENT.LASTNAME, VISIT.METHOD", "VISIT, STUDENT");
-            if (rd.HasRows)
-            {
 
-                while (rd.Read())
-                {
-                    DateTime thedate = DateTime.Parse(rd["DATE"].ToString());
-                    
-
-                    if (thedate >= minDate && thedate <= maxDate)
-                        //TAB THIS
-                        listBoxLoggedIn.Items.Add(thedate.ToString("MM/dd/yyyy") + " " + rd["FIRSTNAME"] + " " + rd["LASTNAME"] + " " +  rd["TIME_IN"] + " " + rd["TIME_OUT"] + " " + rd["METHOD"]);
-                   // else(thedate >= minDate && thedate <= maxDate)
-                     //   listBoxLoggedIn.Items.Add(thedate.ToString("MM/dd/yyyy") + " " + rd[1] + " " + rd[2] + " " + rd[4] + " " + rd[5] + " " + rd[6]);
-                    
-                    
-                        
-                }
-            }
-            rd.Close();
-
-
-            //closes connection
-            conn.Close();
-
-
-        }
 
         private void tabControlAdmin_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -890,16 +850,18 @@ namespace CIS411
                     DateTime maxSearch = DateTime.Parse(dateTimePickerEditMax.Text);
 
                     //loads the results of the search into the listBoxLoggedIn
+                    //loadvisits(studentID, minSearch, maxSearch);
 
-                    loadvisits(studentID, minSearch, maxSearch);
+                    frmEditList editListForm = new frmEditList(studentID, minSearch, maxSearch);
+                    editListForm.Show();
 
 
-
-
-                    btnEditVisit.Text = "Edit This Visit";
-                    btnLogOut.Visible = false;
-                    btnLogOut.Enabled = false;
-                    lblLoggedIn.Text = "Editing...";
+                    btnEditVisit.Text = "Save Edit";
+                    //btnLogOut.Visible = false;
+                    //btnLogOut.Enabled = false;
+                    //lblLoggedIn.Text = "Editing...";
+                    dateTimePickerEditTimeIn.Enabled = true;
+                    dateTimePickerEditTimeOut.Enabled = true;
                 }
                 else
                 {
@@ -908,29 +870,29 @@ namespace CIS411
                 }
             }
 
-            //Enters the selected visit into the edit form
-            else if (btnEditVisit.Text =="Edit This Visit")
-            {
-                    dateTimePickerEditTimeIn.Enabled = true;
-                    dateTimePickerEditTimeOut.Enabled = true;
+                           /* //Enters the selected visit into the edit form
+                            else if (btnEditVisit.Text =="Edit This Visit")
+                            {
+                                    dateTimePickerEditTimeIn.Enabled = true;
+                                    dateTimePickerEditTimeOut.Enabled = true;
                     
-                    string[] selectedVisitEdit = listBoxLoggedIn.SelectedItem.ToString().Split();
-                    string dateEdit = selectedVisitEdit[0];
-                    DateTime TimeInEdit = DateTime.Parse(selectedVisitEdit[1]);
-                    if (selectedVisitEdit[2] != "")
-                    {
-                        DateTime TimeOutEdit = DateTime.Parse(selectedVisitEdit[2]);
-                        dateTimePickerEditTimeOut.Value = TimeOutEdit;
-                    }
-                    txtEditDate.Text = dateEdit;
-                    dateTimePickerEditTimeIn.Value = TimeInEdit;
-                    comboEditMethod.SelectedItem = selectedVisitEdit[3];
+                                    string[] selectedVisitEdit = listBoxLoggedIn.SelectedItem.ToString().Split();
+                                    string dateEdit = selectedVisitEdit[0];
+                                    DateTime TimeInEdit = DateTime.Parse(selectedVisitEdit[1]);
+                                    if (selectedVisitEdit[2] != "")
+                                    {
+                                        DateTime TimeOutEdit = DateTime.Parse(selectedVisitEdit[2]);
+                                        dateTimePickerEditTimeOut.Value = TimeOutEdit;
+                                    }
+                                    txtEditDate.Text = dateEdit;
+                                    dateTimePickerEditTimeIn.Value = TimeInEdit;
+                                    comboEditMethod.SelectedItem = selectedVisitEdit[3];
                     
 
-                    btnEditVisit.Text = "Save Edit";
+                                    btnEditVisit.Text = "Save Edit";
 
-            }
-
+                            }
+                            */
             
             else
             {
@@ -970,8 +932,8 @@ namespace CIS411
                 
 
                 btnEditVisit.Text = "List Visits";
-                btnLogOut.Visible = true;
-                btnLogOut.Enabled = true;
+                //btnLogOut.Visible = true;
+                //btnLogOut.Enabled = true;
                 loadlist();
             }
         }

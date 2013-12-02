@@ -30,6 +30,8 @@ namespace CIS411
         {
             this.tabControlAdmin = new System.Windows.Forms.TabControl();
             this.tabVisits = new System.Windows.Forms.TabPage();
+            this.comboEditMethod = new System.Windows.Forms.ComboBox();
+            this.lblEditMethod = new System.Windows.Forms.Label();
             this.comboaddClass = new System.Windows.Forms.ComboBox();
             this.comboAddTutoring = new System.Windows.Forms.ComboBox();
             this.dateTimePickerEditTimeOut = new System.Windows.Forms.DateTimePicker();
@@ -111,8 +113,6 @@ namespace CIS411
             this.txtAddTutor = new System.Windows.Forms.TextBox();
             this.txtAddSignOut = new System.Windows.Forms.TextBox();
             this.txtAddSignIn = new System.Windows.Forms.TextBox();
-            this.comboEditMethod = new System.Windows.Forms.ComboBox();
-            this.lblEditMethod = new System.Windows.Forms.Label();
             this.tabControlAdmin.SuspendLayout();
             this.tabVisits.SuspendLayout();
             this.tabTutors.SuspendLayout();
@@ -179,6 +179,23 @@ namespace CIS411
             this.tabVisits.TabIndex = 2;
             this.tabVisits.Text = "Visits";
             this.tabVisits.UseVisualStyleBackColor = true;
+            // 
+            // comboEditMethod
+            // 
+            this.comboEditMethod.FormattingEnabled = true;
+            this.comboEditMethod.Location = new System.Drawing.Point(312, 359);
+            this.comboEditMethod.Name = "comboEditMethod";
+            this.comboEditMethod.Size = new System.Drawing.Size(121, 21);
+            this.comboEditMethod.TabIndex = 46;
+            // 
+            // lblEditMethod
+            // 
+            this.lblEditMethod.AutoSize = true;
+            this.lblEditMethod.Location = new System.Drawing.Point(309, 344);
+            this.lblEditMethod.Name = "lblEditMethod";
+            this.lblEditMethod.Size = new System.Drawing.Size(43, 13);
+            this.lblEditMethod.TabIndex = 45;
+            this.lblEditMethod.Text = "Method";
             // 
             // comboaddClass
             // 
@@ -970,23 +987,6 @@ namespace CIS411
             this.txtAddSignIn.Size = new System.Drawing.Size(100, 20);
             this.txtAddSignIn.TabIndex = 14;
             // 
-            // comboEditMethod
-            // 
-            this.comboEditMethod.FormattingEnabled = true;
-            this.comboEditMethod.Location = new System.Drawing.Point(312, 359);
-            this.comboEditMethod.Name = "comboEditMethod";
-            this.comboEditMethod.Size = new System.Drawing.Size(121, 21);
-            this.comboEditMethod.TabIndex = 46;
-            // 
-            // lblEditMethod
-            // 
-            this.lblEditMethod.AutoSize = true;
-            this.lblEditMethod.Location = new System.Drawing.Point(309, 344);
-            this.lblEditMethod.Name = "lblEditMethod";
-            this.lblEditMethod.Size = new System.Drawing.Size(43, 13);
-            this.lblEditMethod.TabIndex = 45;
-            this.lblEditMethod.Text = "Method";
-            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1049,10 +1049,8 @@ namespace CIS411
         private System.Windows.Forms.DateTimePicker dateTimePickerAdd;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Label lblEditVisit;
-        private System.Windows.Forms.TextBox txtEditDate;
         private System.Windows.Forms.Label lblEditDate;
         private System.Windows.Forms.DateTimePicker dateTimePickerEditMax;
-        private System.Windows.Forms.DateTimePicker dateTimePickerEditMin;
         private System.Windows.Forms.Label lblEditDateRange;
         private System.Windows.Forms.TextBox txtEditStudentID;
         private System.Windows.Forms.Label lblEditTimeOut;
@@ -1063,8 +1061,6 @@ namespace CIS411
         private System.Windows.Forms.ComboBox comboAddMethod;
         private System.Windows.Forms.Label lblAddTutor;
         private System.Windows.Forms.Button btnAddMethod;
-        private System.Windows.Forms.DateTimePicker dateTimePickerEditTimeOut;
-        private System.Windows.Forms.DateTimePicker dateTimePickerEditTimeIn;
         private System.Windows.Forms.DateTimePicker dateTimePickerAddTimeOut;
         private System.Windows.Forms.DateTimePicker dateTimePickerAddTimeIn;
         private System.Windows.Forms.ComboBox comboAddTutoring;
@@ -1097,8 +1093,12 @@ namespace CIS411
         private System.Windows.Forms.ListBox listBoxReport;
         private System.Windows.Forms.Button btnMoveDown;
         private System.Windows.Forms.Button btnMoveUp;
-        private System.Windows.Forms.ComboBox comboEditMethod;
         private System.Windows.Forms.Label lblEditMethod;
+        private System.Windows.Forms.DateTimePicker dateTimePickerEditMin;
+        internal System.Windows.Forms.DateTimePicker dateTimePickerEditTimeOut;
+        internal System.Windows.Forms.TextBox txtEditDate;
+        internal System.Windows.Forms.DateTimePicker dateTimePickerEditTimeIn;
+        internal System.Windows.Forms.ComboBox comboEditMethod;
         //private DataSet1TableAdapters.DataTable2TableAdapter dataTable2TableAdapter;
     }
         #endregion
