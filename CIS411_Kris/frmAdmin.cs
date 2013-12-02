@@ -1152,7 +1152,7 @@ namespace CIS411
                     table = "VISIT";
                     condition = "where time_difference is not null and tutor_id is not null and term = '" + term.ToString() + "' ORDER BY tutor_id";
 
-                    if (comboFilter.SelectedItem.ToString() == "All" || comboFilter.SelectedItem.ToString() == "Total Hours")
+                    if (comboFilter.SelectedItem.ToString() == "All" || comboFilter.SelectedItem.ToString() == "Hours Tutoring")
                     {
                         newid = -1;
                         count = 0;
@@ -1186,7 +1186,7 @@ namespace CIS411
                        // listBoxReport.Items.Add(newid.ToString().PadRight(60 - newid.ToString().Length) + "\t" + newtime);
                         listBoxReport.Items.Add("");
                     }
-                    if (comboFilter.SelectedItem.ToString() == "All" || comboFilter.SelectedItem.ToString() == "Days Worked")
+                    if (comboFilter.SelectedItem.ToString() == "All" || comboFilter.SelectedItem.ToString() == "Students Tutored")
                     {
                         newid = -1;
                         count = 0;
@@ -1412,8 +1412,8 @@ MessageBox.Show("sfgfdsgfg");
             }
             else if (comboCountCategory.SelectedItem.ToString() == "Tutor")
             {
-                comboFilter.Items.Add("Total Hours");
-                comboFilter.Items.Add("Days Worked");
+                comboFilter.Items.Add("Hours Tutoring");
+                comboFilter.Items.Add("Students Tutored");
             }
             else if (comboCountCategory.SelectedItem.ToString() == "Course")
             {
