@@ -249,6 +249,7 @@ namespace CIS411
             // 
             // comboAddMethod
             // 
+            this.comboAddMethod.Enabled = false;
             this.comboAddMethod.FormattingEnabled = true;
             this.comboAddMethod.Location = new System.Drawing.Point(22, 250);
             this.comboAddMethod.Name = "comboAddMethod";
@@ -270,9 +271,9 @@ namespace CIS411
             this.lblAddMethod.AutoSize = true;
             this.lblAddMethod.Location = new System.Drawing.Point(19, 235);
             this.lblAddMethod.Name = "lblAddMethod";
-            this.lblAddMethod.Size = new System.Drawing.Size(71, 13);
+            this.lblAddMethod.Size = new System.Drawing.Size(43, 13);
             this.lblAddMethod.TabIndex = 31;
-            this.lblAddMethod.Text = "I was here for";
+            this.lblAddMethod.Text = "Method";
             // 
             // txtEditDate
             // 
@@ -335,6 +336,7 @@ namespace CIS411
             // txtEditStudentID
             // 
             this.txtEditStudentID.Location = new System.Drawing.Point(22, 315);
+            this.txtEditStudentID.MaxLength = 8;
             this.txtEditStudentID.Name = "txtEditStudentID";
             this.txtEditStudentID.Size = new System.Drawing.Size(100, 20);
             this.txtEditStudentID.TabIndex = 23;
@@ -384,7 +386,7 @@ namespace CIS411
             this.dateTimePickerAdd.Name = "dateTimePickerAdd";
             this.dateTimePickerAdd.Size = new System.Drawing.Size(103, 20);
             this.dateTimePickerAdd.TabIndex = 17;
-            this.dateTimePickerAdd.Value = new System.DateTime(2013, 11, 7, 0, 0, 0, 0);
+            this.dateTimePickerAdd.Value = new System.DateTime(2013, 11, 12, 0, 0, 0, 0);
             // 
             // lblDate
             // 
@@ -398,9 +400,11 @@ namespace CIS411
             // txtAddStudentID
             // 
             this.txtAddStudentID.Location = new System.Drawing.Point(22, 206);
+            this.txtAddStudentID.MaxLength = 8;
             this.txtAddStudentID.Name = "txtAddStudentID";
             this.txtAddStudentID.Size = new System.Drawing.Size(100, 20);
             this.txtAddStudentID.TabIndex = 13;
+            this.txtAddStudentID.TextChanged += new System.EventHandler(this.txtAddStudentID_TextChanged);
             // 
             // btnAddVisit
             // 
@@ -873,7 +877,6 @@ namespace CIS411
             this.txtYear.Name = "txtYear";
             this.txtYear.Size = new System.Drawing.Size(31, 20);
             this.txtYear.TabIndex = 1;
-            this.txtYear.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_KeyPress);
             // 
             // btnDisplay
             // 
@@ -973,7 +976,7 @@ namespace CIS411
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 474);
+            this.ClientSize = new System.Drawing.Size(682, 460);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.tabControlAdmin);
             this.Name = "frmAdmin";
