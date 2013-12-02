@@ -39,13 +39,14 @@ public class DataConnection
 
     static public SqlConnection GetConn()
     {
-        string dbPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+        /*string dbPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
         //string dbPath = System.IO.Path.Combine(folder, "db.mdf");
         int bin = dbPath.IndexOf("bin");
         dbPath = dbPath.Remove(bin);
         AppDomain currentDomain = AppDomain.CurrentDomain;
         currentDomain.SetData("database", dbPath + "db.mdf");
         //return new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename='" + currentDomain.GetData("database") + "';Integrated Security=True");;
+        */
         return new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\db.mdf;Integrated Security=True");;
     }
 

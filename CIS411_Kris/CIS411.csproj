@@ -89,12 +89,6 @@
     <Compile Include="COURSE.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database2DataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Database2DataSet.xsd</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
     <Compile Include="DataConnection.cs" />
     <Compile Include="frmAdmin.cs">
       <SubType>Form</SubType>
@@ -187,20 +181,6 @@
       <DependentUpon>frmsearchByName.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="CIS411_TemporaryKey.pfx" />
-    <None Include="Database2DataSet.xsc">
-      <DependentUpon>Database2DataSet.xsd</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Database2DataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>Database2DataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Database2DataSet.xss">
-      <DependentUpon>Database2DataSet.xsd</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
