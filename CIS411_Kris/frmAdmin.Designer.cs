@@ -111,6 +111,8 @@ namespace CIS411
             this.txtAddTutor = new System.Windows.Forms.TextBox();
             this.txtAddSignOut = new System.Windows.Forms.TextBox();
             this.txtAddSignIn = new System.Windows.Forms.TextBox();
+            this.comboEditMethod = new System.Windows.Forms.ComboBox();
+            this.lblEditMethod = new System.Windows.Forms.Label();
             this.tabControlAdmin.SuspendLayout();
             this.tabVisits.SuspendLayout();
             this.tabTutors.SuspendLayout();
@@ -136,6 +138,8 @@ namespace CIS411
             // 
             // tabVisits
             // 
+            this.tabVisits.Controls.Add(this.comboEditMethod);
+            this.tabVisits.Controls.Add(this.lblEditMethod);
             this.tabVisits.Controls.Add(this.comboaddClass);
             this.tabVisits.Controls.Add(this.comboAddTutoring);
             this.tabVisits.Controls.Add(this.dateTimePickerEditTimeOut);
@@ -294,7 +298,7 @@ namespace CIS411
             this.btnEditVisit.Name = "btnEditVisit";
             this.btnEditVisit.Size = new System.Drawing.Size(75, 68);
             this.btnEditVisit.TabIndex = 16;
-            this.btnEditVisit.Text = "Edit Visit";
+            this.btnEditVisit.Text = "List Visits";
             this.btnEditVisit.UseVisualStyleBackColor = true;
             this.btnEditVisit.Click += new System.EventHandler(this.btnEditVisit_Click);
             // 
@@ -332,6 +336,7 @@ namespace CIS411
             // txtEditStudentID
             // 
             this.txtEditStudentID.Location = new System.Drawing.Point(22, 315);
+            this.txtEditStudentID.MaxLength = 8;
             this.txtEditStudentID.Name = "txtEditStudentID";
             this.txtEditStudentID.Size = new System.Drawing.Size(100, 20);
             this.txtEditStudentID.TabIndex = 23;
@@ -395,6 +400,7 @@ namespace CIS411
             // txtAddStudentID
             // 
             this.txtAddStudentID.Location = new System.Drawing.Point(22, 206);
+            this.txtAddStudentID.MaxLength = 8;
             this.txtAddStudentID.Name = "txtAddStudentID";
             this.txtAddStudentID.Size = new System.Drawing.Size(100, 20);
             this.txtAddStudentID.TabIndex = 13;
@@ -645,7 +651,6 @@ namespace CIS411
             this.btn_courses_import.TabIndex = 6;
             this.btn_courses_import.Text = "Import Courses";
             this.btn_courses_import.UseVisualStyleBackColor = true;
-           // this.btn_courses_import.Click += new System.EventHandler(this.btn_courses_import_Click_1);
             // 
             // btn_student_import
             // 
@@ -881,7 +886,6 @@ namespace CIS411
             this.txtYear.Name = "txtYear";
             this.txtYear.Size = new System.Drawing.Size(31, 20);
             this.txtYear.TabIndex = 1;
-           // this.txtYear.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_KeyPress);
             // 
             // btnDisplay
             // 
@@ -965,6 +969,23 @@ namespace CIS411
             this.txtAddSignIn.Name = "txtAddSignIn";
             this.txtAddSignIn.Size = new System.Drawing.Size(100, 20);
             this.txtAddSignIn.TabIndex = 14;
+            // 
+            // comboEditMethod
+            // 
+            this.comboEditMethod.FormattingEnabled = true;
+            this.comboEditMethod.Location = new System.Drawing.Point(312, 359);
+            this.comboEditMethod.Name = "comboEditMethod";
+            this.comboEditMethod.Size = new System.Drawing.Size(121, 21);
+            this.comboEditMethod.TabIndex = 46;
+            // 
+            // lblEditMethod
+            // 
+            this.lblEditMethod.AutoSize = true;
+            this.lblEditMethod.Location = new System.Drawing.Point(309, 344);
+            this.lblEditMethod.Name = "lblEditMethod";
+            this.lblEditMethod.Size = new System.Drawing.Size(43, 13);
+            this.lblEditMethod.TabIndex = 45;
+            this.lblEditMethod.Text = "Method";
             // 
             // frmAdmin
             // 
@@ -1076,6 +1097,8 @@ namespace CIS411
         private System.Windows.Forms.ListBox listBoxReport;
         private System.Windows.Forms.Button btnMoveDown;
         private System.Windows.Forms.Button btnMoveUp;
+        private System.Windows.Forms.ComboBox comboEditMethod;
+        private System.Windows.Forms.Label lblEditMethod;
         //private DataSet1TableAdapters.DataTable2TableAdapter dataTable2TableAdapter;
     }
         #endregion
