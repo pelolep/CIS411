@@ -1106,15 +1106,10 @@ MessageBox.Show("Thank you for adding a visit!");
                         if (newid != -1)
                         {
                             studentcount++;
-<<<<<<< HEAD
                             listBoxReport.Items.Add(first.PadRight(20 - first.Length) + "\t" + last.PadRight(40 - (first.Length + last.Length)) + "\t" + count);
                             listBoxReport.Items.Add("Nontraditional Students".PadRight(60 - 23) + "\t" + nontradcount);
                             listBoxReport.Items.Add("Traditional Students".PadRight(60 - 20) + "\t" + (studentcount-nontradcount));
-=======
-                            listBoxReport.Items.Add(first.PadRight(40 - first.Length) + "\t" + last.PadRight(40 - (last.Length)) + "\t" + count);
-                            listBoxReport.Items.Add("nontraditional students".PadRight(100 - 23) + "\t" + nontradcount);
-                            listBoxReport.Items.Add("traditional students".PadRight(100 - 20) + "\t" + (studentcount-nontradcount));
->>>>>>> origin/Matt19
+
 
                         }
                     }
