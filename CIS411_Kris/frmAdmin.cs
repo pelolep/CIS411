@@ -67,6 +67,20 @@ namespace CIS411
             {
                 bool real = frmMain.studentIDExists(int.Parse(studentID));
                 DataConnection conn = new DataConnection();
+
+                SqlDataReader rd = conn.joinQuery("select clarion_id from tutor");
+
+                if (rd.HasRows)
+                {
+                    
+                    while (rd.Read())
+                    {
+                        if (studentID == rd[0].ToString())
+                            real = false;
+                    }
+                }
+
+                
                 if (real)
                 {
                     conn.Open();
@@ -78,8 +92,9 @@ namespace CIS411
             }
             catch
             {
-                MessageBox.Show("please enter a valid number");
+                MessageBox.Show("please enter a valid ID");
             }
+            loadlist();
         }
 
         private void btnDisableSelected_Click(object sender, EventArgs e)
@@ -996,7 +1011,7 @@ namespace CIS411
                             while (rd.Read())
                             {
                                 for (int i = 0; i < 2; i++)
-                                    row += rd[i].ToString().PadRight(80 - rd[i].ToString().Length) + "\t";
+                                    row += rd[i].ToString().PadRight(80) + "\t";
                                 listBoxReport.Items.Add(row);
                                 row = "";
                             }
@@ -1038,7 +1053,7 @@ namespace CIS411
                                
                                 if (newid != -1)
                                 {
-                                    listBoxReport.Items.Add(first.PadRight(40 - first.Length) + "\t" + last.PadRight(40 - (last.Length)) + "\t" + newtime);
+                                    listBoxReport.Items.Add(first.PadRight(40) + "\t" + last.PadRight(40) + "\t" + newtime);
                                     studentcount++;
                                     
                                 }
@@ -1064,7 +1079,7 @@ namespace CIS411
                         if (newid != -1)
                         {
                             studentcount++;
-                            listBoxReport.Items.Add(first.PadRight(40 - first.Length) + "\t" + last.PadRight(40 - (last.Length)) + "\t" + newtime);
+                            listBoxReport.Items.Add(first.PadRight(40 ) + "\t" + last.PadRight(40 ) + "\t" + newtime);
                             
 
                             listBoxReport.Items.Add("nontraditional students".PadRight(100 - 23) + "\t" + nontradcount);
@@ -1105,7 +1120,7 @@ namespace CIS411
                                 if (newid != -1)
                                 {
                                     studentcount++;
-                                    listBoxReport.Items.Add(first.PadRight(40 - first.Length) + "\t" + last.PadRight(40 - (last.Length)) + "\t" + count);
+                                    listBoxReport.Items.Add(first.PadRight(40 ) + "\t" + last.PadRight(40) + "\t" + count);
                                   
                                 }
                                 newid = int.Parse(rd[0].ToString());
@@ -1127,9 +1142,9 @@ namespace CIS411
                         if (newid != -1)
                         {
                             studentcount++;
-                            listBoxReport.Items.Add(first.PadRight(20 - first.Length) + "\t" + last.PadRight(40 - (first.Length + last.Length)) + "\t" + count);
-                            listBoxReport.Items.Add("Nontraditional Students".PadRight(60 - 23) + "\t" + nontradcount);
-                            listBoxReport.Items.Add("Traditional Students".PadRight(60 - 20) + "\t" + (studentcount-nontradcount));
+                            listBoxReport.Items.Add(first.PadRight(40 ) + "\t" + last.PadRight(40 ) + "\t" + count);
+                            listBoxReport.Items.Add("Nontraditional Students".PadRight(100 - 23) + "\t" + nontradcount);
+                            listBoxReport.Items.Add("Traditional Students".PadRight(100 - 20) + "\t" + (studentcount-nontradcount));
 
 
                         }
@@ -1166,7 +1181,7 @@ namespace CIS411
                             else
                             {
                                 if (newid != -1)
-                                    listBoxReport.Items.Add(first.PadRight(40 - first.Length) + "\t" + last.PadRight(40 - (last.Length)) + "\t" + newtime);
+                                    listBoxReport.Items.Add(first.PadRight(40 ) + "\t" + last.PadRight(40 ) + "\t" + newtime);
                                 newid = int.Parse(rd[0].ToString());
                                 newtime = TimeSpan.Parse(rd[2].ToString());
                                 first = rd[5].ToString();
@@ -1176,7 +1191,7 @@ namespace CIS411
    
                         }
                         if (newid != -1)
-                            listBoxReport.Items.Add(first.PadRight(40 - first.Length) + "\t" + last.PadRight(40 - (last.Length)) + "\t" + newtime);
+                            listBoxReport.Items.Add(first.PadRight(40 ) + "\t" + last.PadRight(40 ) + "\t" + newtime);
                         
                        // listBoxReport.Items.Add(newid.ToString().PadRight(60 - newid.ToString().Length) + "\t" + newtime);
                         listBoxReport.Items.Add("");
@@ -1200,7 +1215,7 @@ namespace CIS411
                                 else
                                 {
                                     if (newid != -1)
-                                        listBoxReport.Items.Add(first.PadRight(40 - first.Length) + "\t" + last.PadRight(40 - (last.Length)) + "\t" + count);
+                                        listBoxReport.Items.Add(first.PadRight(40 ) + "\t" + last.PadRight(40 ) + "\t" + count);
                                     newid = int.Parse(rd[0].ToString());
                                     count = 1;
                                     first = rd[5].ToString();
