@@ -861,12 +861,12 @@ namespace CIS411
                         editListForm.Show();
 
 
-                        btnEditVisit.Text = "Save Edit";
+                        //btnEditVisit.Text = "Save Edit";
                         //btnLogOut.Visible = false;
                         //btnLogOut.Enabled = false;
                         //lblLoggedIn.Text = "Editing...";
-                        dateTimePickerEditTimeIn.Enabled = true;
-                        dateTimePickerEditTimeOut.Enabled = true;
+                        //dateTimePickerEditTimeIn.Enabled = true;
+                        //dateTimePickerEditTimeOut.Enabled = true;
                     }
                 
                     else
@@ -899,7 +899,7 @@ namespace CIS411
                                     btnEditVisit.Text = "Save Edit";
 
                             }
-                            */
+                            
             
             else
             {
@@ -942,7 +942,7 @@ namespace CIS411
                 //btnLogOut.Visible = true;
                 //btnLogOut.Enabled = true;
                 loadlist();
-            }
+            }*/
         }
 
 
