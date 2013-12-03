@@ -30,7 +30,6 @@ namespace CIS411
         {
             this.tabControlAdmin = new System.Windows.Forms.TabControl();
             this.tabVisits = new System.Windows.Forms.TabPage();
-            this.btnDeleteVisit = new System.Windows.Forms.Button();
             this.comboEditMethod = new System.Windows.Forms.ComboBox();
             this.lblEditMethod = new System.Windows.Forms.Label();
             this.comboaddClass = new System.Windows.Forms.ComboBox();
@@ -81,6 +80,14 @@ namespace CIS411
             this.btnSaveMethods = new System.Windows.Forms.Button();
             this.btnAddMethod = new System.Windows.Forms.Button();
             this.tabAdmin = new System.Windows.Forms.TabPage();
+            this.grpBoxAddStudent = new System.Windows.Forms.GroupBox();
+            this.btnAddStudent = new System.Windows.Forms.Button();
+            this.txtAddID = new System.Windows.Forms.TextBox();
+            this.txtAddLast = new System.Windows.Forms.TextBox();
+            this.txtAddFirst = new System.Windows.Forms.TextBox();
+            this.lblAddID = new System.Windows.Forms.Label();
+            this.blAddLast = new System.Windows.Forms.Label();
+            this.lblAddFirst = new System.Windows.Forms.Label();
             this.btnImport = new System.Windows.Forms.Button();
             this.grpBoxPassword = new System.Windows.Forms.GroupBox();
             this.btnChangePassword = new System.Windows.Forms.Button();
@@ -115,22 +122,14 @@ namespace CIS411
             this.txtAddSignOut = new System.Windows.Forms.TextBox();
             this.btn_courses_import = new System.Windows.Forms.Button();
             this.txtAddSignIn = new System.Windows.Forms.TextBox();
-            this.grpBoxAddStudent = new System.Windows.Forms.GroupBox();
-            this.lblAddFirst = new System.Windows.Forms.Label();
-            this.blAddLast = new System.Windows.Forms.Label();
-            this.lblAddID = new System.Windows.Forms.Label();
-            this.txtAddFirst = new System.Windows.Forms.TextBox();
-            this.txtAddLast = new System.Windows.Forms.TextBox();
-            this.txtAddID = new System.Windows.Forms.TextBox();
-            this.btnAddStudent = new System.Windows.Forms.Button();
             this.tabControlAdmin.SuspendLayout();
             this.tabVisits.SuspendLayout();
             this.tabTutors.SuspendLayout();
             this.tabMethods.SuspendLayout();
             this.tabAdmin.SuspendLayout();
+            this.grpBoxAddStudent.SuspendLayout();
             this.grpBoxPassword.SuspendLayout();
             this.tabReports.SuspendLayout();
-            this.grpBoxAddStudent.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlAdmin
@@ -149,7 +148,6 @@ namespace CIS411
             // 
             // tabVisits
             // 
-            this.tabVisits.Controls.Add(this.btnDeleteVisit);
             this.tabVisits.Controls.Add(this.comboEditMethod);
             this.tabVisits.Controls.Add(this.lblEditMethod);
             this.tabVisits.Controls.Add(this.comboaddClass);
@@ -192,19 +190,9 @@ namespace CIS411
             this.tabVisits.Text = "Visits";
             this.tabVisits.UseVisualStyleBackColor = true;
             // 
-            // btnDeleteVisit
-            // 
-            this.btnDeleteVisit.Enabled = false;
-            this.btnDeleteVisit.Location = new System.Drawing.Point(559, 353);
-            this.btnDeleteVisit.Name = "btnDeleteVisit";
-            this.btnDeleteVisit.Size = new System.Drawing.Size(75, 32);
-            this.btnDeleteVisit.TabIndex = 45;
-            this.btnDeleteVisit.Text = "Delete Visit";
-            this.btnDeleteVisit.UseVisualStyleBackColor = true;
-            this.btnDeleteVisit.Click += new System.EventHandler(this.btnDeleteVisit_Click);
-            // 
             // comboEditMethod
             // 
+            this.comboEditMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboEditMethod.FormattingEnabled = true;
             this.comboEditMethod.Location = new System.Drawing.Point(312, 359);
             this.comboEditMethod.Name = "comboEditMethod";
@@ -298,6 +286,7 @@ namespace CIS411
             // 
             // comboAddMethod
             // 
+            this.comboAddMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboAddMethod.Enabled = false;
             this.comboAddMethod.FormattingEnabled = true;
             this.comboAddMethod.Location = new System.Drawing.Point(22, 250);
@@ -704,6 +693,81 @@ namespace CIS411
             this.tabAdmin.Text = "Administration";
             this.tabAdmin.UseVisualStyleBackColor = true;
             // 
+            // grpBoxAddStudent
+            // 
+            this.grpBoxAddStudent.Controls.Add(this.btnAddStudent);
+            this.grpBoxAddStudent.Controls.Add(this.txtAddID);
+            this.grpBoxAddStudent.Controls.Add(this.txtAddLast);
+            this.grpBoxAddStudent.Controls.Add(this.txtAddFirst);
+            this.grpBoxAddStudent.Controls.Add(this.lblAddID);
+            this.grpBoxAddStudent.Controls.Add(this.blAddLast);
+            this.grpBoxAddStudent.Controls.Add(this.lblAddFirst);
+            this.grpBoxAddStudent.Location = new System.Drawing.Point(30, 34);
+            this.grpBoxAddStudent.Name = "grpBoxAddStudent";
+            this.grpBoxAddStudent.Size = new System.Drawing.Size(200, 164);
+            this.grpBoxAddStudent.TabIndex = 8;
+            this.grpBoxAddStudent.TabStop = false;
+            this.grpBoxAddStudent.Text = "Add Login";
+            // 
+            // btnAddStudent
+            // 
+            this.btnAddStudent.Location = new System.Drawing.Point(94, 111);
+            this.btnAddStudent.Name = "btnAddStudent";
+            this.btnAddStudent.Size = new System.Drawing.Size(75, 23);
+            this.btnAddStudent.TabIndex = 6;
+            this.btnAddStudent.Text = "Add";
+            this.btnAddStudent.UseVisualStyleBackColor = true;
+            this.btnAddStudent.Click += new System.EventHandler(this.btnAddStudent_Click);
+            // 
+            // txtAddID
+            // 
+            this.txtAddID.Location = new System.Drawing.Point(69, 72);
+            this.txtAddID.Name = "txtAddID";
+            this.txtAddID.Size = new System.Drawing.Size(100, 20);
+            this.txtAddID.TabIndex = 5;
+            this.txtAddID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_KeyPress);
+            // 
+            // txtAddLast
+            // 
+            this.txtAddLast.Location = new System.Drawing.Point(69, 45);
+            this.txtAddLast.Name = "txtAddLast";
+            this.txtAddLast.Size = new System.Drawing.Size(100, 20);
+            this.txtAddLast.TabIndex = 4;
+            // 
+            // txtAddFirst
+            // 
+            this.txtAddFirst.Location = new System.Drawing.Point(69, 20);
+            this.txtAddFirst.Name = "txtAddFirst";
+            this.txtAddFirst.Size = new System.Drawing.Size(100, 20);
+            this.txtAddFirst.TabIndex = 3;
+            // 
+            // lblAddID
+            // 
+            this.lblAddID.AutoSize = true;
+            this.lblAddID.Location = new System.Drawing.Point(6, 76);
+            this.lblAddID.Name = "lblAddID";
+            this.lblAddID.Size = new System.Drawing.Size(58, 13);
+            this.lblAddID.TabIndex = 2;
+            this.lblAddID.Text = "ID Number";
+            // 
+            // blAddLast
+            // 
+            this.blAddLast.AutoSize = true;
+            this.blAddLast.Location = new System.Drawing.Point(6, 49);
+            this.blAddLast.Name = "blAddLast";
+            this.blAddLast.Size = new System.Drawing.Size(58, 13);
+            this.blAddLast.TabIndex = 1;
+            this.blAddLast.Text = "Last Name";
+            // 
+            // lblAddFirst
+            // 
+            this.lblAddFirst.AutoSize = true;
+            this.lblAddFirst.Location = new System.Drawing.Point(6, 23);
+            this.lblAddFirst.Name = "lblAddFirst";
+            this.lblAddFirst.Size = new System.Drawing.Size(57, 13);
+            this.lblAddFirst.TabIndex = 0;
+            this.lblAddFirst.Text = "First Name";
+            // 
             // btnImport
             // 
             this.btnImport.Location = new System.Drawing.Point(506, 300);
@@ -1043,81 +1107,6 @@ namespace CIS411
             this.txtAddSignIn.Size = new System.Drawing.Size(100, 20);
             this.txtAddSignIn.TabIndex = 14;
             // 
-            // grpBoxAddStudent
-            // 
-            this.grpBoxAddStudent.Controls.Add(this.btnAddStudent);
-            this.grpBoxAddStudent.Controls.Add(this.txtAddID);
-            this.grpBoxAddStudent.Controls.Add(this.txtAddLast);
-            this.grpBoxAddStudent.Controls.Add(this.txtAddFirst);
-            this.grpBoxAddStudent.Controls.Add(this.lblAddID);
-            this.grpBoxAddStudent.Controls.Add(this.blAddLast);
-            this.grpBoxAddStudent.Controls.Add(this.lblAddFirst);
-            this.grpBoxAddStudent.Location = new System.Drawing.Point(30, 34);
-            this.grpBoxAddStudent.Name = "grpBoxAddStudent";
-            this.grpBoxAddStudent.Size = new System.Drawing.Size(200, 164);
-            this.grpBoxAddStudent.TabIndex = 8;
-            this.grpBoxAddStudent.TabStop = false;
-            this.grpBoxAddStudent.Text = "Add Login";
-            // 
-            // lblAddFirst
-            // 
-            this.lblAddFirst.AutoSize = true;
-            this.lblAddFirst.Location = new System.Drawing.Point(6, 23);
-            this.lblAddFirst.Name = "lblAddFirst";
-            this.lblAddFirst.Size = new System.Drawing.Size(57, 13);
-            this.lblAddFirst.TabIndex = 0;
-            this.lblAddFirst.Text = "First Name";
-            // 
-            // blAddLast
-            // 
-            this.blAddLast.AutoSize = true;
-            this.blAddLast.Location = new System.Drawing.Point(6, 49);
-            this.blAddLast.Name = "blAddLast";
-            this.blAddLast.Size = new System.Drawing.Size(58, 13);
-            this.blAddLast.TabIndex = 1;
-            this.blAddLast.Text = "Last Name";
-            // 
-            // lblAddID
-            // 
-            this.lblAddID.AutoSize = true;
-            this.lblAddID.Location = new System.Drawing.Point(6, 76);
-            this.lblAddID.Name = "lblAddID";
-            this.lblAddID.Size = new System.Drawing.Size(58, 13);
-            this.lblAddID.TabIndex = 2;
-            this.lblAddID.Text = "ID Number";
-            // 
-            // txtAddFirst
-            // 
-            this.txtAddFirst.Location = new System.Drawing.Point(69, 20);
-            this.txtAddFirst.Name = "txtAddFirst";
-            this.txtAddFirst.Size = new System.Drawing.Size(100, 20);
-            this.txtAddFirst.TabIndex = 3;
-            // 
-            // txtAddLast
-            // 
-            this.txtAddLast.Location = new System.Drawing.Point(69, 45);
-            this.txtAddLast.Name = "txtAddLast";
-            this.txtAddLast.Size = new System.Drawing.Size(100, 20);
-            this.txtAddLast.TabIndex = 4;
-            // 
-            // txtAddID
-            // 
-            this.txtAddID.Location = new System.Drawing.Point(69, 72);
-            this.txtAddID.Name = "txtAddID";
-            this.txtAddID.Size = new System.Drawing.Size(100, 20);
-            this.txtAddID.TabIndex = 5;
-            this.txtAddID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_KeyPress);
-            // 
-            // btnAddStudent
-            // 
-            this.btnAddStudent.Location = new System.Drawing.Point(94, 111);
-            this.btnAddStudent.Name = "btnAddStudent";
-            this.btnAddStudent.Size = new System.Drawing.Size(75, 23);
-            this.btnAddStudent.TabIndex = 6;
-            this.btnAddStudent.Text = "Add";
-            this.btnAddStudent.UseVisualStyleBackColor = true;
-            this.btnAddStudent.Click += new System.EventHandler(this.btnAddStudent_Click);
-            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1135,12 +1124,12 @@ namespace CIS411
             this.tabTutors.PerformLayout();
             this.tabMethods.ResumeLayout(false);
             this.tabAdmin.ResumeLayout(false);
+            this.grpBoxAddStudent.ResumeLayout(false);
+            this.grpBoxAddStudent.PerformLayout();
             this.grpBoxPassword.ResumeLayout(false);
             this.grpBoxPassword.PerformLayout();
             this.tabReports.ResumeLayout(false);
             this.tabReports.PerformLayout();
-            this.grpBoxAddStudent.ResumeLayout(false);
-            this.grpBoxAddStudent.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1224,7 +1213,6 @@ namespace CIS411
         private System.Windows.Forms.ListBox listBoxReport;
         private System.Windows.Forms.Button btnMoveDown;
         private System.Windows.Forms.Button btnImport;
-        private System.Windows.Forms.Button btnDeleteVisit;
         private System.Windows.Forms.Button btnFullReport;
         private System.Windows.Forms.Label lblEditMethod;
         private System.Windows.Forms.DateTimePicker dateTimePickerEditMin;
@@ -1242,7 +1230,6 @@ namespace CIS411
         private System.Windows.Forms.Label lblAddID;
         private System.Windows.Forms.Label blAddLast;
         private System.Windows.Forms.Label lblAddFirst;
-        //private DataSet1TableAdapters.DataTable2TableAdapter dataTable2TableAdapter;
     }
         #endregion
 }

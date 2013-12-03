@@ -33,6 +33,13 @@ namespace CIS411
                comboAddMethod.Items.Add(Properties.Settings.Default.MethodNames[i]);
                comboEditMethod.Items.Add(Properties.Settings.Default.MethodNames[i]);
             }
+            comboEditMethod.Items.Clear();
+            DataConnection conn = new DataConnection();
+            conn.Open();
+            SqlDataReader rd = conn.GetReader("DISTINCT Method", "Visit");
+            while (rd.Read())
+                comboEditMethod.Items.Add(rd[0]);
+            conn.Close();
         }
         
         //Adds Tutor to the list of tutors via Student ID and adds their information to the Tutors table
@@ -46,20 +53,23 @@ namespace CIS411
             
             rd = cmd.ExecuteReader();
             */
-
-            DataConnection conn = new DataConnection();
-            conn.Open();
-            SqlDataReader rd = conn.GetReader("clarion_id","STUDENT","CLARION_ID",studentID);
-            if (rd.HasRows)
+            try
             {
-               
-                conn.Close();
-                conn.Open();
-                conn.Query("insert into tutor(clarion_id,status) values ('"+ studentID +"', '"+ "active" +"')");
+                bool real = frmMain.studentIDExists(int.Parse(studentID));
+                DataConnection conn = new DataConnection();
+                if (real)
+                {
+                    conn.Open();
+                    conn.Query("insert into tutor(clarion_id,status) values ('" + studentID + "', '" + "active" + "')");
+                    conn.Close();
+                }
+                else
+                    MessageBox.Show("please check the student id and try again");
             }
-            conn.Close();
-            loadlist();
-
+            catch
+            {
+                MessageBox.Show("please enter a valid number");
+            }
         }
 
         private void btnDisableSelected_Click(object sender, EventArgs e)
@@ -904,7 +914,6 @@ namespace CIS411
                 e.Handled = true;
         }
 
-
         //Created by Sean: button1_Click inside the Reporting Tab
         private void displayBtn_Click(object sender, EventArgs e)
         {
@@ -1441,21 +1450,6 @@ MessageBox.Show("sfgfdsgfg");
             ImportCourses();
             ImportStudents();
             MessageBox.Show("Imports Complete.");
-        }
-
-        private void btnDeleteVisit_Click(object sender, EventArgs e)
-        {
-            DataConnection conn = new DataConnection();
-            conn.Open();
-            try
-            {
-                conn.Query("DELETE FROM VISIT WHERE CLARION_ID = " + txtEditStudentID.Text + " AND DATE = " + getVisitOriginalDate() + " AND TIME_IN = " + getVisitOriginalTimeIn().ToString("HH:mm:ss tt"));
-            }
-            catch
-            {
-                MessageBox.Show("Error while attempting to delete visit. Please reload visit information and try again.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            conn.Close();
         }
 
         private void txtAddStudentID_TextChanged(object sender, EventArgs e)

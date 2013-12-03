@@ -46,6 +46,7 @@
             this.lblAddTutor = new System.Windows.Forms.Label();
             this.lblAddClass = new System.Windows.Forms.Label();
             this.btnSaveEdit = new System.Windows.Forms.Button();
+            this.btnDeleteVisit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblEditing
@@ -68,7 +69,7 @@
             // 
             // btnEditSelectedVisit
             // 
-            this.btnEditSelectedVisit.Location = new System.Drawing.Point(530, 224);
+            this.btnEditSelectedVisit.Location = new System.Drawing.Point(474, 213);
             this.btnEditSelectedVisit.Name = "btnEditSelectedVisit";
             this.btnEditSelectedVisit.Size = new System.Drawing.Size(101, 44);
             this.btnEditSelectedVisit.TabIndex = 2;
@@ -78,6 +79,7 @@
             // 
             // comboEditMethod
             // 
+            this.comboEditMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboEditMethod.Enabled = false;
             this.comboEditMethod.FormattingEnabled = true;
             this.comboEditMethod.Location = new System.Drawing.Point(306, 257);
@@ -172,6 +174,7 @@
             // 
             // comboaddClass
             // 
+            this.comboaddClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboaddClass.Enabled = false;
             this.comboaddClass.FormattingEnabled = true;
             this.comboaddClass.Location = new System.Drawing.Point(16, 313);
@@ -181,6 +184,7 @@
             // 
             // comboAddTutoring
             // 
+            this.comboAddTutoring.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboAddTutoring.Enabled = false;
             this.comboAddTutoring.FormattingEnabled = true;
             this.comboAddTutoring.Location = new System.Drawing.Point(131, 313);
@@ -209,7 +213,7 @@
             // btnSaveEdit
             // 
             this.btnSaveEdit.Enabled = false;
-            this.btnSaveEdit.Location = new System.Drawing.Point(530, 281);
+            this.btnSaveEdit.Location = new System.Drawing.Point(474, 263);
             this.btnSaveEdit.Name = "btnSaveEdit";
             this.btnSaveEdit.Size = new System.Drawing.Size(101, 44);
             this.btnSaveEdit.TabIndex = 64;
@@ -217,11 +221,22 @@
             this.btnSaveEdit.UseVisualStyleBackColor = true;
             this.btnSaveEdit.Click += new System.EventHandler(this.btnSaveEdit_Click);
             // 
+            // btnDeleteVisit
+            // 
+            this.btnDeleteVisit.Location = new System.Drawing.Point(474, 313);
+            this.btnDeleteVisit.Name = "btnDeleteVisit";
+            this.btnDeleteVisit.Size = new System.Drawing.Size(101, 44);
+            this.btnDeleteVisit.TabIndex = 65;
+            this.btnDeleteVisit.Text = "Delete Visit";
+            this.btnDeleteVisit.UseVisualStyleBackColor = true;
+            this.btnDeleteVisit.Click += new System.EventHandler(this.btnDeleteVisit_Click);
+            // 
             // frmEditList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(908, 440);
+            this.Controls.Add(this.btnDeleteVisit);
             this.Controls.Add(this.btnSaveEdit);
             this.Controls.Add(this.comboaddClass);
             this.Controls.Add(this.comboAddTutoring);
@@ -267,5 +282,6 @@
         private System.Windows.Forms.Label lblAddTutor;
         private System.Windows.Forms.Label lblAddClass;
         private System.Windows.Forms.Button btnSaveEdit;
+        private System.Windows.Forms.Button btnDeleteVisit;
     }
 }
