@@ -705,13 +705,17 @@ namespace CIS411
                     comboAddTutoring.Items.Clear();
                 }
 
-                catch { MessageBox.Show("please check info and try again"); };
+                catch
+                {
+                    MessageBox.Show("Information invalid. Please check it and try again.");
+                    return;
+                }
                 MessageBox.Show("Thank you for adding a visit!");
             }
-           else
+            else
             {
-            MessageBox.Show("Invalid Student ID", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return;
+                MessageBox.Show("Invalid Student ID", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
         }
 
@@ -896,7 +900,7 @@ namespace CIS411
 
         static public void txt_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (((e.KeyChar < '0') || (e.KeyChar > '9'))&&(e.KeyChar!='\b'))
+            if (((e.KeyChar < '0') || (e.KeyChar > '9'))&&(e.KeyChar!='\b')&&(e.KeyChar!='\n'))
                 e.Handled = true;
         }
 
@@ -1525,6 +1529,30 @@ MessageBox.Show("sfgfdsgfg");
             }
             reportFile.Dispose();
             MessageBox.Show("Report Generation Complete!");
+        }
+
+        private void btnAddStudent_Click(object sender, EventArgs e)
+        {
+            DataConnection conn = new DataConnection();
+            conn.Open(); 
+            try
+            {
+                conn.Query("insert into STUDENT ( clarion_id,lastname,firstname ) values (" + txtAddID.Text + ",'" + txtAddLast + "','" + txtAddFirst + "')");
+            }
+            catch
+            {
+                if (MessageBox.Show("Entry found with that StudentID. Update existing entry?", "Conflict", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
+                {
+                    conn.Close();
+                    return;
+                }
+                conn.Query("update STUDENT set lastname = '" + txtAddLast.Text + "', firstname = '" + txtAddFirst.Text + "' where clarion_id = '" + txtAddID.Text + "'");
+            }
+            conn.Close();
+            MessageBox.Show("Entry added.");
+            txtAddID.Clear();
+            txtAddLast.Clear();
+            txtAddFirst.Clear();
         }
     }
 }
