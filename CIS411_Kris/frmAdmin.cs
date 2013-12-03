@@ -410,6 +410,8 @@ namespace CIS411
                 }
             }
 
+            listBoxLoggedIn.Items.Add("DATE\t\tTIME IN\t\tID\t\tLAST NAME\tFIRST NAME");
+
             rd = conn.GetReader("*", "VISIT","student", "visit.clarion_id=student.clarion_id and time_out is null", 1);
 
             if (rd.HasRows)
@@ -426,7 +428,6 @@ namespace CIS411
             rd = conn.joinQuery("select tutor_hour.tutor_id, tutor_hour.date ,tutor_hour.time_difference, tutor_hour.time_in, student.lastname, student.firstname from tutor_hour inner join tutor on tutor_hour.tutor_id = tutor.tutor_id inner join student on tutor.clarion_id = student.clarion_id where time_difference is null");
 
             //rd = conn.GetReader("*", "tutor_hour", "student", "tutor_hour.clarion_id=student.clarion_id and time_out is null", 1);
-            listBoxLoggedIn.Items.Add("DATE\t\tTIME IN\t\tID\t\tLAST NAME\tFIRST NAME");
 
             if (rd.HasRows)
             {
