@@ -48,10 +48,10 @@ namespace CIS411
             */
             DataConnection conn = new DataConnection();
             conn.Open();
-            SqlDataReader rd = conn.GetReader("*","STUDENT","CLARION_ID",studentID);
+            SqlDataReader rd = conn.GetReader("clarion_id","STUDENT","CLARION_ID",studentID);
             if (rd.HasRows)
             {
-
+               
                 conn.Close();
                 conn.Open();
                 conn.Query("insert into tutor(clarion_id,status) values ('"+ studentID +"', '"+ "active" +"')");
@@ -400,7 +400,6 @@ namespace CIS411
             }
 
             rd = conn.GetReader("*", "VISIT","student", "visit.clarion_id=student.clarion_id and time_out is null", 1);
-            listBoxLoggedIn.Items.Add("DATE\t\tTIME IN\t\tID\t\tLAST NAME\tFIRST NAME");
 
             if (rd.HasRows)
             {
@@ -410,6 +409,22 @@ namespace CIS411
                     
                     DateTime jdate= DateTime.Parse(rd[1].ToString());
                     listBoxLoggedIn.Items.Add(jdate.ToString("MM/dd/yyyy") + "\t" + rd[2] + "\t\t" + rd[0] + "\t" + rd[13] + "\t\t" + rd[14]);
+                }
+            }
+
+            rd = conn.joinQuery("select tutor_hour.tutor_id, tutor_hour.date ,tutor_hour.time_difference, tutor_hour.time_in, student.lastname, student.firstname from tutor_hour inner join tutor on tutor_hour.tutor_id = tutor.tutor_id inner join student on tutor.clarion_id = student.clarion_id where time_difference is null");
+
+            //rd = conn.GetReader("*", "tutor_hour", "student", "tutor_hour.clarion_id=student.clarion_id and time_out is null", 1);
+            listBoxLoggedIn.Items.Add("DATE\t\tTIME IN\t\tID\t\tLAST NAME\tFIRST NAME");
+
+            if (rd.HasRows)
+            {
+                
+                while (rd.Read())
+                {
+
+                    DateTime jdate = DateTime.Parse(rd[1].ToString());
+                    listBoxLoggedIn.Items.Add(jdate.ToString("MM/dd/yyyy") + "\t" + rd[3] + "\t\t" + rd[0] + "\t" + rd[4] + "\t\t" + rd[5]);
                 }
             }
 
@@ -533,10 +548,15 @@ namespace CIS411
         
         private void btnLogOut_Click(object sender, EventArgs e)
         {
+
+
             string []selectedStudent=listBoxLoggedIn.SelectedItem.ToString().Split();
             int student_ID = int.Parse(selectedStudent[3]);
 
-            frmMain.signOut(student_ID);
+          
+                frmMain.signOut(student_ID);
+          
+
             loadlist(); 
               
         }
@@ -694,9 +714,10 @@ namespace CIS411
                 txtAddStudentID.Text = "";
                 comboaddClass.Items.Clear();
                 comboAddTutoring.Items.Clear();
+MessageBox.Show("Thank you for adding a visit!");
             }
             catch { MessageBox.Show("please check info and try again"); };
-            MessageBox.Show("Thank you for adding a visit!");
+            
             comboAddMethod.Enabled = false;
             txtAddStudentID.Text = "";
         }
