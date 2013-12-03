@@ -100,6 +100,7 @@ namespace CIS411
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
+           
             signIn();
         }
 
