@@ -28,6 +28,11 @@ namespace CIS411
         public frmAdmin()
         {
             InitializeComponent();
+            this.txtYear.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_KeyPress);
+            this.txtAddID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_KeyPress);
+            this.txtTutorStudentID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_KeyPress);
+            this.txtAddStudentID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_KeyPress);
+            this.txtEditStudentID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_KeyPress);
             for (int i = 0; i < Properties.Settings.Default.MethodNames.Count; i++)
             {
                comboAddMethod.Items.Add(Properties.Settings.Default.MethodNames[i]);
@@ -40,8 +45,13 @@ namespace CIS411
             while (rd.Read())
                 comboEditMethod.Items.Add(rd[0]);
             conn.Close();
+            for (int i = 0; i < Properties.Settings.Default.MethodNames.Count; i++)
+            {
+                if (!(comboEditMethod.Items.Contains(Properties.Settings.Default.MethodNames[i])))
+                    comboEditMethod.Items.Add(Properties.Settings.Default.MethodNames[i]);
+            }
         }
-        
+
         //Adds Tutor to the list of tutors via Student ID and adds their information to the Tutors table
         private void btnAddTutor_Click(object sender, EventArgs e)
         {/////////////// edit table so only clarion id, status and cnet_username are used

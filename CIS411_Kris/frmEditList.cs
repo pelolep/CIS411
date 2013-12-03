@@ -115,6 +115,11 @@ namespace CIS411
                 while (rd.Read())
                     comboEditMethod.Items.Add(rd[0].ToString());
                 conn.Close();
+                for (int i = 0; i < Properties.Settings.Default.MethodNames.Count; i++)
+                {
+                    if (!(comboEditMethod.Items.Contains(Properties.Settings.Default.MethodNames[i])))
+                        comboEditMethod.Items.Add(Properties.Settings.Default.MethodNames[i]);
+                }
                 for (int i = 0; i < comboEditMethod.Items.Count; i++)
                     if (selectedVisitEdit[6] == comboEditMethod.Items[i].ToString())
                         comboEditMethod.SelectedIndex = i;

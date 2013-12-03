@@ -383,7 +383,6 @@ namespace CIS411
             this.txtEditStudentID.Size = new System.Drawing.Size(100, 20);
             this.txtEditStudentID.TabIndex = 23;
             this.txtEditStudentID.GotFocus += new System.EventHandler(this.EditVisitAcceptButton);
-            this.txtEditStudentID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_KeyPress);
             // 
             // lblEditTimeOut
             // 
@@ -451,7 +450,6 @@ namespace CIS411
             this.txtAddStudentID.TabIndex = 13;
             this.txtAddStudentID.TextChanged += new System.EventHandler(this.txtAddStudentID_TextChanged);
             this.txtAddStudentID.GotFocus += new System.EventHandler(this.AddVisitAcceptButton);
-            this.txtAddStudentID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_KeyPress);
             // 
             // btnAddVisit
             // 
@@ -644,10 +642,10 @@ namespace CIS411
             // txtTutorStudentID
             // 
             this.txtTutorStudentID.Location = new System.Drawing.Point(74, 39);
+            this.txtTutorStudentID.MaxLength = 8;
             this.txtTutorStudentID.Name = "txtTutorStudentID";
             this.txtTutorStudentID.Size = new System.Drawing.Size(100, 20);
             this.txtTutorStudentID.TabIndex = 0;
-            this.txtTutorStudentID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_KeyPress);
             // 
             // tabMethods
             // 
@@ -722,10 +720,10 @@ namespace CIS411
             // txtAddID
             // 
             this.txtAddID.Location = new System.Drawing.Point(69, 72);
+            this.txtAddID.MaxLength = 8;
             this.txtAddID.Name = "txtAddID";
             this.txtAddID.Size = new System.Drawing.Size(100, 20);
             this.txtAddID.TabIndex = 5;
-            this.txtAddID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_KeyPress);
             // 
             // txtAddLast
             // 
@@ -1013,7 +1011,6 @@ namespace CIS411
             this.txtYear.Name = "txtYear";
             this.txtYear.Size = new System.Drawing.Size(31, 20);
             this.txtYear.TabIndex = 1;
-            this.txtYear.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_KeyPress);
             // 
             // btnDisplay
             // 
