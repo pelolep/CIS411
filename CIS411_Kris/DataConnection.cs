@@ -218,18 +218,6 @@ public class DataConnection
         cmd.ExecuteNonQuery();
     }
 
-    public SqlDataReader joinQuery(string q)
-    {
-        cmd.CommandText = q;
-        if (rd == null)
-            rd = cmd.ExecuteReader();
-        else
-        {
-            rd.Close();
-            rd = cmd.ExecuteReader();
-        }
-        return rd;
-    }
         public SqlDataReader GetReader(string column, string table, string whereColumn, string whereValue, string condition2)
     {
         int i;
@@ -269,5 +257,18 @@ public class DataConnection
         }
         return rd;
     }
+        public SqlDataReader joinQuery(string q)
+        {
+            cmd.CommandText = q;
+            if (rd == null)
+                rd = cmd.ExecuteReader();
+            else
+            {
+                rd.Close();
+                rd = cmd.ExecuteReader();
+            }
+            return rd;
+        }
+
 
 }

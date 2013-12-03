@@ -19,7 +19,6 @@ namespace CIS411
     {//        AppDomain currentDomain = AppDomain.CurrentDomain.SetData("DataDirectory", "App1.config");
 
         AppDomain Directory = AppDomain.CurrentDomain;
-        
 
         /*
         SqlConnection cn;
@@ -32,6 +31,7 @@ namespace CIS411
             for (int i = 0; i < Properties.Settings.Default.MethodNames.Count; i++)
             {
                comboAddMethod.Items.Add(Properties.Settings.Default.MethodNames[i]);
+               comboEditMethod.Items.Add(Properties.Settings.Default.MethodNames[i]);
             }
         }
         
@@ -46,6 +46,7 @@ namespace CIS411
             
             rd = cmd.ExecuteReader();
             */
+
             DataConnection conn = new DataConnection();
             conn.Open();
             SqlDataReader rd = conn.GetReader("clarion_id","STUDENT","CLARION_ID",studentID);
@@ -433,42 +434,7 @@ namespace CIS411
 
         }
 
-        //fills the listBox with range of visits for edit visit
-        public void loadvisits(int studentID, DateTime minDate, DateTime maxDate)
-        {
-            //clears the list box to enter new information
-            listBoxLoggedIn.Items.Clear();
-            //TAB THIS
-            listBoxLoggedIn.Items.Add("DATETIME IN    TIME OUT");
-            //creates new dataconnection
-            DataConnection conn = new DataConnection();
-            conn.Open();
-            
-            //gets visits request
-            SqlDataReader rd = conn.GetReader("CLARION_ID, VISIT.DATE, VISIT.TIME_IN, VISIT.TIME_OUT", "visit");
-            if (rd.HasRows)
-            {
 
-                while (rd.Read())
-                {
-                    DateTime thedate = DateTime.Parse(rd[1].ToString());
-
-                    if (DateTime.Parse(rd[1].ToString()) >= minDate && DateTime.Parse(rd[1].ToString()) <= maxDate)
-                        //TAB THIS
-                        listBoxLoggedIn.Items.Add(thedate.ToString("MM/dd/yyyy") + " " + rd[2] + " " + rd[3]);
-
-                    
-                        
-                }
-            }
-            rd.Close();
-
-
-            //closes connection
-            conn.Close();
-
-
-        }
 
         private void tabControlAdmin_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -629,116 +595,124 @@ namespace CIS411
 
         private void btnAddVisit_Click(object sender, EventArgs e)
         {
-            try
+            int tryStudentID;
+            if (int.TryParse(txtAddStudentID.Text, out tryStudentID))
             {
-                /*Won't run because of tutor ID issue.
-                 * The Tutor ID being uploaded to the visits
-                 * table does not line up with the Tutor table
-                 * 
-                 * 
-                 */
-                string studentID = "", date = "", timeIn = "", timeOut = "", method = "", time_difference = "";
-                string[] selectedTutor, selectedClass;
-                int tutor = 0;
-                // 11319440
-                studentID = txtAddStudentID.Text;
-                date = dateTimePickerAdd.Text;
-                timeIn = dateTimePickerAddTimeIn.Text;
-                timeOut = dateTimePickerAddTimeOut.Text;
                 try
                 {
-                    method = comboAddMethod.SelectedItem.ToString();
-                }
-                catch { }
-                //course = txtAddClass.Text;
-                // comboaddClass
-                TimeSpan dd = DateTime.Parse(timeOut).Subtract(DateTime.Parse(timeIn));
-                time_difference = dd.ToString();
-                //timedifference =DateTime.Parse( timenow.Subtract(timein).ToString());j
-                selectedClass = new string[5];
+                    /*Won't run because of tutor ID issue.
+                     * The Tutor ID being uploaded to the visits
+                     * table does not line up with the Tutor table
+                     * 
+                     * 
+                     */
+                    string studentID = "", date = "", timeIn = "", timeOut = "", method = "", time_difference = "";
+                    string[] selectedTutor, selectedClass;
+                    int tutor = 0;
+                    // 11319440
+                    studentID = txtAddStudentID.Text;
+                    date = dateTimePickerAdd.Text;
+                    timeIn = dateTimePickerAddTimeIn.Text;
+                    timeOut = dateTimePickerAddTimeOut.Text;
 
-
-                if (method == "Tutoring")
-                {
-                    selectedTutor = comboAddTutoring.SelectedItem.ToString().Split();
-                    tutor = int.Parse(selectedTutor[0]);
-                }
-                try
-                {
-                    selectedClass = comboaddClass.SelectedItem.ToString().Split();
-                }
-                catch { }
-                string nothing = "other";
-
-                DataConnection conn = new DataConnection();
-                conn.Open();
-
-                if (method == "Tutoring")
-                {
-                    if ((string)comboaddClass.SelectedItem.ToString().ToLower() == "other")
+                    try
                     {
-                        try
+                        method = comboAddMethod.SelectedItem.ToString();
+                    }
+                    catch { }
+                    //course = txtAddClass.Text;
+                    // comboaddClass
+                    TimeSpan dd = DateTime.Parse(timeOut).Subtract(DateTime.Parse(timeIn));
+                    time_difference = dd.ToString();
+                    //timedifference =DateTime.Parse( timenow.Subtract(timein).ToString());j
+                    selectedClass = new string[5];
+
+
+                    if (method == "Tutoring")
+                    {
+                        selectedTutor = comboAddTutoring.SelectedItem.ToString().Split();
+                        tutor = int.Parse(selectedTutor[0]);
+                    }
+                    try
+                    {
+                        selectedClass = comboaddClass.SelectedItem.ToString().Split();
+                    }
+                    catch { }
+                    string nothing = "other";
+
+                    DataConnection conn = new DataConnection();
+                    conn.Open();
+
+                    if (method == "Tutoring")
+                    {
+                        if ((string)comboaddClass.SelectedItem.ToString().ToLower() == "other")
                         {
-                            conn.Query("insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION, time_difference) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + nothing + "', '" + nothing + "', '" + nothing + "', '" + tutor + "', '" + method + "', '" + nothing + "', '" + time_difference + "')");
+                            try
+                            {
+                                conn.Query("insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION, time_difference) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + nothing + "', '" + nothing + "', '" + nothing + "', '" + tutor + "', '" + method + "', '" + nothing + "', '" + time_difference + "')");
+                            }
+                            catch { }
                         }
-                        catch { }
-                    }
-                    else
-                    {
-                        conn.Query("insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION,time_difference) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + selectedClass[0] + "', '" + selectedClass[1] + "', '" + selectedClass[2] + "', '" + tutor + "', '" + method + "', '" + selectedClass[3] + "', '" + time_difference + "')");
-
-                    }
-                }
-                else // method isn't tutoring
-                {
-                    if ((string)comboaddClass.SelectedItem.ToString().ToLower() == "other")
-                    {
-                        try
+                        else
                         {
-                            conn.Query("insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG,METHOD, SECTION,time_difference) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + nothing + "', '" + nothing + "', '" + nothing + "', '" + method + "', '" + nothing + "','" + time_difference + "')");
+                            conn.Query("insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION,time_difference) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + selectedClass[0] + "', '" + selectedClass[1] + "', '" + selectedClass[2] + "', '" + tutor + "', '" + method + "', '" + selectedClass[3] + "', '" + time_difference + "')");
 
                         }
-                        catch { }
                     }
-                    else
+                    else // method isn't tutoring
                     {
-                        conn.Query("insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG, METHOD, SECTION,time_difference) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + selectedClass[0] + "', '" + selectedClass[1] + "', '" + selectedClass[2] + "', '" + method + "', '" + selectedClass[3] + "','" + time_difference + "')");
+                        if ((string)comboaddClass.SelectedItem.ToString().ToLower() == "other")
+                        {
+                            try
+                            {
+                                conn.Query("insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG,METHOD, SECTION,time_difference) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + nothing + "', '" + nothing + "', '" + nothing + "', '" + method + "', '" + nothing + "','" + time_difference + "')");
 
+                            }
+                            catch { }
+                        }
+                        else
+                        {
+                            conn.Query("insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG, METHOD, SECTION,time_difference) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + selectedClass[0] + "', '" + selectedClass[1] + "', '" + selectedClass[2] + "', '" + method + "', '" + selectedClass[3] + "','" + time_difference + "')");
+
+                        }
                     }
+                    //cmd.Connection = cn;
+
+
+                    conn.Close();
+                    /*
+        =======
+                   // try
+                    {
+        >>>>>>> origin/Matt8
+                        cn.Open();
+                        cmd.CommandText = "insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + "2138" + "', '" + "LS" + "', '" + "540" + "', '" + tutor + "', '" + method + "', '" + "W01" + "')";
+                        cmd.ExecuteNonQuery();
+                        cmd.Clone();
+                        cn.Close();
+        <<<<<<< HEAD
+                    }
+                    */
+                    // catch
+                    //{}
+                    //  }
+                    //lblTest.Text = date + "','" + timeIn + "', '" + timeOut + "', '" + studentID +  "', '" + method;
+
+                    comboaddClass.Enabled = false;
+                    comboAddTutoring.Enabled = false;
+                    txtAddStudentID.Text = "";
+                    comboaddClass.Items.Clear();
+                    comboAddTutoring.Items.Clear();
                 }
-                //cmd.Connection = cn;
 
-
-                conn.Close();
-                /*
-    =======
-               // try
-                {
-    >>>>>>> origin/Matt8
-                    cn.Open();
-                    cmd.CommandText = "insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + "2138" + "', '" + "LS" + "', '" + "540" + "', '" + tutor + "', '" + method + "', '" + "W01" + "')";
-                    cmd.ExecuteNonQuery();
-                    cmd.Clone();
-                    cn.Close();
-    <<<<<<< HEAD
-                }
-                */
-                // catch
-                //{}
-                //  }
-                //lblTest.Text = date + "','" + timeIn + "', '" + timeOut + "', '" + studentID +  "', '" + method;
-
-                comboaddClass.Enabled = false;
-                comboAddTutoring.Enabled = false;
-                txtAddStudentID.Text = "";
-                comboaddClass.Items.Clear();
-                comboAddTutoring.Items.Clear();
-MessageBox.Show("Thank you for adding a visit!");
+                catch { MessageBox.Show("please check info and try again"); };
+                MessageBox.Show("Thank you for adding a visit!");
             }
-            catch { MessageBox.Show("please check info and try again"); };
-            
-            comboAddMethod.Enabled = false;
-            txtAddStudentID.Text = "";
+           else
+            {
+            MessageBox.Show("Invalid Student ID", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+            }
         }
 
         
@@ -746,51 +720,75 @@ MessageBox.Show("Thank you for adding a visit!");
         //By: Kris
         private void btnEditVisit_Click(object sender, EventArgs e)
         {
-            
 
-           //Change button text to save and return to Edit Visit
-            if (btnEditVisit.Text == "Edit Visit")
+
+            //Change button text to save and return to Edit Visit
+            if (btnEditVisit.Text == "List Visits")
             {
-                //Puts the student id, min search date, and max search date into variables
-                int studentID = int.Parse(txtEditStudentID.Text);
-                DateTime minSearch = DateTime.Parse(dateTimePickerEditMin.Text);
-                DateTime maxSearch = DateTime.Parse(dateTimePickerEditMax.Text);
 
-                //loads the results of the search into the listBoxLoggedIn
-
-                loadvisits(studentID, minSearch, maxSearch);
-
-                
-
-
-                btnEditVisit.Text = "Edit This Visit";
-                btnLogOut.Visible = false;
-                btnLogOut.Enabled = false;
-            }
-
-                //Enters the selected visit into the edit form
-            else if (btnEditVisit.Text == "Edit This Visit")
-            {
-                dateTimePickerEditTimeIn.Enabled = true;
-                dateTimePickerEditTimeOut.Enabled = true;
-
-                string[] selectedVisitEdit = listBoxLoggedIn.SelectedItem.ToString().Split();
-                string dateEdit = selectedVisitEdit[0];
-                DateTime TimeInEdit = DateTime.Parse(selectedVisitEdit[1]);
-                if (selectedVisitEdit[2] != "")
+                int tryStudentID;
+                if (int.TryParse(txtEditStudentID.Text, out tryStudentID) || txtEditStudentID.Text == "")
                 {
-                    DateTime TimeOutEdit = DateTime.Parse(selectedVisitEdit[2]);
-                    dateTimePickerEditTimeOut.Value = TimeOutEdit;
+                    int studentID = 0;
+                    //Puts the student id, min search date, and max search date into variables
+                    try
+                    {
+                        studentID = int.Parse(txtEditStudentID.Text);
+                    }
+                    catch { }
+                    DateTime minSearch = DateTime.Parse(dateTimePickerEditMin.Text);
+                    DateTime maxSearch = DateTime.Parse(dateTimePickerEditMax.Text);
+
+                    //loads the results of the search into the listBoxLoggedIn
+                    //loadvisits(studentID, minSearch, maxSearch);
+
+
+                    frmEditList editListForm = new frmEditList(studentID, minSearch, maxSearch);
+                    editListForm.Show();
+
+
+
+                    //btnEditVisit.Text = "Save Edit";
+                    //btnLogOut.Visible = false;
+                    //btnLogOut.Enabled = false;
+                    //lblLoggedIn.Text = "Editing...";
+                    //dateTimePickerEditTimeIn.Enabled = true;
+                    //dateTimePickerEditTimeOut.Enabled = true;
                 }
-                txtEditDate.Text = dateEdit;
-                dateTimePickerEditTimeIn.Value = TimeInEdit;
 
-
-                btnEditVisit.Text = "Save Edit";
-                btnDeleteVisit.Enabled = true;
+                else
+                {
+                    MessageBox.Show("Invalid Student ID", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
+        }
 
-            else // if (btnEditVisit.Text == "Save Edit")
+                           /* //Enters the selected visit into the edit form
+                            else if (btnEditVisit.Text =="Edit This Visit")
+                            {
+                                    dateTimePickerEditTimeIn.Enabled = true;
+                                    dateTimePickerEditTimeOut.Enabled = true;
+                    
+                                    string[] selectedVisitEdit = listBoxLoggedIn.SelectedItem.ToString().Split();
+                                    string dateEdit = selectedVisitEdit[0];
+                                    DateTime TimeInEdit = DateTime.Parse(selectedVisitEdit[1]);
+                                    if (selectedVisitEdit[2] != "")
+                                    {
+                                        DateTime TimeOutEdit = DateTime.Parse(selectedVisitEdit[2]);
+                                        dateTimePickerEditTimeOut.Value = TimeOutEdit;
+                                    }
+                                    txtEditDate.Text = dateEdit;
+                                    dateTimePickerEditTimeIn.Value = TimeInEdit;
+                                    comboEditMethod.SelectedItem = selectedVisitEdit[3];
+                    
+
+                                    btnEditVisit.Text = "Save Edit";
+
+                            }
+                            
+            
+            else
             {
 
                 //DateTime.Parse(DateTime.Now.ToString("HH:mm:ss tt")
@@ -832,12 +830,11 @@ MessageBox.Show("Thank you for adding a visit!");
 
 
 
-                btnEditVisit.Text = "Edit Visit";
-                btnLogOut.Visible = true;
-                btnLogOut.Enabled = true;
+                btnEditVisit.Text = "List Visits";
+                //btnLogOut.Visible = true;
+                //btnLogOut.Enabled = true;
                 loadlist();
-            }
-        }
+            }*/
 
         private DateTime getVisitOriginalTimeIn()
         {
