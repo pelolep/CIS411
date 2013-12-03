@@ -46,20 +46,23 @@ namespace CIS411
             
             rd = cmd.ExecuteReader();
             */
-
-            DataConnection conn = new DataConnection();
-            conn.Open();
-            SqlDataReader rd = conn.GetReader("clarion_id","STUDENT","CLARION_ID",studentID);
-            if (rd.HasRows)
+            try
             {
-               
-                conn.Close();
-                conn.Open();
-                conn.Query("insert into tutor(clarion_id,status) values ('"+ studentID +"', '"+ "active" +"')");
+                bool real = frmMain.studentIDExists(int.Parse(studentID));
+                DataConnection conn = new DataConnection();
+                if (real)
+                {
+                    conn.Open();
+                    conn.Query("insert into tutor(clarion_id,status) values ('" + studentID + "', '" + "active" + "')");
+                    conn.Close();
+                }
+                else
+                    MessageBox.Show("please check the student id and try again");
             }
-            conn.Close();
-            loadlist();
-
+            catch
+            {
+                MessageBox.Show("please enter a valid number");
+            }
         }
 
         private void btnDisableSelected_Click(object sender, EventArgs e)
