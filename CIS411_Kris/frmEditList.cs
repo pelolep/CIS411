@@ -37,33 +37,61 @@ namespace CIS411
             DataConnection conn = new DataConnection();
 
             conn.Open();
-
-            //gets visits request
-            //just added STUDENT.FIRSTNAME, STUDENT.LASTNAME, STUDENT TABLE
-            SqlDataReader rd = conn.GetReader("VISIT.CLARION_ID, VISIT.DATE, VISIT.TIME_IN, VISIT.TIME_OUT, STUDENT.FIRSTNAME, STUDENT.LASTNAME, VISIT.METHOD", "VISIT, STUDENT");
-            if (rd.HasRows)
+            if (studentID == 0)
             {
+                //gets visits request
+                //just added STUDENT.FIRSTNAME, STUDENT.LASTNAME, STUDENT TABLE
+                SqlDataReader rd = conn.joinQuery("SELECT VISIT.CLARION_ID, VISIT.DATE, VISIT.TIME_IN, VISIT.TIME_OUT, STUDENT.FIRSTNAME, STUDENT.LASTNAME, VISIT.METHOD FROM VISIT INNER JOIN student on visit.clarion_id = student.clarion_id WHERE visit.DATE<'" + maxDate + "' AND visit.DATE>'" + minDate + "'");
 
-                while (rd.Read())
+
+                if (rd.HasRows)
                 {
-                    DateTime thedate = DateTime.Parse(rd["DATE"].ToString());
+
+                    while (rd.Read())
+                    {
+                        DateTime thedate = DateTime.Parse(rd["DATE"].ToString());
 
 
-                    if (thedate >= minDate && thedate <= maxDate)
-                        //TAB THIS
-                        listBoxEditVisit.Items.Add(thedate.ToString("MM/dd/yyyy") + " " + rd["FIRSTNAME"] + " " + rd["LASTNAME"] + " " + rd["TIME_IN"] + " " + rd["TIME_OUT"] + " " + rd["METHOD"]);
-                    // else(thedate >= minDate && thedate <= maxDate)
-                    //   listBoxLoggedIn.Items.Add(thedate.ToString("MM/dd/yyyy") + " " + rd[1] + " " + rd[2] + " " + rd[4] + " " + rd[5] + " " + rd[6]);
+                       // if (thedate >= minDate && thedate <= maxDate)
+                            //TAB THIS
+                            listBoxEditVisit.Items.Add(thedate.ToString("d") + "\t\t" + rd["FIRSTNAME"] + "\t\t" + rd["LASTNAME"] + "\t\t" + rd["TIME_IN"] + "\t\t" + rd["TIME_OUT"] + "\t\t" + rd["METHOD"]);
+                        // else(thedate >= minDate && thedate <= maxDate)
+                        //   listBoxLoggedIn.Items.Add(thedate.ToString("MM/dd/yyyy") + " " + rd[1] + " " + rd[2] + " " + rd[4] + " " + rd[5] + " " + rd[6]);
 
 
 
+                    }
                 }
+                rd.Close();
+
+
+                //closes connection
+                conn.Close();
             }
-            rd.Close();
+            else
+            {
+                //gets visits request
+                //just added STUDENT.FIRSTNAME, STUDENT.LASTNAME, STUDENT TABLE
+                SqlDataReader rd = conn.joinQuery("SELECT VISIT.CLARION_ID, VISIT.DATE, VISIT.TIME_IN, VISIT.TIME_OUT, STUDENT.FIRSTNAME, STUDENT.LASTNAME, VISIT.METHOD FROM VISIT INNER JOIN student on visit.clarion_id = student.clarion_id WHERE visit.DATE<'" + maxDate + "' AND visit.DATE>'" + minDate +"' AND VISIT.CLARION_ID = '" + studentID + "'");
 
 
-            //closes connection
-            conn.Close();
+                if (rd.HasRows)
+                {
+
+                    while (rd.Read())
+                    {
+                        DateTime thedate = DateTime.Parse(rd["DATE"].ToString());
+
+                            listBoxEditVisit.Items.Add(thedate.ToString("d") + "/t/t" + rd["FIRSTNAME"] + "/t/t" + rd["LASTNAME"] + "/t/t" + rd["TIME_IN"] + "/t/t" + rd["TIME_OUT"] + "/t/t" + rd["METHOD"]);
+
+                    }
+                }
+                rd.Close();
+
+
+                //closes connection
+                conn.Close();
+            }
 
 
         }

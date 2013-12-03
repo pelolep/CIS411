@@ -842,32 +842,39 @@ namespace CIS411
             if (btnEditVisit.Text == "List Visits")
             {
                 int tryStudentID;
-                if (int.TryParse(txtEditStudentID.Text, out tryStudentID))
+                if (int.TryParse(txtEditStudentID.Text, out tryStudentID)|| txtEditStudentID.Text=="")
                 {
-                    //Puts the student id, min search date, and max search date into variables
-                    int studentID = int.Parse(txtEditStudentID.Text);
-                    DateTime minSearch = DateTime.Parse(dateTimePickerEditMin.Text);
-                    DateTime maxSearch = DateTime.Parse(dateTimePickerEditMax.Text);
+                    int studentID = 0;
+                        //Puts the student id, min search date, and max search date into variables
+                    try
+                    {
+                        studentID = int.Parse(txtEditStudentID.Text);
+                    }
+                    catch { }
+                        DateTime minSearch = DateTime.Parse(dateTimePickerEditMin.Text);
+                        DateTime maxSearch = DateTime.Parse(dateTimePickerEditMax.Text);
 
-                    //loads the results of the search into the listBoxLoggedIn
-                    //loadvisits(studentID, minSearch, maxSearch);
+                        //loads the results of the search into the listBoxLoggedIn
+                        //loadvisits(studentID, minSearch, maxSearch);
 
-                    frmEditList editListForm = new frmEditList(studentID, minSearch, maxSearch);
-                    editListForm.Show();
+                        frmEditList editListForm = new frmEditList(studentID, minSearch, maxSearch);
+                        editListForm.Show();
 
 
-                    btnEditVisit.Text = "Save Edit";
-                    //btnLogOut.Visible = false;
-                    //btnLogOut.Enabled = false;
-                    //lblLoggedIn.Text = "Editing...";
-                    dateTimePickerEditTimeIn.Enabled = true;
-                    dateTimePickerEditTimeOut.Enabled = true;
-                }
-                else
-                {
-                    MessageBox.Show("Invalid Student ID", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                        btnEditVisit.Text = "Save Edit";
+                        //btnLogOut.Visible = false;
+                        //btnLogOut.Enabled = false;
+                        //lblLoggedIn.Text = "Editing...";
+                        dateTimePickerEditTimeIn.Enabled = true;
+                        dateTimePickerEditTimeOut.Enabled = true;
+                    }
+                
+                    else
+                    {
+                        MessageBox.Show("Invalid Student ID", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                
             }
 
                            /* //Enters the selected visit into the edit form

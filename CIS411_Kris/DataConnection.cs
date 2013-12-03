@@ -254,5 +254,18 @@ public class DataConnection
         }
         return rd;
     }
+        public SqlDataReader joinQuery(string q)
+        {
+            cmd.CommandText = q;
+            if (rd == null)
+                rd = cmd.ExecuteReader();
+            else
+            {
+                rd.Close();
+                rd = cmd.ExecuteReader();
+            }
+            return rd;
+        }
+
 
 }
