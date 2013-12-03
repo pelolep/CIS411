@@ -202,7 +202,7 @@ namespace CIS411
                 xlApp.Quit();
             }
             reportFile.Dispose();
-            this.Focus();
+            MessageBox.Show("Report Generation Complete!");
         }
 
         private void ImportStudents()
@@ -440,8 +440,7 @@ namespace CIS411
 
         private void tabControlAdmin_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tabControlAdmin.SelectedTab.Name == "tabAdmin")
-                this.AcceptButton = btnChangePassword;
+
             if (tabControlAdmin.SelectedTab.Name == "tabMethods")
             {
                 initializeMethodTextBoxes();
@@ -451,7 +450,27 @@ namespace CIS411
             {
                 txtMethods.Clear();
                 methodIndex = 0;
+                if (tabControlAdmin.SelectedTab.Name == "tabVisits")
+                {
+                    txtAddStudentID.Focus();
+                }
+                else if (tabControlAdmin.SelectedTab.Name == "tabAdmin")
+                {
+                    this.AcceptButton = btnChangePassword;
+                    txtCurrentPassword.Focus();
+                }
+                else if (tabControlAdmin.SelectedTab.Name == "tabTutors")
+                {
+                    this.AcceptButton = btnAddTutor;
+                    txtTutorStudentID.Focus();
+                }
+                else //if (tabControlAdmin.SelectedTab.Name == "tabReport")
+                {
+                    this.AcceptButton = btnDisplay;
+                    txtYear.Focus();
+                }
             }
+
         }
 
         void initializeMethodTextBoxes()
@@ -1045,8 +1064,8 @@ namespace CIS411
                         {
                             studentcount++;
                             listBoxReport.Items.Add(first.PadRight(20 - first.Length) + "\t" + last.PadRight(40 - (first.Length + last.Length)) + "\t" + count);
-                            listBoxReport.Items.Add("nontraditional students".PadRight(60 - 23) + "\t" + nontradcount);
-                            listBoxReport.Items.Add("traditional students".PadRight(60 - 20) + "\t" + (studentcount-nontradcount));
+                            listBoxReport.Items.Add("Nontraditional Students".PadRight(60 - 23) + "\t" + nontradcount);
+                            listBoxReport.Items.Add("Traditional Students".PadRight(60 - 20) + "\t" + (studentcount-nontradcount));
 
                         }
                     }
@@ -1401,6 +1420,70 @@ MessageBox.Show("sfgfdsgfg");
                 comboAddMethod.Enabled = true;
             else
                 comboAddMethod.Enabled = false;
+        }
+
+        private void AddVisitAcceptButton(object sender, System.EventArgs e)
+        {
+            this.AcceptButton = this.btnAddVisit;
+        }
+
+        private void EditVisitAcceptButton(object sender, System.EventArgs e)
+        {
+            this.AcceptButton = this.btnEditVisit;
+        }
+
+        private void listBoxLoggedIn_GotFocus(object sender, System.EventArgs e)
+        {
+            this.AcceptButton = this.btnLogOut;
+        }
+
+        private void btnFullReport_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("This may take a very long time, continue?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
+                return;
+            SaveFileDialog reportFile = new SaveFileDialog();
+            reportFile.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+            reportFile.RestoreDirectory = true;
+            reportFile.DefaultExt = "xlsx";
+            reportFile.OverwritePrompt = false;
+
+            if (reportFile.ShowDialog() == DialogResult.OK)
+            {
+                Excel.Application xlApp = new Excel.Application();
+                Excel.Workbook xlWorkBook = xlApp.Workbooks.Add();
+                Excel.Worksheet xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+                DataConnection conn = new DataConnection();
+                conn.Open();
+                SqlDataReader rd = conn.GetReader("*", "VISIT", "WHERE TERM = '" + DataConnection.getTerm(int.Parse(txtYear.Text),comboTerm.SelectedItem.ToString()).ToString() + "'");
+                if (!rd.HasRows)
+                    MessageBox.Show("Found no visits with the current selected term.\nAborting report generation.", "No Visits Found");
+                this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+                for (int i = 0; i < rd.FieldCount; i++)
+                    xlWorkSheet.Cells[1, i + 1] = rd.GetName(i);
+                for (int i = 1; rd.Read(); i++)
+                {
+                    for (int j = 0; j < rd.FieldCount; j++)
+                        xlWorkSheet.Cells[i + 1, j + 1].Value = rd[j].ToString();
+                }
+                conn.Close();
+
+                try
+                {
+                    xlWorkBook.SaveAs(reportFile.FileName, Excel.XlFileFormat.xlOpenXMLWorkbook);
+                    xlWorkBook.Close();
+                }
+                catch (Exception ex)
+                {
+                    if (ex.Source == "Microsoft Excel")
+                        MessageBox.Show("File may be open in another window", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else
+                        MessageBox.Show(ex.ToString());
+                }
+                xlApp.Quit();
+                this.Cursor = System.Windows.Forms.Cursors.Default;
+            }
+            reportFile.Dispose();
+            MessageBox.Show("Report Generation Complete!");
         }
     }
 }

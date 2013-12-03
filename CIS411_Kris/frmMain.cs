@@ -377,7 +377,6 @@ namespace CIS411
             b = rd.HasRows;
             conn.Close();
             return b;
-
         }
 
         public void updatetxtStudentID (int numIn)
@@ -388,7 +387,7 @@ namespace CIS411
             txtStudentID.Visible = true;
             txtStudentID.Text = studentID.ToString();
             //txtStudentID.ReadOnly = true;
-            initClassCombo();
+            //initClassCombo();
             //groupRadioButtons.Enabled = true;
         }
 
@@ -403,7 +402,7 @@ namespace CIS411
             b = rd.HasRows;
             conn.Close();
 
-            MessageBox.Show(b.ToString());
+            //MessageBox.Show(b.ToString());
 
             if (b == false)
             {
@@ -429,19 +428,10 @@ namespace CIS411
 
         static public bool signOut(int studentID)///////////
         {
-/*<<<<<<< HEAD
             System.DateTime timein, timenow;
             System.TimeSpan timedifference; // sign out works for everything but searching for the time out
             DataConnection conn = new DataConnection();
             conn.Open();
-            string o = "";
-=======*/
-
-            System.DateTime timein, timenow;
-            System.TimeSpan timedifference; // sign out works for everything but searching for the time out
-            DataConnection conn = new DataConnection();
-            conn.Open();
-//>>>>>>> origin/Matt12
             SqlDataReader rd = conn.GetReader("time_in, time_out", "visit", "clarion_id", studentID.ToString(), "and time_out is null");
             if (rd.HasRows)
             {
@@ -489,21 +479,6 @@ namespace CIS411
                 conn.Close();
                 return false;
             }
-
-
-/*<<<<<<< HEAD
-            MessageBox.Show("hit");
-            conn.Query("update visit set time_out = '" + timenow + "' , time_difference = '" + timedifference.ToString("c") + "' where clarion_id= '" + studentID + "' and time_out is null");
-            conn.Close();
-            return true;
-/*
-=======
-
-
-            MessageBox.Show("You have been signed out."); //ADD TO THIS
-            resetForm();
->>>>>>> origin/Matt12
- */
         }
 
         private void manualStudentIDEntry()
@@ -513,14 +488,7 @@ namespace CIS411
             btnIdSearch.Visible = true;
             btnForgotId.Visible = true;
         }
-        /*
-        public void disableChangeID()
-        {
-            txtStudentID.ReadOnly = true;
-            btnForgotId.Enabled = false;
-            btnIdSearch.Enabled = false;
-        }
-        */
+
         static public int StripID(int old)
         {
             return old % 100000000;

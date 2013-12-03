@@ -31,6 +31,7 @@ namespace CIS411
             this.components = new System.ComponentModel.Container();
             this.tabControlAdmin = new System.Windows.Forms.TabControl();
             this.tabVisits = new System.Windows.Forms.TabPage();
+            this.btnDeleteVisit = new System.Windows.Forms.Button();
             this.comboaddClass = new System.Windows.Forms.ComboBox();
             this.comboAddTutoring = new System.Windows.Forms.ComboBox();
             this.dateTimePickerEditTimeOut = new System.Windows.Forms.DateTimePicker();
@@ -112,7 +113,7 @@ namespace CIS411
             this.txtAddSignOut = new System.Windows.Forms.TextBox();
             this.txtAddSignIn = new System.Windows.Forms.TextBox();
             this.database2DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btnDeleteVisit = new System.Windows.Forms.Button();
+            this.btnFullReport = new System.Windows.Forms.Button();
             this.tabControlAdmin.SuspendLayout();
             this.tabVisits.SuspendLayout();
             this.tabTutors.SuspendLayout();
@@ -120,6 +121,7 @@ namespace CIS411
             this.tabAdmin.SuspendLayout();
             this.grpBoxPassword.SuspendLayout();
             this.tabReports.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.database2DataSetBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlAdmin
@@ -179,17 +181,31 @@ namespace CIS411
             this.tabVisits.Text = "Visits";
             this.tabVisits.UseVisualStyleBackColor = true;
             // 
+            // btnDeleteVisit
+            // 
+            this.btnDeleteVisit.Enabled = false;
+            this.btnDeleteVisit.Location = new System.Drawing.Point(559, 353);
+            this.btnDeleteVisit.Name = "btnDeleteVisit";
+            this.btnDeleteVisit.Size = new System.Drawing.Size(75, 32);
+            this.btnDeleteVisit.TabIndex = 45;
+            this.btnDeleteVisit.Text = "Delete Visit";
+            this.btnDeleteVisit.UseVisualStyleBackColor = true;
+            this.btnDeleteVisit.Click += new System.EventHandler(this.btnDeleteVisit_Click);
+            // 
             // comboaddClass
             // 
+            this.comboaddClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboaddClass.Enabled = false;
             this.comboaddClass.FormattingEnabled = true;
             this.comboaddClass.Location = new System.Drawing.Point(149, 251);
             this.comboaddClass.Name = "comboaddClass";
             this.comboaddClass.Size = new System.Drawing.Size(109, 21);
             this.comboaddClass.TabIndex = 44;
+            this.comboaddClass.GotFocus += new System.EventHandler(this.AddVisitAcceptButton);
             // 
             // comboAddTutoring
             // 
+            this.comboAddTutoring.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboAddTutoring.Enabled = false;
             this.comboAddTutoring.FormattingEnabled = true;
             this.comboAddTutoring.Location = new System.Drawing.Point(264, 251);
@@ -197,6 +213,7 @@ namespace CIS411
             this.comboAddTutoring.Size = new System.Drawing.Size(121, 21);
             this.comboAddTutoring.TabIndex = 43;
             this.comboAddTutoring.SelectedIndexChanged += new System.EventHandler(this.comboAddTutoring_SelectedIndexChanged);
+            this.comboAddTutoring.GotFocus += new System.EventHandler(this.AddVisitAcceptButton);
             // 
             // dateTimePickerEditTimeOut
             // 
@@ -206,7 +223,8 @@ namespace CIS411
             this.dateTimePickerEditTimeOut.ShowUpDown = true;
             this.dateTimePickerEditTimeOut.Size = new System.Drawing.Size(86, 20);
             this.dateTimePickerEditTimeOut.TabIndex = 41;
-            this.dateTimePickerEditTimeOut.Value = new System.DateTime(2013, 11, 12, 16, 23, 0, 0);
+            this.dateTimePickerEditTimeOut.Value = System.DateTime.Today;
+            this.dateTimePickerEditTimeOut.GotFocus += new System.EventHandler(this.EditVisitAcceptButton);
             // 
             // dateTimePickerEditTimeIn
             // 
@@ -216,7 +234,8 @@ namespace CIS411
             this.dateTimePickerEditTimeIn.ShowUpDown = true;
             this.dateTimePickerEditTimeIn.Size = new System.Drawing.Size(86, 20);
             this.dateTimePickerEditTimeIn.TabIndex = 40;
-            this.dateTimePickerEditTimeIn.Value = new System.DateTime(2013, 11, 12, 16, 23, 0, 0);
+            this.dateTimePickerEditTimeIn.Value = System.DateTime.Today;
+            this.dateTimePickerEditTimeIn.GotFocus += new System.EventHandler(this.EditVisitAcceptButton);
             // 
             // dateTimePickerAddTimeOut
             // 
@@ -226,7 +245,8 @@ namespace CIS411
             this.dateTimePickerAddTimeOut.ShowUpDown = true;
             this.dateTimePickerAddTimeOut.Size = new System.Drawing.Size(86, 20);
             this.dateTimePickerAddTimeOut.TabIndex = 39;
-            this.dateTimePickerAddTimeOut.Value = new System.DateTime(2013, 11, 12, 16, 23, 0, 0);
+            this.dateTimePickerAddTimeOut.Value = System.DateTime.Today;
+            this.dateTimePickerAddTimeOut.GotFocus += new System.EventHandler(this.AddVisitAcceptButton);
             // 
             // dateTimePickerAddTimeIn
             // 
@@ -236,7 +256,8 @@ namespace CIS411
             this.dateTimePickerAddTimeIn.ShowUpDown = true;
             this.dateTimePickerAddTimeIn.Size = new System.Drawing.Size(86, 20);
             this.dateTimePickerAddTimeIn.TabIndex = 38;
-            this.dateTimePickerAddTimeIn.Value = new System.DateTime(2013, 11, 12, 16, 23, 0, 0);
+            this.dateTimePickerAddTimeIn.Value = System.DateTime.Today;
+            this.dateTimePickerAddTimeIn.GotFocus += new System.EventHandler(this.AddVisitAcceptButton);
             // 
             // lblAddTutor
             // 
@@ -256,6 +277,7 @@ namespace CIS411
             this.comboAddMethod.Size = new System.Drawing.Size(121, 21);
             this.comboAddMethod.TabIndex = 35;
             this.comboAddMethod.SelectedIndexChanged += new System.EventHandler(this.comboAddMethod_SelectedIndexChanged);
+            this.comboAddMethod.GotFocus += new System.EventHandler(this.AddVisitAcceptButton);
             // 
             // lblAddClass
             // 
@@ -282,6 +304,7 @@ namespace CIS411
             this.txtEditDate.Name = "txtEditDate";
             this.txtEditDate.Size = new System.Drawing.Size(100, 20);
             this.txtEditDate.TabIndex = 30;
+            this.txtEditDate.GotFocus += new System.EventHandler(this.EditVisitAcceptButton);
             // 
             // lblEditDate
             // 
@@ -311,7 +334,8 @@ namespace CIS411
             this.dateTimePickerEditMax.Name = "dateTimePickerEditMax";
             this.dateTimePickerEditMax.Size = new System.Drawing.Size(200, 20);
             this.dateTimePickerEditMax.TabIndex = 28;
-            this.dateTimePickerEditMax.Value = new System.DateTime(2013, 11, 7, 0, 0, 0, 0);
+            this.dateTimePickerEditMax.Value = System.DateTime.Today;
+            this.dateTimePickerEditMax.GotFocus += new System.EventHandler(this.EditVisitAcceptButton);
             // 
             // dateTimePickerEditMin
             // 
@@ -322,7 +346,8 @@ namespace CIS411
             this.dateTimePickerEditMin.Name = "dateTimePickerEditMin";
             this.dateTimePickerEditMin.Size = new System.Drawing.Size(200, 20);
             this.dateTimePickerEditMin.TabIndex = 27;
-            this.dateTimePickerEditMin.Value = new System.DateTime(2013, 11, 7, 0, 0, 0, 0);
+            this.dateTimePickerEditMin.Value = System.DateTime.Today;
+            this.dateTimePickerEditMin.GotFocus += new System.EventHandler(this.EditVisitAcceptButton);
             // 
             // lblEditDateRange
             // 
@@ -340,6 +365,7 @@ namespace CIS411
             this.txtEditStudentID.Name = "txtEditStudentID";
             this.txtEditStudentID.Size = new System.Drawing.Size(100, 20);
             this.txtEditStudentID.TabIndex = 23;
+            this.txtEditStudentID.GotFocus += new System.EventHandler(this.EditVisitAcceptButton);
             // 
             // lblEditTimeOut
             // 
@@ -386,7 +412,8 @@ namespace CIS411
             this.dateTimePickerAdd.Name = "dateTimePickerAdd";
             this.dateTimePickerAdd.Size = new System.Drawing.Size(103, 20);
             this.dateTimePickerAdd.TabIndex = 17;
-            this.dateTimePickerAdd.Value = new System.DateTime(2013, 11, 12, 0, 0, 0, 0);
+            this.dateTimePickerAdd.Value = System.DateTime.Today;
+            this.dateTimePickerAdd.GotFocus += new System.EventHandler(this.AddVisitAcceptButton);
             // 
             // lblDate
             // 
@@ -405,6 +432,7 @@ namespace CIS411
             this.txtAddStudentID.Size = new System.Drawing.Size(100, 20);
             this.txtAddStudentID.TabIndex = 13;
             this.txtAddStudentID.TextChanged += new System.EventHandler(this.txtAddStudentID_TextChanged);
+            this.txtAddStudentID.GotFocus += new System.EventHandler(this.AddVisitAcceptButton);
             // 
             // btnAddVisit
             // 
@@ -478,6 +506,7 @@ namespace CIS411
             this.listBoxLoggedIn.Name = "listBoxLoggedIn";
             this.listBoxLoggedIn.Size = new System.Drawing.Size(615, 121);
             this.listBoxLoggedIn.TabIndex = 0;
+            this.listBoxLoggedIn.GotFocus += new System.EventHandler(this.listBoxLoggedIn_GotFocus);
             // 
             // tabTutors
             // 
@@ -732,6 +761,7 @@ namespace CIS411
             // 
             // tabReports
             // 
+            this.tabReports.Controls.Add(this.btnFullReport);
             this.tabReports.Controls.Add(this.btnMoveDown);
             this.tabReports.Controls.Add(this.btnMoveUp);
             this.tabReports.Controls.Add(this.lblGroup);
@@ -961,22 +991,21 @@ namespace CIS411
             this.txtAddSignIn.Size = new System.Drawing.Size(100, 20);
             this.txtAddSignIn.TabIndex = 14;
             // 
-            // btnDeleteVisit
+            // btnFullReport
             // 
-            this.btnDeleteVisit.Enabled = false;
-            this.btnDeleteVisit.Location = new System.Drawing.Point(559, 353);
-            this.btnDeleteVisit.Name = "btnDeleteVisit";
-            this.btnDeleteVisit.Size = new System.Drawing.Size(75, 32);
-            this.btnDeleteVisit.TabIndex = 45;
-            this.btnDeleteVisit.Text = "Delete Visit";
-            this.btnDeleteVisit.UseVisualStyleBackColor = true;
-            this.btnDeleteVisit.Click += new System.EventHandler(this.btnDeleteVisit_Click);
+            this.btnFullReport.Location = new System.Drawing.Point(90, 349);
+            this.btnFullReport.Name = "btnFullReport";
+            this.btnFullReport.Size = new System.Drawing.Size(75, 38);
+            this.btnFullReport.TabIndex = 18;
+            this.btnFullReport.Text = "Full Report";
+            this.btnFullReport.UseVisualStyleBackColor = true;
+            this.btnFullReport.Click += new System.EventHandler(this.btnFullReport_Click);
             // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 460);
+            this.ClientSize = new System.Drawing.Size(682, 470);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.tabControlAdmin);
             this.Name = "frmAdmin";
@@ -993,6 +1022,7 @@ namespace CIS411
             this.grpBoxPassword.PerformLayout();
             this.tabReports.ResumeLayout(false);
             this.tabReports.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.database2DataSetBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1083,6 +1113,7 @@ namespace CIS411
         private System.Windows.Forms.BindingSource database2DataSetBindingSource;
         private System.Windows.Forms.Button btnImport;
         private System.Windows.Forms.Button btnDeleteVisit;
+        private System.Windows.Forms.Button btnFullReport;
         //private DataSet1TableAdapters.DataTable2TableAdapter dataTable2TableAdapter;
     }
         #endregion
