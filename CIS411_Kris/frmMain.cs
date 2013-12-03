@@ -19,23 +19,39 @@ namespace CIS411
         bool tutoring;
         static int tutorid;
         static string method="";
-        /*
-        SqlConnection cn;
-        SqlCommand cmd;
-        SqlDataReader rd;
-        */
+        private System.Windows.Forms.RadioButton[] rdoMethods;
+
         public frmMain()
         {
+            this.rdoMethods = new System.Windows.Forms.RadioButton[Properties.Settings.Default.MethodNames.Count];
+            for (int i = 0; i < Properties.Settings.Default.MethodNames.Count; i++)
+                this.rdoMethods[i] = new System.Windows.Forms.RadioButton();
+            #region rdoMethods
+            //
+            // rdoMethods
+            //
+            for (int i = 0; i < Properties.Settings.Default.MethodNames.Count; i++)
+            {
+                this.rdoMethods[i].AutoSize = true;
+                this.rdoMethods[i].Location = new System.Drawing.Point(5, 30 + (i * 30));
+                this.rdoMethods[i].Name = Properties.Settings.Default.MethodNames[i];
+                this.rdoMethods[i].Size = new System.Drawing.Size(85, 17);
+                this.rdoMethods[i].TabIndex = 0;
+                this.rdoMethods[i].TabStop = true;
+                this.rdoMethods[i].Text = Properties.Settings.Default.MethodNames[i];
+                this.rdoMethods[i].UseVisualStyleBackColor = true;
+                //SPECIAL CASE FOR TUTORING
+                if (this.rdoMethods[i].Text == Properties.Settings.Default.TutoringMethod)
+                    this.rdoMethods[i].Click += new System.EventHandler(this.rdoTutor_Click);
+                else
+                    this.rdoMethods[i].Click += new System.EventHandler(this.rdoOther_Click);
+            }
+            #endregion
             InitializeComponent();
+            for (int i = 0; i < Properties.Settings.Default.MethodNames.Count; i++)
+                this.groupRadioButtons.Controls.Add(this.rdoMethods[i]);
             tutoring = false;
             tutorid = 0;
-            /*
-            cn = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\db.mdf;Integrated Security=True");
-            cmd = new SqlCommand();
-            cn.Open(); //TESTING DATABASE
-            cn.Close();
-            cmd.Connection = cn;
-            */
         }
 
         private void txtStudentID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
