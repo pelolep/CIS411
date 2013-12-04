@@ -34,23 +34,17 @@ namespace CIS411
             this.lblEditMethod = new System.Windows.Forms.Label();
             this.comboaddClass = new System.Windows.Forms.ComboBox();
             this.comboAddTutoring = new System.Windows.Forms.ComboBox();
-            this.dateTimePickerEditTimeOut = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePickerEditTimeIn = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerAddTimeOut = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerAddTimeIn = new System.Windows.Forms.DateTimePicker();
             this.lblAddTutor = new System.Windows.Forms.Label();
             this.comboAddMethod = new System.Windows.Forms.ComboBox();
             this.lblAddClass = new System.Windows.Forms.Label();
             this.lblAddMethod = new System.Windows.Forms.Label();
-            this.txtEditDate = new System.Windows.Forms.TextBox();
-            this.lblEditDate = new System.Windows.Forms.Label();
             this.btnEditVisit = new System.Windows.Forms.Button();
             this.dateTimePickerEditMax = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerEditMin = new System.Windows.Forms.DateTimePicker();
             this.lblEditDateRange = new System.Windows.Forms.Label();
             this.txtEditStudentID = new System.Windows.Forms.TextBox();
-            this.lblEditTimeOut = new System.Windows.Forms.Label();
-            this.lblEditTimeIn = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.lblEditVisit = new System.Windows.Forms.Label();
             this.dateTimePickerAdd = new System.Windows.Forms.DateTimePicker();
@@ -122,6 +116,7 @@ namespace CIS411
             this.txtAddSignOut = new System.Windows.Forms.TextBox();
             this.btn_courses_import = new System.Windows.Forms.Button();
             this.txtAddSignIn = new System.Windows.Forms.TextBox();
+            this.btnDeleteReportRow = new System.Windows.Forms.Button();
             this.tabControlAdmin.SuspendLayout();
             this.tabVisits.SuspendLayout();
             this.tabTutors.SuspendLayout();
@@ -152,23 +147,17 @@ namespace CIS411
             this.tabVisits.Controls.Add(this.lblEditMethod);
             this.tabVisits.Controls.Add(this.comboaddClass);
             this.tabVisits.Controls.Add(this.comboAddTutoring);
-            this.tabVisits.Controls.Add(this.dateTimePickerEditTimeOut);
-            this.tabVisits.Controls.Add(this.dateTimePickerEditTimeIn);
             this.tabVisits.Controls.Add(this.dateTimePickerAddTimeOut);
             this.tabVisits.Controls.Add(this.dateTimePickerAddTimeIn);
             this.tabVisits.Controls.Add(this.lblAddTutor);
             this.tabVisits.Controls.Add(this.comboAddMethod);
             this.tabVisits.Controls.Add(this.lblAddClass);
             this.tabVisits.Controls.Add(this.lblAddMethod);
-            this.tabVisits.Controls.Add(this.txtEditDate);
-            this.tabVisits.Controls.Add(this.lblEditDate);
             this.tabVisits.Controls.Add(this.btnEditVisit);
             this.tabVisits.Controls.Add(this.dateTimePickerEditMax);
             this.tabVisits.Controls.Add(this.dateTimePickerEditMin);
             this.tabVisits.Controls.Add(this.lblEditDateRange);
             this.tabVisits.Controls.Add(this.txtEditStudentID);
-            this.tabVisits.Controls.Add(this.lblEditTimeOut);
-            this.tabVisits.Controls.Add(this.lblEditTimeIn);
             this.tabVisits.Controls.Add(this.label6);
             this.tabVisits.Controls.Add(this.lblEditVisit);
             this.tabVisits.Controls.Add(this.dateTimePickerAdd);
@@ -194,7 +183,7 @@ namespace CIS411
             // 
             this.comboEditMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboEditMethod.FormattingEnabled = true;
-            this.comboEditMethod.Location = new System.Drawing.Point(312, 359);
+            this.comboEditMethod.Location = new System.Drawing.Point(22, 356);
             this.comboEditMethod.Name = "comboEditMethod";
             this.comboEditMethod.Size = new System.Drawing.Size(121, 21);
             this.comboEditMethod.TabIndex = 46;
@@ -202,7 +191,7 @@ namespace CIS411
             // lblEditMethod
             // 
             this.lblEditMethod.AutoSize = true;
-            this.lblEditMethod.Location = new System.Drawing.Point(309, 344);
+            this.lblEditMethod.Location = new System.Drawing.Point(19, 340);
             this.lblEditMethod.Name = "lblEditMethod";
             this.lblEditMethod.Size = new System.Drawing.Size(43, 13);
             this.lblEditMethod.TabIndex = 45;
@@ -230,28 +219,6 @@ namespace CIS411
             this.comboAddTutoring.TabIndex = 43;
             this.comboAddTutoring.SelectedIndexChanged += new System.EventHandler(this.comboAddTutoring_SelectedIndexChanged);
             this.comboAddTutoring.GotFocus += new System.EventHandler(this.AddVisitAcceptButton);
-            // 
-            // dateTimePickerEditTimeOut
-            // 
-            this.dateTimePickerEditTimeOut.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePickerEditTimeOut.Location = new System.Drawing.Point(220, 360);
-            this.dateTimePickerEditTimeOut.Name = "dateTimePickerEditTimeOut";
-            this.dateTimePickerEditTimeOut.ShowUpDown = true;
-            this.dateTimePickerEditTimeOut.Size = new System.Drawing.Size(86, 20);
-            this.dateTimePickerEditTimeOut.TabIndex = 41;
-            this.dateTimePickerEditTimeOut.Value = new System.DateTime(2013, 12, 3, 0, 0, 0, 0);
-            this.dateTimePickerEditTimeOut.GotFocus += new System.EventHandler(this.EditVisitAcceptButton);
-            // 
-            // dateTimePickerEditTimeIn
-            // 
-            this.dateTimePickerEditTimeIn.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePickerEditTimeIn.Location = new System.Drawing.Point(128, 360);
-            this.dateTimePickerEditTimeIn.Name = "dateTimePickerEditTimeIn";
-            this.dateTimePickerEditTimeIn.ShowUpDown = true;
-            this.dateTimePickerEditTimeIn.Size = new System.Drawing.Size(86, 20);
-            this.dateTimePickerEditTimeIn.TabIndex = 40;
-            this.dateTimePickerEditTimeIn.Value = new System.DateTime(2013, 12, 3, 0, 0, 0, 0);
-            this.dateTimePickerEditTimeIn.GotFocus += new System.EventHandler(this.EditVisitAcceptButton);
             // 
             // dateTimePickerAddTimeOut
             // 
@@ -314,27 +281,9 @@ namespace CIS411
             this.lblAddMethod.TabIndex = 31;
             this.lblAddMethod.Text = "Method";
             // 
-            // txtEditDate
-            // 
-            this.txtEditDate.Enabled = false;
-            this.txtEditDate.Location = new System.Drawing.Point(22, 360);
-            this.txtEditDate.Name = "txtEditDate";
-            this.txtEditDate.Size = new System.Drawing.Size(100, 20);
-            this.txtEditDate.TabIndex = 30;
-            this.txtEditDate.GotFocus += new System.EventHandler(this.EditVisitAcceptButton);
-            // 
-            // lblEditDate
-            // 
-            this.lblEditDate.AutoSize = true;
-            this.lblEditDate.Location = new System.Drawing.Point(19, 342);
-            this.lblEditDate.Name = "lblEditDate";
-            this.lblEditDate.Size = new System.Drawing.Size(30, 13);
-            this.lblEditDate.TabIndex = 29;
-            this.lblEditDate.Text = "Date";
-            // 
             // btnEditVisit
             // 
-            this.btnEditVisit.Location = new System.Drawing.Point(559, 315);
+            this.btnEditVisit.Location = new System.Drawing.Point(391, 349);
             this.btnEditVisit.Name = "btnEditVisit";
             this.btnEditVisit.Size = new System.Drawing.Size(75, 32);
             this.btnEditVisit.TabIndex = 16;
@@ -346,7 +295,7 @@ namespace CIS411
             // 
             this.dateTimePickerEditMax.CustomFormat = "MM\'/\'dd\'/\'yyyy";
             this.dateTimePickerEditMax.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePickerEditMax.Location = new System.Drawing.Point(334, 315);
+            this.dateTimePickerEditMax.Location = new System.Drawing.Point(152, 357);
             this.dateTimePickerEditMax.MinDate = new System.DateTime(2013, 1, 1, 0, 0, 0, 0);
             this.dateTimePickerEditMax.Name = "dateTimePickerEditMax";
             this.dateTimePickerEditMax.Size = new System.Drawing.Size(200, 20);
@@ -358,7 +307,7 @@ namespace CIS411
             // 
             this.dateTimePickerEditMin.CustomFormat = "MM\'/\'dd\'/\'yyyy";
             this.dateTimePickerEditMin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePickerEditMin.Location = new System.Drawing.Point(128, 315);
+            this.dateTimePickerEditMin.Location = new System.Drawing.Point(152, 315);
             this.dateTimePickerEditMin.MinDate = new System.DateTime(2013, 1, 1, 0, 0, 0, 0);
             this.dateTimePickerEditMin.Name = "dateTimePickerEditMin";
             this.dateTimePickerEditMin.Size = new System.Drawing.Size(200, 20);
@@ -369,7 +318,7 @@ namespace CIS411
             // lblEditDateRange
             // 
             this.lblEditDateRange.AutoSize = true;
-            this.lblEditDateRange.Location = new System.Drawing.Point(128, 297);
+            this.lblEditDateRange.Location = new System.Drawing.Point(149, 297);
             this.lblEditDateRange.Name = "lblEditDateRange";
             this.lblEditDateRange.Size = new System.Drawing.Size(65, 13);
             this.lblEditDateRange.TabIndex = 26;
@@ -383,24 +332,6 @@ namespace CIS411
             this.txtEditStudentID.Size = new System.Drawing.Size(100, 20);
             this.txtEditStudentID.TabIndex = 23;
             this.txtEditStudentID.GotFocus += new System.EventHandler(this.EditVisitAcceptButton);
-            // 
-            // lblEditTimeOut
-            // 
-            this.lblEditTimeOut.AutoSize = true;
-            this.lblEditTimeOut.Location = new System.Drawing.Point(217, 342);
-            this.lblEditTimeOut.Name = "lblEditTimeOut";
-            this.lblEditTimeOut.Size = new System.Drawing.Size(50, 13);
-            this.lblEditTimeOut.TabIndex = 21;
-            this.lblEditTimeOut.Text = "Time Out";
-            // 
-            // lblEditTimeIn
-            // 
-            this.lblEditTimeIn.AutoSize = true;
-            this.lblEditTimeIn.Location = new System.Drawing.Point(128, 342);
-            this.lblEditTimeIn.Name = "lblEditTimeIn";
-            this.lblEditTimeIn.Size = new System.Drawing.Size(42, 13);
-            this.lblEditTimeIn.TabIndex = 20;
-            this.lblEditTimeIn.Text = "Time In";
             // 
             // label6
             // 
@@ -453,9 +384,9 @@ namespace CIS411
             // 
             // btnAddVisit
             // 
-            this.btnAddVisit.Location = new System.Drawing.Point(449, 203);
+            this.btnAddVisit.Location = new System.Drawing.Point(391, 244);
             this.btnAddVisit.Name = "btnAddVisit";
-            this.btnAddVisit.Size = new System.Drawing.Size(75, 62);
+            this.btnAddVisit.Size = new System.Drawing.Size(75, 32);
             this.btnAddVisit.TabIndex = 10;
             this.btnAddVisit.Text = "Add Visit";
             this.btnAddVisit.UseVisualStyleBackColor = true;
@@ -510,9 +441,9 @@ namespace CIS411
             // 
             this.btnLogOut.Location = new System.Drawing.Point(559, 162);
             this.btnLogOut.Name = "btnLogOut";
-            this.btnLogOut.Size = new System.Drawing.Size(75, 23);
+            this.btnLogOut.Size = new System.Drawing.Size(75, 39);
             this.btnLogOut.TabIndex = 1;
-            this.btnLogOut.Text = "Log Out";
+            this.btnLogOut.Text = "Log Out Selected";
             this.btnLogOut.UseVisualStyleBackColor = true;
             this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
@@ -549,7 +480,7 @@ namespace CIS411
             // lblInactiveTutors
             // 
             this.lblInactiveTutors.AutoSize = true;
-            this.lblInactiveTutors.Location = new System.Drawing.Point(472, 20);
+            this.lblInactiveTutors.Location = new System.Drawing.Point(259, 13);
             this.lblInactiveTutors.Name = "lblInactiveTutors";
             this.lblInactiveTutors.Size = new System.Drawing.Size(81, 13);
             this.lblInactiveTutors.TabIndex = 11;
@@ -558,7 +489,7 @@ namespace CIS411
             // lblActiveTutors
             // 
             this.lblActiveTutors.AutoSize = true;
-            this.lblActiveTutors.Location = new System.Drawing.Point(222, 20);
+            this.lblActiveTutors.Location = new System.Drawing.Point(9, 13);
             this.lblActiveTutors.Name = "lblActiveTutors";
             this.lblActiveTutors.Size = new System.Drawing.Size(73, 13);
             this.lblActiveTutors.TabIndex = 10;
@@ -566,7 +497,7 @@ namespace CIS411
             // 
             // btnAddTutor
             // 
-            this.btnAddTutor.Location = new System.Drawing.Point(74, 66);
+            this.btnAddTutor.Location = new System.Drawing.Point(182, 260);
             this.btnAddTutor.Name = "btnAddTutor";
             this.btnAddTutor.Size = new System.Drawing.Size(75, 23);
             this.btnAddTutor.TabIndex = 9;
@@ -576,7 +507,7 @@ namespace CIS411
             // 
             // btnDisableSelected
             // 
-            this.btnDisableSelected.Location = new System.Drawing.Point(412, 216);
+            this.btnDisableSelected.Location = new System.Drawing.Point(199, 209);
             this.btnDisableSelected.Name = "btnDisableSelected";
             this.btnDisableSelected.Size = new System.Drawing.Size(39, 35);
             this.btnDisableSelected.TabIndex = 8;
@@ -586,7 +517,7 @@ namespace CIS411
             // 
             // btnDisableAll
             // 
-            this.btnDisableAll.Location = new System.Drawing.Point(412, 175);
+            this.btnDisableAll.Location = new System.Drawing.Point(199, 168);
             this.btnDisableAll.Name = "btnDisableAll";
             this.btnDisableAll.Size = new System.Drawing.Size(39, 35);
             this.btnDisableAll.TabIndex = 7;
@@ -596,7 +527,7 @@ namespace CIS411
             // 
             // btnEnableAll
             // 
-            this.btnEnableAll.Location = new System.Drawing.Point(412, 80);
+            this.btnEnableAll.Location = new System.Drawing.Point(199, 73);
             this.btnEnableAll.Name = "btnEnableAll";
             this.btnEnableAll.Size = new System.Drawing.Size(39, 35);
             this.btnEnableAll.TabIndex = 6;
@@ -606,7 +537,7 @@ namespace CIS411
             // 
             // btnEnableSelected
             // 
-            this.btnEnableSelected.Location = new System.Drawing.Point(412, 39);
+            this.btnEnableSelected.Location = new System.Drawing.Point(199, 32);
             this.btnEnableSelected.Name = "btnEnableSelected";
             this.btnEnableSelected.Size = new System.Drawing.Size(39, 35);
             this.btnEnableSelected.TabIndex = 4;
@@ -617,7 +548,7 @@ namespace CIS411
             // listBoxDisableTutors
             // 
             this.listBoxDisableTutors.FormattingEnabled = true;
-            this.listBoxDisableTutors.Location = new System.Drawing.Point(472, 39);
+            this.listBoxDisableTutors.Location = new System.Drawing.Point(259, 32);
             this.listBoxDisableTutors.Name = "listBoxDisableTutors";
             this.listBoxDisableTutors.Size = new System.Drawing.Size(161, 212);
             this.listBoxDisableTutors.TabIndex = 3;
@@ -625,7 +556,7 @@ namespace CIS411
             // listBoxEnableTutors
             // 
             this.listBoxEnableTutors.FormattingEnabled = true;
-            this.listBoxEnableTutors.Location = new System.Drawing.Point(222, 39);
+            this.listBoxEnableTutors.Location = new System.Drawing.Point(9, 32);
             this.listBoxEnableTutors.Name = "listBoxEnableTutors";
             this.listBoxEnableTutors.Size = new System.Drawing.Size(174, 212);
             this.listBoxEnableTutors.TabIndex = 2;
@@ -633,7 +564,7 @@ namespace CIS411
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 42);
+            this.label1.Location = new System.Drawing.Point(9, 265);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 1;
@@ -641,7 +572,7 @@ namespace CIS411
             // 
             // txtTutorStudentID
             // 
-            this.txtTutorStudentID.Location = new System.Drawing.Point(74, 39);
+            this.txtTutorStudentID.Location = new System.Drawing.Point(76, 262);
             this.txtTutorStudentID.MaxLength = 8;
             this.txtTutorStudentID.Name = "txtTutorStudentID";
             this.txtTutorStudentID.Size = new System.Drawing.Size(100, 20);
@@ -855,6 +786,7 @@ namespace CIS411
             // 
             // tabReports
             // 
+            this.tabReports.Controls.Add(this.btnDeleteReportRow);
             this.tabReports.Controls.Add(this.btnFullReport);
             this.tabReports.Controls.Add(this.btnMoveDown);
             this.tabReports.Controls.Add(this.btnMoveUp);
@@ -937,9 +869,9 @@ namespace CIS411
             // 
             // btnReport
             // 
-            this.btnReport.Location = new System.Drawing.Point(4, 167);
+            this.btnReport.Location = new System.Drawing.Point(100, 167);
             this.btnReport.Name = "btnReport";
-            this.btnReport.Size = new System.Drawing.Size(171, 38);
+            this.btnReport.Size = new System.Drawing.Size(75, 38);
             this.btnReport.TabIndex = 12;
             this.btnReport.Text = "Quick Report";
             this.btnReport.UseVisualStyleBackColor = true;
@@ -1104,6 +1036,16 @@ namespace CIS411
             this.txtAddSignIn.Size = new System.Drawing.Size(100, 20);
             this.txtAddSignIn.TabIndex = 14;
             // 
+            // btnDeleteReportRow
+            // 
+            this.btnDeleteReportRow.Location = new System.Drawing.Point(4, 167);
+            this.btnDeleteReportRow.Name = "btnDeleteReportRow";
+            this.btnDeleteReportRow.Size = new System.Drawing.Size(75, 38);
+            this.btnDeleteReportRow.TabIndex = 19;
+            this.btnDeleteReportRow.Text = "Delete Selected";
+            this.btnDeleteReportRow.UseVisualStyleBackColor = true;
+            this.btnDeleteReportRow.Click += new System.EventHandler(this.btnDeleteReportRow_Click);
+            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1168,12 +1110,9 @@ namespace CIS411
         private System.Windows.Forms.DateTimePicker dateTimePickerAdd;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Label lblEditVisit;
-        private System.Windows.Forms.Label lblEditDate;
         private System.Windows.Forms.DateTimePicker dateTimePickerEditMax;
         private System.Windows.Forms.Label lblEditDateRange;
         private System.Windows.Forms.TextBox txtEditStudentID;
-        private System.Windows.Forms.Label lblEditTimeOut;
-        private System.Windows.Forms.Label lblEditTimeIn;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblAddMethod;
         private System.Windows.Forms.Label lblAddClass;
@@ -1215,9 +1154,6 @@ namespace CIS411
         private System.Windows.Forms.DateTimePicker dateTimePickerEditMin;
         private System.Windows.Forms.Button btnMoveUp;
         private System.Windows.Forms.Button btn_courses_import;
-        internal System.Windows.Forms.DateTimePicker dateTimePickerEditTimeOut;
-        internal System.Windows.Forms.TextBox txtEditDate;
-        internal System.Windows.Forms.DateTimePicker dateTimePickerEditTimeIn;
         internal System.Windows.Forms.ComboBox comboEditMethod;
         private System.Windows.Forms.GroupBox grpBoxAddStudent;
         private System.Windows.Forms.Button btnAddStudent;
@@ -1227,6 +1163,7 @@ namespace CIS411
         private System.Windows.Forms.Label lblAddID;
         private System.Windows.Forms.Label blAddLast;
         private System.Windows.Forms.Label lblAddFirst;
+        private System.Windows.Forms.Button btnDeleteReportRow;
     }
         #endregion
 }

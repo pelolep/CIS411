@@ -65,34 +65,28 @@ namespace CIS411
             */
             try
             {
-                bool real = frmMain.studentIDExists(int.Parse(studentID));
+                bool notInDB = frmMain.studentIDExists(int.Parse(studentID));
                 DataConnection conn = new DataConnection();
 
-                SqlDataReader rd = conn.joinQuery("select clarion_id from tutor");
+                SqlDataReader rd = conn.joinQuery("select clarion_id from tutor where clarion_id = " + studentID);
 
                 if (rd.HasRows)
                 {
-                    
-                    while (rd.Read())
-                    {
-                        if (studentID == rd[0].ToString())
-                            real = false;
-                    }
+                    notInDB = false;
                 }
-
                 
-                if (real)
+                if (notInDB)
                 {
                     conn.Open();
                     conn.Query("insert into tutor(clarion_id,status) values ('" + studentID + "', '" + "active" + "')");
                     conn.Close();
                 }
                 else
-                    MessageBox.Show("please check the student id and try again");
+                    MessageBox.Show("Tutor is already in database.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch
             {
-                MessageBox.Show("please enter a valid ID");
+                MessageBox.Show("Error while searching for student ID. Please check to see if it is valid.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             loadlist();
         }
@@ -107,7 +101,7 @@ namespace CIS411
             }
             catch
             {
-                MessageBox.Show("please choose a tutor first");
+                MessageBox.Show("Please choose a tutor first", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             DataConnection conn = new DataConnection();
             conn.Open();
@@ -132,7 +126,7 @@ namespace CIS411
             }
             catch
             {
-                MessageBox.Show("please choose a tutor first");
+                MessageBox.Show("Please choose a tutor first", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             DataConnection conn = new DataConnection();
             conn.Open();
@@ -185,7 +179,7 @@ namespace CIS411
             //Check that the Password matches the current Password entered by the user
             if (hash(txtCurrentPassword.Text) != Properties.Settings.Default.EncryptedPassword)
             {
-                MessageBox.Show( "Error: The password you used is incorrect");
+                MessageBox.Show("Error: The password you used is incorrect", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtCurrentPassword.Clear();
                 txtCurrentPassword.Focus();
             }
@@ -395,10 +389,6 @@ namespace CIS411
             dateTimePickerAdd.Value = DateTime.Today;
             dateTimePickerEditMin.Value = DateTime.Today;
             dateTimePickerEditMax.Value = DateTime.Today;
-            // TODO: This line of code loads data into the 'DataSet1.DataTable2' table. You can move, or remove it, as needed.
-            //this.dataTable2TableAdapter.Fill(this.DataSet1.DataTable2);
-            // TODO: This line of code loads data into the 'DataSet1.DataTable1' table. You can move, or remove it, as needed.
-            
             comboCountCategory.SelectedIndex=0;
             comboTerm.SelectedIndex = 0;
        
@@ -420,54 +410,75 @@ namespace CIS411
             listBoxDisableTutors.Items.Clear();
             listBoxLoggedIn.Items.Clear();
             DataConnection conn = new DataConnection();
+            SqlDataReader rd;
             conn.Open();
-            SqlDataReader rd = conn.GetReader("STUDENT.FIRSTNAME, STUDENT.MIDDLE_NAME, STUDENT.clarion_id, tutor.status", "TUTOR INNER JOIN STUDENT ON TUTOR.CLARION_ID=STUDENT.CLARION_ID");
-            
-            if (rd.HasRows)
-            {  
-                
-                while (rd.Read())
-                {
-                    if(rd[3].ToString() == "active")
-                        listBoxEnableTutors.Items.Add(rd[0].ToString() + " " +rd[1].ToString() + " " + rd[2]);
-                    else
-                        listBoxDisableTutors.Items.Add(rd[0].ToString() + " " + rd[1].ToString() + " " + rd[2]);
-                }
-            }
-
-            listBoxLoggedIn.Items.Add("DATE\t\tTIME IN\t\tID\t\tLAST NAME\tFIRST NAME");
-
-            rd = conn.GetReader("*", "VISIT","student", "visit.clarion_id=student.clarion_id and time_out is null", 1);
-
-            if (rd.HasRows)
+            try
             {
+                rd = conn.GetReader("STUDENT.FIRSTNAME, STUDENT.MIDDLE_NAME, STUDENT.clarion_id, tutor.status", "TUTOR INNER JOIN STUDENT ON TUTOR.CLARION_ID=STUDENT.CLARION_ID");
 
-                while (rd.Read())
+                if (rd.HasRows)
                 {
-                    
-                    DateTime jdate= DateTime.Parse(rd[1].ToString());
-                    listBoxLoggedIn.Items.Add(jdate.ToString("MM/dd/yyyy") + "\t" + rd[2] + "\t\t" + rd[0] + "\t" + rd[13] + "\t\t" + rd[14]);
+
+                    while (rd.Read())
+                    {
+                        if (rd[3].ToString() == "active")
+                            listBoxEnableTutors.Items.Add(rd[0].ToString() + " " + rd[1].ToString() + " " + rd[2]);
+                        else
+                            listBoxDisableTutors.Items.Add(rd[0].ToString() + " " + rd[1].ToString() + " " + rd[2]);
+                    }
                 }
+
+                listBoxLoggedIn.Items.Add("DATE\t\tTIME IN\t\tID\t\tLAST NAME\tFIRST NAME");
             }
-
-            rd = conn.joinQuery("select tutor_hour.tutor_id, tutor_hour.date ,tutor_hour.time_difference, tutor_hour.time_in, student.lastname, student.firstname from tutor_hour inner join tutor on tutor_hour.tutor_id = tutor.tutor_id inner join student on tutor.clarion_id = student.clarion_id where time_difference is null");
-
-            //rd = conn.GetReader("*", "tutor_hour", "student", "tutor_hour.clarion_id=student.clarion_id and time_out is null", 1);
-
-            if (rd.HasRows)
+            catch
             {
-                
-                while (rd.Read())
-                {
-
-                    DateTime jdate = DateTime.Parse(rd[1].ToString());
-                    listBoxLoggedIn.Items.Add(jdate.ToString("MM/dd/yyyy") + "\t" + rd[3] + "\t\t" + rd[0] + "\t" + rd[4] + "\t\t" + rd[5]);
-                }
+                MessageBox.Show("Cannot load tutors", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-
             conn.Close();
+            conn.Open();
+            try
+            {
+                rd = conn.GetReader("*", "VISIT", "student", "visit.clarion_id=student.clarion_id and time_out is null", 1);
 
+                if (rd.HasRows)
+                {
+
+                    while (rd.Read())
+                    {
+
+                        DateTime jdate = DateTime.Parse(rd[1].ToString());
+                        listBoxLoggedIn.Items.Add(jdate.ToString("MM/dd/yyyy") + "\t" + rd[2] + "\t\t" + rd[0] + "\t" + rd[13] + "\t\t" + rd[14]);
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Cannot load currently logged in visits", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            conn.Close();
+            conn.Open();
+            try
+            {
+
+                rd = conn.joinQuery("select tutor_hour.tutor_id, tutor_hour.date ,tutor_hour.time_difference, tutor_hour.time_in, student.lastname, student.firstname from tutor_hour inner join tutor on tutor_hour.tutor_id = tutor.tutor_id inner join student on tutor.clarion_id = student.clarion_id where time_difference is null");
+
+                //rd = conn.GetReader("*", "tutor_hour", "student", "tutor_hour.clarion_id=student.clarion_id and time_out is null", 1);
+
+                if (rd.HasRows)
+                {
+                    while (rd.Read())
+                    {
+
+                        DateTime jdate = DateTime.Parse(rd[1].ToString());
+                        listBoxLoggedIn.Items.Add(jdate.ToString("MM/dd/yyyy") + "\t" + rd[3] + "\t\t" + rd[0] + "\t" + rd[4] + "\t\t" + rd[5]);
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Cannot load currently logged in visits", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            conn.Close();
         }
 
 
@@ -565,21 +576,21 @@ namespace CIS411
             btnSaveMethods.Enabled = true;
         }
 
-        
-        
+
+
         private void btnLogOut_Click(object sender, EventArgs e)
         {
 
 
-            string []selectedStudent=listBoxLoggedIn.SelectedItem.ToString().Split();
+            string[] selectedStudent = listBoxLoggedIn.SelectedItem.ToString().Split();
             int student_ID = int.Parse(selectedStudent[3]);
 
-          
-                frmMain.signOut(student_ID);
-          
 
-            loadlist(); 
-              
+            frmMain.signOut(student_ID);
+
+
+            loadlist();
+
         }
 
         List<TextBox> txtMethods = new List<TextBox>();
@@ -636,12 +647,6 @@ namespace CIS411
             {
                 try
                 {
-                    /*Won't run because of tutor ID issue.
-                     * The Tutor ID being uploaded to the visits
-                     * table does not line up with the Tutor table
-                     * 
-                     * 
-                     */
                     string studentID = "", date = "", timeIn = "", timeOut = "", method = "", time_difference = "";
                     string[] selectedTutor, selectedClass;
                     int tutor = 0;
@@ -687,12 +692,21 @@ namespace CIS411
                             {
                                 conn.Query("insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION, time_difference) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + nothing + "', '" + nothing + "', '" + nothing + "', '" + tutor + "', '" + method + "', '" + nothing + "', '" + time_difference + "')");
                             }
-                            catch { }
+                            catch
+                            {
+                                MessageBox.Show("Cannot add visit", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
                         else
                         {
-                            conn.Query("insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION,time_difference) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + selectedClass[0] + "', '" + selectedClass[1] + "', '" + selectedClass[2] + "', '" + tutor + "', '" + method + "', '" + selectedClass[3] + "', '" + time_difference + "')");
-
+                            try
+                            {
+                                conn.Query("insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG, TUTOR_ID, METHOD, SECTION,time_difference) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + selectedClass[0] + "', '" + selectedClass[1] + "', '" + selectedClass[2] + "', '" + tutor + "', '" + method + "', '" + selectedClass[3] + "', '" + time_difference + "')");
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Cannot add visit", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
                     }
                     else // method isn't tutoring
@@ -704,12 +718,22 @@ namespace CIS411
                                 conn.Query("insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG,METHOD, SECTION,time_difference) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + nothing + "', '" + nothing + "', '" + nothing + "', '" + method + "', '" + nothing + "','" + time_difference + "')");
 
                             }
-                            catch { }
+                            catch
+                            {
+                                MessageBox.Show("Cannot add visit", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
                         else
                         {
+                            try
+                            {
                             conn.Query("insert into VISIT(DATE, TIME_IN, TIME_OUT, CLARION_ID, TERM, SUBJECT, CATALOG, METHOD, SECTION,time_difference) values ('" + date + "','" + timeIn + "', '" + timeOut + "', '" + studentID + "', '" + selectedClass[0] + "', '" + selectedClass[1] + "', '" + selectedClass[2] + "', '" + method + "', '" + selectedClass[3] + "','" + time_difference + "')");
 
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Cannot add visit", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
                     }
                     //cmd.Connection = cn;
@@ -760,48 +784,42 @@ namespace CIS411
         //By: Kris
         private void btnEditVisit_Click(object sender, EventArgs e)
         {
-
-
-            //Change button text to save and return to Edit Visit
-            if (btnEditVisit.Text == "List Visits")
+            int tryStudentID;
+            if (int.TryParse(txtEditStudentID.Text, out tryStudentID) || txtEditStudentID.Text == "")
             {
-
-                int tryStudentID;
-                if (int.TryParse(txtEditStudentID.Text, out tryStudentID) || txtEditStudentID.Text == "")
+                int studentID = 0;
+                //Puts the student id, min search date, and max search date into variables
+                try
                 {
-                    int studentID = 0;
-                    //Puts the student id, min search date, and max search date into variables
-                    try
-                    {
-                        studentID = int.Parse(txtEditStudentID.Text);
-                    }
-                    catch { }
-                    DateTime minSearch = DateTime.Parse(dateTimePickerEditMin.Text);
-                    DateTime maxSearch = DateTime.Parse(dateTimePickerEditMax.Text);
-
-                    //loads the results of the search into the listBoxLoggedIn
-                    //loadvisits(studentID, minSearch, maxSearch);
-
-
-                    frmEditList editListForm = new frmEditList(studentID, minSearch, maxSearch);
-                    editListForm.Show();
-
-
-
-                    //btnEditVisit.Text = "Save Edit";
-                    //btnLogOut.Visible = false;
-                    //btnLogOut.Enabled = false;
-                    //lblLoggedIn.Text = "Editing...";
-                    //dateTimePickerEditTimeIn.Enabled = true;
-                    //dateTimePickerEditTimeOut.Enabled = true;
+                    studentID = int.Parse(txtEditStudentID.Text);
                 }
+                catch { }
+                DateTime minSearch = DateTime.Parse(dateTimePickerEditMin.Text);
+                DateTime maxSearch = DateTime.Parse(dateTimePickerEditMax.Text);
 
-                else
-                {
-                    MessageBox.Show("Invalid Student ID", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                //loads the results of the search into the listBoxLoggedIn
+                //loadvisits(studentID, minSearch, maxSearch);
+
+
+                frmEditList editListForm = new frmEditList(studentID, minSearch, maxSearch);
+                editListForm.Show();
+
+
+
+                //btnEditVisit.Text = "Save Edit";
+                //btnLogOut.Visible = false;
+                //btnLogOut.Enabled = false;
+                //lblLoggedIn.Text = "Editing...";
+                //dateTimePickerEditTimeIn.Enabled = true;
+                //dateTimePickerEditTimeOut.Enabled = true;
             }
+
+            else
+            {
+                MessageBox.Show("Invalid Student ID", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
         }
 
                            /* //Enters the selected visit into the edit form
@@ -928,7 +946,7 @@ namespace CIS411
             }
             catch
             {
-                MessageBox.Show("please check student id");
+                MessageBox.Show("Cannot import student classes. Check the student ID.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         
@@ -1396,6 +1414,11 @@ MessageBox.Show("sfgfdsgfg");
                 while (rd.Read())
                     comboFilter.Items.Add(rd[0].ToString());
                 conn.Close();
+                for (int i = 0; i < Properties.Settings.Default.MethodNames.Count; i++)
+                {
+                    if (!(comboFilter.Items.Contains(Properties.Settings.Default.MethodNames[i])))
+                        comboFilter.Items.Add(Properties.Settings.Default.MethodNames[i]);
+                }
                 /*
                 comboGroup.Items.Add("Tutoring");
                 comboGroup.Items.Add("Group Meeting");
@@ -1451,7 +1474,7 @@ MessageBox.Show("sfgfdsgfg");
                     int toInsert = listBoxReport.SelectedIndices[i] - 1;
                     listBoxReport.Items.Insert(toInsert, listBoxReport.SelectedItems[i]);
                     listBoxReport.Items.RemoveAt(toInsert + 2);
-                    listBoxReport.SelectedItem = listBoxReport.Items[toInsert];
+                    listBoxReport.SelectedIndex = toInsert;
                 }
             listBoxReport.EndUpdate();
         }
@@ -1466,7 +1489,7 @@ MessageBox.Show("sfgfdsgfg");
                     int toInsert = listBoxReport.SelectedIndices[i] + 2;
                     listBoxReport.Items.Insert(toInsert, listBoxReport.SelectedItems[i]);
                     listBoxReport.Items.RemoveAt(toInsert - 2);
-                    listBoxReport.SelectedItem = listBoxReport.Items[toInsert - 1];
+                    listBoxReport.SelectedIndex = toInsert - 1;
                 }
             listBoxReport.EndUpdate();
         }
@@ -1573,6 +1596,15 @@ MessageBox.Show("sfgfdsgfg");
             txtAddID.Clear();
             txtAddLast.Clear();
             txtAddFirst.Clear();
+        }
+
+        private void btnDeleteReportRow_Click(object sender, EventArgs e)
+        {
+            listBoxReport.BeginUpdate();
+            int numSelected = listBoxReport.SelectedItems.Count;
+            for (int i = 0; i < numSelected; i++)
+                listBoxReport.Items.RemoveAt(listBoxReport.SelectedIndices[0]);
+            listBoxReport.EndUpdate();
         }
     }
 }
