@@ -262,6 +262,7 @@ namespace CIS411
         //  Queries database for classes taken by student with ID cardNumber
         private void updateClassComboBox(int studentID)
         {
+            
 
             comboClassList.Items.Add("Select a class...");
             DataConnection conn = new DataConnection();

@@ -193,16 +193,26 @@ namespace CIS411
             {
                 
                 method = comboEditMethod.SelectedItem.ToString();
-                
+                //MessageBox.Show("crap");
+
                 course = comboaddClass.SelectedItem.ToString().Split();
-               
+                MessageBox.Show(course[0].ToString());
+                if (course[0].ToString().ToLower() == "other")
+                {
+                    course = new string[10];
+                    course[0] = "other";
+                    course[1] = "other";
+                    course[2] = "other";
+                    course[3] = "other";
+                }
+             //   MessageBox.Show("crap");
                 if(comboAddTutoring.Enabled==true)
                 tutor = comboAddTutoring.SelectedItem.ToString().Split();
-                
+             //   MessageBox.Show("crap");
             }
             catch
             {
-                
+                MessageBox.Show("crap1");
                 istutor = true;
             }
             //MessageBox.Show(istutor.ToString());

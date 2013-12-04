@@ -65,6 +65,7 @@
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.listBoxEditVisit, 5);
             this.listBoxEditVisit.FormattingEnabled = true;
+            this.listBoxEditVisit.HorizontalScrollbar = true;
             this.listBoxEditVisit.Location = new System.Drawing.Point(3, 20);
             this.listBoxEditVisit.Name = "listBoxEditVisit";
             this.listBoxEditVisit.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
