@@ -165,6 +165,7 @@ namespace CIS411
                 btnSaveEdit.Enabled = true;
                 conn.Close();
             }
+            btnDeleteVisit.Enabled = false;
             
         }
 
