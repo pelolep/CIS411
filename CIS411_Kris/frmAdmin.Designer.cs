@@ -30,67 +30,72 @@ namespace CIS411
         {
             this.tabControlAdmin = new System.Windows.Forms.TabControl();
             this.tabVisits = new System.Windows.Forms.TabPage();
-            this.comboEditMethod = new System.Windows.Forms.ComboBox();
-            this.lblEditMethod = new System.Windows.Forms.Label();
-            this.comboaddClass = new System.Windows.Forms.ComboBox();
-            this.comboAddTutoring = new System.Windows.Forms.ComboBox();
-            this.dateTimePickerAddTimeOut = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePickerAddTimeIn = new System.Windows.Forms.DateTimePicker();
-            this.lblAddTutor = new System.Windows.Forms.Label();
-            this.comboAddMethod = new System.Windows.Forms.ComboBox();
-            this.lblAddClass = new System.Windows.Forms.Label();
-            this.lblAddMethod = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnEditVisit = new System.Windows.Forms.Button();
-            this.dateTimePickerEditMax = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePickerEditMin = new System.Windows.Forms.DateTimePicker();
-            this.lblEditDateRange = new System.Windows.Forms.Label();
-            this.txtEditStudentID = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.lblEditVisit = new System.Windows.Forms.Label();
-            this.dateTimePickerAdd = new System.Windows.Forms.DateTimePicker();
-            this.lblDate = new System.Windows.Forms.Label();
-            this.txtAddStudentID = new System.Windows.Forms.TextBox();
             this.btnAddVisit = new System.Windows.Forms.Button();
-            this.lblTimeOut = new System.Windows.Forms.Label();
-            this.lblTimeIn = new System.Windows.Forms.Label();
-            this.lblStudentID = new System.Windows.Forms.Label();
-            this.lblAddVisit = new System.Windows.Forms.Label();
             this.lblLoggedIn = new System.Windows.Forms.Label();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.listBoxLoggedIn = new System.Windows.Forms.ListBox();
+            this.comboEditMethod = new System.Windows.Forms.ComboBox();
+            this.dateTimePickerEditMax = new System.Windows.Forms.DateTimePicker();
+            this.lblEditMethod = new System.Windows.Forms.Label();
+            this.lblAddVisit = new System.Windows.Forms.Label();
+            this.comboAddTutoring = new System.Windows.Forms.ComboBox();
+            this.comboaddClass = new System.Windows.Forms.ComboBox();
+            this.dateTimePickerEditMin = new System.Windows.Forms.DateTimePicker();
+            this.txtEditStudentID = new System.Windows.Forms.TextBox();
+            this.lblEditDateRange = new System.Windows.Forms.Label();
+            this.lblStudentID = new System.Windows.Forms.Label();
+            this.comboAddMethod = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblAddTutor = new System.Windows.Forms.Label();
+            this.dateTimePickerAddTimeOut = new System.Windows.Forms.DateTimePicker();
+            this.lblDate = new System.Windows.Forms.Label();
+            this.lblAddClass = new System.Windows.Forms.Label();
+            this.dateTimePickerAddTimeIn = new System.Windows.Forms.DateTimePicker();
+            this.lblAddMethod = new System.Windows.Forms.Label();
+            this.lblTimeIn = new System.Windows.Forms.Label();
+            this.lblTimeOut = new System.Windows.Forms.Label();
+            this.txtAddStudentID = new System.Windows.Forms.TextBox();
+            this.dateTimePickerAdd = new System.Windows.Forms.DateTimePicker();
+            this.lblEditVisit = new System.Windows.Forms.Label();
             this.tabTutors = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.lblInactiveTutors = new System.Windows.Forms.Label();
             this.lblActiveTutors = new System.Windows.Forms.Label();
+            this.listBoxDisableTutors = new System.Windows.Forms.ListBox();
+            this.listBoxEnableTutors = new System.Windows.Forms.ListBox();
             this.btnAddTutor = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnDisableSelected = new System.Windows.Forms.Button();
             this.btnDisableAll = new System.Windows.Forms.Button();
             this.btnEnableAll = new System.Windows.Forms.Button();
             this.btnEnableSelected = new System.Windows.Forms.Button();
-            this.listBoxDisableTutors = new System.Windows.Forms.ListBox();
-            this.listBoxEnableTutors = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.txtTutorStudentID = new System.Windows.Forms.TextBox();
             this.tabMethods = new System.Windows.Forms.TabPage();
             this.btnSaveMethods = new System.Windows.Forms.Button();
             this.btnAddMethod = new System.Windows.Forms.Button();
             this.tabAdmin = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.grpBoxAddStudent = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblAddFirst = new System.Windows.Forms.Label();
             this.btnAddStudent = new System.Windows.Forms.Button();
+            this.blAddLast = new System.Windows.Forms.Label();
             this.txtAddID = new System.Windows.Forms.TextBox();
+            this.lblAddID = new System.Windows.Forms.Label();
             this.txtAddLast = new System.Windows.Forms.TextBox();
             this.txtAddFirst = new System.Windows.Forms.TextBox();
-            this.lblAddID = new System.Windows.Forms.Label();
-            this.blAddLast = new System.Windows.Forms.Label();
-            this.lblAddFirst = new System.Windows.Forms.Label();
             this.btnImport = new System.Windows.Forms.Button();
             this.grpBoxPassword = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.btnChangePassword = new System.Windows.Forms.Button();
-            this.txtConfirmPassword = new System.Windows.Forms.TextBox();
-            this.txtNewPassword = new System.Windows.Forms.TextBox();
-            this.txtCurrentPassword = new System.Windows.Forms.TextBox();
             this.lblConfirmPassword = new System.Windows.Forms.Label();
+            this.txtCurrentPassword = new System.Windows.Forms.TextBox();
             this.lblNewPassword = new System.Windows.Forms.Label();
+            this.txtNewPassword = new System.Windows.Forms.TextBox();
             this.lblCurrentPassword = new System.Windows.Forms.Label();
+            this.txtConfirmPassword = new System.Windows.Forms.TextBox();
             this.tabReports = new System.Windows.Forms.TabPage();
             this.btnDeleteReportRow = new System.Windows.Forms.Button();
             this.btnFullReport = new System.Windows.Forms.Button();
@@ -117,24 +122,19 @@ namespace CIS411
             this.txtAddSignOut = new System.Windows.Forms.TextBox();
             this.btn_courses_import = new System.Windows.Forms.Button();
             this.txtAddSignIn = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControlAdmin.SuspendLayout();
             this.tabVisits.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.tabTutors.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.tabMethods.SuspendLayout();
             this.tabAdmin.SuspendLayout();
-            this.grpBoxAddStudent.SuspendLayout();
-            this.grpBoxPassword.SuspendLayout();
-            this.tabReports.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
+            this.grpBoxAddStudent.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.grpBoxPassword.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            this.tabReports.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlAdmin
@@ -147,7 +147,7 @@ namespace CIS411
             this.tabControlAdmin.Location = new System.Drawing.Point(12, 12);
             this.tabControlAdmin.Name = "tabControlAdmin";
             this.tabControlAdmin.SelectedIndex = 0;
-            this.tabControlAdmin.Size = new System.Drawing.Size(976, 421);
+            this.tabControlAdmin.Size = new System.Drawing.Size(660, 421);
             this.tabControlAdmin.TabIndex = 0;
             this.tabControlAdmin.SelectedIndexChanged += new System.EventHandler(this.tabControlAdmin_SelectedIndexChanged);
             // 
@@ -157,112 +157,66 @@ namespace CIS411
             this.tabVisits.Location = new System.Drawing.Point(4, 22);
             this.tabVisits.Name = "tabVisits";
             this.tabVisits.Padding = new System.Windows.Forms.Padding(3);
-            this.tabVisits.Size = new System.Drawing.Size(968, 395);
+            this.tabVisits.Size = new System.Drawing.Size(652, 395);
             this.tabVisits.TabIndex = 2;
             this.tabVisits.Text = "Visits";
             this.tabVisits.UseVisualStyleBackColor = true;
             // 
-            // comboEditMethod
+            // tableLayoutPanel1
             // 
-            this.comboEditMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboEditMethod.FormattingEnabled = true;
-            this.comboEditMethod.Location = new System.Drawing.Point(3, 332);
-            this.comboEditMethod.Name = "comboEditMethod";
-            this.comboEditMethod.Size = new System.Drawing.Size(121, 21);
-            this.comboEditMethod.TabIndex = 46;
-            // 
-            // lblEditMethod
-            // 
-            this.lblEditMethod.AutoSize = true;
-            this.lblEditMethod.Location = new System.Drawing.Point(3, 316);
-            this.lblEditMethod.Name = "lblEditMethod";
-            this.lblEditMethod.Size = new System.Drawing.Size(43, 13);
-            this.lblEditMethod.TabIndex = 45;
-            this.lblEditMethod.Text = "Method";
-            // 
-            // comboaddClass
-            // 
-            this.comboaddClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboaddClass.Enabled = false;
-            this.comboaddClass.FormattingEnabled = true;
-            this.comboaddClass.Location = new System.Drawing.Point(130, 240);
-            this.comboaddClass.Name = "comboaddClass";
-            this.comboaddClass.Size = new System.Drawing.Size(109, 21);
-            this.comboaddClass.TabIndex = 44;
-            this.comboaddClass.GotFocus += new System.EventHandler(this.AddVisitAcceptButton);
-            // 
-            // comboAddTutoring
-            // 
-            this.comboAddTutoring.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboAddTutoring.Enabled = false;
-            this.comboAddTutoring.FormattingEnabled = true;
-            this.comboAddTutoring.Location = new System.Drawing.Point(245, 240);
-            this.comboAddTutoring.Name = "comboAddTutoring";
-            this.comboAddTutoring.Size = new System.Drawing.Size(121, 21);
-            this.comboAddTutoring.TabIndex = 43;
-            this.comboAddTutoring.SelectedIndexChanged += new System.EventHandler(this.comboAddTutoring_SelectedIndexChanged);
-            this.comboAddTutoring.GotFocus += new System.EventHandler(this.AddVisitAcceptButton);
-            // 
-            // dateTimePickerAddTimeOut
-            // 
-            this.dateTimePickerAddTimeOut.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePickerAddTimeOut.Location = new System.Drawing.Point(372, 201);
-            this.dateTimePickerAddTimeOut.Name = "dateTimePickerAddTimeOut";
-            this.dateTimePickerAddTimeOut.ShowUpDown = true;
-            this.dateTimePickerAddTimeOut.Size = new System.Drawing.Size(86, 20);
-            this.dateTimePickerAddTimeOut.TabIndex = 39;
-            this.dateTimePickerAddTimeOut.Value = new System.DateTime(2013, 12, 3, 0, 0, 0, 0);
-            this.dateTimePickerAddTimeOut.GotFocus += new System.EventHandler(this.AddVisitAcceptButton);
-            // 
-            // dateTimePickerAddTimeIn
-            // 
-            this.dateTimePickerAddTimeIn.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePickerAddTimeIn.Location = new System.Drawing.Point(245, 201);
-            this.dateTimePickerAddTimeIn.Name = "dateTimePickerAddTimeIn";
-            this.dateTimePickerAddTimeIn.ShowUpDown = true;
-            this.dateTimePickerAddTimeIn.Size = new System.Drawing.Size(86, 20);
-            this.dateTimePickerAddTimeIn.TabIndex = 38;
-            this.dateTimePickerAddTimeIn.Value = new System.DateTime(2013, 12, 3, 0, 0, 0, 0);
-            this.dateTimePickerAddTimeIn.GotFocus += new System.EventHandler(this.AddVisitAcceptButton);
-            // 
-            // lblAddTutor
-            // 
-            this.lblAddTutor.AutoSize = true;
-            this.lblAddTutor.Location = new System.Drawing.Point(245, 224);
-            this.lblAddTutor.Name = "lblAddTutor";
-            this.lblAddTutor.Size = new System.Drawing.Size(32, 13);
-            this.lblAddTutor.TabIndex = 36;
-            this.lblAddTutor.Text = "Tutor";
-            // 
-            // comboAddMethod
-            // 
-            this.comboAddMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboAddMethod.Enabled = false;
-            this.comboAddMethod.FormattingEnabled = true;
-            this.comboAddMethod.Location = new System.Drawing.Point(3, 240);
-            this.comboAddMethod.Name = "comboAddMethod";
-            this.comboAddMethod.Size = new System.Drawing.Size(121, 21);
-            this.comboAddMethod.TabIndex = 35;
-            this.comboAddMethod.SelectedIndexChanged += new System.EventHandler(this.comboAddMethod_SelectedIndexChanged);
-            this.comboAddMethod.GotFocus += new System.EventHandler(this.AddVisitAcceptButton);
-            // 
-            // lblAddClass
-            // 
-            this.lblAddClass.AutoSize = true;
-            this.lblAddClass.Location = new System.Drawing.Point(130, 224);
-            this.lblAddClass.Name = "lblAddClass";
-            this.lblAddClass.Size = new System.Drawing.Size(32, 13);
-            this.lblAddClass.TabIndex = 33;
-            this.lblAddClass.Text = "Class";
-            // 
-            // lblAddMethod
-            // 
-            this.lblAddMethod.AutoSize = true;
-            this.lblAddMethod.Location = new System.Drawing.Point(3, 224);
-            this.lblAddMethod.Name = "lblAddMethod";
-            this.lblAddMethod.Size = new System.Drawing.Size(43, 13);
-            this.lblAddMethod.TabIndex = 31;
-            this.lblAddMethod.Text = "Method";
+            this.tableLayoutPanel1.ColumnCount = 5;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.lblLoggedIn, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.dateTimePickerEditMin, 1, 11);
+            this.tableLayoutPanel1.Controls.Add(this.btnEditVisit, 2, 10);
+            this.tableLayoutPanel1.Controls.Add(this.comboEditMethod, 0, 13);
+            this.tableLayoutPanel1.Controls.Add(this.dateTimePickerEditMax, 1, 13);
+            this.tableLayoutPanel1.Controls.Add(this.listBoxLoggedIn, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblEditMethod, 0, 12);
+            this.tableLayoutPanel1.Controls.Add(this.lblAddVisit, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.comboAddTutoring, 2, 7);
+            this.tableLayoutPanel1.Controls.Add(this.comboaddClass, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.btnLogOut, 4, 2);
+            this.tableLayoutPanel1.Controls.Add(this.txtEditStudentID, 0, 11);
+            this.tableLayoutPanel1.Controls.Add(this.lblEditDateRange, 1, 10);
+            this.tableLayoutPanel1.Controls.Add(this.lblStudentID, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.comboAddMethod, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.label6, 0, 10);
+            this.tableLayoutPanel1.Controls.Add(this.lblAddTutor, 2, 6);
+            this.tableLayoutPanel1.Controls.Add(this.dateTimePickerAddTimeOut, 3, 5);
+            this.tableLayoutPanel1.Controls.Add(this.btnAddVisit, 4, 6);
+            this.tableLayoutPanel1.Controls.Add(this.lblDate, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.lblAddClass, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.dateTimePickerAddTimeIn, 2, 5);
+            this.tableLayoutPanel1.Controls.Add(this.lblAddMethod, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.lblTimeIn, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.lblTimeOut, 3, 4);
+            this.tableLayoutPanel1.Controls.Add(this.txtAddStudentID, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.dateTimePickerAdd, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.lblEditVisit, 0, 9);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 6);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 14;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(626, 365);
+            this.tableLayoutPanel1.TabIndex = 47;
             // 
             // btnEditVisit
             // 
@@ -275,97 +229,6 @@ namespace CIS411
             this.btnEditVisit.UseVisualStyleBackColor = true;
             this.btnEditVisit.Click += new System.EventHandler(this.btnEditVisit_Click);
             // 
-            // dateTimePickerEditMax
-            // 
-            this.dateTimePickerEditMax.CustomFormat = "MM\'/\'dd\'/\'yyyy";
-            this.dateTimePickerEditMax.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePickerEditMax.Location = new System.Drawing.Point(130, 332);
-            this.dateTimePickerEditMax.MinDate = new System.DateTime(2013, 1, 1, 0, 0, 0, 0);
-            this.dateTimePickerEditMax.Name = "dateTimePickerEditMax";
-            this.dateTimePickerEditMax.Size = new System.Drawing.Size(109, 20);
-            this.dateTimePickerEditMax.TabIndex = 28;
-            this.dateTimePickerEditMax.Value = new System.DateTime(2013, 12, 3, 0, 0, 0, 0);
-            this.dateTimePickerEditMax.GotFocus += new System.EventHandler(this.EditVisitAcceptButton);
-            // 
-            // dateTimePickerEditMin
-            // 
-            this.dateTimePickerEditMin.CustomFormat = "MM\'/\'dd\'/\'yyyy";
-            this.dateTimePickerEditMin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePickerEditMin.Location = new System.Drawing.Point(130, 293);
-            this.dateTimePickerEditMin.MinDate = new System.DateTime(2013, 1, 1, 0, 0, 0, 0);
-            this.dateTimePickerEditMin.Name = "dateTimePickerEditMin";
-            this.dateTimePickerEditMin.Size = new System.Drawing.Size(109, 20);
-            this.dateTimePickerEditMin.TabIndex = 27;
-            this.dateTimePickerEditMin.Value = new System.DateTime(2013, 12, 3, 0, 0, 0, 0);
-            this.dateTimePickerEditMin.GotFocus += new System.EventHandler(this.EditVisitAcceptButton);
-            // 
-            // lblEditDateRange
-            // 
-            this.lblEditDateRange.AutoSize = true;
-            this.lblEditDateRange.Location = new System.Drawing.Point(130, 277);
-            this.lblEditDateRange.Name = "lblEditDateRange";
-            this.lblEditDateRange.Size = new System.Drawing.Size(65, 13);
-            this.lblEditDateRange.TabIndex = 26;
-            this.lblEditDateRange.Text = "Date Range";
-            // 
-            // txtEditStudentID
-            // 
-            this.txtEditStudentID.Location = new System.Drawing.Point(3, 293);
-            this.txtEditStudentID.MaxLength = 8;
-            this.txtEditStudentID.Name = "txtEditStudentID";
-            this.txtEditStudentID.Size = new System.Drawing.Size(100, 20);
-            this.txtEditStudentID.TabIndex = 23;
-            this.txtEditStudentID.GotFocus += new System.EventHandler(this.EditVisitAcceptButton);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 277);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(58, 13);
-            this.label6.TabIndex = 19;
-            this.label6.Text = "Student ID";
-            // 
-            // lblEditVisit
-            // 
-            this.lblEditVisit.AutoSize = true;
-            this.lblEditVisit.Location = new System.Drawing.Point(3, 264);
-            this.lblEditVisit.Name = "lblEditVisit";
-            this.lblEditVisit.Size = new System.Drawing.Size(50, 13);
-            this.lblEditVisit.TabIndex = 18;
-            this.lblEditVisit.Text = "Edit Visit:";
-            // 
-            // dateTimePickerAdd
-            // 
-            this.dateTimePickerAdd.CustomFormat = "MM\'/\'dd\'/\'yyyy";
-            this.dateTimePickerAdd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePickerAdd.Location = new System.Drawing.Point(130, 201);
-            this.dateTimePickerAdd.MinDate = new System.DateTime(2013, 1, 1, 0, 0, 0, 0);
-            this.dateTimePickerAdd.Name = "dateTimePickerAdd";
-            this.dateTimePickerAdd.Size = new System.Drawing.Size(109, 20);
-            this.dateTimePickerAdd.TabIndex = 17;
-            this.dateTimePickerAdd.Value = new System.DateTime(2013, 12, 3, 0, 0, 0, 0);
-            this.dateTimePickerAdd.GotFocus += new System.EventHandler(this.AddVisitAcceptButton);
-            // 
-            // lblDate
-            // 
-            this.lblDate.AutoSize = true;
-            this.lblDate.Location = new System.Drawing.Point(130, 185);
-            this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(30, 13);
-            this.lblDate.TabIndex = 16;
-            this.lblDate.Text = "Date";
-            // 
-            // txtAddStudentID
-            // 
-            this.txtAddStudentID.Location = new System.Drawing.Point(3, 201);
-            this.txtAddStudentID.MaxLength = 8;
-            this.txtAddStudentID.Name = "txtAddStudentID";
-            this.txtAddStudentID.Size = new System.Drawing.Size(100, 20);
-            this.txtAddStudentID.TabIndex = 13;
-            this.txtAddStudentID.TextChanged += new System.EventHandler(this.txtAddStudentID_TextChanged);
-            this.txtAddStudentID.GotFocus += new System.EventHandler(this.AddVisitAcceptButton);
-            // 
             // btnAddVisit
             // 
             this.btnAddVisit.Location = new System.Drawing.Point(464, 227);
@@ -376,42 +239,6 @@ namespace CIS411
             this.btnAddVisit.Text = "Add Visit";
             this.btnAddVisit.UseVisualStyleBackColor = true;
             this.btnAddVisit.Click += new System.EventHandler(this.btnAddVisit_Click);
-            // 
-            // lblTimeOut
-            // 
-            this.lblTimeOut.AutoSize = true;
-            this.lblTimeOut.Location = new System.Drawing.Point(372, 185);
-            this.lblTimeOut.Name = "lblTimeOut";
-            this.lblTimeOut.Size = new System.Drawing.Size(50, 13);
-            this.lblTimeOut.TabIndex = 9;
-            this.lblTimeOut.Text = "Time Out";
-            // 
-            // lblTimeIn
-            // 
-            this.lblTimeIn.AutoSize = true;
-            this.lblTimeIn.Location = new System.Drawing.Point(245, 185);
-            this.lblTimeIn.Name = "lblTimeIn";
-            this.lblTimeIn.Size = new System.Drawing.Size(42, 13);
-            this.lblTimeIn.TabIndex = 8;
-            this.lblTimeIn.Text = "Time In";
-            // 
-            // lblStudentID
-            // 
-            this.lblStudentID.AutoSize = true;
-            this.lblStudentID.Location = new System.Drawing.Point(3, 185);
-            this.lblStudentID.Name = "lblStudentID";
-            this.lblStudentID.Size = new System.Drawing.Size(58, 13);
-            this.lblStudentID.TabIndex = 7;
-            this.lblStudentID.Text = "Student ID";
-            // 
-            // lblAddVisit
-            // 
-            this.lblAddVisit.AutoSize = true;
-            this.lblAddVisit.Location = new System.Drawing.Point(3, 172);
-            this.lblAddVisit.Name = "lblAddVisit";
-            this.lblAddVisit.Size = new System.Drawing.Size(51, 13);
-            this.lblAddVisit.TabIndex = 3;
-            this.lblAddVisit.Text = "Add Visit:";
             // 
             // lblLoggedIn
             // 
@@ -444,16 +271,277 @@ namespace CIS411
             this.listBoxLoggedIn.TabIndex = 0;
             this.listBoxLoggedIn.GotFocus += new System.EventHandler(this.listBoxLoggedIn_GotFocus);
             // 
+            // comboEditMethod
+            // 
+            this.comboEditMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboEditMethod.FormattingEnabled = true;
+            this.comboEditMethod.Location = new System.Drawing.Point(3, 332);
+            this.comboEditMethod.Name = "comboEditMethod";
+            this.comboEditMethod.Size = new System.Drawing.Size(121, 21);
+            this.comboEditMethod.TabIndex = 46;
+            // 
+            // dateTimePickerEditMax
+            // 
+            this.dateTimePickerEditMax.CustomFormat = "MM\'/\'dd\'/\'yyyy";
+            this.dateTimePickerEditMax.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePickerEditMax.Location = new System.Drawing.Point(130, 332);
+            this.dateTimePickerEditMax.MinDate = new System.DateTime(2013, 1, 1, 0, 0, 0, 0);
+            this.dateTimePickerEditMax.Name = "dateTimePickerEditMax";
+            this.dateTimePickerEditMax.Size = new System.Drawing.Size(109, 20);
+            this.dateTimePickerEditMax.TabIndex = 28;
+            this.dateTimePickerEditMax.Value = new System.DateTime(2013, 12, 3, 0, 0, 0, 0);
+            this.dateTimePickerEditMax.GotFocus += new System.EventHandler(this.EditVisitAcceptButton);
+            // 
+            // lblEditMethod
+            // 
+            this.lblEditMethod.AutoSize = true;
+            this.lblEditMethod.Location = new System.Drawing.Point(3, 316);
+            this.lblEditMethod.Name = "lblEditMethod";
+            this.lblEditMethod.Size = new System.Drawing.Size(43, 13);
+            this.lblEditMethod.TabIndex = 45;
+            this.lblEditMethod.Text = "Method";
+            // 
+            // lblAddVisit
+            // 
+            this.lblAddVisit.AutoSize = true;
+            this.lblAddVisit.Location = new System.Drawing.Point(3, 172);
+            this.lblAddVisit.Name = "lblAddVisit";
+            this.lblAddVisit.Size = new System.Drawing.Size(51, 13);
+            this.lblAddVisit.TabIndex = 3;
+            this.lblAddVisit.Text = "Add Visit:";
+            // 
+            // comboAddTutoring
+            // 
+            this.comboAddTutoring.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboAddTutoring.Enabled = false;
+            this.comboAddTutoring.FormattingEnabled = true;
+            this.comboAddTutoring.Location = new System.Drawing.Point(245, 240);
+            this.comboAddTutoring.Name = "comboAddTutoring";
+            this.comboAddTutoring.Size = new System.Drawing.Size(121, 21);
+            this.comboAddTutoring.TabIndex = 43;
+            this.comboAddTutoring.SelectedIndexChanged += new System.EventHandler(this.comboAddTutoring_SelectedIndexChanged);
+            this.comboAddTutoring.GotFocus += new System.EventHandler(this.AddVisitAcceptButton);
+            // 
+            // comboaddClass
+            // 
+            this.comboaddClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboaddClass.Enabled = false;
+            this.comboaddClass.FormattingEnabled = true;
+            this.comboaddClass.Location = new System.Drawing.Point(130, 240);
+            this.comboaddClass.Name = "comboaddClass";
+            this.comboaddClass.Size = new System.Drawing.Size(109, 21);
+            this.comboaddClass.TabIndex = 44;
+            this.comboaddClass.GotFocus += new System.EventHandler(this.AddVisitAcceptButton);
+            // 
+            // dateTimePickerEditMin
+            // 
+            this.dateTimePickerEditMin.CustomFormat = "MM\'/\'dd\'/\'yyyy";
+            this.dateTimePickerEditMin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePickerEditMin.Location = new System.Drawing.Point(130, 293);
+            this.dateTimePickerEditMin.MinDate = new System.DateTime(2013, 1, 1, 0, 0, 0, 0);
+            this.dateTimePickerEditMin.Name = "dateTimePickerEditMin";
+            this.dateTimePickerEditMin.Size = new System.Drawing.Size(109, 20);
+            this.dateTimePickerEditMin.TabIndex = 27;
+            this.dateTimePickerEditMin.Value = new System.DateTime(2013, 12, 3, 0, 0, 0, 0);
+            this.dateTimePickerEditMin.GotFocus += new System.EventHandler(this.EditVisitAcceptButton);
+            // 
+            // txtEditStudentID
+            // 
+            this.txtEditStudentID.Location = new System.Drawing.Point(3, 293);
+            this.txtEditStudentID.MaxLength = 8;
+            this.txtEditStudentID.Name = "txtEditStudentID";
+            this.txtEditStudentID.Size = new System.Drawing.Size(100, 20);
+            this.txtEditStudentID.TabIndex = 23;
+            this.txtEditStudentID.GotFocus += new System.EventHandler(this.EditVisitAcceptButton);
+            // 
+            // lblEditDateRange
+            // 
+            this.lblEditDateRange.AutoSize = true;
+            this.lblEditDateRange.Location = new System.Drawing.Point(130, 277);
+            this.lblEditDateRange.Name = "lblEditDateRange";
+            this.lblEditDateRange.Size = new System.Drawing.Size(65, 13);
+            this.lblEditDateRange.TabIndex = 26;
+            this.lblEditDateRange.Text = "Date Range";
+            // 
+            // lblStudentID
+            // 
+            this.lblStudentID.AutoSize = true;
+            this.lblStudentID.Location = new System.Drawing.Point(3, 185);
+            this.lblStudentID.Name = "lblStudentID";
+            this.lblStudentID.Size = new System.Drawing.Size(58, 13);
+            this.lblStudentID.TabIndex = 7;
+            this.lblStudentID.Text = "Student ID";
+            // 
+            // comboAddMethod
+            // 
+            this.comboAddMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboAddMethod.Enabled = false;
+            this.comboAddMethod.FormattingEnabled = true;
+            this.comboAddMethod.Location = new System.Drawing.Point(3, 240);
+            this.comboAddMethod.Name = "comboAddMethod";
+            this.comboAddMethod.Size = new System.Drawing.Size(121, 21);
+            this.comboAddMethod.TabIndex = 35;
+            this.comboAddMethod.SelectedIndexChanged += new System.EventHandler(this.comboAddMethod_SelectedIndexChanged);
+            this.comboAddMethod.GotFocus += new System.EventHandler(this.AddVisitAcceptButton);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 277);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(58, 13);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "Student ID";
+            // 
+            // lblAddTutor
+            // 
+            this.lblAddTutor.AutoSize = true;
+            this.lblAddTutor.Location = new System.Drawing.Point(245, 224);
+            this.lblAddTutor.Name = "lblAddTutor";
+            this.lblAddTutor.Size = new System.Drawing.Size(32, 13);
+            this.lblAddTutor.TabIndex = 36;
+            this.lblAddTutor.Text = "Tutor";
+            // 
+            // dateTimePickerAddTimeOut
+            // 
+            this.dateTimePickerAddTimeOut.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimePickerAddTimeOut.Location = new System.Drawing.Point(372, 201);
+            this.dateTimePickerAddTimeOut.Name = "dateTimePickerAddTimeOut";
+            this.dateTimePickerAddTimeOut.ShowUpDown = true;
+            this.dateTimePickerAddTimeOut.Size = new System.Drawing.Size(86, 20);
+            this.dateTimePickerAddTimeOut.TabIndex = 39;
+            this.dateTimePickerAddTimeOut.Value = new System.DateTime(2013, 12, 3, 0, 0, 0, 0);
+            this.dateTimePickerAddTimeOut.GotFocus += new System.EventHandler(this.AddVisitAcceptButton);
+            // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            this.lblDate.Location = new System.Drawing.Point(130, 185);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(30, 13);
+            this.lblDate.TabIndex = 16;
+            this.lblDate.Text = "Date";
+            // 
+            // lblAddClass
+            // 
+            this.lblAddClass.AutoSize = true;
+            this.lblAddClass.Location = new System.Drawing.Point(130, 224);
+            this.lblAddClass.Name = "lblAddClass";
+            this.lblAddClass.Size = new System.Drawing.Size(32, 13);
+            this.lblAddClass.TabIndex = 33;
+            this.lblAddClass.Text = "Class";
+            // 
+            // dateTimePickerAddTimeIn
+            // 
+            this.dateTimePickerAddTimeIn.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimePickerAddTimeIn.Location = new System.Drawing.Point(245, 201);
+            this.dateTimePickerAddTimeIn.Name = "dateTimePickerAddTimeIn";
+            this.dateTimePickerAddTimeIn.ShowUpDown = true;
+            this.dateTimePickerAddTimeIn.Size = new System.Drawing.Size(86, 20);
+            this.dateTimePickerAddTimeIn.TabIndex = 38;
+            this.dateTimePickerAddTimeIn.Value = new System.DateTime(2013, 12, 3, 0, 0, 0, 0);
+            this.dateTimePickerAddTimeIn.GotFocus += new System.EventHandler(this.AddVisitAcceptButton);
+            // 
+            // lblAddMethod
+            // 
+            this.lblAddMethod.AutoSize = true;
+            this.lblAddMethod.Location = new System.Drawing.Point(3, 224);
+            this.lblAddMethod.Name = "lblAddMethod";
+            this.lblAddMethod.Size = new System.Drawing.Size(43, 13);
+            this.lblAddMethod.TabIndex = 31;
+            this.lblAddMethod.Text = "Method";
+            // 
+            // lblTimeIn
+            // 
+            this.lblTimeIn.AutoSize = true;
+            this.lblTimeIn.Location = new System.Drawing.Point(245, 185);
+            this.lblTimeIn.Name = "lblTimeIn";
+            this.lblTimeIn.Size = new System.Drawing.Size(42, 13);
+            this.lblTimeIn.TabIndex = 8;
+            this.lblTimeIn.Text = "Time In";
+            // 
+            // lblTimeOut
+            // 
+            this.lblTimeOut.AutoSize = true;
+            this.lblTimeOut.Location = new System.Drawing.Point(372, 185);
+            this.lblTimeOut.Name = "lblTimeOut";
+            this.lblTimeOut.Size = new System.Drawing.Size(50, 13);
+            this.lblTimeOut.TabIndex = 9;
+            this.lblTimeOut.Text = "Time Out";
+            // 
+            // txtAddStudentID
+            // 
+            this.txtAddStudentID.Location = new System.Drawing.Point(3, 201);
+            this.txtAddStudentID.MaxLength = 8;
+            this.txtAddStudentID.Name = "txtAddStudentID";
+            this.txtAddStudentID.Size = new System.Drawing.Size(100, 20);
+            this.txtAddStudentID.TabIndex = 13;
+            this.txtAddStudentID.TextChanged += new System.EventHandler(this.txtAddStudentID_TextChanged);
+            this.txtAddStudentID.GotFocus += new System.EventHandler(this.AddVisitAcceptButton);
+            // 
+            // dateTimePickerAdd
+            // 
+            this.dateTimePickerAdd.CustomFormat = "MM\'/\'dd\'/\'yyyy";
+            this.dateTimePickerAdd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePickerAdd.Location = new System.Drawing.Point(130, 201);
+            this.dateTimePickerAdd.MinDate = new System.DateTime(2013, 1, 1, 0, 0, 0, 0);
+            this.dateTimePickerAdd.Name = "dateTimePickerAdd";
+            this.dateTimePickerAdd.Size = new System.Drawing.Size(109, 20);
+            this.dateTimePickerAdd.TabIndex = 17;
+            this.dateTimePickerAdd.Value = new System.DateTime(2013, 12, 3, 0, 0, 0, 0);
+            this.dateTimePickerAdd.GotFocus += new System.EventHandler(this.AddVisitAcceptButton);
+            // 
+            // lblEditVisit
+            // 
+            this.lblEditVisit.AutoSize = true;
+            this.lblEditVisit.Location = new System.Drawing.Point(3, 264);
+            this.lblEditVisit.Name = "lblEditVisit";
+            this.lblEditVisit.Size = new System.Drawing.Size(50, 13);
+            this.lblEditVisit.TabIndex = 18;
+            this.lblEditVisit.Text = "Edit Visit:";
+            // 
             // tabTutors
             // 
             this.tabTutors.Controls.Add(this.tableLayoutPanel2);
             this.tabTutors.Location = new System.Drawing.Point(4, 22);
             this.tabTutors.Name = "tabTutors";
             this.tabTutors.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTutors.Size = new System.Drawing.Size(968, 395);
+            this.tabTutors.Size = new System.Drawing.Size(652, 395);
             this.tabTutors.TabIndex = 1;
             this.tabTutors.Text = "Tutors";
             this.tabTutors.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 5;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.Controls.Add(this.lblActiveTutors, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 6);
+            this.tableLayoutPanel2.Controls.Add(this.btnAddTutor, 2, 6);
+            this.tableLayoutPanel2.Controls.Add(this.lblInactiveTutors, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.listBoxDisableTutors, 3, 1);
+            this.tableLayoutPanel2.Controls.Add(this.listBoxEnableTutors, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.btnDisableSelected, 2, 5);
+            this.tableLayoutPanel2.Controls.Add(this.btnDisableAll, 2, 4);
+            this.tableLayoutPanel2.Controls.Add(this.btnEnableAll, 2, 2);
+            this.tableLayoutPanel2.Controls.Add(this.btnEnableSelected, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.txtTutorStudentID, 1, 6);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(6, 6);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 7;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(433, 324);
+            this.tableLayoutPanel2.TabIndex = 12;
             // 
             // lblInactiveTutors
             // 
@@ -475,6 +563,26 @@ namespace CIS411
             this.lblActiveTutors.TabIndex = 10;
             this.lblActiveTutors.Text = "Active Tutors:";
             // 
+            // listBoxDisableTutors
+            // 
+            this.tableLayoutPanel2.SetColumnSpan(this.listBoxDisableTutors, 2);
+            this.listBoxDisableTutors.FormattingEnabled = true;
+            this.listBoxDisableTutors.Location = new System.Drawing.Point(264, 16);
+            this.listBoxDisableTutors.Name = "listBoxDisableTutors";
+            this.tableLayoutPanel2.SetRowSpan(this.listBoxDisableTutors, 5);
+            this.listBoxDisableTutors.Size = new System.Drawing.Size(161, 212);
+            this.listBoxDisableTutors.TabIndex = 3;
+            // 
+            // listBoxEnableTutors
+            // 
+            this.tableLayoutPanel2.SetColumnSpan(this.listBoxEnableTutors, 2);
+            this.listBoxEnableTutors.FormattingEnabled = true;
+            this.listBoxEnableTutors.Location = new System.Drawing.Point(3, 16);
+            this.listBoxEnableTutors.Name = "listBoxEnableTutors";
+            this.tableLayoutPanel2.SetRowSpan(this.listBoxEnableTutors, 5);
+            this.listBoxEnableTutors.Size = new System.Drawing.Size(174, 212);
+            this.listBoxEnableTutors.TabIndex = 2;
+            // 
             // btnAddTutor
             // 
             this.btnAddTutor.Location = new System.Drawing.Point(183, 234);
@@ -484,6 +592,15 @@ namespace CIS411
             this.btnAddTutor.Text = "Add";
             this.btnAddTutor.UseVisualStyleBackColor = true;
             this.btnAddTutor.Click += new System.EventHandler(this.btnAddTutor_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 231);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Student ID:";
             // 
             // btnDisableSelected
             // 
@@ -525,35 +642,6 @@ namespace CIS411
             this.btnEnableSelected.UseVisualStyleBackColor = true;
             this.btnEnableSelected.Click += new System.EventHandler(this.btnEnableSelected_Click);
             // 
-            // listBoxDisableTutors
-            // 
-            this.tableLayoutPanel2.SetColumnSpan(this.listBoxDisableTutors, 2);
-            this.listBoxDisableTutors.FormattingEnabled = true;
-            this.listBoxDisableTutors.Location = new System.Drawing.Point(264, 16);
-            this.listBoxDisableTutors.Name = "listBoxDisableTutors";
-            this.tableLayoutPanel2.SetRowSpan(this.listBoxDisableTutors, 5);
-            this.listBoxDisableTutors.Size = new System.Drawing.Size(161, 212);
-            this.listBoxDisableTutors.TabIndex = 3;
-            // 
-            // listBoxEnableTutors
-            // 
-            this.tableLayoutPanel2.SetColumnSpan(this.listBoxEnableTutors, 2);
-            this.listBoxEnableTutors.FormattingEnabled = true;
-            this.listBoxEnableTutors.Location = new System.Drawing.Point(3, 16);
-            this.listBoxEnableTutors.Name = "listBoxEnableTutors";
-            this.tableLayoutPanel2.SetRowSpan(this.listBoxEnableTutors, 5);
-            this.listBoxEnableTutors.Size = new System.Drawing.Size(174, 212);
-            this.listBoxEnableTutors.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 231);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Student ID:";
-            // 
             // txtTutorStudentID
             // 
             this.txtTutorStudentID.Location = new System.Drawing.Point(70, 234);
@@ -569,7 +657,7 @@ namespace CIS411
             this.tabMethods.Location = new System.Drawing.Point(4, 22);
             this.tabMethods.Name = "tabMethods";
             this.tabMethods.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMethods.Size = new System.Drawing.Size(968, 395);
+            this.tabMethods.Size = new System.Drawing.Size(652, 395);
             this.tabMethods.TabIndex = 4;
             this.tabMethods.Text = "Methods";
             this.tabMethods.UseVisualStyleBackColor = true;
@@ -599,10 +687,26 @@ namespace CIS411
             this.tabAdmin.Location = new System.Drawing.Point(4, 22);
             this.tabAdmin.Name = "tabAdmin";
             this.tabAdmin.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAdmin.Size = new System.Drawing.Size(968, 395);
+            this.tabAdmin.Size = new System.Drawing.Size(652, 395);
             this.tabAdmin.TabIndex = 3;
             this.tabAdmin.Text = "Administration";
             this.tabAdmin.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.ColumnCount = 2;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel5.Controls.Add(this.grpBoxAddStudent, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.btnImport, 1, 1);
+            this.tableLayoutPanel5.Controls.Add(this.grpBoxPassword, 1, 0);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(10, 16);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 2;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(556, 353);
+            this.tableLayoutPanel5.TabIndex = 9;
             // 
             // grpBoxAddStudent
             // 
@@ -614,6 +718,38 @@ namespace CIS411
             this.grpBoxAddStudent.TabStop = false;
             this.grpBoxAddStudent.Text = "Add Login";
             // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel3.Controls.Add(this.lblAddFirst, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.btnAddStudent, 1, 4);
+            this.tableLayoutPanel3.Controls.Add(this.blAddLast, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.txtAddID, 1, 2);
+            this.tableLayoutPanel3.Controls.Add(this.lblAddID, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.txtAddLast, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.txtAddFirst, 1, 0);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(6, 19);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 5;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(175, 129);
+            this.tableLayoutPanel3.TabIndex = 7;
+            // 
+            // lblAddFirst
+            // 
+            this.lblAddFirst.AutoSize = true;
+            this.lblAddFirst.Location = new System.Drawing.Point(3, 0);
+            this.lblAddFirst.Name = "lblAddFirst";
+            this.lblAddFirst.Size = new System.Drawing.Size(57, 13);
+            this.lblAddFirst.TabIndex = 0;
+            this.lblAddFirst.Text = "First Name";
+            // 
             // btnAddStudent
             // 
             this.btnAddStudent.Location = new System.Drawing.Point(67, 91);
@@ -624,6 +760,15 @@ namespace CIS411
             this.btnAddStudent.UseVisualStyleBackColor = true;
             this.btnAddStudent.Click += new System.EventHandler(this.btnAddStudent_Click);
             // 
+            // blAddLast
+            // 
+            this.blAddLast.AutoSize = true;
+            this.blAddLast.Location = new System.Drawing.Point(3, 26);
+            this.blAddLast.Name = "blAddLast";
+            this.blAddLast.Size = new System.Drawing.Size(58, 13);
+            this.blAddLast.TabIndex = 1;
+            this.blAddLast.Text = "Last Name";
+            // 
             // txtAddID
             // 
             this.txtAddID.Location = new System.Drawing.Point(67, 55);
@@ -631,6 +776,15 @@ namespace CIS411
             this.txtAddID.Name = "txtAddID";
             this.txtAddID.Size = new System.Drawing.Size(100, 20);
             this.txtAddID.TabIndex = 5;
+            // 
+            // lblAddID
+            // 
+            this.lblAddID.AutoSize = true;
+            this.lblAddID.Location = new System.Drawing.Point(3, 52);
+            this.lblAddID.Name = "lblAddID";
+            this.lblAddID.Size = new System.Drawing.Size(58, 13);
+            this.lblAddID.TabIndex = 2;
+            this.lblAddID.Text = "ID Number";
             // 
             // txtAddLast
             // 
@@ -645,33 +799,6 @@ namespace CIS411
             this.txtAddFirst.Name = "txtAddFirst";
             this.txtAddFirst.Size = new System.Drawing.Size(100, 20);
             this.txtAddFirst.TabIndex = 3;
-            // 
-            // lblAddID
-            // 
-            this.lblAddID.AutoSize = true;
-            this.lblAddID.Location = new System.Drawing.Point(3, 52);
-            this.lblAddID.Name = "lblAddID";
-            this.lblAddID.Size = new System.Drawing.Size(58, 13);
-            this.lblAddID.TabIndex = 2;
-            this.lblAddID.Text = "ID Number";
-            // 
-            // blAddLast
-            // 
-            this.blAddLast.AutoSize = true;
-            this.blAddLast.Location = new System.Drawing.Point(3, 26);
-            this.blAddLast.Name = "blAddLast";
-            this.blAddLast.Size = new System.Drawing.Size(58, 13);
-            this.blAddLast.TabIndex = 1;
-            this.blAddLast.Text = "Last Name";
-            // 
-            // lblAddFirst
-            // 
-            this.lblAddFirst.AutoSize = true;
-            this.lblAddFirst.Location = new System.Drawing.Point(3, 0);
-            this.lblAddFirst.Name = "lblAddFirst";
-            this.lblAddFirst.Size = new System.Drawing.Size(57, 13);
-            this.lblAddFirst.TabIndex = 0;
-            this.lblAddFirst.Text = "First Name";
             // 
             // btnImport
             // 
@@ -695,6 +822,29 @@ namespace CIS411
             this.grpBoxPassword.TabStop = false;
             this.grpBoxPassword.Text = "Password";
             // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel4.Controls.Add(this.btnChangePassword, 1, 4);
+            this.tableLayoutPanel4.Controls.Add(this.lblConfirmPassword, 0, 2);
+            this.tableLayoutPanel4.Controls.Add(this.txtCurrentPassword, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.lblNewPassword, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.txtNewPassword, 1, 1);
+            this.tableLayoutPanel4.Controls.Add(this.lblCurrentPassword, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.txtConfirmPassword, 1, 2);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(6, 22);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 5;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(248, 126);
+            this.tableLayoutPanel4.TabIndex = 10;
+            // 
             // btnChangePassword
             // 
             this.btnChangePassword.Location = new System.Drawing.Point(100, 91);
@@ -705,30 +855,6 @@ namespace CIS411
             this.btnChangePassword.UseVisualStyleBackColor = true;
             this.btnChangePassword.Click += new System.EventHandler(this.btnChangePassword_Click);
             // 
-            // txtConfirmPassword
-            // 
-            this.txtConfirmPassword.Location = new System.Drawing.Point(100, 55);
-            this.txtConfirmPassword.Name = "txtConfirmPassword";
-            this.txtConfirmPassword.Size = new System.Drawing.Size(144, 20);
-            this.txtConfirmPassword.TabIndex = 8;
-            this.txtConfirmPassword.UseSystemPasswordChar = true;
-            // 
-            // txtNewPassword
-            // 
-            this.txtNewPassword.Location = new System.Drawing.Point(100, 29);
-            this.txtNewPassword.Name = "txtNewPassword";
-            this.txtNewPassword.Size = new System.Drawing.Size(144, 20);
-            this.txtNewPassword.TabIndex = 7;
-            this.txtNewPassword.UseSystemPasswordChar = true;
-            // 
-            // txtCurrentPassword
-            // 
-            this.txtCurrentPassword.Location = new System.Drawing.Point(100, 3);
-            this.txtCurrentPassword.Name = "txtCurrentPassword";
-            this.txtCurrentPassword.Size = new System.Drawing.Size(144, 20);
-            this.txtCurrentPassword.TabIndex = 6;
-            this.txtCurrentPassword.UseSystemPasswordChar = true;
-            // 
             // lblConfirmPassword
             // 
             this.lblConfirmPassword.AutoSize = true;
@@ -737,6 +863,14 @@ namespace CIS411
             this.lblConfirmPassword.Size = new System.Drawing.Size(91, 13);
             this.lblConfirmPassword.TabIndex = 5;
             this.lblConfirmPassword.Text = "Confirm Password";
+            // 
+            // txtCurrentPassword
+            // 
+            this.txtCurrentPassword.Location = new System.Drawing.Point(100, 3);
+            this.txtCurrentPassword.Name = "txtCurrentPassword";
+            this.txtCurrentPassword.Size = new System.Drawing.Size(144, 20);
+            this.txtCurrentPassword.TabIndex = 6;
+            this.txtCurrentPassword.UseSystemPasswordChar = true;
             // 
             // lblNewPassword
             // 
@@ -747,6 +881,14 @@ namespace CIS411
             this.lblNewPassword.TabIndex = 1;
             this.lblNewPassword.Text = "New Password";
             // 
+            // txtNewPassword
+            // 
+            this.txtNewPassword.Location = new System.Drawing.Point(100, 29);
+            this.txtNewPassword.Name = "txtNewPassword";
+            this.txtNewPassword.Size = new System.Drawing.Size(144, 20);
+            this.txtNewPassword.TabIndex = 7;
+            this.txtNewPassword.UseSystemPasswordChar = true;
+            // 
             // lblCurrentPassword
             // 
             this.lblCurrentPassword.AutoSize = true;
@@ -755,6 +897,14 @@ namespace CIS411
             this.lblCurrentPassword.Size = new System.Drawing.Size(90, 13);
             this.lblCurrentPassword.TabIndex = 0;
             this.lblCurrentPassword.Text = "Current Password";
+            // 
+            // txtConfirmPassword
+            // 
+            this.txtConfirmPassword.Location = new System.Drawing.Point(100, 55);
+            this.txtConfirmPassword.Name = "txtConfirmPassword";
+            this.txtConfirmPassword.Size = new System.Drawing.Size(144, 20);
+            this.txtConfirmPassword.TabIndex = 8;
+            this.txtConfirmPassword.UseSystemPasswordChar = true;
             // 
             // tabReports
             // 
@@ -776,7 +926,7 @@ namespace CIS411
             this.tabReports.Location = new System.Drawing.Point(4, 22);
             this.tabReports.Name = "tabReports";
             this.tabReports.Padding = new System.Windows.Forms.Padding(3);
-            this.tabReports.Size = new System.Drawing.Size(968, 395);
+            this.tabReports.Size = new System.Drawing.Size(652, 395);
             this.tabReports.TabIndex = 5;
             this.tabReports.Text = "Reports";
             this.tabReports.UseVisualStyleBackColor = true;
@@ -938,7 +1088,7 @@ namespace CIS411
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(591, 439);
+            this.btnClose.Location = new System.Drawing.Point(576, 439);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 2;
@@ -1018,161 +1168,11 @@ namespace CIS411
             this.txtAddSignIn.Size = new System.Drawing.Size(100, 20);
             this.txtAddSignIn.TabIndex = 14;
             // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 5;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.lblLoggedIn, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnEditVisit, 2, 10);
-            this.tableLayoutPanel1.Controls.Add(this.comboEditMethod, 0, 13);
-            this.tableLayoutPanel1.Controls.Add(this.dateTimePickerEditMax, 1, 13);
-            this.tableLayoutPanel1.Controls.Add(this.listBoxLoggedIn, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblEditMethod, 0, 12);
-            this.tableLayoutPanel1.Controls.Add(this.lblAddVisit, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.comboAddTutoring, 2, 7);
-            this.tableLayoutPanel1.Controls.Add(this.comboaddClass, 1, 7);
-            this.tableLayoutPanel1.Controls.Add(this.dateTimePickerEditMin, 1, 11);
-            this.tableLayoutPanel1.Controls.Add(this.btnLogOut, 4, 2);
-            this.tableLayoutPanel1.Controls.Add(this.txtEditStudentID, 0, 11);
-            this.tableLayoutPanel1.Controls.Add(this.lblEditDateRange, 1, 10);
-            this.tableLayoutPanel1.Controls.Add(this.lblStudentID, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.comboAddMethod, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.label6, 0, 10);
-            this.tableLayoutPanel1.Controls.Add(this.lblAddTutor, 2, 6);
-            this.tableLayoutPanel1.Controls.Add(this.dateTimePickerAddTimeOut, 3, 5);
-            this.tableLayoutPanel1.Controls.Add(this.btnAddVisit, 4, 6);
-            this.tableLayoutPanel1.Controls.Add(this.lblDate, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.lblAddClass, 1, 6);
-            this.tableLayoutPanel1.Controls.Add(this.dateTimePickerAddTimeIn, 2, 5);
-            this.tableLayoutPanel1.Controls.Add(this.lblAddMethod, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.lblTimeIn, 2, 4);
-            this.tableLayoutPanel1.Controls.Add(this.lblTimeOut, 3, 4);
-            this.tableLayoutPanel1.Controls.Add(this.txtAddStudentID, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.dateTimePickerAdd, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.lblEditVisit, 0, 9);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 6);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 14;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(626, 313);
-            this.tableLayoutPanel1.TabIndex = 47;
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 5;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.Controls.Add(this.lblActiveTutors, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btnAddTutor, 2, 6);
-            this.tableLayoutPanel2.Controls.Add(this.lblInactiveTutors, 3, 0);
-            this.tableLayoutPanel2.Controls.Add(this.listBoxDisableTutors, 3, 1);
-            this.tableLayoutPanel2.Controls.Add(this.listBoxEnableTutors, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 6);
-            this.tableLayoutPanel2.Controls.Add(this.btnDisableSelected, 2, 5);
-            this.tableLayoutPanel2.Controls.Add(this.btnDisableAll, 2, 4);
-            this.tableLayoutPanel2.Controls.Add(this.btnEnableAll, 2, 2);
-            this.tableLayoutPanel2.Controls.Add(this.btnEnableSelected, 2, 1);
-            this.tableLayoutPanel2.Controls.Add(this.txtTutorStudentID, 1, 6);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(6, 6);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 7;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(433, 324);
-            this.tableLayoutPanel2.TabIndex = 12;
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel3.Controls.Add(this.lblAddFirst, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.btnAddStudent, 1, 4);
-            this.tableLayoutPanel3.Controls.Add(this.blAddLast, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.txtAddID, 1, 2);
-            this.tableLayoutPanel3.Controls.Add(this.lblAddID, 0, 2);
-            this.tableLayoutPanel3.Controls.Add(this.txtAddLast, 1, 1);
-            this.tableLayoutPanel3.Controls.Add(this.txtAddFirst, 1, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(6, 19);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 5;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(175, 129);
-            this.tableLayoutPanel3.TabIndex = 7;
-            // 
-            // tableLayoutPanel4
-            // 
-            this.tableLayoutPanel4.ColumnCount = 2;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel4.Controls.Add(this.btnChangePassword, 1, 4);
-            this.tableLayoutPanel4.Controls.Add(this.lblConfirmPassword, 0, 2);
-            this.tableLayoutPanel4.Controls.Add(this.txtCurrentPassword, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.lblNewPassword, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.txtNewPassword, 1, 1);
-            this.tableLayoutPanel4.Controls.Add(this.lblCurrentPassword, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.txtConfirmPassword, 1, 2);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(6, 22);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 5;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(248, 126);
-            this.tableLayoutPanel4.TabIndex = 10;
-            // 
-            // tableLayoutPanel5
-            // 
-            this.tableLayoutPanel5.ColumnCount = 2;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel5.Controls.Add(this.grpBoxAddStudent, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.btnImport, 1, 1);
-            this.tableLayoutPanel5.Controls.Add(this.grpBoxPassword, 1, 0);
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(10, 16);
-            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 2;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(556, 353);
-            this.tableLayoutPanel5.TabIndex = 9;
-            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1000, 470);
+            this.ClientSize = new System.Drawing.Size(679, 470);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.tabControlAdmin);
             this.Name = "frmAdmin";
@@ -1180,22 +1180,22 @@ namespace CIS411
             this.Load += new System.EventHandler(this.frmAdmin_Load);
             this.tabControlAdmin.ResumeLayout(false);
             this.tabVisits.ResumeLayout(false);
-            this.tabTutors.ResumeLayout(false);
-            this.tabMethods.ResumeLayout(false);
-            this.tabAdmin.ResumeLayout(false);
-            this.grpBoxAddStudent.ResumeLayout(false);
-            this.grpBoxPassword.ResumeLayout(false);
-            this.tabReports.ResumeLayout(false);
-            this.tabReports.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.tabTutors.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.tabMethods.ResumeLayout(false);
+            this.tabAdmin.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.grpBoxAddStudent.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            this.grpBoxPassword.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
-            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tabReports.ResumeLayout(false);
+            this.tabReports.PerformLayout();
             this.ResumeLayout(false);
 
         }

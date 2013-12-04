@@ -287,7 +287,7 @@
             this.ClientSize = new System.Drawing.Size(908, 440);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmEditList";
-            this.Text = "frmEditList";
+            this.Text = "Edit Visit";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

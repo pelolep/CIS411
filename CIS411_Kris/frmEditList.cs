@@ -138,6 +138,7 @@ namespace CIS411
                 while (rd.Read())
                     comboaddClass.Items.Add(rd[0].ToString() + " " + rd[1] + " " + rd[2]);
                 conn.Close();
+                comboaddClass.Items.Add("Other");
                 for (int i = 0; i < comboaddClass.Items.Count; i++)
                     if (selectedVisitEdit[8] + " " + selectedVisitEdit[9] + " " + selectedVisitEdit[10] == comboaddClass.Items[i].ToString())
                         comboaddClass.SelectedIndex = i;
@@ -194,7 +195,7 @@ namespace CIS411
                 
                 istutor = true;
             }
-            MessageBox.Show(istutor.ToString());
+            //MessageBox.Show(istutor.ToString());
             string tutorID = null;
             DataConnection conn = new DataConnection();
             conn.Open();
@@ -259,7 +260,7 @@ namespace CIS411
             
             if (items[6] == "i'm_a_tutor")
                 tutor = true;
-            MessageBox.Show(items[6]);
+            //MessageBox.Show(items[6]);
             DataConnection conn = new DataConnection();
             conn.Open();
             try
