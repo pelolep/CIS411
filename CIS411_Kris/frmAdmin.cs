@@ -485,7 +485,7 @@ namespace CIS411
             }
             catch
             {
-                MessageBox.Show("Cannot load currently logged in visits", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Cannot load currently logged in tutors", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             conn.Close();
         }

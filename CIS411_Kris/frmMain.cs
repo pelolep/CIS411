@@ -23,7 +23,14 @@ namespace CIS411
 
         public frmMain()
         {
-            this.rdoMethods = new System.Windows.Forms.RadioButton[Properties.Settings.Default.MethodNames.Count];
+            InitializeComponent();
+            initMethodRadio();
+            tutoring = false;
+            tutorid = 0;
+        }
+
+        private void initMethodRadio()
+        {            this.rdoMethods = new System.Windows.Forms.RadioButton[Properties.Settings.Default.MethodNames.Count];
             for (int i = 0; i < Properties.Settings.Default.MethodNames.Count; i++)
                 this.rdoMethods[i] = new System.Windows.Forms.RadioButton();
             #region rdoMethods
@@ -47,11 +54,9 @@ namespace CIS411
                     this.rdoMethods[i].Click += new System.EventHandler(this.rdoOther_Click);
             }
             #endregion
-            InitializeComponent();
+            groupRadioButtons.Controls.Clear();
             for (int i = 0; i < Properties.Settings.Default.MethodNames.Count; i++)
                 this.groupRadioButtons.Controls.Add(this.rdoMethods[i]);
-            tutoring = false;
-            tutorid = 0;
         }
 
         private void txtStudentID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -74,7 +79,6 @@ namespace CIS411
                 // If student is swiping card, first character must be stripped from ID textbox because it is an extraneous 9.
                 txtStudentID.Text = txtStudentID.Text.Remove(0, 1);
                 txtStudentID.Select(8,1);
-                
             }
             
         }
@@ -304,6 +308,9 @@ namespace CIS411
                 conn.Open();
                 conn.Query("insert into tutor_hour(tutor_id,Date,Time_in)values('" + tutorid + "', '" + DateTime.Today.ToString("d") + "', '" + DateTime.Parse(DateTime.Now.ToString("t")) + "')");
                 conn.Close();
+                MessageBox.Show("You have been signed in");
+                resetForm();
+                return;
             }
 
 
@@ -388,6 +395,9 @@ namespace CIS411
             this.btnSubmit.Visible = true;
             this.btnSubmit.Enabled = false;
             studentID = 0;
+            tutoring = false;
+            tutorid = 0;
+            initMethodRadio();
         }
         
         // Returns array of all tutors
