@@ -1557,7 +1557,7 @@ MessageBox.Show("sfgfdsgfg");
             conn.Open(); 
             try
             {
-                conn.Query("insert into STUDENT ( clarion_id,lastname,firstname ) values (" + txtAddID.Text + ",'" + txtAddLast + "','" + txtAddFirst + "')");
+                conn.Query("insert into STUDENT ( clarion_id,lastname,firstname ) values (" + txtAddID.Text + ",'" + txtAddLast.Text + "','" + txtAddFirst.Text + "')");
             }
             catch
             {

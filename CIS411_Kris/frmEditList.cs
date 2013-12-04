@@ -117,7 +117,9 @@ namespace CIS411
                 
                 dateTimePickerEditTimeOut.Value = TimeOutEdit;
                 }
-                catch { }
+                catch {
+                   // dateTimePickerEditTimeOut.Value = null;
+                }
             }
             txtEditDate.Text = dateEdit;
             txtEditStudentID.Text = selectedVisitEdit[3];
