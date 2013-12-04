@@ -397,7 +397,7 @@ namespace CIS411
         private void frmAdmin_Load(object sender, EventArgs e)
         {
             dateTimePickerAdd.Value = DateTime.Today;
-            dateTimePickerEditMin.Value = DateTime.Today;
+            dateTimePickerEditMin.Value = DateTime.Today.AddDays(-1);
             dateTimePickerEditMax.Value = DateTime.Today;
             comboCountCategory.SelectedIndex=0;
             comboTerm.SelectedIndex = 0;
