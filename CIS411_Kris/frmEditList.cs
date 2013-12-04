@@ -193,16 +193,26 @@ namespace CIS411
             {
                 
                 method = comboEditMethod.SelectedItem.ToString();
-                
+                //MessageBox.Show("crap");
+
                 course = comboaddClass.SelectedItem.ToString().Split();
-               
+                MessageBox.Show(course[0].ToString());
+                if (course[0].ToString().ToLower() == "other")
+                {
+                    course = new string[10];
+                    course[0] = "other";
+                    course[1] = "other";
+                    course[2] = "other";
+                    course[3] = "other";
+                }
+             //   MessageBox.Show("crap");
                 if(comboAddTutoring.Enabled==true)
                 tutor = comboAddTutoring.SelectedItem.ToString().Split();
-                
+             //   MessageBox.Show("crap");
             }
             catch
             {
-                
+                MessageBox.Show("crap1");
                 istutor = true;
             }
             //MessageBox.Show(istutor.ToString());
@@ -235,11 +245,13 @@ namespace CIS411
             conn.Open();
             if (istutor)
                 conn.Query("update tutor_hour set tutor_ID = '" + txtEditStudentID.Text + "' , DATE = '" + date + "' , TIME_IN ='" + timeIn.ToString("HH:mm:ss tt") + "' , TIME_OUT = '" + timeOut.ToString("HH:mm:ss tt") + "' , TIME_DIFFERENCE = '" + timedifference.ToString("c") + "' where tutor_ID = '" + txtEditStudentID.Text + "' AND DATE = '" + date + "' AND TIME_IN ='" + originalDateTime.ToString("HH:mm:ss tt") + "'");
-            else if(comboAddTutoring.Enabled)
+            else if (comboAddTutoring.Enabled)
                 conn.Query("update VISIT set CLARION_ID = '" + txtEditStudentID.Text + "' , DATE = '" + date + "' , TIME_IN ='" + timeIn.ToString("HH:mm:ss tt") + "' , TIME_OUT = '" + timeOut.ToString("HH:mm:ss tt") + "' , TIME_DIFFERENCE = '" + timedifference.ToString("c") + "', SUBJECT = '" + course[0] + "', CATALOG = '" + course[1] + "', SECTION = '" + course[2] + "', TUTOR_ID = " + tutorID + ", METHOD = '" + method + "' where CLARION_ID = '" + txtEditStudentID.Text + "' AND DATE = '" + date + "' AND TIME_IN ='" + originalDateTime.ToString("HH:mm:ss tt") + "'");
             else
+            {
                 conn.Query("update VISIT set CLARION_ID = '" + txtEditStudentID.Text + "' , DATE = '" + date + "' , TIME_IN ='" + timeIn.ToString("HH:mm:ss tt") + "' , TIME_OUT = '" + timeOut.ToString("HH:mm:ss tt") + "' , TIME_DIFFERENCE = '" + timedifference.ToString("c") + "', SUBJECT = '" + course[0] + "', CATALOG = '" + course[1] + "', SECTION = '" + course[2] + "', METHOD = '" + method + "' where CLARION_ID = '" + txtEditStudentID.Text + "' AND DATE = '" + date + "' AND TIME_IN ='" + originalDateTime.ToString("HH:mm:ss tt") + "'");
-
+                MessageBox.Show(txtEditStudentID.Text + " " + date + " " + originalDateTime.ToString("HH:mm:ss tt"));
+            }
             conn.Close();
            // MessageBox.Show(date);
             MessageBox.Show("Visit has been edited.");
