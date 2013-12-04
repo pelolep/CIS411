@@ -68,7 +68,7 @@ namespace CIS411
                 //gets visits request
                 //just added STUDENT.FIRSTNAME, STUDENT.LASTNAME, STUDENT TABLE
                // rd = conn.joinQuery("SELECT VISIT.CLARION_ID, VISIT.DATE, VISIT.TIME_IN, VISIT.TIME_OUT, STUDENT.FIRSTNAME, STUDENT.LASTNAME, VISIT.METHOD, TUTOR.TUTOR_ID, SUBJECT, CATALOG, S_TUTOR.FIRSTNAME AS TUTORFIRSTNAME, S_TUTOR.LASTNAME AS TUTORLASTNAME, SECTION FROM VISIT INNER JOIN student on visit.clarion_id = student.clarion_id LEFT JOIN TUTOR ON VISIT.TUTOR_ID = TUTOR.TUTOR_ID LEFT JOIN STUDENT S_TUTOR ON TUTOR.CLARION_ID = S_TUTOR.CLARION_ID WHERE visit.DATE<='" + maxDate + "' AND visit.DATE>='" + minDate + (studentID == 0 ? "'" : "' AND VISIT.CLARION_ID = '" + studentID + "'") + " ORDER BY DATE, TIME_IN");
-                rd = conn.joinQuery("select tutor_hour.tutor_id, tutor_hour.date, tutor_hour.time_out ,tutor_hour.time_difference, tutor_hour.time_in, student.lastname, student.firstname from tutor_hour inner join tutor on tutor_hour.tutor_id = tutor.tutor_id inner join student on tutor.clarion_id = student.clarion_id where time_difference is NOT null and tutor_hour.DATE<='" + maxDate + "' AND tutor_hour.DATE>='" + minDate+"' ");
+                rd = conn.joinQuery("select tutor_hour.tutor_id, tutor_hour.date, tutor_hour.time_out ,tutor_hour.time_difference, tutor_hour.time_in, student.lastname, student.firstname from tutor_hour inner join tutor on tutor_hour.tutor_id = tutor.tutor_id inner join student on tutor.clarion_id = student.clarion_id where tutor_hour.DATE<='" + maxDate + "' AND tutor_hour.DATE>='" + minDate+"' ");
 
 
                 if (rd.HasRows)
@@ -93,7 +93,7 @@ namespace CIS411
             try
             {
                 selectedVisitEdit = listBoxEditVisit.SelectedItem.ToString().Split('\t');
-                MessageBox.Show(selectedVisitEdit[4]);
+                
                 
             }
             catch
