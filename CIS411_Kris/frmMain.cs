@@ -330,7 +330,7 @@ namespace CIS411
                     return;
                 }
             }
-            
+            if(!tutoring)
             {
                 try
                 {
