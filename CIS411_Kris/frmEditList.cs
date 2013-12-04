@@ -55,7 +55,7 @@ namespace CIS411
                     string TIMEOUT = rd["TIME_OUT"].ToString().PadRight(10);
                     if (TIMEOUT.Replace(" ","").Length !=8)
                         TIMEOUT = " ".PadRight(18);
-                    listBoxEditVisit.Items.Add(thedate.ToString("d").PadRight(15) + "\t" + rd["FIRSTNAME"].ToString().PadRight(30-rd["firstname"].ToString().Length) + "\t" + rd["LASTNAME"].ToString().PadRight(30-rd["lastname"].ToString().Length) + "\t" + (int.Parse(rd["CLARION_ID"].ToString())).ToString("D8").PadRight(20-(int.Parse(rd["clarion_id"].ToString())).ToString("D8").Length) + "\t" + rd["TIME_IN"].ToString().PadRight(10) + "\t" + TIMEOUT + "\t" + rd["METHOD"].ToString().PadRight(30-rd["method"].ToString().Length) + "\t" + rd["TUTORFIRSTNAME"].ToString().PadRight(30-rd["tutorfirstname"].ToString().Length) + " " + rd["TUTORLASTNAME"].ToString().PadRight(30-rd["tutorlastname"].ToString().Length) + "\t" + rd["SUBJECT"].ToString().PadRight(10-rd["subject"].ToString().Length) + "\t" + rd["CATALOG"].ToString().PadRight(10-rd["catalog"].ToString().Length) + "\t" + rd["SECTION"].ToString().PadRight(10));
+                    listBoxEditVisit.Items.Add(thedate.ToString("d").PadRight(15) + "\t" + rd["FIRSTNAME"].ToString().PadRight(30) + "\t" + rd["LASTNAME"].ToString().PadRight(30) + "\t" + (int.Parse(rd["CLARION_ID"].ToString())).ToString("D8").PadRight(12) + "\t" + rd["TIME_IN"].ToString().PadRight(10) + "\t" + TIMEOUT + "\t" + rd["METHOD"].ToString().PadRight(30) + "\t" + rd["TUTORFIRSTNAME"].ToString().PadRight(30) + " " + rd["TUTORLASTNAME"].ToString().PadRight(30) + "\t" + rd["SUBJECT"].ToString().PadRight(5) + "\t" + ((rd["CATALOG"]).ToString()).PadRight(5) + "\t" + ((rd["SECTION"]).ToString()).PadRight(4));
 
                 }
             }
@@ -80,9 +80,9 @@ namespace CIS411
                     {
                         DateTime thedate = DateTime.Parse(rd["DATE"].ToString());
                         string TIMEOUT = rd["TIME_OUT"].ToString().PadRight(10);
-                        MessageBox.Show(TIMEOUT.Replace(" ", "").Length.ToString());
                         if (TIMEOUT.Replace(" ", "").Length != 8)
-                            TIMEOUT = " ".PadRight(18); listBoxEditVisit.Items.Add(thedate.ToString("d").PadRight(15) + "\t" + rd["FIRSTNAME"].ToString().PadRight(30 - rd["firstname"].ToString().Length) + "\t" + rd["LASTNAME"].ToString().PadRight(30 - rd["lastname"].ToString().Length) + "\t" + rd["tutor_ID"].ToString().PadRight(20 - rd["tutor_id"].ToString().Length) + "\t" + rd["TIME_IN"].ToString().PadRight(10) + "\t" + TIMEOUT + "\t" + "i'm_a_tutor");
+                            TIMEOUT = " ".PadRight(18); 
+                        listBoxEditVisit.Items.Add(thedate.ToString("d").PadRight(15) + "\t" + rd["FIRSTNAME"].ToString().PadRight(30) + "\t" + rd["LASTNAME"].ToString().PadRight(30) + "\t" + ("TUT" + int.Parse(rd["tutor_ID"].ToString()).ToString("D4").PadRight(10)) + "\t" + rd["TIME_IN"].ToString().PadRight(10));
 
                     }
                 }
@@ -142,7 +142,7 @@ namespace CIS411
                 for (int i = 0; i < comboEditMethod.Items.Count; i++)
                     if (selectedVisitEdit[6] == comboEditMethod.Items[i].ToString())
                         comboEditMethod.SelectedIndex = i;
-                comboEditMethod.Items.Add("is_a_tutor");
+                comboEditMethod.Items.Add("Tutor");
                 comboaddClass.Items.Clear();
                 conn.Open();
                 rd = conn.GetReader("SUBJECT, CATALOG, SECTION", "STUDENT_COURSE", "CLARION_ID", selectedVisitEdit[3]);
@@ -274,7 +274,7 @@ namespace CIS411
                 items = listBoxEditVisit.SelectedItems[i].ToString().Split('\t');
                 tutor = false;
 
-                if (items[6] == "i'm_a_tutor")
+                if (items[3].Remove(3)=="TUT")
                     tutor = true;
                 //MessageBox.Show(items[6]);
                 DataConnection conn = new DataConnection();
@@ -282,7 +282,7 @@ namespace CIS411
                 try
                 {
                     if (tutor)
-                        conn.Query("DELETE FROM tutor_hour WHERE tutor_ID = '" + items[3] + "' AND DATE = '" + items[0] + "' AND TIME_IN = '" + items[4] + "' ");
+                        conn.Query("DELETE FROM tutor_hour WHERE tutor_ID = '" + items[3].Remove(0,3) + "' AND DATE = '" + items[0] + "' AND TIME_IN = '" + items[4] + "' ");
                     else
                         conn.Query("DELETE FROM VISIT WHERE CLARION_ID = '" + items[3] + "' AND DATE = '" + items[0] + "' AND TIME_IN = '" + items[4] + "' ");
                 }

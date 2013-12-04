@@ -23,6 +23,14 @@ namespace CIS411
 
         public frmMain()
         {
+            InitializeComponent();
+            initMethodRadio();
+            tutoring = false;
+            tutorid = 0;
+        }
+
+        private void initMethodRadio()
+        {
             this.rdoMethods = new System.Windows.Forms.RadioButton[Properties.Settings.Default.MethodNames.Count];
             for (int i = 0; i < Properties.Settings.Default.MethodNames.Count; i++)
                 this.rdoMethods[i] = new System.Windows.Forms.RadioButton();
@@ -47,11 +55,9 @@ namespace CIS411
                     this.rdoMethods[i].Click += new System.EventHandler(this.rdoOther_Click);
             }
             #endregion
-            InitializeComponent();
+            this.groupRadioButtons.Controls.Clear();
             for (int i = 0; i < Properties.Settings.Default.MethodNames.Count; i++)
                 this.groupRadioButtons.Controls.Add(this.rdoMethods[i]);
-            tutoring = false;
-            tutorid = 0;
         }
 
         private void txtStudentID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -290,8 +296,8 @@ namespace CIS411
 
             if (tutoring)
             {
-                conn.Open(); 
-                 tutorid = 0;
+                conn.Open();
+                tutorid = 0;
                 SqlDataReader rd = conn.GetReader("*", "tutor", "clarion_id", studentID.ToString());
                 if (rd.HasRows)
                 {
@@ -359,7 +365,6 @@ namespace CIS411
 
         private void resetForm()
         {
-
             this.txtStudentID.Text = "";
             this.txtStudentID.Visible = true;
             this.txtStudentID.ReadOnly = false;
@@ -382,6 +387,9 @@ namespace CIS411
             this.btnSubmit.Visible = true;
             this.btnSubmit.Enabled = false;
             studentID = 0;
+            tutorid = 0;
+            tutoring = false;
+            initMethodRadio();
         }
         
         // Returns array of all tutors
@@ -395,7 +403,7 @@ namespace CIS411
             {
                 while (rd.Read())
                 {
-                    tutorList.Add(rd[2]+" " + rd[0] + " " + rd[1]);
+                    tutorList.Add(includeIDs ? rd[2] + " " : "" + rd[0] + " " + rd[1]);
                 }
             }
             conn.Close();
@@ -461,7 +469,7 @@ namespace CIS411
 
         }
 
-        static public bool signOut(int studentID)///////////
+        static public bool signOut(int studentID, bool isTutor=false)///////////
         {
             System.DateTime timein, timenow;
             System.TimeSpan timedifference; // sign out works for everything but searching for the time out
@@ -488,6 +496,37 @@ namespace CIS411
                 return true;
             }
             conn.Close();
+
+            if (isTutor)
+            {
+                conn.Open();
+                rd = conn.GetReader("time_in, time_out", "tutor_hour", "tutor_id", studentID.ToString(), "and time_out is null");
+
+                if (rd.HasRows)
+                {
+                    rd.Read();
+                    timein = DateTime.Parse(rd[0].ToString());
+                    timenow = DateTime.Now;
+                    timedifference = timenow.Subtract(timein);
+                    while (rd.Read())
+                    {
+                        timein = DateTime.Parse(rd[0].ToString());
+                    }
+                    rd.Close();
+                    conn.Close();
+                    conn.Open();
+                    timedifference = (timenow.Subtract(timein));
+                    conn.Query("update tutor_hour set time_out = '" + timenow + "' , time_difference = '" + timedifference + "' where tutor_id= '" + studentID + "' and time_out is null");
+                    conn.Close();
+                    return true;
+                }
+                else
+                {
+                    conn.Close();
+                    return false;
+                }
+            }
+
             conn.Open();
             rd = conn.GetReader("time_in, time_out", "tutor_hour", "tutor_id", tutorid.ToString(), "and time_out is null");
 
