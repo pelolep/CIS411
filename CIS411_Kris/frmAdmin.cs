@@ -456,7 +456,7 @@ namespace CIS411
                     while (rd.Read())
                     {
                         DateTime jdate = DateTime.Parse(rd[1].ToString());
-                        listBoxLoggedIn.Items.Add(jdate.ToString("MM/dd/yyyy") + "\t" + rd[2] + "\t\t" + rd[0] + "\t" + rd[13] + "\t\t" + rd[14]);
+                        listBoxLoggedIn.Items.Add(jdate.ToString("MM/dd/yyyy") + "\t" + rd[2] + "\t\t" + rd[0].ToString().PadRight(20-rd[0].ToString().Length) + "\t" + rd[13] + "\t\t" + rd[14]);
                     }
                 }
             }
@@ -479,7 +479,7 @@ namespace CIS411
                     {
 
                         DateTime jdate = DateTime.Parse(rd[1].ToString());
-                        listBoxLoggedIn.Items.Add(jdate.ToString("MM/dd/yyyy") + "\t" + rd[3] + "\t\t" + rd[0] + "\t" + rd[4] + "\t\t" + rd[5]);
+                        listBoxLoggedIn.Items.Add(jdate.ToString("MM/dd/yyyy") + "\t" + rd[3] + "\t\t" + rd[0].ToString().PadRight(20 - rd[0].ToString().Length) + "\t" + rd[4] + "\t\t" + rd[5]);
                     }
                 }
             }
