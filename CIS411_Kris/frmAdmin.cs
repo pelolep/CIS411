@@ -650,6 +650,8 @@ namespace CIS411
 
         private void btnAddVisit_Click(object sender, EventArgs e)
         {
+            DataConnection conn = new DataConnection();
+
             int tryStudentID;
             if (int.TryParse(txtAddStudentID.Text, out tryStudentID))
             {
@@ -680,7 +682,21 @@ namespace CIS411
                     if (method == "Tutoring")
                     {
                         selectedTutor = comboAddTutoring.SelectedItem.ToString().Split();
-                        tutor = int.Parse(selectedTutor[0]);
+                        conn = new DataConnection();
+
+                        string selectedTutorID;
+                        conn.Open();
+                        SqlDataReader rd = conn.GetReader("TUTOR_ID", "STUDENT INNER JOIN TUTOR ON TUTOR.CLARION_ID = STUDENT.CLARION_ID", "LASTNAME", selectedTutor[1], "FIRSTNAME", selectedTutor[0]);
+                        if (!(rd.Read()))
+                        {
+                            conn.Close();
+                            MessageBox.Show("Tutor not found.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        selectedTutorID = rd[0].ToString();
+                        tutor = int.Parse(selectedTutorID);
+                        conn.Close();
+                       
                     }
                     try
                     {
@@ -689,7 +705,7 @@ namespace CIS411
                     catch { }
                     string nothing = "other";
 
-                    DataConnection conn = new DataConnection();
+                    conn = new DataConnection();
                     conn.Open();
 
                     if (method == "Tutoring")
@@ -740,7 +756,7 @@ namespace CIS411
                             }
                             catch
                             {
-                                MessageBox.Show("Cannot add visit", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show("Cannot add visit, please check ", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                     }
@@ -771,6 +787,7 @@ namespace CIS411
                     txtAddStudentID.Text = "";
                     comboaddClass.Items.Clear();
                     comboAddTutoring.Items.Clear();
+
                 }
 
                 catch
@@ -778,13 +795,14 @@ namespace CIS411
                     MessageBox.Show("Information invalid. Please check it and try again.");
                     return;
                 }
-                MessageBox.Show("Thank you for adding a visit!");
+                
             }
             else
             {
                 MessageBox.Show("Invalid Student ID", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+MessageBox.Show("Thank you for adding a visit!");
         }
 
         
@@ -927,7 +945,8 @@ namespace CIS411
             {
                 comboAddTutoring.Enabled = true;
                 comboAddTutoring.Items.Add("Select a tutor...");
-                comboAddTutoring.Items.AddRange(frmMain.getTutors(true));
+                    comboAddTutoring.Items.AddRange(frmMain.getTutors(false));
+                
                 comboAddTutoring.SelectedIndex = 0;
             }
             else

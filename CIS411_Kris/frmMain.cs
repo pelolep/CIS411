@@ -17,7 +17,7 @@ namespace CIS411
     public partial class frmMain : Form
     {
         bool tutoring;
-        static int tutorid;
+        static int tutorid=-1;
         static string method="";
         private System.Windows.Forms.RadioButton[] rdoMethods;
 
@@ -342,6 +342,7 @@ namespace CIS411
                     return;
                 }
                 selectedTutorID = rd[0].ToString();
+                
                 conn.Close();
                 conn.Open();
                 if (comboClassList.SelectedItem.ToString() == "Other")
@@ -403,7 +404,7 @@ namespace CIS411
             {
                 while (rd.Read())
                 {
-                    tutorList.Add(includeIDs ? rd[2] + " " : "" + rd[0] + " " + rd[1]);
+                    tutorList.Add(includeIDs ? (rd[2] + " ") : "" + rd[0] + " " + rd[1]);
                 }
             }
             conn.Close();
@@ -528,6 +529,9 @@ namespace CIS411
             }
 
             conn.Open();
+            if (tutorid == -1)
+                tutorid = studentID;
+           
             rd = conn.GetReader("time_in, time_out", "tutor_hour", "tutor_id", tutorid.ToString(), "and time_out is null");
 
             if (rd.HasRows)

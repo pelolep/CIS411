@@ -56,7 +56,6 @@ namespace CIS411
                     if (TIMEOUT.Replace(" ","").Length !=8)
                         TIMEOUT = " ".PadRight(18);
                     listBoxEditVisit.Items.Add(thedate.ToString("d").PadRight(15) + "\t" + rd["FIRSTNAME"].ToString().PadRight(30) + "\t" + rd["LASTNAME"].ToString().PadRight(30) + "\t" + (int.Parse(rd["CLARION_ID"].ToString())).ToString("D8").PadRight(12) + "\t" + rd["TIME_IN"].ToString().PadRight(10) + "\t" + TIMEOUT + "\t" + rd["METHOD"].ToString().PadRight(30) + "\t" + rd["TUTORFIRSTNAME"].ToString().PadRight(30) + " " + rd["TUTORLASTNAME"].ToString().PadRight(30) + "\t" + rd["SUBJECT"].ToString().PadRight(5) + "\t" + ((rd["CATALOG"]).ToString()).PadRight(5) + "\t" + ((rd["SECTION"]).ToString()).PadRight(4));
-
                 }
             }
             rd.Close();
@@ -83,7 +82,6 @@ namespace CIS411
                         if (TIMEOUT.Replace(" ", "").Length != 8)
                             TIMEOUT = " ".PadRight(18); 
                         listBoxEditVisit.Items.Add(thedate.ToString("d").PadRight(15) + "\t" + rd["FIRSTNAME"].ToString().PadRight(30) + "\t" + rd["LASTNAME"].ToString().PadRight(30) + "\t" + ("TUT" + int.Parse(rd["tutor_ID"].ToString()).ToString("D4").PadRight(10)) + "\t" + rd["TIME_IN"].ToString().PadRight(10));
-
                     }
                 }
                 rd.Close();
