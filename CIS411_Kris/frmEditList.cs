@@ -57,7 +57,6 @@ namespace CIS411
                         TIMEOUT = " ".PadRight(18);
                     listBoxEditVisit.Items.Add(thedate.ToString("d").PadRight(15) + "\t" + rd["FIRSTNAME"].ToString().PadRight(30-rd["firstname"].ToString().Length) + "\t" + rd["LASTNAME"].ToString().PadRight(30-rd["lastname"].ToString().Length) + "\t" + (int.Parse(rd["CLARION_ID"].ToString())).ToString("D8").PadRight(20-(int.Parse(rd["clarion_id"].ToString())).ToString("D8").Length) + "\t" + rd["TIME_IN"].ToString().PadRight(10) + "\t" + TIMEOUT + "\t" + rd["METHOD"].ToString().PadRight(30-rd["method"].ToString().Length) + "\t" + rd["TUTORFIRSTNAME"].ToString().PadRight(30-rd["tutorfirstname"].ToString().Length) + " " + rd["TUTORLASTNAME"].ToString().PadRight(30-rd["tutorlastname"].ToString().Length) + "\t" + rd["SUBJECT"].ToString().PadRight(10-rd["subject"].ToString().Length) + "\t" + rd["CATALOG"].ToString().PadRight(10-rd["catalog"].ToString().Length) + "\t" + rd["SECTION"].ToString().PadRight(10));
 
-                    
                 }
             }
             rd.Close();

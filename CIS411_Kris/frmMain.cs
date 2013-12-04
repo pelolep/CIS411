@@ -290,14 +290,14 @@ namespace CIS411
 
             if (tutoring)
             {
-                conn.Open();
-                tutorid = 0;
+                conn.Open(); 
+                 tutorid = 0;
                 SqlDataReader rd = conn.GetReader("*", "tutor", "clarion_id", studentID.ToString());
                 if (rd.HasRows)
                 {
                     while (rd.Read())
                     {
-                        tutorid = int.Parse(rd[0].ToString());
+                        tutorid= int.Parse(rd[0].ToString());
                     }
                 }
                 conn.Close();
