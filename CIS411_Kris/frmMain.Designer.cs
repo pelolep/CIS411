@@ -40,11 +40,14 @@ namespace CIS411
             this.btnAdmin = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.keyTimer = new System.Windows.Forms.Timer(this.components);
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtStudentID
             // 
-            this.txtStudentID.Location = new System.Drawing.Point(196, 35);
+            this.txtStudentID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtStudentID.Location = new System.Drawing.Point(119, 34);
             this.txtStudentID.MaxLength = 8;
             this.txtStudentID.Name = "txtStudentID";
             this.txtStudentID.Size = new System.Drawing.Size(100, 20);
@@ -53,8 +56,11 @@ namespace CIS411
             // 
             // btnIdSearch
             // 
-            this.btnIdSearch.Location = new System.Drawing.Point(314, 12);
+            this.btnIdSearch.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.btnIdSearch, 2);
+            this.btnIdSearch.Location = new System.Drawing.Point(261, 34);
             this.btnIdSearch.Name = "btnIdSearch";
+            this.tableLayoutPanel1.SetRowSpan(this.btnIdSearch, 2);
             this.btnIdSearch.Size = new System.Drawing.Size(190, 64);
             this.btnIdSearch.TabIndex = 1;
             this.btnIdSearch.Text = "Search by ID";
@@ -63,8 +69,9 @@ namespace CIS411
             // 
             // lblStudentID
             // 
+            this.lblStudentID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblStudentID.AutoSize = true;
-            this.lblStudentID.Location = new System.Drawing.Point(132, 38);
+            this.lblStudentID.Location = new System.Drawing.Point(55, 44);
             this.lblStudentID.Name = "lblStudentID";
             this.lblStudentID.Size = new System.Drawing.Size(58, 13);
             this.lblStudentID.TabIndex = 3;
@@ -72,11 +79,13 @@ namespace CIS411
             // 
             // btnForgotId
             // 
+            this.btnForgotId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.btnForgotId, 2);
             this.btnForgotId.FlatAppearance.BorderSize = 0;
             this.btnForgotId.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnForgotId.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnForgotId.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnForgotId.Location = new System.Drawing.Point(123, 61);
+            this.btnForgotId.Location = new System.Drawing.Point(65, 60);
             this.btnForgotId.Name = "btnForgotId";
             this.btnForgotId.Size = new System.Drawing.Size(190, 23);
             this.btnForgotId.TabIndex = 4;
@@ -86,9 +95,11 @@ namespace CIS411
             // 
             // groupRadioButtons
             // 
+            this.tableLayoutPanel1.SetColumnSpan(this.groupRadioButtons, 2);
             this.groupRadioButtons.Enabled = false;
-            this.groupRadioButtons.Location = new System.Drawing.Point(29, 133);
+            this.groupRadioButtons.Location = new System.Drawing.Point(55, 104);
             this.groupRadioButtons.Name = "groupRadioButtons";
+            this.tableLayoutPanel1.SetRowSpan(this.groupRadioButtons, 11);
             this.groupRadioButtons.Size = new System.Drawing.Size(200, 343);
             this.groupRadioButtons.TabIndex = 5;
             this.groupRadioButtons.TabStop = false;
@@ -96,10 +107,11 @@ namespace CIS411
             // 
             // comboClassList
             // 
+            this.tableLayoutPanel1.SetColumnSpan(this.comboClassList, 2);
             this.comboClassList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboClassList.Enabled = false;
             this.comboClassList.FormattingEnabled = true;
-            this.comboClassList.Location = new System.Drawing.Point(314, 133);
+            this.comboClassList.Location = new System.Drawing.Point(261, 132);
             this.comboClassList.Name = "comboClassList";
             this.comboClassList.Size = new System.Drawing.Size(235, 21);
             this.comboClassList.TabIndex = 6;
@@ -107,9 +119,10 @@ namespace CIS411
             // 
             // comboTutors
             // 
+            this.tableLayoutPanel1.SetColumnSpan(this.comboTutors, 2);
             this.comboTutors.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboTutors.FormattingEnabled = true;
-            this.comboTutors.Location = new System.Drawing.Point(314, 163);
+            this.comboTutors.Location = new System.Drawing.Point(261, 159);
             this.comboTutors.Name = "comboTutors";
             this.comboTutors.Size = new System.Drawing.Size(235, 21);
             this.comboTutors.TabIndex = 6;
@@ -119,9 +132,10 @@ namespace CIS411
             // btnSubmit
             // 
             this.btnSubmit.Enabled = false;
-            this.btnSubmit.Location = new System.Drawing.Point(314, 327);
+            this.btnSubmit.Location = new System.Drawing.Point(261, 270);
             this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(235, 149);
+            this.tableLayoutPanel1.SetRowSpan(this.btnSubmit, 2);
+            this.btnSubmit.Size = new System.Drawing.Size(235, 90);
             this.btnSubmit.TabIndex = 7;
             this.btnSubmit.Text = "Submit";
             this.btnSubmit.UseVisualStyleBackColor = true;
@@ -129,7 +143,8 @@ namespace CIS411
             // 
             // btnAdmin
             // 
-            this.btnAdmin.Location = new System.Drawing.Point(12, 500);
+            this.btnAdmin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAdmin.Location = new System.Drawing.Point(3, 491);
             this.btnAdmin.Name = "btnAdmin";
             this.btnAdmin.Size = new System.Drawing.Size(46, 25);
             this.btnAdmin.TabIndex = 8;
@@ -139,7 +154,8 @@ namespace CIS411
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(12, 12);
+            this.btnReset.AutoSize = true;
+            this.btnReset.Location = new System.Drawing.Point(3, 3);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(46, 25);
             this.btnReset.TabIndex = 9;
@@ -152,24 +168,61 @@ namespace CIS411
             this.keyTimer.Interval = 200;
             this.keyTimer.Tick += new System.EventHandler(this.keyTimer_Tick);
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tableLayoutPanel1.AutoSize = true;
+            this.tableLayoutPanel1.ColumnCount = 6;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.btnReset, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnAdmin, 0, 15);
+            this.tableLayoutPanel1.Controls.Add(this.lblStudentID, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.txtStudentID, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.comboTutors, 3, 5);
+            this.tableLayoutPanel1.Controls.Add(this.comboClassList, 3, 4);
+            this.tableLayoutPanel1.Controls.Add(this.btnIdSearch, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.groupRadioButtons, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.btnForgotId, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.btnSubmit, 3, 9);
+            this.tableLayoutPanel1.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 6);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 16;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(553, 519);
+            this.tableLayoutPanel1.TabIndex = 10;
+            // 
             // frmMain
             // 
             this.AcceptButton = this.btnIdSearch;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 537);
-            this.Controls.Add(this.btnAdmin);
-            this.Controls.Add(this.btnSubmit);
-            this.Controls.Add(this.comboClassList);
-            this.Controls.Add(this.comboTutors);
-            this.Controls.Add(this.groupRadioButtons);
-            this.Controls.Add(this.btnForgotId);
-            this.Controls.Add(this.lblStudentID);
-            this.Controls.Add(this.btnIdSearch);
-            this.Controls.Add(this.txtStudentID);
-            this.Controls.Add(this.btnReset);
+            this.ClientSize = new System.Drawing.Size(577, 537);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmMain";
             this.Text = "Login";
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -187,6 +240,7 @@ namespace CIS411
         private System.Windows.Forms.Button btnAdmin;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Timer keyTimer;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 
     }
 }

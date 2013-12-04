@@ -53,7 +53,7 @@ namespace CIS411
                 {
                     DateTime thedate = DateTime.Parse(rd["DATE"].ToString());
 
-                    listBoxEditVisit.Items.Add(thedate.ToString("d").PadRight(15) + "\t" + rd["FIRSTNAME"].ToString().PadRight(10) + "\t" + rd["LASTNAME"].ToString().PadRight(10) + "\t" + rd["CLARION_ID"].ToString().PadRight(5) + "\t" + rd["TIME_IN"].ToString().PadRight(10) + "\t" + rd["TIME_OUT"].ToString().PadRight(10) + "\t" + rd["METHOD"].ToString().PadRight(30) + "\t" + rd["TUTORFIRSTNAME"].ToString().PadRight(10) + " " + rd["TUTORLASTNAME"].ToString().PadRight(10) + "\t" + rd["SUBJECT"].ToString().PadRight(10) + "\t" + rd["CATALOG"].ToString().PadRight(5) + "\t" + rd["SECTION"].ToString().PadRight(10));
+                    listBoxEditVisit.Items.Add(thedate.ToString("d").PadRight(15) + "\t" + rd["FIRSTNAME"].ToString().PadRight(10) + "\t" + rd["LASTNAME"].ToString().PadRight(10) + "\t" + int.Parse(rd["CLARION_ID"].ToString()).ToString("D8").PadRight(5) + "\t" + rd["TIME_IN"].ToString().PadRight(10) + "\t" + rd["TIME_OUT"].ToString().PadRight(10) + "\t" + rd["METHOD"].ToString().PadRight(30) + "\t" + rd["TUTORFIRSTNAME"].ToString().PadRight(10) + " " + rd["TUTORLASTNAME"].ToString().PadRight(10) + "\t" + rd["SUBJECT"].ToString().PadRight(10) + "\t" + rd["CATALOG"].ToString().PadRight(5) + "\t" + rd["SECTION"].ToString().PadRight(10));
 
                 }
             }
