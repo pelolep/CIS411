@@ -34,7 +34,7 @@ namespace CIS411
             //clears the list box to enter new information
             listBoxEditVisit.Items.Clear();
             //TAB THIS
-            listBoxEditVisit.Items.Add("DATE".PadRight(25) + " NAME".PadRight(60)+  "TIME IN".PadRight(25)+    "TIME OUT".PadRight(20)+ "METHOD");
+            listBoxEditVisit.Items.Add("DATE".PadRight(25) + " NAME".PadRight(60)+  "ID".PadRight(25)+    "TIME IN".PadRight(25)+ "TIME OUT".PadRight(25) + "METHOD");
             //creates new dataconnection
             DataConnection conn = new DataConnection();
             SqlDataReader rd;
@@ -52,9 +52,12 @@ namespace CIS411
                 while (rd.Read())
                 {
                     DateTime thedate = DateTime.Parse(rd["DATE"].ToString());
+                    string TIMEOUT = rd["TIME_OUT"].ToString().PadRight(10);
+                    if (TIMEOUT.Replace(" ","").Length !=8)
+                        TIMEOUT = " ".PadRight(18);
+                    listBoxEditVisit.Items.Add(thedate.ToString("d").PadRight(15) + "\t" + rd["FIRSTNAME"].ToString().PadRight(30-rd["firstname"].ToString().Length) + "\t" + rd["LASTNAME"].ToString().PadRight(30-rd["lastname"].ToString().Length) + "\t" + (int.Parse(rd["CLARION_ID"].ToString())).ToString("D8").PadRight(20-(int.Parse(rd["clarion_id"].ToString())).ToString("D8").Length) + "\t" + rd["TIME_IN"].ToString().PadRight(10) + "\t" + TIMEOUT + "\t" + rd["METHOD"].ToString().PadRight(30-rd["method"].ToString().Length) + "\t" + rd["TUTORFIRSTNAME"].ToString().PadRight(30-rd["tutorfirstname"].ToString().Length) + " " + rd["TUTORLASTNAME"].ToString().PadRight(30-rd["tutorlastname"].ToString().Length) + "\t" + rd["SUBJECT"].ToString().PadRight(10-rd["subject"].ToString().Length) + "\t" + rd["CATALOG"].ToString().PadRight(10-rd["catalog"].ToString().Length) + "\t" + rd["SECTION"].ToString().PadRight(10));
 
-                    listBoxEditVisit.Items.Add(thedate.ToString("d").PadRight(15) + "\t" + rd["FIRSTNAME"].ToString().PadRight(10) + "\t" + rd["LASTNAME"].ToString().PadRight(10) + "\t" + int.Parse(rd["CLARION_ID"].ToString()).ToString("D8").PadRight(5) + "\t" + rd["TIME_IN"].ToString().PadRight(10) + "\t" + rd["TIME_OUT"].ToString().PadRight(10) + "\t" + rd["METHOD"].ToString().PadRight(30) + "\t" + rd["TUTORFIRSTNAME"].ToString().PadRight(10) + " " + rd["TUTORLASTNAME"].ToString().PadRight(10) + "\t" + rd["SUBJECT"].ToString().PadRight(10) + "\t" + rd["CATALOG"].ToString().PadRight(5) + "\t" + rd["SECTION"].ToString().PadRight(10));
-
+                    
                 }
             }
             rd.Close();
@@ -77,8 +80,10 @@ namespace CIS411
                     while (rd.Read())
                     {
                         DateTime thedate = DateTime.Parse(rd["DATE"].ToString());
-
-                        listBoxEditVisit.Items.Add(thedate.ToString("d").PadRight(15) + "\t" + rd["FIRSTNAME"].ToString().PadRight(10) + "\t" + rd["LASTNAME"].ToString().PadRight(10) + "\t" + rd["tutor_ID"].ToString().PadRight(5) + "\t" + rd["TIME_IN"].ToString().PadRight(10) + "\t" + rd["TIME_OUT"].ToString().PadRight(10) + "\t" + "i'm_a_tutor");
+                        string TIMEOUT = rd["TIME_OUT"].ToString().PadRight(10);
+                        MessageBox.Show(TIMEOUT.Replace(" ", "").Length.ToString());
+                        if (TIMEOUT.Replace(" ", "").Length != 8)
+                            TIMEOUT = " ".PadRight(18); listBoxEditVisit.Items.Add(thedate.ToString("d").PadRight(15) + "\t" + rd["FIRSTNAME"].ToString().PadRight(30 - rd["firstname"].ToString().Length) + "\t" + rd["LASTNAME"].ToString().PadRight(30 - rd["lastname"].ToString().Length) + "\t" + rd["tutor_ID"].ToString().PadRight(20 - rd["tutor_id"].ToString().Length) + "\t" + rd["TIME_IN"].ToString().PadRight(10) + "\t" + TIMEOUT + "\t" + "i'm_a_tutor");
 
                     }
                 }
@@ -107,8 +112,15 @@ namespace CIS411
 
             if (selectedVisitEdit[3] != null)
             {
-                DateTime TimeOutEdit = DateTime.Parse(selectedVisitEdit[5]);
+                try
+                {
+                    DateTime TimeOutEdit = DateTime.Parse(selectedVisitEdit[5]);
+                
                 dateTimePickerEditTimeOut.Value = TimeOutEdit;
+                }
+                catch {
+                   // dateTimePickerEditTimeOut.Value = null;
+                }
             }
             txtEditDate.Text = dateEdit;
             txtEditStudentID.Text = selectedVisitEdit[3];
