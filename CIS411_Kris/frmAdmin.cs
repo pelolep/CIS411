@@ -591,12 +591,15 @@ namespace CIS411
             int student_ID;
             for (int i = 0; i < listBoxLoggedIn.SelectedItems.Count; i++)
             {
-                selectedStudent = listBoxLoggedIn.SelectedItems[i].ToString().Split();
-                if (selectedStudent[3].Remove(3)=="TUT")
-                    student_ID = int.Parse(selectedStudent[3].Remove(0,3));
-                else
-                    student_ID = int.Parse(selectedStudent[3]);
-                frmMain.signOut(student_ID,true);
+                if (listBoxLoggedIn.SelectedIndices[i] != 0)
+                {
+                    selectedStudent = listBoxLoggedIn.SelectedItems[i].ToString().Split();
+                    if (selectedStudent[3].Remove(3) == "TUT")
+                        student_ID = int.Parse(selectedStudent[3].Remove(0, 3));
+                    else
+                        student_ID = int.Parse(selectedStudent[3]);
+                    frmMain.signOut(student_ID, true);
+                }
             }
             loadlist();
         }

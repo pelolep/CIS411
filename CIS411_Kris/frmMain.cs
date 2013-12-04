@@ -107,7 +107,10 @@ namespace CIS411
             }
 
             if (MessageBox.Show("Are you " + getName() + "?", "ID Validation", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                resetForm();
                 return;
+            }
             //Check Visits Table for not-signed in
             if (studentSignedIn(studentID))
             { 
@@ -173,6 +176,7 @@ namespace CIS411
             // Otherwise, initialize the comboTutors box if it hasn't been yet
             else if (comboTutors.Items.Count==0)
             {
+                tutoring = false;
                 this.comboTutors.Items.Add("Select a tutor...");
                 this.comboTutors.Items.AddRange(getTutors(false));
                 this.comboTutors.SelectedIndex = 0;
@@ -276,17 +280,15 @@ namespace CIS411
             comboClassList.SelectedIndex = 0;
         }
 
-        // Initializes classComboBox if it hasn't been yet
+        // Initializes classComboBox
         private void initClassCombo()
         {
-            if (comboClassList.Items.Count==0)
-            {
+            comboClassList.Items.Clear();
                 updateClassComboBox(studentID);
-            }
         }
 
         // Adds an entry to the visits table with the information currently selected and resets the form
-         private void signIn()
+        private void signIn()
         {
             for (int i = 0; i < rdoMethods.Length; i++)
                 if (rdoMethods[i].Checked)
@@ -303,7 +305,7 @@ namespace CIS411
                 {
                     while (rd.Read())
                     {
-                        tutorid= int.Parse(rd[0].ToString());
+                        tutorid = int.Parse(rd[0].ToString());
                     }
                 }
                 conn.Close();
@@ -342,7 +344,7 @@ namespace CIS411
                     return;
                 }
                 selectedTutorID = rd[0].ToString();
-                
+
                 conn.Close();
                 conn.Open();
                 if (comboClassList.SelectedItem.ToString() == "Other")

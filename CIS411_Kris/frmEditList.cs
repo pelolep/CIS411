@@ -91,12 +91,12 @@ namespace CIS411
         }
         private void btnEditSelectedVisit_Click(object sender, EventArgs e)
         {
+            if ((listBoxEditVisit.SelectedIndex == 0)||(listBoxEditVisit.SelectedIndices.Count>1))
+                return;
             string[] selectedVisitEdit;
             try
             {
                 selectedVisitEdit = listBoxEditVisit.SelectedItem.ToString().Split('\t');
-                
-                
             }
             catch
             {
@@ -233,15 +233,22 @@ namespace CIS411
                 return;
             }
             conn.Open();
-            if (istutor)
-                conn.Query("update tutor_hour set tutor_ID = '" + txtEditStudentID.Text + "' , DATE = '" + date + "' , TIME_IN ='" + timeIn.ToString("HH:mm:ss tt") + "' , TIME_OUT = '" + timeOut.ToString("HH:mm:ss tt") + "' , TIME_DIFFERENCE = '" + timedifference.ToString("c") + "' where tutor_ID = '" + txtEditStudentID.Text + "' AND DATE = '" + date + "' AND TIME_IN ='" + originalDateTime.ToString("HH:mm:ss tt") + "'");
-            else if(comboAddTutoring.Enabled)
-                conn.Query("update VISIT set CLARION_ID = '" + txtEditStudentID.Text + "' , DATE = '" + date + "' , TIME_IN ='" + timeIn.ToString("HH:mm:ss tt") + "' , TIME_OUT = '" + timeOut.ToString("HH:mm:ss tt") + "' , TIME_DIFFERENCE = '" + timedifference.ToString("c") + "', SUBJECT = '" + course[0] + "', CATALOG = '" + course[1] + "', SECTION = '" + course[2] + "', TUTOR_ID = " + tutorID + ", METHOD = '" + method + "' where CLARION_ID = '" + txtEditStudentID.Text + "' AND DATE = '" + date + "' AND TIME_IN ='" + originalDateTime.ToString("HH:mm:ss tt") + "'");
-            else
-                conn.Query("update VISIT set CLARION_ID = '" + txtEditStudentID.Text + "' , DATE = '" + date + "' , TIME_IN ='" + timeIn.ToString("HH:mm:ss tt") + "' , TIME_OUT = '" + timeOut.ToString("HH:mm:ss tt") + "' , TIME_DIFFERENCE = '" + timedifference.ToString("c") + "', SUBJECT = '" + course[0] + "', CATALOG = '" + course[1] + "', SECTION = '" + course[2] + "', METHOD = '" + method + "' where CLARION_ID = '" + txtEditStudentID.Text + "' AND DATE = '" + date + "' AND TIME_IN ='" + originalDateTime.ToString("HH:mm:ss tt") + "'");
-
+            try
+            {
+                if (istutor)
+                    conn.Query("update tutor_hour set tutor_ID = '" + txtEditStudentID.Text.Remove(0, 3) + "' , DATE = '" + date + "' , TIME_IN ='" + timeIn.ToString("HH:mm:ss tt") + "' , TIME_OUT = '" + timeOut.ToString("HH:mm:ss tt") + "' , TIME_DIFFERENCE = '" + timedifference.ToString("c") + "' where tutor_ID = '" + txtEditStudentID.Text.Remove(0, 3) + "' AND DATE = '" + date + "' AND TIME_IN ='" + originalDateTime.ToString("HH:mm:ss tt") + "'");
+                else if (comboAddTutoring.Enabled)
+                    conn.Query("update VISIT set CLARION_ID = '" + txtEditStudentID.Text + "' , DATE = '" + date + "' , TIME_IN ='" + timeIn.ToString("HH:mm:ss tt") + "' , TIME_OUT = '" + timeOut.ToString("HH:mm:ss tt") + "' , TIME_DIFFERENCE = '" + timedifference.ToString("c") + "', SUBJECT = '" + course[0] + "', CATALOG = '" + course[1] + "', SECTION = '" + course[2] + "', TUTOR_ID = " + tutorID + ", METHOD = '" + method + "'" + ((comboaddClass.SelectedItem.ToString()=="Other") ? ", TERM='Other'" : "") + " where CLARION_ID = '" + txtEditStudentID.Text + "' AND DATE = '" + date + "' AND TIME_IN ='" + originalDateTime.ToString("HH:mm:ss tt") + "'");
+                else
+                    conn.Query("update VISIT set CLARION_ID = '" + txtEditStudentID.Text + "' , DATE = '" + date + "' , TIME_IN ='" + timeIn.ToString("HH:mm:ss tt") + "' , TIME_OUT = '" + timeOut.ToString("HH:mm:ss tt") + "' , TIME_DIFFERENCE = '" + timedifference.ToString("c") + "', SUBJECT = '" + course[0] + "', CATALOG = '" + course[1] + "', SECTION = '" + course[2] + "', METHOD = '" + method + "'" + ((comboaddClass.SelectedItem.ToString()=="Other") ? ", TERM='Other'" : "") + " where CLARION_ID = '" + txtEditStudentID.Text + "' AND DATE = '" + date + "' AND TIME_IN ='" + originalDateTime.ToString("HH:mm:ss tt") + "'");
+            }
+            catch
+            {
+                MessageBox.Show("Cannot save visit", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                conn.Close();
+                return;
+            }
             conn.Close();
-           // MessageBox.Show(date);
             MessageBox.Show("Visit has been edited.");
             this.Close();
         }
@@ -251,7 +258,7 @@ namespace CIS411
             comboaddClass.Enabled = true;
             if (comboEditMethod.SelectedItem.ToString() == Properties.Settings.Default.TutoringMethod)
                 comboAddTutoring.Enabled = true;
-            else if (comboEditMethod.SelectedItem.ToString() == "is a tutor")
+            else if (comboEditMethod.SelectedItem.ToString() == "Tutor")
             {
                 comboaddClass.Enabled = false;
                 comboAddTutoring.Enabled = false;
@@ -265,6 +272,8 @@ namespace CIS411
 
         private void btnDeleteVisit_Click(object sender, EventArgs e)
         {
+            if (listBoxEditVisit.SelectedIndex == 0)
+                return;
             string[] items;
             bool tutor;
             for (int i = 0; i < listBoxEditVisit.SelectedItems.Count; i++)
