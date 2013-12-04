@@ -80,7 +80,7 @@ namespace CIS411
                     {
                         DateTime thedate = DateTime.Parse(rd["DATE"].ToString());
                         string TIMEOUT = rd["TIME_OUT"].ToString().PadRight(10);
-                        MessageBox.Show(TIMEOUT.Replace(" ", "").Length.ToString());
+                       // MessageBox.Show(TIMEOUT.Replace(" ", "").Length.ToString());
                         if (TIMEOUT.Replace(" ", "").Length != 8)
                             TIMEOUT = " ".PadRight(18);
                         listBoxEditVisit.Items.Add(thedate.ToString("d").PadRight(15) + "\t" + rd["FIRSTNAME"].ToString().PadRight(30 - rd["firstname"].ToString().Length) + "\t" + rd["LASTNAME"].ToString().PadRight(30 - rd["lastname"].ToString().Length) + "\t" + rd["tutor_ID"].ToString().PadRight(20 - rd["tutor_id"].ToString().Length) + "\t" + rd["TIME_IN"].ToString().PadRight(10) + "\t" + TIMEOUT + "\t" + "i'm_a_tutor");

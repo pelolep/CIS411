@@ -328,7 +328,7 @@ namespace CIS411
                 string[] selectedTutor = comboTutors.SelectedItem.ToString().Split();
                 string selectedTutorID;
                 conn.Open();
-                SqlDataReader rd = conn.GetReader("TUTOR_ID", "STUDENT INNER JOIN TUTOR ON TUTOR.CLARION_ID = STUDENT.CLARION_ID", "LASTNAME", selectedTutor[2], "FIRSTNAME", selectedTutor[1]);
+                SqlDataReader rd = conn.GetReader("TUTOR_ID", "STUDENT INNER JOIN TUTOR ON TUTOR.CLARION_ID = STUDENT.CLARION_ID", "LASTNAME", selectedTutor[1], "FIRSTNAME", selectedTutor[0]);
                 if (!(rd.Read()))
                 {
                     conn.Close();
@@ -336,6 +336,7 @@ namespace CIS411
                     return;
                 }
                 selectedTutorID = rd[0].ToString();
+                
                 conn.Close();
                 conn.Open();
                 if (comboClassList.SelectedItem.ToString() == "Other")
@@ -395,7 +396,7 @@ namespace CIS411
             {
                 while (rd.Read())
                 {
-                    tutorList.Add(rd[2]+" " + rd[0] + " " + rd[1]);
+                    tutorList.Add(includeIDs ? (rd[2] + " ") : "" + rd[0] + " " + rd[1]);
                 }
             }
             conn.Close();
