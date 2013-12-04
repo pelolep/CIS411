@@ -302,12 +302,16 @@ namespace CIS411
                 }
                 conn.Close();
                 conn.Open();
-                conn.Query("insert into tutor_hour(tutor_id,Date,Time_in)values('" + tutorid + "', '" + DateTime.Today.ToString("d") + "', '" + DateTime.Parse(DateTime.Now.ToString("t")) + "')");
+                conn.Query("insert into tutor_hour(tutor_id,Date,Time_in)values('" + tutorid + "', '" + DateTime.Today.ToString("d") + "', '" + DateTime.Parse(DateTime.Now.ToString("HH:mm:ss tt")) + "')");
                 conn.Close();
             }
-
-
-            string[] selectedClass = comboClassList.SelectedItem.ToString().Split();
+            string[] selectedClass = new string[10];
+            try
+            {
+                selectedClass = comboClassList.SelectedItem.ToString().Split();
+            }
+            catch
+            { }
 
             if (comboTutors.Visible == false && comboClassList.Enabled == true)
             {
@@ -326,7 +330,7 @@ namespace CIS411
                     return;
                 }
             }
-            else
+            
             {
                 try
                 {
@@ -353,8 +357,7 @@ namespace CIS411
                 catch
                 {
                     conn.Close();
-                    MessageBox.Show("There was an error signing in.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                   
                 }
             }
             conn.Close();
