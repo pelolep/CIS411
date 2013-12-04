@@ -17,7 +17,7 @@ namespace CIS411
     public partial class frmMain : Form
     {
         bool tutoring;
-        static int tutorid;
+        static int tutorid=-1;
         static string method="";
         private System.Windows.Forms.RadioButton[] rdoMethods;
 
@@ -51,7 +51,7 @@ namespace CIS411
             for (int i = 0; i < Properties.Settings.Default.MethodNames.Count; i++)
                 this.groupRadioButtons.Controls.Add(this.rdoMethods[i]);
             tutoring = false;
-            tutorid = 0;
+            
         }
 
         private void txtStudentID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -328,7 +328,7 @@ namespace CIS411
                 string[] selectedTutor = comboTutors.SelectedItem.ToString().Split();
                 string selectedTutorID;
                 conn.Open();
-                SqlDataReader rd = conn.GetReader("TUTOR_ID", "STUDENT INNER JOIN TUTOR ON TUTOR.CLARION_ID = STUDENT.CLARION_ID", "LASTNAME", selectedTutor[1], "FIRSTNAME", selectedTutor[0]);
+                SqlDataReader rd = conn.GetReader("TUTOR_ID", "STUDENT INNER JOIN TUTOR ON TUTOR.CLARION_ID = STUDENT.CLARION_ID", "LASTNAME", selectedTutor[2], "FIRSTNAME", selectedTutor[1]);
                 if (!(rd.Read()))
                 {
                     conn.Close();
@@ -489,6 +489,9 @@ namespace CIS411
             }
             conn.Close();
             conn.Open();
+            if (tutorid == -1)
+                tutorid = studentID;
+           
             rd = conn.GetReader("time_in, time_out", "tutor_hour", "tutor_id", tutorid.ToString(), "and time_out is null");
 
             if (rd.HasRows)
