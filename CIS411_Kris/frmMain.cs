@@ -302,7 +302,7 @@ namespace CIS411
                 }
                 conn.Close();
                 conn.Open();
-                conn.Query("insert into tutor_hour(tutor_id,Date,Time_in)values('" + tutorid + "', '" + DateTime.Today.ToString() + "', '" + DateTime.Parse(DateTime.Now.ToString("HH:mm:ss tt")) + "')");
+                conn.Query("insert into tutor_hour(tutor_id,Date,Time_in)values('" + tutorid + "', '" + DateTime.Today.ToString("d") + "', '" + DateTime.Parse(DateTime.Now.ToString("t")) + "')");
                 conn.Close();
             }
 

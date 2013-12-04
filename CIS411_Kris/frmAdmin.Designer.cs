@@ -28,21 +28,21 @@ namespace CIS411
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControlAdmin = new System.Windows.Forms.TabControl();
             this.tabVisits = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnEditVisit = new System.Windows.Forms.Button();
-            this.btnAddVisit = new System.Windows.Forms.Button();
             this.lblLoggedIn = new System.Windows.Forms.Label();
-            this.btnLogOut = new System.Windows.Forms.Button();
-            this.listBoxLoggedIn = new System.Windows.Forms.ListBox();
+            this.dateTimePickerEditMin = new System.Windows.Forms.DateTimePicker();
+            this.btnEditVisit = new System.Windows.Forms.Button();
             this.comboEditMethod = new System.Windows.Forms.ComboBox();
             this.dateTimePickerEditMax = new System.Windows.Forms.DateTimePicker();
+            this.listBoxLoggedIn = new System.Windows.Forms.ListBox();
             this.lblEditMethod = new System.Windows.Forms.Label();
             this.lblAddVisit = new System.Windows.Forms.Label();
             this.comboAddTutoring = new System.Windows.Forms.ComboBox();
             this.comboaddClass = new System.Windows.Forms.ComboBox();
-            this.dateTimePickerEditMin = new System.Windows.Forms.DateTimePicker();
+            this.btnLogOut = new System.Windows.Forms.Button();
             this.txtEditStudentID = new System.Windows.Forms.TextBox();
             this.lblEditDateRange = new System.Windows.Forms.Label();
             this.lblStudentID = new System.Windows.Forms.Label();
@@ -50,6 +50,7 @@ namespace CIS411
             this.label6 = new System.Windows.Forms.Label();
             this.lblAddTutor = new System.Windows.Forms.Label();
             this.dateTimePickerAddTimeOut = new System.Windows.Forms.DateTimePicker();
+            this.btnAddVisit = new System.Windows.Forms.Button();
             this.lblDate = new System.Windows.Forms.Label();
             this.lblAddClass = new System.Windows.Forms.Label();
             this.dateTimePickerAddTimeIn = new System.Windows.Forms.DateTimePicker();
@@ -61,12 +62,12 @@ namespace CIS411
             this.lblEditVisit = new System.Windows.Forms.Label();
             this.tabTutors = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblInactiveTutors = new System.Windows.Forms.Label();
             this.lblActiveTutors = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnAddTutor = new System.Windows.Forms.Button();
+            this.lblInactiveTutors = new System.Windows.Forms.Label();
             this.listBoxDisableTutors = new System.Windows.Forms.ListBox();
             this.listBoxEnableTutors = new System.Windows.Forms.ListBox();
-            this.btnAddTutor = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.btnDisableSelected = new System.Windows.Forms.Button();
             this.btnDisableAll = new System.Windows.Forms.Button();
             this.btnEnableAll = new System.Windows.Forms.Button();
@@ -122,6 +123,7 @@ namespace CIS411
             this.txtAddSignOut = new System.Windows.Forms.TextBox();
             this.btn_courses_import = new System.Windows.Forms.Button();
             this.txtAddSignIn = new System.Windows.Forms.TextBox();
+            this.keyTimer = new System.Windows.Forms.Timer(this.components);
             this.tabControlAdmin.SuspendLayout();
             this.tabVisits.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -218,28 +220,6 @@ namespace CIS411
             this.tableLayoutPanel1.Size = new System.Drawing.Size(626, 365);
             this.tableLayoutPanel1.TabIndex = 47;
             // 
-            // btnEditVisit
-            // 
-            this.btnEditVisit.Location = new System.Drawing.Point(245, 280);
-            this.btnEditVisit.Name = "btnEditVisit";
-            this.tableLayoutPanel1.SetRowSpan(this.btnEditVisit, 2);
-            this.btnEditVisit.Size = new System.Drawing.Size(75, 32);
-            this.btnEditVisit.TabIndex = 16;
-            this.btnEditVisit.Text = "List Visits";
-            this.btnEditVisit.UseVisualStyleBackColor = true;
-            this.btnEditVisit.Click += new System.EventHandler(this.btnEditVisit_Click);
-            // 
-            // btnAddVisit
-            // 
-            this.btnAddVisit.Location = new System.Drawing.Point(464, 227);
-            this.btnAddVisit.Name = "btnAddVisit";
-            this.tableLayoutPanel1.SetRowSpan(this.btnAddVisit, 2);
-            this.btnAddVisit.Size = new System.Drawing.Size(75, 32);
-            this.btnAddVisit.TabIndex = 10;
-            this.btnAddVisit.Text = "Add Visit";
-            this.btnAddVisit.UseVisualStyleBackColor = true;
-            this.btnAddVisit.Click += new System.EventHandler(this.btnAddVisit_Click);
-            // 
             // lblLoggedIn
             // 
             this.lblLoggedIn.AutoSize = true;
@@ -250,26 +230,28 @@ namespace CIS411
             this.lblLoggedIn.TabIndex = 2;
             this.lblLoggedIn.Text = "Students Currently Logged In:";
             // 
-            // btnLogOut
+            // dateTimePickerEditMin
             // 
-            this.btnLogOut.Location = new System.Drawing.Point(464, 143);
-            this.btnLogOut.Name = "btnLogOut";
-            this.tableLayoutPanel1.SetRowSpan(this.btnLogOut, 2);
-            this.btnLogOut.Size = new System.Drawing.Size(75, 39);
-            this.btnLogOut.TabIndex = 1;
-            this.btnLogOut.Text = "Log Out Selected";
-            this.btnLogOut.UseVisualStyleBackColor = true;
-            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
+            this.dateTimePickerEditMin.CustomFormat = "MM\'/\'dd\'/\'yyyy";
+            this.dateTimePickerEditMin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePickerEditMin.Location = new System.Drawing.Point(130, 293);
+            this.dateTimePickerEditMin.MinDate = new System.DateTime(2013, 1, 1, 0, 0, 0, 0);
+            this.dateTimePickerEditMin.Name = "dateTimePickerEditMin";
+            this.dateTimePickerEditMin.Size = new System.Drawing.Size(109, 20);
+            this.dateTimePickerEditMin.TabIndex = 27;
+            this.dateTimePickerEditMin.Value = new System.DateTime(2013, 12, 3, 0, 0, 0, 0);
+            this.dateTimePickerEditMin.GotFocus += new System.EventHandler(this.EditVisitAcceptButton);
             // 
-            // listBoxLoggedIn
+            // btnEditVisit
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.listBoxLoggedIn, 5);
-            this.listBoxLoggedIn.FormattingEnabled = true;
-            this.listBoxLoggedIn.Location = new System.Drawing.Point(3, 16);
-            this.listBoxLoggedIn.Name = "listBoxLoggedIn";
-            this.listBoxLoggedIn.Size = new System.Drawing.Size(615, 121);
-            this.listBoxLoggedIn.TabIndex = 0;
-            this.listBoxLoggedIn.GotFocus += new System.EventHandler(this.listBoxLoggedIn_GotFocus);
+            this.btnEditVisit.Location = new System.Drawing.Point(245, 280);
+            this.btnEditVisit.Name = "btnEditVisit";
+            this.tableLayoutPanel1.SetRowSpan(this.btnEditVisit, 2);
+            this.btnEditVisit.Size = new System.Drawing.Size(75, 32);
+            this.btnEditVisit.TabIndex = 16;
+            this.btnEditVisit.Text = "List Visits";
+            this.btnEditVisit.UseVisualStyleBackColor = true;
+            this.btnEditVisit.Click += new System.EventHandler(this.btnEditVisit_Click);
             // 
             // comboEditMethod
             // 
@@ -291,6 +273,17 @@ namespace CIS411
             this.dateTimePickerEditMax.TabIndex = 28;
             this.dateTimePickerEditMax.Value = new System.DateTime(2013, 12, 3, 0, 0, 0, 0);
             this.dateTimePickerEditMax.GotFocus += new System.EventHandler(this.EditVisitAcceptButton);
+            // 
+            // listBoxLoggedIn
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.listBoxLoggedIn, 5);
+            this.listBoxLoggedIn.FormattingEnabled = true;
+            this.listBoxLoggedIn.Location = new System.Drawing.Point(3, 16);
+            this.listBoxLoggedIn.Name = "listBoxLoggedIn";
+            this.listBoxLoggedIn.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.listBoxLoggedIn.Size = new System.Drawing.Size(615, 121);
+            this.listBoxLoggedIn.TabIndex = 0;
+            this.listBoxLoggedIn.GotFocus += new System.EventHandler(this.listBoxLoggedIn_GotFocus);
             // 
             // lblEditMethod
             // 
@@ -333,17 +326,16 @@ namespace CIS411
             this.comboaddClass.TabIndex = 44;
             this.comboaddClass.GotFocus += new System.EventHandler(this.AddVisitAcceptButton);
             // 
-            // dateTimePickerEditMin
+            // btnLogOut
             // 
-            this.dateTimePickerEditMin.CustomFormat = "MM\'/\'dd\'/\'yyyy";
-            this.dateTimePickerEditMin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePickerEditMin.Location = new System.Drawing.Point(130, 293);
-            this.dateTimePickerEditMin.MinDate = new System.DateTime(2013, 1, 1, 0, 0, 0, 0);
-            this.dateTimePickerEditMin.Name = "dateTimePickerEditMin";
-            this.dateTimePickerEditMin.Size = new System.Drawing.Size(109, 20);
-            this.dateTimePickerEditMin.TabIndex = 27;
-            this.dateTimePickerEditMin.Value = new System.DateTime(2013, 12, 3, 0, 0, 0, 0);
-            this.dateTimePickerEditMin.GotFocus += new System.EventHandler(this.EditVisitAcceptButton);
+            this.btnLogOut.Location = new System.Drawing.Point(464, 143);
+            this.btnLogOut.Name = "btnLogOut";
+            this.tableLayoutPanel1.SetRowSpan(this.btnLogOut, 2);
+            this.btnLogOut.Size = new System.Drawing.Size(75, 39);
+            this.btnLogOut.TabIndex = 1;
+            this.btnLogOut.Text = "Log Out Highlighted";
+            this.btnLogOut.UseVisualStyleBackColor = true;
+            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
             // txtEditStudentID
             // 
@@ -412,6 +404,17 @@ namespace CIS411
             this.dateTimePickerAddTimeOut.TabIndex = 39;
             this.dateTimePickerAddTimeOut.Value = new System.DateTime(2013, 12, 3, 0, 0, 0, 0);
             this.dateTimePickerAddTimeOut.GotFocus += new System.EventHandler(this.AddVisitAcceptButton);
+            // 
+            // btnAddVisit
+            // 
+            this.btnAddVisit.Location = new System.Drawing.Point(464, 227);
+            this.btnAddVisit.Name = "btnAddVisit";
+            this.tableLayoutPanel1.SetRowSpan(this.btnAddVisit, 2);
+            this.btnAddVisit.Size = new System.Drawing.Size(75, 32);
+            this.btnAddVisit.TabIndex = 10;
+            this.btnAddVisit.Text = "Add Visit";
+            this.btnAddVisit.UseVisualStyleBackColor = true;
+            this.btnAddVisit.Click += new System.EventHandler(this.btnAddVisit_Click);
             // 
             // lblDate
             // 
@@ -543,16 +546,6 @@ namespace CIS411
             this.tableLayoutPanel2.Size = new System.Drawing.Size(433, 324);
             this.tableLayoutPanel2.TabIndex = 12;
             // 
-            // lblInactiveTutors
-            // 
-            this.lblInactiveTutors.AutoSize = true;
-            this.tableLayoutPanel2.SetColumnSpan(this.lblInactiveTutors, 2);
-            this.lblInactiveTutors.Location = new System.Drawing.Point(264, 0);
-            this.lblInactiveTutors.Name = "lblInactiveTutors";
-            this.lblInactiveTutors.Size = new System.Drawing.Size(81, 13);
-            this.lblInactiveTutors.TabIndex = 11;
-            this.lblInactiveTutors.Text = "Inactive Tutors:";
-            // 
             // lblActiveTutors
             // 
             this.lblActiveTutors.AutoSize = true;
@@ -562,6 +555,35 @@ namespace CIS411
             this.lblActiveTutors.Size = new System.Drawing.Size(73, 13);
             this.lblActiveTutors.TabIndex = 10;
             this.lblActiveTutors.Text = "Active Tutors:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 231);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Student ID:";
+            // 
+            // btnAddTutor
+            // 
+            this.btnAddTutor.Location = new System.Drawing.Point(183, 234);
+            this.btnAddTutor.Name = "btnAddTutor";
+            this.btnAddTutor.Size = new System.Drawing.Size(75, 23);
+            this.btnAddTutor.TabIndex = 9;
+            this.btnAddTutor.Text = "Add";
+            this.btnAddTutor.UseVisualStyleBackColor = true;
+            this.btnAddTutor.Click += new System.EventHandler(this.btnAddTutor_Click);
+            // 
+            // lblInactiveTutors
+            // 
+            this.lblInactiveTutors.AutoSize = true;
+            this.tableLayoutPanel2.SetColumnSpan(this.lblInactiveTutors, 2);
+            this.lblInactiveTutors.Location = new System.Drawing.Point(264, 0);
+            this.lblInactiveTutors.Name = "lblInactiveTutors";
+            this.lblInactiveTutors.Size = new System.Drawing.Size(81, 13);
+            this.lblInactiveTutors.TabIndex = 11;
+            this.lblInactiveTutors.Text = "Inactive Tutors:";
             // 
             // listBoxDisableTutors
             // 
@@ -582,25 +604,6 @@ namespace CIS411
             this.tableLayoutPanel2.SetRowSpan(this.listBoxEnableTutors, 5);
             this.listBoxEnableTutors.Size = new System.Drawing.Size(174, 212);
             this.listBoxEnableTutors.TabIndex = 2;
-            // 
-            // btnAddTutor
-            // 
-            this.btnAddTutor.Location = new System.Drawing.Point(183, 234);
-            this.btnAddTutor.Name = "btnAddTutor";
-            this.btnAddTutor.Size = new System.Drawing.Size(75, 23);
-            this.btnAddTutor.TabIndex = 9;
-            this.btnAddTutor.Text = "Add";
-            this.btnAddTutor.UseVisualStyleBackColor = true;
-            this.btnAddTutor.Click += new System.EventHandler(this.btnAddTutor_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 231);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Student ID:";
             // 
             // btnDisableSelected
             // 
@@ -1168,6 +1171,11 @@ namespace CIS411
             this.txtAddSignIn.Size = new System.Drawing.Size(100, 20);
             this.txtAddSignIn.TabIndex = 14;
             // 
+            // keyTimer
+            // 
+            this.keyTimer.Interval = 200;
+            this.keyTimer.Tick += new System.EventHandler(this.keyTimer_Tick);
+            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1296,6 +1304,7 @@ namespace CIS411
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.Timer keyTimer;
     }
         #endregion
 }

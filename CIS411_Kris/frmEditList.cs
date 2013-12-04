@@ -255,26 +255,31 @@ namespace CIS411
 
         private void btnDeleteVisit_Click(object sender, EventArgs e)
         {
-            string[] items = listBoxEditVisit.SelectedItem.ToString().Split('\t');
-            bool tutor = false;
-            
-            if (items[6] == "i'm_a_tutor")
-                tutor = true;
-            //MessageBox.Show(items[6]);
-            DataConnection conn = new DataConnection();
-            conn.Open();
-            try
+            string[] items;
+            bool tutor;
+            for (int i = 0; i < listBoxEditVisit.SelectedItems.Count; i++)
             {
-                if(tutor)
-                    conn.Query("DELETE FROM tutor_hour WHERE tutor_ID = '" + items[3] + "' AND DATE = '" + items[0] + "' AND TIME_IN = '" + items[4] + "' ");
-                else
-                conn.Query("DELETE FROM VISIT WHERE CLARION_ID = '" + items[3] + "' AND DATE = '" + items[0] + "' AND TIME_IN = '" + items[4]+"' ");
+                items = listBoxEditVisit.SelectedItems[i].ToString().Split('\t');
+                tutor = false;
+
+                if (items[6] == "i'm_a_tutor")
+                    tutor = true;
+                //MessageBox.Show(items[6]);
+                DataConnection conn = new DataConnection();
+                conn.Open();
+                try
+                {
+                    if (tutor)
+                        conn.Query("DELETE FROM tutor_hour WHERE tutor_ID = '" + items[3] + "' AND DATE = '" + items[0] + "' AND TIME_IN = '" + items[4] + "' ");
+                    else
+                        conn.Query("DELETE FROM VISIT WHERE CLARION_ID = '" + items[3] + "' AND DATE = '" + items[0] + "' AND TIME_IN = '" + items[4] + "' ");
+                }
+                catch
+                {
+                    MessageBox.Show("Error while attempting to delete visit. Please reload visit information and try again.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                conn.Close();
             }
-            catch
-            {
-                MessageBox.Show("Error while attempting to delete visit. Please reload visit information and try again.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            conn.Close();
             loadvisits(ID,min,max);
         }
 

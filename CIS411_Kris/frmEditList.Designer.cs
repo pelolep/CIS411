@@ -67,6 +67,7 @@
             this.listBoxEditVisit.FormattingEnabled = true;
             this.listBoxEditVisit.Location = new System.Drawing.Point(3, 20);
             this.listBoxEditVisit.Name = "listBoxEditVisit";
+            this.listBoxEditVisit.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.listBoxEditVisit.Size = new System.Drawing.Size(880, 134);
             this.listBoxEditVisit.TabIndex = 1;
             // 

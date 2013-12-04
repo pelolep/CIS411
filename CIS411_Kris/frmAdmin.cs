@@ -33,6 +33,10 @@ namespace CIS411
             this.txtTutorStudentID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_KeyPress);
             this.txtAddStudentID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_KeyPress);
             this.txtEditStudentID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(txt_KeyPress);
+            this.txtAddID.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(cutOffSwipeDigit_PreviewKeyDown);
+            this.txtTutorStudentID.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(cutOffSwipeDigit_PreviewKeyDown);
+            this.txtAddStudentID.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(cutOffSwipeDigit_PreviewKeyDown);
+            this.txtEditStudentID.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(cutOffSwipeDigit_PreviewKeyDown);
             for (int i = 0; i < Properties.Settings.Default.MethodNames.Count; i++)
             {
                comboAddMethod.Items.Add(Properties.Settings.Default.MethodNames[i]);
@@ -50,6 +54,12 @@ namespace CIS411
                 if (!(comboEditMethod.Items.Contains(Properties.Settings.Default.MethodNames[i])))
                     comboEditMethod.Items.Add(Properties.Settings.Default.MethodNames[i]);
             }
+            this.txtAddFirst.GotFocus += new System.EventHandler(this.AddStudentAcceptButton);
+            this.txtAddLast.GotFocus += new System.EventHandler(this.AddStudentAcceptButton);
+            this.txtAddID.GotFocus += new System.EventHandler(this.AddStudentAcceptButton);
+            this.txtCurrentPassword.GotFocus += new System.EventHandler(this.ChangePasswordAcceptButton);
+            this.txtNewPassword.GotFocus += new System.EventHandler(this.ChangePasswordAcceptButton);
+            this.txtConfirmPassword.GotFocus += new System.EventHandler(this.ChangePasswordAcceptButton);
         }
 
         //Adds Tutor to the list of tutors via Student ID and adds their information to the Tutors table
@@ -247,9 +257,9 @@ namespace CIS411
                         MessageBox.Show(ex.ToString());
                 }
                 xlApp.Quit();
+                MessageBox.Show("Report Generation Complete!");
             }
             reportFile.Dispose();
-            MessageBox.Show("Report Generation Complete!");
         }
 
         private void ImportStudents()
@@ -575,21 +585,17 @@ namespace CIS411
             btnSaveMethods.Enabled = true;
         }
 
-
-
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-
-
-            string[] selectedStudent = listBoxLoggedIn.SelectedItem.ToString().Split();
-            int student_ID = int.Parse(selectedStudent[3]);
-
-
-            frmMain.signOut(student_ID);
-
-
+            string[] selectedStudent;
+            int student_ID;
+            for (int i = 0; i < listBoxLoggedIn.SelectedItems.Count; i++)
+            {
+                selectedStudent = listBoxLoggedIn.SelectedItems[i].ToString().Split();
+                student_ID = int.Parse(selectedStudent[3]);
+                frmMain.signOut(student_ID);
+            }
             loadlist();
-
         }
 
         List<TextBox> txtMethods = new List<TextBox>();
@@ -954,6 +960,8 @@ namespace CIS411
         static public void txt_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (((e.KeyChar < '0') || (e.KeyChar > '9'))&&(e.KeyChar!='\b')&&(e.KeyChar!='\n'))
+                e.Handled = true;
+            if ((e.KeyChar == '\n') && (usingCard))
                 e.Handled = true;
         }
 
@@ -1524,6 +1532,16 @@ MessageBox.Show("sfgfdsgfg");
             this.AcceptButton = this.btnLogOut;
         }
 
+        private void ChangePasswordAcceptButton(object sender, System.EventArgs e)
+        {
+            this.AcceptButton = this.btnChangePassword;
+        }
+
+        private void AddStudentAcceptButton(object sender, System.EventArgs e)
+        {
+            this.AcceptButton = this.btnAddStudent;
+        }
+
         private void btnFullReport_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("This may take a very long time, continue?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
@@ -1568,9 +1586,9 @@ MessageBox.Show("sfgfdsgfg");
                 }
                 xlApp.Quit();
                 this.Cursor = System.Windows.Forms.Cursors.Default;
+                MessageBox.Show("Report Generation Complete!");
             }
             reportFile.Dispose();
-            MessageBox.Show("Report Generation Complete!");
         }
 
         private void btnAddStudent_Click(object sender, EventArgs e)
@@ -1579,7 +1597,7 @@ MessageBox.Show("sfgfdsgfg");
             conn.Open(); 
             try
             {
-                conn.Query("insert into STUDENT ( clarion_id,lastname,firstname ) values (" + txtAddID.Text + ",'" + txtAddLast + "','" + txtAddFirst + "')");
+                conn.Query("insert into STUDENT ( clarion_id,lastname,firstname ) values (" + txtAddID.Text + ",'" + txtAddLast.Text + "','" + txtAddFirst.Text + "')");
             }
             catch
             {
@@ -1604,6 +1622,38 @@ MessageBox.Show("sfgfdsgfg");
             for (int i = 0; i < numSelected; i++)
                 listBoxReport.Items.RemoveAt(listBoxReport.SelectedIndices[0]);
             listBoxReport.EndUpdate();
+        }
+
+        private void keyTimer_Tick(object sender, EventArgs e)
+        {
+            usingCard = false;
+            keyTimer.Stop();
+        }
+        static private bool usingCard = false;
+
+        private void cutOffSwipeDigit_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                return;
+            if (((System.Windows.Forms.TextBox)sender).Text == "")
+            {
+                // Starts a timer to see if user is swiping a card.
+                // keyTimer sets usingCard to false in 200 ms
+                usingCard = true;
+                keyTimer.Start();
+            }
+            /*
+             * if (e.KeyCode == Keys.Enter)
+                btnIdSearch.PerformClick();
+             */
+            else if ((((System.Windows.Forms.TextBox)sender).TextLength == 8) && (usingCard))
+            {
+                // If student is swiping card, first character must be stripped from ID textbox because it is an extraneous 9.
+                ((System.Windows.Forms.TextBox)sender).Text = ((System.Windows.Forms.TextBox)sender).Text.Remove(0, 1);
+                ((System.Windows.Forms.TextBox)sender).Select(8, 1);
+
+            }
+
         }
     }
 }
