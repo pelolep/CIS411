@@ -438,7 +438,7 @@ namespace CIS411
                     }
                 }
 
-                listBoxLoggedIn.Items.Add("DATE\t\tTIME IN\t\tID\t\tLAST NAME\tFIRST NAME");
+                listBoxLoggedIn.Items.Add("DATE\t\tTIME IN\t\tID\t\t" + "LAST NAME".PadRight(30) + "\tFIRST NAME");
             }
             catch
             {
@@ -456,7 +456,7 @@ namespace CIS411
                     while (rd.Read())
                     {
                         DateTime jdate = DateTime.Parse(rd[1].ToString());
-                        listBoxLoggedIn.Items.Add(jdate.ToString("MM/dd/yyyy") + "\t" + rd[2] + "\t\t" + rd[0].ToString().PadRight(20-rd[0].ToString().Length) + "\t" + rd[13] + "\t\t" + rd[14]);
+                        listBoxLoggedIn.Items.Add(jdate.ToString("MM/dd/yyyy") + "\t" + rd[2] + "\t\t" + int.Parse(rd[0].ToString()).ToString("D8").PadRight(20-rd[0].ToString().Length) + "\t" + rd[13].ToString().PadRight(30) + "\t" + rd[14].ToString().PadRight(30));
                     }
                 }
             }
@@ -479,7 +479,7 @@ namespace CIS411
                     {
 
                         DateTime jdate = DateTime.Parse(rd[1].ToString());
-                        listBoxLoggedIn.Items.Add(jdate.ToString("MM/dd/yyyy") + "\t" + rd[3] + "\t\t" + rd[0].ToString().PadRight(20 - rd[0].ToString().Length) + "\t" + rd[4] + "\t\t" + rd[5]);
+                        listBoxLoggedIn.Items.Add(jdate.ToString("MM/dd/yyyy") + "\t" + rd[3] + "\t\t" + ("TUT" + int.Parse(rd[0].ToString()).ToString("D4")).PadRight(20 - ("TUT" + int.Parse(rd[0].ToString()).ToString("D4")).Length) + "\t" + rd[4].ToString().PadRight(30) + "\t" + rd[5].ToString().PadRight(30));
                     }
                 }
             }
@@ -592,8 +592,11 @@ namespace CIS411
             for (int i = 0; i < listBoxLoggedIn.SelectedItems.Count; i++)
             {
                 selectedStudent = listBoxLoggedIn.SelectedItems[i].ToString().Split();
-                student_ID = int.Parse(selectedStudent[3]);
-                frmMain.signOut(student_ID);
+                if (selectedStudent[3].Remove(3)=="TUT")
+                    student_ID = int.Parse(selectedStudent[3].Remove(0,3));
+                else
+                    student_ID = int.Parse(selectedStudent[3]);
+                frmMain.signOut(student_ID,true);
             }
             loadlist();
         }

@@ -719,7 +719,7 @@ namespace CIS411
             this.grpBoxAddStudent.Size = new System.Drawing.Size(200, 164);
             this.grpBoxAddStudent.TabIndex = 8;
             this.grpBoxAddStudent.TabStop = false;
-            this.grpBoxAddStudent.Text = "Add Login";
+            this.grpBoxAddStudent.Text = "Add Student/Guest";
             // 
             // tableLayoutPanel3
             // 
