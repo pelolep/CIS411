@@ -63,14 +63,16 @@ namespace CIS411
             // lblEx
             // 
             this.lblEx.AutoSize = true;
-            this.lblEx.Location = new System.Drawing.Point(12, 53);
+            this.lblEx.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEx.Location = new System.Drawing.Point(30, 55);
             this.lblEx.Name = "lblEx";
-            this.lblEx.Size = new System.Drawing.Size(216, 13);
+            this.lblEx.Size = new System.Drawing.Size(177, 13);
             this.lblEx.TabIndex = 4;
-            this.lblEx.Text = "Your Clarion username with @clarion.edu";
+            this.lblEx.Text = "Include \"@clarion.edu\" if applicable";
             // 
             // frmSearchByName
             // 
+            this.AcceptButton = this.btnSearch;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(393, 96);
@@ -81,7 +83,6 @@ namespace CIS411
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmSearchByName";
             this.Text = "Forgot your Student Id?";
-            this.AcceptButton = btnSearch;
             this.ResumeLayout(false);
             this.PerformLayout();
 

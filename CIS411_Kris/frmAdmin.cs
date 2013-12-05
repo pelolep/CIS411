@@ -1640,7 +1640,7 @@ MessageBox.Show("sfgfdsgfg");
             conn.Open(); 
             try
             {
-                conn.Query("insert into STUDENT ( clarion_id,lastname,firstname ) values (" + txtAddID.Text + ",'" + txtAddLast.Text + "','" + txtAddFirst.Text + "')");
+                conn.Query("insert into STUDENT ( clarion_id,lastname,firstname,cnet_username ) values (" + txtAddID.Text + ",'" + txtAddLast.Text + "','" + txtAddFirst.Text + "'" + "'" + txtAddFirst.Text + txtAddLast.Text + "')");
             }
             catch
             {
@@ -1649,7 +1649,7 @@ MessageBox.Show("sfgfdsgfg");
                     conn.Close();
                     return;
                 }
-                conn.Query("update STUDENT set lastname = '" + txtAddLast.Text + "', firstname = '" + txtAddFirst.Text + "' where clarion_id = '" + txtAddID.Text + "'");
+                conn.Query("update STUDENT set lastname = '" + txtAddLast.Text + "', firstname = '" + txtAddFirst.Text + "', cnet_username = '" + txtAddFirst.Text + txtAddLast.Text + "' where clarion_id = '" + txtAddID.Text + "'");
             }
             conn.Close();
             MessageBox.Show("Entry added.");

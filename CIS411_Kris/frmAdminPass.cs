@@ -15,25 +15,25 @@ namespace CIS411
         public frmAdminPass()
         {
             InitializeComponent();
-            //Properties.Settings.Default.EncryptedPassword = frmAdmin.hash("CIS411");
-            //Properties.Settings.Default.Save();
+            //Properties.Settings.Default.EncryptedPassword = frmAdmin.hash("");
+            Properties.Settings.Default.Save();
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            /*
+            
             if (frmAdmin.hash(txtPass.Text) == Properties.Settings.Default.EncryptedPassword)
-            {*/
+            {
                 frmAdmin adminForm = new frmAdmin();
                 adminForm.Show();
                 this.Close();
-			/*
+			}
             else
             {
                 MessageBox.Show("Incorrect Password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtPass.Clear();
             }
-            */
+            
         }
     }
 }
