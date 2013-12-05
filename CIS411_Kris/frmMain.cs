@@ -323,6 +323,7 @@ namespace CIS411
             {
                 conn.Open();
                 rd = conn.GetReader("term", "student", "clarion_id", studentID.ToString());
+                rd.Read();
                 term = rd[0].ToString();
             }
             catch

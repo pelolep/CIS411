@@ -122,6 +122,7 @@ namespace CIS411
             this.btn_courses_import = new System.Windows.Forms.Button();
             this.txtAddSignIn = new System.Windows.Forms.TextBox();
             this.keyTimer = new System.Windows.Forms.Timer(this.components);
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.tabControlAdmin.SuspendLayout();
             this.tabVisits.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -196,6 +197,7 @@ namespace CIS411
             this.tableLayoutPanel1.Controls.Add(this.dateTimePickerEditMax, 1, 13);
             this.tableLayoutPanel1.Controls.Add(this.btnEditVisit, 2, 11);
             this.tableLayoutPanel1.Controls.Add(this.btnAddVisit, 3, 7);
+            this.tableLayoutPanel1.Controls.Add(this.btnRefresh, 0, 2);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 6);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 14;
@@ -276,7 +278,7 @@ namespace CIS411
             // lblAddVisit
             // 
             this.lblAddVisit.AutoSize = true;
-            this.lblAddVisit.Location = new System.Drawing.Point(3, 172);
+            this.lblAddVisit.Location = new System.Drawing.Point(3, 169);
             this.lblAddVisit.Name = "lblAddVisit";
             this.lblAddVisit.Size = new System.Drawing.Size(51, 13);
             this.lblAddVisit.TabIndex = 3;
@@ -1156,6 +1158,16 @@ namespace CIS411
             this.keyTimer.Interval = 200;
             this.keyTimer.Tick += new System.EventHandler(this.keyTimer_Tick);
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(3, 143);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
+            this.btnRefresh.TabIndex = 45;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1283,6 +1295,7 @@ namespace CIS411
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Timer keyTimer;
+        private System.Windows.Forms.Button btnRefresh;
     }
         #endregion
 }

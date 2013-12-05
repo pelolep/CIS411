@@ -34,7 +34,7 @@ namespace CIS411
             //clears the list box to enter new information
             listBoxEditVisit.Items.Clear();
             //TAB THIS
-            listBoxEditVisit.Items.Add("DATE".PadRight(25) + " NAME".PadRight(60)+  "ID".PadRight(25)+    "TIME IN".PadRight(25)+ "TIME OUT".PadRight(25) + "METHOD");
+            listBoxEditVisit.Items.Add("DATE".PadRight(15) + "\t" + "FIRST NAME".PadRight(30) + "\t" + "LAST NAME".PadRight(30) + "\t" + "ID".PadRight(12)+ "\t" + "TIME IN".PadRight(10)+"\t" + "TIME OUT".PadRight(10) + "\t" + "METHOD".PadRight(20) + "\t" + "TUTOR'S FIRST NAME".PadRight(30) + "TUTOR'S LAST NAME".PadRight(30)+ "\t" + "SUBJECT" + "\t" + "CATALOG" + "\t" + "SECTION");
             //creates new dataconnection
             DataConnection conn = new DataConnection();
             SqlDataReader rd;
@@ -55,7 +55,7 @@ namespace CIS411
                     string TIMEOUT = rd["TIME_OUT"].ToString().PadRight(10);
                     if (TIMEOUT.Replace(" ","").Length !=8)
                         TIMEOUT = " ".PadRight(18);
-                    listBoxEditVisit.Items.Add(thedate.ToString("d").PadRight(15) + "\t" + rd["FIRSTNAME"].ToString().PadRight(30) + "\t" + rd["LASTNAME"].ToString().PadRight(30) + "\t" + (int.Parse(rd["CLARION_ID"].ToString())).ToString("D8").PadRight(12) + "\t" + rd["TIME_IN"].ToString().PadRight(10) + "\t" + TIMEOUT + "\t" + rd["METHOD"].ToString().PadRight(30) + "\t" + rd["TUTORFIRSTNAME"].ToString().PadRight(30) + " " + rd["TUTORLASTNAME"].ToString().PadRight(30) + "\t" + rd["SUBJECT"].ToString().PadRight(5) + "\t" + ((rd["CATALOG"]).ToString()).PadRight(5) + "\t" + ((rd["SECTION"]).ToString()).PadRight(4));
+                    listBoxEditVisit.Items.Add(thedate.ToString("d").PadRight(15) + "\t" + rd["FIRSTNAME"].ToString().PadRight(30) + "\t" + rd["LASTNAME"].ToString().PadRight(30) + "\t" + (int.Parse(rd["CLARION_ID"].ToString())).ToString("D8").PadRight(12) + "\t" + rd["TIME_IN"].ToString().PadRight(10) + "\t" + TIMEOUT.PadRight(10) + "\t" + rd["METHOD"].ToString().PadRight(20) + "\t" + rd["TUTORFIRSTNAME"].ToString().PadRight(30) + " " + rd["TUTORLASTNAME"].ToString().PadRight(30) + "\t" + rd["SUBJECT"].ToString().PadRight(5) + "\t" + ((rd["CATALOG"]).ToString()).PadRight(5) + "\t" + ((rd["SECTION"]).ToString()).PadRight(4));
                 }
             }
             rd.Close();
@@ -74,14 +74,13 @@ namespace CIS411
 
                 if (rd.HasRows)
                 {
-
                     while (rd.Read())
                     {
                         DateTime thedate = DateTime.Parse(rd["DATE"].ToString());
                         string TIMEOUT = rd["TIME_OUT"].ToString().PadRight(10);
                         if (TIMEOUT.Replace(" ", "").Length != 8)
                             TIMEOUT = " ".PadRight(18); 
-                        listBoxEditVisit.Items.Add(thedate.ToString("d").PadRight(15) + "\t" + rd["FIRSTNAME"].ToString().PadRight(30) + "\t" + rd["LASTNAME"].ToString().PadRight(30) + "\t" + ("TUT" + int.Parse(rd["tutor_ID"].ToString()).ToString("D4").PadRight(10)) + "\t" + rd["TIME_IN"].ToString().PadRight(10));
+                        listBoxEditVisit.Items.Add(thedate.ToString("d").PadRight(15) + "\t" + rd["FIRSTNAME"].ToString().PadRight(30) + "\t" + rd["LASTNAME"].ToString().PadRight(30) + "\t" + ("TUT" + int.Parse(rd["tutor_ID"].ToString()).ToString("D4").PadRight(10)) + "\t" + rd["TIME_IN"].ToString().PadRight(10) + "\t" + rd["TIME_OUT"].ToString().PadRight(10) + "\t" + "TUTOR");
                     }
                 }
                 rd.Close();
@@ -138,7 +137,7 @@ namespace CIS411
                         comboEditMethod.Items.Add(Properties.Settings.Default.MethodNames[i]);
                 }
                 for (int i = 0; i < comboEditMethod.Items.Count; i++)
-                    if (selectedVisitEdit[6] == comboEditMethod.Items[i].ToString())
+                    if (selectedVisitEdit[6].ToString().TrimEnd() == comboEditMethod.Items[i].ToString())
                         comboEditMethod.SelectedIndex = i;
                 comboEditMethod.Items.Add("Tutor");
                 comboaddClass.Items.Clear();
@@ -148,16 +147,24 @@ namespace CIS411
                     comboaddClass.Items.Add(rd[0].ToString() + " " + rd[1] + " " + rd[2]);
                 conn.Close();
                 comboaddClass.Items.Add("Other");
+                conn.Open();
+                rd = conn.GetReader("SUBJECT, CATALOG, SECTION", "VISIT", "CLARION_ID", selectedVisitEdit[3], "DATE", selectedVisitEdit[0], "TIME_IN", selectedVisitEdit[4]);
+                rd.Read();
+                if (rd[0].ToString() == "other")
+                    for (int i = 0; i < comboaddClass.Items.Count; i++)
+                        if (comboaddClass.Items[i].ToString() == "Other")
+                            comboaddClass.SelectedIndex = i;
                 for (int i = 0; i < comboaddClass.Items.Count; i++)
-                    if (selectedVisitEdit[8] + " " + selectedVisitEdit[9] + " " + selectedVisitEdit[10] == comboaddClass.Items[i].ToString())
+                    if (rd[0] + " " + rd[1] + " " + rd[2] == comboaddClass.Items[i].ToString())
                         comboaddClass.SelectedIndex = i;
+                conn.Close();
                 conn.Open();
                 rd = conn.GetReader("FIRSTNAME, LASTNAME", "TUTOR INNER JOIN STUDENT ON STUDENT.CLARION_ID = TUTOR.CLARION_ID");
                 while (rd.Read())
                     comboAddTutoring.Items.Add(rd[0].ToString() + " " + rd[1]);
                 conn.Close();
                 for (int i = 0; i < comboAddTutoring.Items.Count; i++)
-                    if (selectedVisitEdit[7] == comboAddTutoring.Items[i].ToString())
+                    if (selectedVisitEdit[7].ToString() == comboAddTutoring.Items[i].ToString())
                         comboAddTutoring.SelectedIndex = i;
 
                 comboaddClass.Enabled = true;
@@ -193,10 +200,8 @@ namespace CIS411
             {
                 
                 method = comboEditMethod.SelectedItem.ToString();
-                //MessageBox.Show("crap");
 
                 course = comboaddClass.SelectedItem.ToString().Split();
-                MessageBox.Show(course[0].ToString());
                 if (course[0].ToString().ToLower() == "other")
                 {
                     course = new string[10];
@@ -205,14 +210,11 @@ namespace CIS411
                     course[2] = "other";
                     course[3] = "other";
                 }
-             //   MessageBox.Show("crap");
                 if(comboAddTutoring.Enabled==true)
                 tutor = comboAddTutoring.SelectedItem.ToString().Split();
-             //   MessageBox.Show("crap");
             }
             catch
             {
-                MessageBox.Show("crap1");
                 istutor = true;
             }
             //MessageBox.Show(istutor.ToString());
@@ -282,34 +284,37 @@ namespace CIS411
 
         private void btnDeleteVisit_Click(object sender, EventArgs e)
         {
-            if (listBoxEditVisit.SelectedIndex == 0)
-                return;
-            string[] items;
-            bool tutor;
-            for (int i = 0; i < listBoxEditVisit.SelectedItems.Count; i++)
+            if (MessageBox.Show("Are you sure you want to delete?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
-                items = listBoxEditVisit.SelectedItems[i].ToString().Split('\t');
-                tutor = false;
+                if (listBoxEditVisit.SelectedIndex == 0)
+                    return;
+                string[] items;
+                bool tutor;
+                for (int i = 0; i < listBoxEditVisit.SelectedItems.Count; i++)
+                {
+                    items = listBoxEditVisit.SelectedItems[i].ToString().Split('\t');
+                    tutor = false;
 
-                if (items[3].Remove(3)=="TUT")
-                    tutor = true;
-                //MessageBox.Show(items[6]);
-                DataConnection conn = new DataConnection();
-                conn.Open();
-                try
-                {
-                    if (tutor)
-                        conn.Query("DELETE FROM tutor_hour WHERE tutor_ID = '" + items[3].Remove(0,3) + "' AND DATE = '" + items[0] + "' AND TIME_IN = '" + items[4] + "' ");
-                    else
-                        conn.Query("DELETE FROM VISIT WHERE CLARION_ID = '" + items[3] + "' AND DATE = '" + items[0] + "' AND TIME_IN = '" + items[4] + "' ");
+                    if (items[3].Remove(3) == "TUT")
+                        tutor = true;
+                    //MessageBox.Show(items[6]);
+                    DataConnection conn = new DataConnection();
+                    conn.Open();
+                    try
+                    {
+                        if (tutor)
+                            conn.Query("DELETE FROM tutor_hour WHERE tutor_ID = '" + items[3].Remove(0, 3) + "' AND DATE = '" + items[0] + "' AND TIME_IN = '" + items[4] + "' ");
+                        else
+                            conn.Query("DELETE FROM VISIT WHERE CLARION_ID = '" + items[3] + "' AND DATE = '" + items[0] + "' AND TIME_IN = '" + items[4] + "' ");
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Error while attempting to delete visit. Please reload visit information and try again.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    conn.Close();
                 }
-                catch
-                {
-                    MessageBox.Show("Error while attempting to delete visit. Please reload visit information and try again.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                conn.Close();
+                loadvisits(ID, min, max);
             }
-            loadvisits(ID,min,max);
         }
 
     }
