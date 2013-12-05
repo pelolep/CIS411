@@ -77,14 +77,15 @@ namespace CIS411
             {
                 bool notInDB = frmMain.studentIDExists(int.Parse(studentID));
                 DataConnection conn = new DataConnection();
-
+                conn.Open();             
                 SqlDataReader rd = conn.joinQuery("select clarion_id from tutor where clarion_id = " + studentID);
 
                 if (rd.HasRows)
                 {
                     notInDB = false;
+
                 }
-                
+                conn.Close();
                 if (notInDB)
                 {
                     conn.Open();
@@ -93,6 +94,7 @@ namespace CIS411
                 }
                 else
                     MessageBox.Show("Tutor is already in database.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                conn.Close();
             }
             catch
             {
