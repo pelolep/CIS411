@@ -64,6 +64,7 @@
             // listBoxEditVisit
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.listBoxEditVisit, 5);
+            this.listBoxEditVisit.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxEditVisit.FormattingEnabled = true;
             this.listBoxEditVisit.HorizontalScrollbar = true;
             this.listBoxEditVisit.Location = new System.Drawing.Point(3, 20);
