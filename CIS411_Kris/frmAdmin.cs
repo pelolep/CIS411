@@ -1537,8 +1537,8 @@ MessageBox.Show("sfgfdsgfg");
 
         private void btnImport_Click(object sender, EventArgs e)
         {
-            ImportCourses();
             ImportStudents();
+            ImportCourses();
             MessageBox.Show("Imports Complete.");
         }
 
