@@ -1041,7 +1041,7 @@ MessageBox.Show("Thank you for adding a visit!");
                         {
                            // for (int i = 0; i < 2; i++)
                             {
-                                row += rd[0].ToString().PadRight(80) + "\t" +rd[1];
+                                row += rd[0].ToString().PadRight(40) + "\t" +rd[1];
                                // MessageBox.Show((80 - rd[0].ToString().Length).ToString());
 
                             }
@@ -1063,7 +1063,7 @@ MessageBox.Show("Thank you for adding a visit!");
                             while (rd.Read())
                             {
                                 for (int i = 0; i < 2; i++)
-                                    row += rd[i].ToString().PadRight(80) + "\t";
+                                    row += rd[i].ToString().PadRight(40) + "\t";
                                 listBoxReport.Items.Add(row);
                                 row = "";
                             }
